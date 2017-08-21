@@ -1,0 +1,6 @@
+framework module Pods_SingleSingUp {
+  umbrella header "Pods-SingleSingUp-umbrella.h"
+
+  export *
+  module * { export * }
+}
