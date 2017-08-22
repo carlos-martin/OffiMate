@@ -1,0 +1,21 @@
+//
+//  SignUpViewCell.swift
+//  SingleSignUp
+//
+//  Created by Carlos Martin on 22/08/17.
+//  Copyright © 2017 Carlos Martin. All rights reserved.
+//
+
+import UIKit
+
+class EmailSignUpViewCell : UITableViewCell {
+    @IBOutlet var emailTextField: UITextField!
+}
+
+class PasswordSignUpViewCell : UITableViewCell {
+    @IBOutlet var passwordTextField: UITextField!
+}
+
+class PasswordValidationSignUpViewCell: UITableViewCell {
+    @IBOutlet var passwordValidationTextField: UITextField!
+}
