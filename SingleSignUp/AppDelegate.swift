@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  SingleSingUp
+//  SingleSignUp
 //
 //  Created by Carlos Martin on 21/08/17.
 //  Copyright © 2017 Carlos Martin. All rights reserved.

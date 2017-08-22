@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_SingleSingUpVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_SingleSingUpVersionString[];
+FOUNDATION_EXPORT double Pods_SingleSignUpVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_SingleSignUpVersionString[];
 
