@@ -1,2 +1,2 @@
-# SingleSingUp
+# SingleSignUp
 AWS example 
