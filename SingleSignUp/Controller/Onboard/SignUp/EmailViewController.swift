@@ -1,15 +1,15 @@
 //
-//  NameViewController.swift
+//  EmailViewController.swift
 //  SingleSignUp
 //
-//  Created by Carlos Martin on 22/08/17.
+//  Created by Carlos Martin on 23/08/17.
 //  Copyright © 2017 Carlos Martin. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class NameViewController: UIViewController {
+class EmailViewController: UIViewController {
     
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
@@ -19,7 +19,7 @@ class NameViewController: UIViewController {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToMove(cell: cell) {
                 self.view.endEditing(true)
-                self.moveToEmail()
+                self.moveToPassword()
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
@@ -38,26 +38,26 @@ class NameViewController: UIViewController {
     
     //MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //if segue.identifier == "toEmail", let nextScene = segue.destination as?
+        //if segue.identifier == "toPassword", let nextScene = segue.destination as?
     }
     
     func readyToMove (cell: UITableViewCell) -> Bool {
         let isReady: Bool
-        if let textField = (cell as! NameSignUpViewCell).nameTextField {
-            isReady = !(textField.text?.isEmpty ?? true)
+        if let textField = (cell as! EmailSignUpViewCell).emailTextField {
+            isReady = Tools.validateEmail(email: textField)
         } else {
             isReady = false
         }
         return isReady
     }
     
-    func moveToEmail() {
-        performSegue(withIdentifier: "toEmail", sender: nil)
+    func moveToPassword() {
+        performSegue(withIdentifier: "toPassword", sender: nil)
     }
 }
 
 //MARK: - TableView
-extension NameViewController: UITableViewDelegate, UITableViewDataSource {
+extension EmailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -67,10 +67,10 @@ extension NameViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "nameSignUpCell", for: indexPath) as! NameSignUpViewCell
-        cell.nameTextField.delegate = self
-        cell.nameTextField.placeholder = "Enter your name..."
-        cell.nameTextField.tag = indexPath.row
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "emailSignUpCell", for: indexPath) as! EmailSignUpViewCell
+        cell.emailTextField.delegate = self
+        cell.emailTextField.placeholder = "Enter your email..."
+        cell.emailTextField.tag = indexPath.row
         return cell
     }
     
@@ -81,14 +81,14 @@ extension NameViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK: - TextField
-extension NameViewController: UITextFieldDelegate {
+extension EmailViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let works: Bool
         if let cell = self.tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0)) {
             works = self.readyToMove(cell: cell)
             if works {
                 self.view.endEditing(true)
-                self.moveToEmail()
+                self.moveToPassword()
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }

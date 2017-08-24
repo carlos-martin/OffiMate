@@ -8,9 +8,14 @@
 
 import UIKit
 
+class NameSignUpViewCell : UITableViewCell {
+    @IBOutlet var nameTextField: UITextField!
+}
+
 class EmailSignUpViewCell : UITableViewCell {
     @IBOutlet var emailTextField: UITextField!
 }
+
 
 class PasswordSignUpViewCell : UITableViewCell {
     @IBOutlet var passwordTextField: UITextField!
