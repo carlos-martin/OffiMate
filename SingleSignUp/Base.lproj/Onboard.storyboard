@@ -122,7 +122,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="emailTextField" destination="RAf-Nb-lDa" id="Lo0-pi-yTF"/>
+                                            <outlet property="emailTextField" destination="RAf-Nb-lDa" id="zVC-pP-yfl"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="passLoginCell" id="bTm-3k-ln5" customClass="PasswordLoginViewCell" customModule="SingleSignUp" customModuleProvider="target">
@@ -166,7 +166,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="1k0-85-Otr">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ccj-G5-8H8"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ccj-G5-8H8">
+                            <connections>
+                                <action selector="doneActionButton:" destination="ecc-2m-2Dy" id="BtN-VX-4nu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="XJ7-ui-SjK" id="uXk-ZS-Sn7"/>
@@ -344,7 +348,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-t5-PUx">
-                                                    <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="355" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
