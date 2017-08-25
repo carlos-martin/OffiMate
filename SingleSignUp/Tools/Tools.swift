@@ -36,7 +36,11 @@ public class Tools {
     }
     
     static func validateEmail (email: UITextField) -> Bool {
-        return self.validateEmail(email: email.text!)
+        if let _email = email.text {
+            return self.validateEmail(email: _email)
+        } else {
+            return false
+        }
     }
     
     static func validateEmail (email: String) -> Bool {
@@ -61,18 +65,22 @@ public class Tools {
         
     }
     
-    static func validateSingelPassword (pass: UITextField) -> Bool {
+    static func validateSingelPassword (pass: UITextField, animated: Bool=false) -> Bool {
         let result: Bool
         
         if Tools.textFieldIsEmpty(textField: pass) {
             Alert.showFailiureAlert(message: "The password field cannot be empty.", handler: { (_) in
-                Tools.textFieldErrorAnimation(textField: pass)
+                if animated {
+                    Tools.textFieldErrorAnimation(textField: pass)
+                }
             })
             result = false
         } else {
             if !validatePassword(pass: pass.text!) {
                 Alert.showFailiureAlert(message: "The password field has to have at least 8 characters.", handler: { (_) in
-                    Tools.textFieldErrorAnimation(textField: pass)
+                    if animated {
+                        Tools.textFieldErrorAnimation(textField: pass)
+                    }
                 })
                 result = false
             } else {

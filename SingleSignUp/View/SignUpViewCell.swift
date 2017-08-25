@@ -20,7 +20,3 @@ class EmailSignUpViewCell : UITableViewCell {
 class PasswordSignUpViewCell : UITableViewCell {
     @IBOutlet var passwordTextField: UITextField!
 }
-
-class PasswordValidationSignUpViewCell: UITableViewCell {
-    @IBOutlet var passwordValidationTextField: UITextField!
-}

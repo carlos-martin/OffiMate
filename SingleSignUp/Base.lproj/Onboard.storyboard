@@ -331,15 +331,65 @@
                     <view key="view" contentMode="scaleToFill" id="kXg-0n-fpg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-Mo-OfE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="passSignUpCell" id="Jt1-uo-tbB" customClass="PasswordSignUpViewCell" customModule="SingleSignUp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jt1-uo-tbB" id="VXZ-ok-1cd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-t5-PUx">
+                                                    <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eV9-t5-PUx" firstAttribute="top" secondItem="VXZ-ok-1cd" secondAttribute="top" id="Phs-lM-Alt"/>
+                                                <constraint firstAttribute="bottom" secondItem="eV9-t5-PUx" secondAttribute="bottom" id="egj-Cf-Jms"/>
+                                                <constraint firstItem="eV9-t5-PUx" firstAttribute="leading" secondItem="VXZ-ok-1cd" secondAttribute="leading" constant="20" id="fK0-43-Ku0"/>
+                                                <constraint firstAttribute="trailing" secondItem="eV9-t5-PUx" secondAttribute="trailing" id="hZs-mu-eqM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="passwordTextField" destination="eV9-t5-PUx" id="bOr-eu-35D"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Xh8-rv-BpQ" id="PMI-ke-27P"/>
+                                    <outlet property="delegate" destination="Xh8-rv-BpQ" id="DSQ-cx-OsB"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Bco-Mo-OfE" secondAttribute="trailing" id="Gak-ok-89Q"/>
+                            <constraint firstItem="Bco-Mo-OfE" firstAttribute="leading" secondItem="kXg-0n-fpg" secondAttribute="leading" id="OPf-VI-qI8"/>
+                            <constraint firstItem="Bco-Mo-OfE" firstAttribute="top" secondItem="kXg-0n-fpg" secondAttribute="top" id="Q86-fH-8N0"/>
+                            <constraint firstItem="EHT-7w-GZp" firstAttribute="top" secondItem="Bco-Mo-OfE" secondAttribute="bottom" id="gEe-vn-E5P"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Password" id="iU0-93-Igb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Sqt-9o-PIV"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Sqt-9o-PIV">
+                            <connections>
+                                <action selector="saveActionButton:" destination="Xh8-rv-BpQ" id="8gr-cl-pdt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Bco-Mo-OfE" id="uR1-ri-Aoo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIb-H3-fC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3020" y="-178"/>
+            <point key="canvasLocation" x="3020" y="-178.56071964017991"/>
         </scene>
     </scenes>
 </document>
