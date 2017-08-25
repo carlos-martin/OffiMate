@@ -79,6 +79,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="loginButton" destination="iDk-Ls-sXP" id="hLI-wn-EqJ"/>
+                        <outlet property="signUpButton" destination="qaM-XY-KLC" id="L2e-ws-V1q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jpi-WC-Pwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
