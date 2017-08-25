@@ -72,6 +72,10 @@ extension EmailViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "What's your e-mail?"
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "emailSignUpCell", for: indexPath) as! EmailSignUpViewCell
         cell.emailTextField.delegate = self

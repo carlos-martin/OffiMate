@@ -72,6 +72,10 @@ extension NameViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "What's your name?"
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "nameSignUpCell", for: indexPath) as! NameSignUpViewCell
         cell.nameTextField.delegate = self
