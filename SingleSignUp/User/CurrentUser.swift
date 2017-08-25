@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class CurrentUser {
-    static var email: String!
-    static var isLogin: Bool!
+    static var              isLogin:    Bool!
+    static private(set) var username:   String!
+    private var             password:   String!
+    
 }

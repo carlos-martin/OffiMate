@@ -10,20 +10,34 @@
 		1A813D181F4B0DCD00F190A2 /* Onboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A813D161F4B0DCD00F190A2 /* Onboard.storyboard */; };
 		1A813D1A1F4B0F0D00F190A2 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */; };
 		1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */; };
+		1A900FA41F4C49FE005B3DA4 /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */; };
+		1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */; };
+		1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */; };
+		1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */; };
+		1A9CC3891F4DC17E000C6479 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9CC3881F4DC17E000C6479 /* Alert.swift */; };
+		1A9CC38B1F4DC579000C6479 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9CC38A1F4DC579000C6479 /* Tools.swift */; };
 		1AA2BC401F4ACEFE00E0C2E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2BC3F1F4ACEFE00E0C2E5 /* AppDelegate.swift */; };
 		1AA2BC421F4ACEFE00E0C2E5 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2BC411F4ACEFE00E0C2E5 /* MainViewController.swift */; };
 		1AA2BC451F4ACEFE00E0C2E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2BC431F4ACEFE00E0C2E5 /* Main.storyboard */; };
 		1AA2BC481F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2BC461F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld */; };
 		1AA2BC4A1F4ACEFE00E0C2E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */; };
 		1AA2BC4D1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2BC4B1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard */; };
+		1AD8B95B1F4D7F7600F6777C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */; };
+		1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */; };
 		BC3E5AD9DB5247D7F2A08029 /* Pods_SingleSignUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896D1627897BA540B0D460D /* Pods_SingleSignUp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1896D1627897BA540B0D460D /* Pods_SingleSignUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleSignUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A813D171F4B0DCD00F190A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboard.storyboard; sourceTree = "<group>"; };
-		1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
+		1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardViewController.swift; path = SingleSignUp/Controller/Onboard/OnboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
+		1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewCell.swift; sourceTree = "<group>"; };
+		1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewCell.swift; sourceTree = "<group>"; };
+		1A9CC3881F4DC17E000C6479 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		1A9CC38A1F4DC579000C6479 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		1AA2BC3C1F4ACEFE00E0C2E5 /* SingleSignUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleSignUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA2BC3F1F4ACEFE00E0C2E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AA2BC411F4ACEFE00E0C2E5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -33,6 +47,8 @@
 		1AA2BC4C1F4ACEFE00E0C2E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AA2BC4E1F4ACEFE00E0C2E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AA2BC541F4AE3F000E0C2E5 /* SingleSignUp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SingleSignUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
+		1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		C59662BE208432AC876AB2F3 /* Pods-SingleSignUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.debug.xcconfig"; sourceTree = "<group>"; };
 		D18D719336A916EE7811732A /* Pods_SingleSingUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleSingUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8704A4492A371B2AD05FAB7 /* Pods-SingleSignUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,11 +66,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A20B47A1F4C73C600F3A44C /* Onboard */ = {
+			isa = PBXGroup;
+			children = (
+				1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */,
+				1A20B47C1F4C73F100F3A44C /* SignUp */,
+				1A20B47B1F4C73E900F3A44C /* Login */,
+			);
+			path = Onboard;
+			sourceTree = "<group>";
+		};
+		1A20B47B1F4C73E900F3A44C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		1A20B47C1F4C73F100F3A44C /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */,
+				1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */,
+				1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		1A813D131F4B0AE700F190A2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1A20B47A1F4C73C600F3A44C /* Onboard */,
 				1AA2BC411F4ACEFE00E0C2E5 /* MainViewController.swift */,
-				1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -75,6 +119,24 @@
 				1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		1A900FA71F4C4B2B005B3DA4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */,
+				1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1A9CC3871F4DC133000C6479 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				1A9CC3881F4DC17E000C6479 /* Alert.swift */,
+				1A9CC38A1F4DC579000C6479 /* Tools.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		1AA2BC331F4ACEFE00E0C2E5 = {
@@ -102,7 +164,9 @@
 				1AA2BC3F1F4ACEFE00E0C2E5 /* AppDelegate.swift */,
 				1A813D1B1F4B1C3300F190A2 /* User */,
 				1A813D131F4B0AE700F190A2 /* Controller */,
+				1A900FA71F4C4B2B005B3DA4 /* View */,
 				1A813D151F4B0D5E00F190A2 /* Storyboard */,
+				1A9CC3871F4DC133000C6479 /* Tools */,
 				1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */,
 				1AA2BC4E1F4ACEFE00E0C2E5 /* Info.plist */,
 				1AA2BC461F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld */,
@@ -264,11 +328,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A9CC38B1F4DC579000C6479 /* Tools.swift in Sources */,
+				1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */,
+				1A900FA41F4C49FE005B3DA4 /* NameViewController.swift in Sources */,
+				1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */,
+				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */,
 				1AA2BC421F4ACEFE00E0C2E5 /* MainViewController.swift in Sources */,
+				1A9CC3891F4DC17E000C6479 /* Alert.swift in Sources */,
+				1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */,
 				1AA2BC481F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld in Sources */,
 				1A813D1A1F4B0F0D00F190A2 /* OnboardViewController.swift in Sources */,
 				1AA2BC401F4ACEFE00E0C2E5 /* AppDelegate.swift in Sources */,
+				1AD8B95B1F4D7F7600F6777C /* EmailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

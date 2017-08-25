@@ -20,6 +20,10 @@ class OnboardViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        print("Leaving OnboardViewController")
+    }
+    
     @IBAction func cancelActionButton(_ sender: Any) {
         self.goToMain()
     }
