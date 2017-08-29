@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,8 +50,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch section {
         case 0:
             return "Name:"
-        default:
+        case 1:
             return "E-mail:"
+        default:
+            return "Password:"
         }
     }
     
@@ -60,8 +62,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             cell.profileLabel.text = CurrentUser.name
-        default:
+        case 1:
             cell.profileLabel.text = CurrentUser.email
+        default:
+            cell.profileLabel.text = CurrentUser.password
         }
         return cell
     }

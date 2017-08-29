@@ -15,7 +15,7 @@ class CurrentUser {
     static              var cognitoId:  String!
     static private(set) var name:       String!
     static private(set) var email:      String!
-    static private      var password:   String!
+    static private(set) var password:   String!
     
     //MARK:- Public funtion
     static func isInit() -> Bool {

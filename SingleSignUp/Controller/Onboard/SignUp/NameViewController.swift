@@ -16,13 +16,7 @@ class NameViewController: UIViewController {
     
     //MARK: IBAction
     @IBAction func nextActionButton(_ sender: Any) {
-        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
-            if self.readyToMove(cell: cell) {
-                self.goFurther()
-            } else {
-                Tools.cellViewErrorAnimation(cell: cell)
-            }
-        }
+        self.nextAction()
     }
     
     override func viewDidLoad() {
@@ -44,6 +38,17 @@ class NameViewController: UIViewController {
     //MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //if segue.identifier == "toEmail", let nextScene = segue.destination as?
+    }
+    
+    func nextAction () {
+        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
+            if self.readyToMove(cell: cell) {
+                let _ = CurrentUser.setName(name: (cell as! NameSignUpViewCell).nameTextField.text!)
+                self.goFurther()
+            } else {
+                Tools.cellViewErrorAnimation(cell: cell)
+            }
+        }
     }
     
     func readyToMove (cell: UITableViewCell) -> Bool {
@@ -93,17 +98,7 @@ extension NameViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - TextField
 extension NameViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let works: Bool
-        if let cell = self.tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0)) {
-            works = self.readyToMove(cell: cell)
-            if works {
-                self.goFurther()
-            } else {
-                Tools.cellViewErrorAnimation(cell: cell)
-            }
-        } else {
-            works = false
-        }
-        return works
+        self.nextAction()
+        return true
     }
 }

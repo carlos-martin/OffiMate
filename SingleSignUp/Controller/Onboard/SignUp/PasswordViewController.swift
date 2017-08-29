@@ -16,13 +16,7 @@ class PasswordViewController: UIViewController {
     
     //MARK: IBAction
     @IBAction func saveActionButton(_ sender: Any) {
-        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
-            if self.readyToSave(cell: cell) {
-                Tools.goToMain(vc: self)
-            } else {
-                Tools.cellViewErrorAnimation(cell: cell)
-            }
-        }
+        self.saveAction()
     }
     
     override func viewDidLoad() {
@@ -42,6 +36,18 @@ class PasswordViewController: UIViewController {
     }
     
     //MARK: Segue
+    func saveAction () {
+        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
+            if self.readyToSave(cell: cell) {
+                let _ = CurrentUser.setPassword(password: (cell as! PasswordSignUpViewCell).passwordTextField.text!)
+                let _ = CurrentUser.localSave()
+                Tools.goToMain(vc: self)
+            } else {
+                Tools.cellViewErrorAnimation(cell: cell)
+            }
+        }
+    }
+    
     func readyToSave(cell: UITableViewCell) -> Bool {
         let isReady: Bool
         if let textField = (cell as! PasswordSignUpViewCell).passwordTextField {
@@ -85,17 +91,7 @@ extension PasswordViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - TextField
 extension PasswordViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let works: Bool
-        if let cell = self.tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0)) {
-            works = self.readyToSave(cell: cell)
-            if works {
-                Tools.goToMain(vc: self)
-            } else {
-                Tools.cellViewErrorAnimation(cell: cell)
-            }
-        } else {
-            works = false
-        }
-        return works
+        self.saveAction()
+        return true
     }
 }
