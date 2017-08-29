@@ -16,7 +16,7 @@ class OnboardViewController: UIViewController {
     
     //MARK: IBAction
     @IBAction func cancelActionButton(_ sender: Any) {
-        self.goToMain()
+        Tools.goToMain(vc: self)
     }
     
     override func viewDidLoad() {
@@ -28,13 +28,6 @@ class OnboardViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    private func goToMain () {
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        controller?.modalPresentationStyle = .popover
-        controller?.modalTransitionStyle = .flipHorizontal
-        self.present(controller!, animated: true, completion: nil)
     }
     
     private func initButtons () {

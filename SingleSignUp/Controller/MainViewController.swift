@@ -21,14 +21,11 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func onboardActionButton(_ sender: Any) {
-        self.goToOnboard()
-    }
-    
-    func goToOnboard () {
-        let controller = UIStoryboard(name: "Onboard", bundle: nil).instantiateInitialViewController()
-        controller?.modalPresentationStyle = .popover
-        controller?.modalTransitionStyle = .flipHorizontal
-        self.present(controller!, animated: true, completion: nil)
+        if CurrentUser.isInit() {
+            Tools.goToProfile(vc: self)
+        } else {
+            Tools.goToOnboard(vc: self)
+        }
     }
 
 }

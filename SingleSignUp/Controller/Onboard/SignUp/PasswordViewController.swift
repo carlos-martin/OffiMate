@@ -18,7 +18,7 @@ class PasswordViewController: UIViewController {
     @IBAction func saveActionButton(_ sender: Any) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
-                self.goToMain()
+                Tools.goToMain(vc: self)
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
@@ -52,13 +52,6 @@ class PasswordViewController: UIViewController {
         return isReady
     }
     
-    func goToMain () {
-        self.view.endEditing(true)
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        controller?.modalPresentationStyle = .popover
-        controller?.modalTransitionStyle = .flipHorizontal
-        self.present(controller!, animated: true, completion: nil)
-    }
 }
 
 //MARK: - TableView
@@ -96,7 +89,7 @@ extension PasswordViewController: UITextFieldDelegate {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0)) {
             works = self.readyToSave(cell: cell)
             if works {
-                self.goToMain()
+                Tools.goToMain(vc: self)
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }

@@ -18,7 +18,7 @@ class NameViewController: UIViewController {
     @IBAction func nextActionButton(_ sender: Any) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToMove(cell: cell) {
-                self.moveToEmail()
+                self.goFurther()
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
@@ -56,7 +56,7 @@ class NameViewController: UIViewController {
         return isReady
     }
     
-    func moveToEmail() {
+    func goFurther() {
         self.view.endEditing(true)
         performSegue(withIdentifier: "toEmail", sender: nil)
     }
@@ -97,7 +97,7 @@ extension NameViewController: UITextFieldDelegate {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: textField.tag, section: 0)) {
             works = self.readyToMove(cell: cell)
             if works {
-                self.moveToEmail()
+                self.goFurther()
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
