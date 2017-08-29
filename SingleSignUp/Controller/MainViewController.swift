@@ -10,9 +10,16 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    @IBOutlet weak var welcomeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        if CurrentUser.isInit() {
+            self.welcomeLabel.text = "Hi! \(CurrentUser.name!)"
+        } else {
+            self.welcomeLabel.text = "Create an account!"
+        }
     }
 
     override func didReceiveMemoryWarning() {
