@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1611" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ikx-YP-Dwl">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="nbJ-7w-0iA">
+            <objects>
+                <navigationController id="ikx-YP-Dwl" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N9j-cP-Yhz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PNI-gG-MUl" kind="relationship" relationship="rootViewController" id="pGY-dt-iIp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MB3-zY-XgD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-650" y="118"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="eHJ-wG-vEe">
+            <objects>
+                <viewController id="PNI-gG-MUl" customClass="ProfileViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xbt-RF-XBG"/>
+                        <viewControllerLayoutGuide type="bottom" id="1In-Uz-UiE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xTa-Hv-LlN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="W66-Wc-jbp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileCell" id="RF6-p5-RxM" customClass="ProfileViewCell" customModule="SingleSignUp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RF6-p5-RxM" id="W6g-Tk-8Fp">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wju-Ge-V7k">
+                                                    <rect key="frame" x="16" y="11" width="343" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Wju-Ge-V7k" firstAttribute="leading" secondItem="W6g-Tk-8Fp" secondAttribute="leadingMargin" constant="8" id="7hS-QS-INU"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Wju-Ge-V7k" secondAttribute="bottom" constant="3" id="8Zn-Vd-bVm"/>
+                                                <constraint firstItem="Wju-Ge-V7k" firstAttribute="top" secondItem="W6g-Tk-8Fp" secondAttribute="topMargin" constant="3" id="Rki-bp-u1w"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Wju-Ge-V7k" secondAttribute="trailing" constant="8" id="gH3-f6-ScL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="profileLabel" destination="Wju-Ge-V7k" id="hlJ-lj-3Jh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="PNI-gG-MUl" id="LLM-p5-Pyx"/>
+                                    <outlet property="delegate" destination="PNI-gG-MUl" id="446-gg-K2F"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W66-Wc-jbp" firstAttribute="leading" secondItem="xTa-Hv-LlN" secondAttribute="leading" id="1gF-Kr-iqR"/>
+                            <constraint firstItem="1In-Uz-UiE" firstAttribute="top" secondItem="W66-Wc-jbp" secondAttribute="bottom" id="VdV-UT-43E"/>
+                            <constraint firstItem="W66-Wc-jbp" firstAttribute="top" secondItem="xTa-Hv-LlN" secondAttribute="top" id="Z06-Ky-Re9"/>
+                            <constraint firstAttribute="trailing" secondItem="W66-Wc-jbp" secondAttribute="trailing" id="hw6-uk-0Ma"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="3w6-gf-4qD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XxB-6p-ztN">
+                            <connections>
+                                <action selector="cancelActionButton:" destination="PNI-gG-MUl" id="B2e-Ml-mme"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="f79-r7-k6b">
+                            <connections>
+                                <action selector="logoutActionButton:" destination="PNI-gG-MUl" id="Fu3-zY-Ykx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="W66-Wc-jbp" id="zmB-2s-f9b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6NA-K1-CkH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="118.29085457271366"/>
+        </scene>
+    </scenes>
+</document>

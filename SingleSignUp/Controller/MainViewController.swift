@@ -10,9 +10,16 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    @IBOutlet weak var welcomeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        if CurrentUser.isInit() {
+            self.welcomeLabel.text = "Hi! \(CurrentUser.name!)"
+        } else {
+            self.welcomeLabel.text = "Create an account!"
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,14 +28,11 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func onboardActionButton(_ sender: Any) {
-        self.goToOnboard()
-    }
-    
-    func goToOnboard () {
-        let controller = UIStoryboard(name: "Onboard", bundle: nil).instantiateInitialViewController()
-        controller?.modalPresentationStyle = .popover
-        controller?.modalTransitionStyle = .flipHorizontal
-        self.present(controller!, animated: true, completion: nil)
+        if CurrentUser.isInit() {
+            Tools.goToProfile(vc: self)
+        } else {
+            Tools.goToOnboard(vc: self)
+        }
     }
 
 }

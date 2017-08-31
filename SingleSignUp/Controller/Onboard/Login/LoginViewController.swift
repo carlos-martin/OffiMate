@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
         let passCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! PasswordLoginViewCell
         if Tools.validateEmail(email: emailCell.emailTextField) {
             if Tools.validateSingelPassword(pass: passCell.passwordTextField) {
-                self.goToMain()
+                Tools.goToMain(vc: self)
             } else {
                 Tools.cellViewErrorAnimation(cell: passCell)
             }
@@ -41,14 +41,6 @@ class LoginViewController: UIViewController {
     
     private func startTextField(){
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EmailLoginViewCell).emailTextField.becomeFirstResponder()
-    }
-    
-    func goToMain () {
-        self.view.endEditing(true)
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        controller?.modalPresentationStyle = .popover
-        controller?.modalTransitionStyle = .flipHorizontal
-        self.present(controller!, animated: true, completion: nil)
     }
 }
 
@@ -112,7 +104,7 @@ extension LoginViewController: UITextFieldDelegate {
             //Password section
             if Tools.validateEmail(email: emailCell.emailTextField) {
                 if Tools.validateSingelPassword(pass: passCell.passwordTextField) {
-                    self.goToMain()
+                    Tools.goToMain(vc: self)
                     works = true
                 } else {
                     Tools.cellViewErrorAnimation(cell: passCell)

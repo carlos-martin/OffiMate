@@ -19,6 +19,27 @@ import Foundation
 import UIKit
 
 public class Tools {
+    static func goToMain (vc: UIViewController) {
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        controller?.modalPresentationStyle = .popover
+        controller?.modalTransitionStyle = .flipHorizontal
+        vc.present(controller!, animated: true, completion: nil)
+    }
+    
+    static func goToOnboard (vc: UIViewController) {
+        let controller = UIStoryboard(name: "Onboard", bundle: nil).instantiateInitialViewController()
+        controller?.modalPresentationStyle = .popover
+        controller?.modalTransitionStyle = .flipHorizontal
+        vc.present(controller!, animated: true, completion: nil)
+    }
+    
+    static func goToProfile (vc: UIViewController) {
+        let controller = UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController()
+        controller?.modalPresentationStyle = .popover
+        controller?.modalTransitionStyle = .flipHorizontal
+        vc.present(controller!, animated: true, completion: nil)
+    }
+    
     static func randomString(length: Int?=12) -> String {
         
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

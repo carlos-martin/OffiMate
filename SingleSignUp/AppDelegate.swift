@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             credentialsProvider: credentialProvider)
         
         AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
+        CurrentUser.cognitoId = credentialProvider.identityId
         return true
     }
 
