@@ -11,6 +11,8 @@ import UIKit
 
 class NameViewController: UIViewController {
     
+    var username: String?
+    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
@@ -37,13 +39,16 @@ class NameViewController: UIViewController {
     
     //MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //if segue.identifier == "toEmail", let nextScene = segue.destination as?
+        if segue.identifier == "toEmail", let nextScene = segue.destination as? EmailViewController {
+            nextScene.username = self.username
+        }
     }
     
     func nextAction () {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToMove(cell: cell) {
-                let _ = CurrentUser.setName(name: (cell as! NameSignUpViewCell).nameTextField.text!)
+                //let _ = CurrentUser.setName(name: (cell as! NameSignUpViewCell).nameTextField.text!)
+                self.username = (cell as! NameSignUpViewCell).nameTextField.text!
                 self.goFurther()
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)

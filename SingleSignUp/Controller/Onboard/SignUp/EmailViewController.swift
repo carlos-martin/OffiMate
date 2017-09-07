@@ -11,6 +11,9 @@ import UIKit
 
 class EmailViewController: UIViewController {
     
+    var username: String?
+    var email:    String?
+    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
@@ -37,13 +40,16 @@ class EmailViewController: UIViewController {
     
     //MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //if segue.identifier == "toPassword", let nextScene = segue.destination as?
+        if segue.identifier == "toPassword", let nextScene = segue.destination as? PasswordViewController {
+            nextScene.username = self.username
+            nextScene.email = self.email
+        }
     }
     
     func nextAction() {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToMove(cell: cell) {
-                let _ = CurrentUser.setEmail(email: (cell as! EmailSignUpViewCell).emailTextField.text!)
+                self.email = (cell as! EmailSignUpViewCell).emailTextField.text!
                 self.moveToPassword()
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)

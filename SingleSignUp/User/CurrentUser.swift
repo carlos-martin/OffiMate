@@ -25,14 +25,13 @@ class CurrentUser {
         }
     }
     
-    static func localSave() -> Bool {
-        if Tools.validatePassword(pass: self.password) && Tools.validateEmail(email: self.email) && !self.name.isEmpty {
+    static func localSave() throws {
+        if self.name != nil && self.email != nil && self.password != nil {
             UserDefaults.standard.set(self.name,     forKey: "name")
             UserDefaults.standard.set(self.email,    forKey: "email")
             UserDefaults.standard.set(self.password, forKey: "password")
-            return true
         } else {
-            return false
+            throw NSError(domain: "Some of the internal variables are nil", code: 0, userInfo: nil)
         }
     }
     
@@ -45,31 +44,38 @@ class CurrentUser {
         UserDefaults.standard.removeObject(forKey: "password")
     }
     
-    static func setName(name: String) -> Bool {
+    static func setName(name: String) throws {
         if !name.isEmpty {
             self.name = name
-            return true
         } else {
-            return false
+            throw NSError(domain: "Not valid name", code: 0, userInfo: nil)
         }
         
     }
     
-    static func setEmail(email: String) -> Bool {
+    static func setEmail(email: String) throws {
         if Tools.validateEmail(email: email) {
             self.email = email
-            return true
         } else {
-            return false
+            throw NSError(domain: "Not valid email", code: 0, userInfo: nil)
         }
     }
     
-    static func setPassword(password: String) -> Bool {
+    static func setPassword(password: String) throws {
         if Tools.validatePassword(pass: password) {
             self.password = password
-            return true
         } else {
-            return false
+            throw NSError(domain: "Not valid password", code: 0, userInfo: nil)
+        }
+    }
+    
+    static func setData(name: String, email: String, password: String) throws {
+        do {
+            try self.setName(name: name)
+            try self.setEmail(email: email)
+            try self.setPassword(password: password)
+        } catch {
+            throw NSError(domain: "Not valid input data", code: 0, userInfo: nil)
         }
     }
     

@@ -11,6 +11,10 @@ import UIKit
 
 class PasswordViewController: UIViewController {
     
+    var username: String?
+    var email:    String?
+    var password: String?
+    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
@@ -39,9 +43,18 @@ class PasswordViewController: UIViewController {
     func saveAction () {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
-                let _ = CurrentUser.setPassword(password: (cell as! PasswordSignUpViewCell).passwordTextField.text!)
-                let _ = CurrentUser.localSave()
-                Tools.goToMain(vc: self)
+                self.password = (cell as! PasswordSignUpViewCell).passwordTextField.text!
+                
+                do {
+                    try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!)
+                    try CurrentUser.localSave()
+                    Tools.goToMain(vc: self)
+                } catch {
+                    Alert.showFailiureAlert(message: "Ops! Something goes wrong", handler: { (_) in
+                        Tools.goToOnboard(vc: self)
+                    })
+                }
+                
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
