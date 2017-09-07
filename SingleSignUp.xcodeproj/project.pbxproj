@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3285A01F6122C700E10042 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 1A32859F1F6122C700E10042 /* awsconfiguration.json */; };
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
 		1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */; };
 		1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		1896D1627897BA540B0D460D /* Pods_SingleSignUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleSignUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A32859F1F6122C700E10042 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
@@ -52,7 +54,6 @@
 		1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AA2BC4C1F4ACEFE00E0C2E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AA2BC4E1F4ACEFE00E0C2E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AA2BC541F4AE3F000E0C2E5 /* SingleSignUp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SingleSignUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		C59662BE208432AC876AB2F3 /* Pods-SingleSignUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,7 +156,6 @@
 				1AA2BC3D1F4ACEFE00E0C2E5 /* Products */,
 				299FA090A28131128BFDAD62 /* Pods */,
 				72C479400C7137E63CB8B25C /* Frameworks */,
-				1AA2BC541F4AE3F000E0C2E5 /* SingleSignUp-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,6 +178,7 @@
 				1A813D151F4B0D5E00F190A2 /* Storyboard */,
 				1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */,
 				1AA2BC4E1F4ACEFE00E0C2E5 /* Info.plist */,
+				1A32859F1F6122C700E10042 /* awsconfiguration.json */,
 				1AA2BC461F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld */,
 			);
 			path = SingleSignUp;
@@ -267,6 +268,7 @@
 			files = (
 				1AA2BC4D1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard in Resources */,
 				1AA2BC4A1F4ACEFE00E0C2E5 /* Assets.xcassets in Resources */,
+				1A3285A01F6122C700E10042 /* awsconfiguration.json in Resources */,
 				1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */,
 				1A813D181F4B0DCD00F190A2 /* Onboard.storyboard in Resources */,
 				1AA2BC451F4ACEFE00E0C2E5 /* Main.storyboard in Resources */,
@@ -283,15 +285,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AWSCognito/AWSCognito.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthUI/AWSAuthUI.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognito.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -496,7 +502,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.SingleSignUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SingleSignUp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -513,7 +518,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.SingleSignUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SingleSignUp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

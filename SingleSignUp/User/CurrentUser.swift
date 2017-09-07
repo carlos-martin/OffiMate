@@ -8,11 +8,8 @@
 
 import Foundation
 import UIKit
-import AWSCore
-import AWSCognito
 
 class CurrentUser {
-    static              var cognitoId:  String!
     static private(set) var name:       String!
     static private(set) var email:      String!
     static private(set) var password:   String!
