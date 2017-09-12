@@ -65,7 +65,7 @@ class PasswordViewController: UIViewController {
                 var attributes = [AWSCognitoIdentityUserAttributeType]()
                 
                 let aws_name = AWSCognitoIdentityUserAttributeType()
-                aws_name?.name = "name"
+                aws_name?.name = "username"
                 aws_name?.value = self.username
                 attributes.append(aws_name!)
                 
@@ -116,7 +116,7 @@ class PasswordViewController: UIViewController {
     func readyToSave(cell: UITableViewCell) -> Bool {
         let isReady: Bool
         if let textField = (cell as! PasswordSignUpViewCell).passwordTextField {
-            isReady = Tools.validateSingelPassword(pass: textField)
+            isReady = Tools.validatePassword(pass: textField)
         } else {
             isReady = false
         }

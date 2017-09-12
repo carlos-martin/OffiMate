@@ -4,9 +4,13 @@ PODS:
   - AWSAuthUI (2.6.1):
     - AWSAuthCore (= 2.6.1)
     - AWSCore (= 2.6.1)
+  - AWSCognito (2.6.1):
+    - AWSCore (= 2.6.1)
   - AWSCognitoIdentityProvider (2.6.1):
     - AWSCore (= 2.6.1)
   - AWSCore (2.6.1)
+  - AWSS3 (2.6.1):
+    - AWSCore (= 2.6.1)
   - AWSUserPoolsSignIn (2.6.1):
     - AWSAuthCore (= 2.6.1)
     - AWSCognitoIdentityProvider (= 2.6.1)
@@ -14,17 +18,21 @@ PODS:
 DEPENDENCIES:
   - AWSAuthCore (~> 2.6.1)
   - AWSAuthUI (~> 2.6.1)
+  - AWSCognito (~> 2.6.1)
   - AWSCognitoIdentityProvider (~> 2.6.1)
   - AWSCore (~> 2.6.1)
+  - AWSS3 (~> 2.6.1)
   - AWSUserPoolsSignIn (~> 2.6.1)
 
 SPEC CHECKSUMS:
   AWSAuthCore: b7102940a777cb5bf974d65f7dbfc460df49611c
   AWSAuthUI: a847a58be0c539f6e1a9e3e205d68b3bc1e39691
+  AWSCognito: 9aad635e11de0febf026e8a8acbbd345b2016801
   AWSCognitoIdentityProvider: a335678a0024fa2b44213bc4e86b46b21773e567
   AWSCore: e7d37fa0715def975acf1b0d75556576780088b8
+  AWSS3: 2e18ede28199a5530955dc1a65434da43dcc4d2c
   AWSUserPoolsSignIn: c850b8f8269a8e7abbdfc289514e3cef036d496e
 
-PODFILE CHECKSUM: a3102ffa70ca36ae8c4d3b84b1fd2d9e0b328490
+PODFILE CHECKSUM: 242426fd2878cd852ba8c531f3ac52a0145f7846
 
 COCOAPODS: 1.3.1

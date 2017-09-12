@@ -7,18 +7,11 @@
 //
 
 import Foundation
-//
-//  Tools.swift
-//  Connet
-//
-//  Created by Carlos Martin (SE) on 25/10/2016.
-//  Copyright © 2016 TUVA Sweden AB. All rights reserved.
-//
-
-import Foundation
 import UIKit
 
 public class Tools {
+    
+    //MARK:- Storyboard navigation
     static func goToMain (vc: UIViewController) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         controller?.modalPresentationStyle = .popover
@@ -40,22 +33,7 @@ public class Tools {
         vc.present(controller!, animated: true, completion: nil)
     }
     
-    static func randomString(length: Int?=12) -> String {
-        
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-        
-        var randomString = ""
-        
-        for _ in 0 ..< length! {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
-        }
-        
-        return randomString
-    }
-    
+    //MARK:- Validations
     static func validateEmail (email: UITextField) -> Bool {
         if let _email = email.text {
             return self.validateEmail(email: _email)
@@ -67,12 +45,7 @@ public class Tools {
     static func validateEmail (email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-
         return emailTest.evaluate(with: email)
-    }
-    
-    static func validateURL (url: UITextField) -> Bool {
-        return self.validateURL(url: url.text!)
     }
     
     static func validateURL (url: String) -> Bool {
@@ -83,51 +56,23 @@ public class Tools {
             successful = false
         }
         return successful
-        
     }
     
-    static func validateSingelPassword (pass: UITextField, animated: Bool=false) -> Bool {
-        let result: Bool
-        
-        if Tools.textFieldIsEmpty(textField: pass) {
-            Alert.showFailiureAlert(message: "The password field cannot be empty.", handler: { (_) in
-                if animated {
-                    Tools.textFieldErrorAnimation(textField: pass)
-                }
-            })
-            result = false
+    static func validatePassword (pass: UITextField) -> Bool {
+        if let _pass = pass.text {
+            return self.validatePassword(pass: _pass)
         } else {
-            if !validatePassword(pass: pass.text!) {
-                Alert.showFailiureAlert(message: "The password field has to have at least 8 characters.", handler: { (_) in
-                    if animated {
-                        Tools.textFieldErrorAnimation(textField: pass)
-                    }
-                })
-                result = false
-            } else {
-                result = true
-            }
+            return false
         }
-        
-        return result
     }
     
     static func validatePassword (pass: String) -> Bool {
-        return (pass.characters.count < 8 ? false : true)
+        let passRegEx = "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}"
+        let passTest = NSPredicate(format:"SELF MATCHES %@", passRegEx)
+        return passTest.evaluate(with: pass)
     }
     
-    static func validateDescription (desc: UITextView) -> Bool {
-        return !desc.text.isEmpty
-    }
-    
-    static func validateBetweenPassword (pass1: UITextField, pass2: UITextField) -> Bool {
-        return pass1.text == pass2.text
-    }
-    
-    static func textFieldIsEmpty (textField: UITextField) -> Bool {
-        return (textField.text?.isEmpty ?? true)
-    }
-    
+    //MARK:- Error View Animation
     static func textFieldErrorAnimation (textField: UITextField) {
         textField.backgroundColor = UIColor.red
         UIView.animate(withDuration: 1, animations: {
@@ -141,11 +86,24 @@ public class Tools {
     static func cellViewErrorAnimation (cell: UITableViewCell) {
         let view = cell.contentView
         view.backgroundColor = UIColor.red
-        UIView.animate(withDuration: 1, animations: { 
+        UIView.animate(withDuration: 1, animations: {
             view.alpha = 0.0
         }) { (finished: Bool) in
             view.backgroundColor = UIColor.white
             view.alpha = 1
         }
+    }
+    
+    //MARK:- Others
+    static func randomString(length: Int?=12) -> String {
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+        var randomString = ""
+        for _ in 0 ..< length! {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        return randomString
     }
 }

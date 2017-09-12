@@ -8,23 +8,18 @@
 
 import Foundation
 import UIKit
+import AWSCognitoIdentityProvider
 
 class LoginViewController: UIViewController {
+    
+    var username: String?
+    var password: String?
+    var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func doneActionButton(_ sender: Any) {
-        let emailCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EmailLoginViewCell
-        let passCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! PasswordLoginViewCell
-        if Tools.validateEmail(email: emailCell.emailTextField) {
-            if Tools.validateSingelPassword(pass: passCell.passwordTextField) {
-                Tools.goToMain(vc: self)
-            } else {
-                Tools.cellViewErrorAnimation(cell: passCell)
-            }
-        } else {
-            Tools.cellViewErrorAnimation(cell: emailCell)
-        }
+        self.logInAction(sender)
     }
     
     override func viewDidLoad() {
@@ -41,6 +36,60 @@ class LoginViewController: UIViewController {
     
     private func startTextField(){
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EmailLoginViewCell).emailTextField.becomeFirstResponder()
+    }
+    
+    func logInAction (_ sender: Any?=nil) {
+        if self.validTextFields() {
+            let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.username!, password: self.password!)
+            self.passwordAuthenticationCompletion?.set(result: authDetails)
+        } else {
+            Alert.showFailiureAlert(message: "Please enter valid user and password")
+        }
+    }
+    
+    func validTextFields () -> Bool {
+        var valid: Bool = true
+        
+        let mailCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EmailLoginViewCell
+        let passCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! PasswordLoginViewCell
+        
+        if Tools.validateEmail(email: mailCell.emailTextField) {
+            self.username = mailCell.emailTextField.text!
+        } else {
+            valid = false
+            Tools.cellViewErrorAnimation(cell: mailCell)
+        }
+        
+        if Tools.validatePassword(pass: passCell.passwordTextField) {
+            self.password = passCell.passwordTextField.text!
+        } else {
+            valid = false
+            Tools.cellViewErrorAnimation(cell: passCell)
+        }
+        
+        return valid
+    }
+}
+
+//MARK: - AWSCognitoIdentityPasswordAuthentication
+extension LoginViewController: AWSCognitoIdentityPasswordAuthentication {
+    public func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput,
+                           passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
+        self.passwordAuthenticationCompletion = passwordAuthenticationCompletionSource
+        DispatchQueue.main.async {
+            print(authenticationInput.lastKnownUsername ?? "No user!")
+        }
+    }
+    
+    public func didCompleteStepWithError(_ error: Error?) {
+        DispatchQueue.main.async {
+            if let error = error as? NSError {
+                Alert.showFailiureAlert(message: error.userInfo["message"] as! String)
+            } else {
+                print("Loading...")
+                Tools.goToMain(vc: self)
+            }
+        }
     }
 }
 
@@ -86,33 +135,10 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+//MARK:- TextField
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let emailCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EmailLoginViewCell
-        let passCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! PasswordLoginViewCell
-        var works: Bool = false
-        switch textField.tag {
-        case 0:
-            //Email section
-            if Tools.validateEmail(email: emailCell.emailTextField) {
-                passCell.passwordTextField.becomeFirstResponder()
-                works = true
-            } else {
-                Tools.cellViewErrorAnimation(cell: emailCell)
-            }
-        default:
-            //Password section
-            if Tools.validateEmail(email: emailCell.emailTextField) {
-                if Tools.validateSingelPassword(pass: passCell.passwordTextField) {
-                    Tools.goToMain(vc: self)
-                    works = true
-                } else {
-                    Tools.cellViewErrorAnimation(cell: passCell)
-                }
-            } else {
-                Tools.cellViewErrorAnimation(cell: emailCell)
-            }
-        }
-        return works
+        self.logInAction()
+        return true
     }
 }
