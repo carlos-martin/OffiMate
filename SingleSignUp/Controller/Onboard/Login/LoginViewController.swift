@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
         let emailCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EmailLoginViewCell
         let passCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! PasswordLoginViewCell
         if Tools.validateEmail(email: emailCell.emailTextField) {
-            if Tools.validateSingelPassword(pass: passCell.passwordTextField) {
+            if Tools.validatePassword(pass: passCell.passwordTextField) {
                 Tools.goToMain(vc: self)
             } else {
                 Tools.cellViewErrorAnimation(cell: passCell)
@@ -103,7 +103,7 @@ extension LoginViewController: UITextFieldDelegate {
         default:
             //Password section
             if Tools.validateEmail(email: emailCell.emailTextField) {
-                if Tools.validateSingelPassword(pass: passCell.passwordTextField) {
+                if Tools.validatePassword(pass: passCell.passwordTextField) {
                     Tools.goToMain(vc: self)
                     works = true
                 } else {

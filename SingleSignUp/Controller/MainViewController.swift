@@ -16,9 +16,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         if CurrentUser.isInit() {
-            self.welcomeLabel.text = "Hi! \(CurrentUser.name!)"
+            self.welcomeLabel.text = "Hi \(CurrentUser.name!)"
         } else {
-            self.welcomeLabel.text = "Create an account!"
+            self.welcomeLabel.text = "There is no registered user."
         }
     }
 

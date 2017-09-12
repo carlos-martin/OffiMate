@@ -51,7 +51,7 @@ class PasswordViewController: UIViewController {
     func readyToSave(cell: UITableViewCell) -> Bool {
         let isReady: Bool
         if let textField = (cell as! PasswordSignUpViewCell).passwordTextField {
-            isReady = Tools.validateSingelPassword(pass: textField)
+            isReady = Tools.validatePassword(pass: textField)
         } else {
             isReady = false
         }
