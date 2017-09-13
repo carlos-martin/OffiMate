@@ -11,6 +11,7 @@
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
 		1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */; };
 		1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */; };
+		1A6A5F131F692E1E0052F1FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */; };
 		1A813D181F4B0DCD00F190A2 /* Onboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A813D161F4B0DCD00F190A2 /* Onboard.storyboard */; };
 		1A813D1A1F4B0F0D00F190A2 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */; };
 		1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */; };
@@ -37,6 +38,7 @@
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
+		1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A813D171F4B0DCD00F190A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboard.storyboard; sourceTree = "<group>"; };
 		1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardViewController.swift; path = SingleSignUp/Controller/Onboard/OnboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */,
 				1AA2BC4E1F4ACEFE00E0C2E5 /* Info.plist */,
 				1AA2BC461F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld */,
+				1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */,
 			);
 			path = SingleSignUp;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */,
 				1A813D181F4B0DCD00F190A2 /* Onboard.storyboard in Resources */,
 				1AA2BC451F4ACEFE00E0C2E5 /* Main.storyboard in Resources */,
+				1A6A5F131F692E1E0052F1FB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,23 +289,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSAuthUI/AWSAuthUI.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognito/AWSCognito.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthUI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognito.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
