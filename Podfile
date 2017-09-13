@@ -1,10 +1,15 @@
-source 'https://github.com/CocoaPods/Specs.git'
-
-platform :ios, '8.0'
-use_frameworks!
+platform :ios, '9.0'
 
 target :'SingleSignUp' do
-    pod 'AWSCognito'
-    pod 'AWSCognitoIdentityProvider'
-    pod 'AWSCore'
+    use_frameworks!
+#    
+#    pod 'AWSS3', '~> 2.6.1'
+#    pod 'AWSCore', '~> 2.6.1'
+#    pod 'AWSAuthCore', '~> 2.6.1'
+#    pod 'AWSUserPoolsSignIn', '~> 2.6.1'
+#    pod 'AWSCognito', '~> 2.6.1'
+#    pod 'AWSCognitoIdentityProvider', '~> 2.6.1'
+#    pod 'AWSAuthUI', '~> 2.6.1'
+#    # other pods
+#    
 end

@@ -26,13 +26,13 @@
 		1AA2BC481F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2BC461F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld */; };
 		1AA2BC4A1F4ACEFE00E0C2E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */; };
 		1AA2BC4D1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2BC4B1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard */; };
+		1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD244151F615B6A002233EE /* ConfirmViewController.swift */; };
 		1AD8B95B1F4D7F7600F6777C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */; };
 		1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */; };
-		BC3E5AD9DB5247D7F2A08029 /* Pods_SingleSignUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1896D1627897BA540B0D460D /* Pods_SingleSignUp.framework */; };
+		506600F5CD1EA8E9EF649A05 /* Pods_SingleSignUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B9BBE3CEE32350C20B3636 /* Pods_SingleSignUp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1896D1627897BA540B0D460D /* Pods_SingleSignUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleSignUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A3326E81F67F8B3009247BC /* ViewControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUtils.swift; sourceTree = "<group>"; };
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -54,12 +54,12 @@
 		1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AA2BC4C1F4ACEFE00E0C2E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AA2BC4E1F4ACEFE00E0C2E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1AA2BC541F4AE3F000E0C2E5 /* SingleSignUp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SingleSignUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		1AD244151F615B6A002233EE /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
-		C59662BE208432AC876AB2F3 /* Pods-SingleSignUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.debug.xcconfig"; sourceTree = "<group>"; };
-		D18D719336A916EE7811732A /* Pods_SingleSingUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleSingUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8704A4492A371B2AD05FAB7 /* Pods-SingleSignUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.release.xcconfig"; sourceTree = "<group>"; };
+		2169E46DE8EA580A38269BA8 /* Pods-SingleSignUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.debug.xcconfig"; sourceTree = "<group>"; };
+		47B9BBE3CEE32350C20B3636 /* Pods_SingleSignUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleSignUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EFC1F95125A4E9273D4CFDA /* Pods-SingleSignUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,13 +67,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC3E5AD9DB5247D7F2A08029 /* Pods_SingleSignUp.framework in Frameworks */,
+				506600F5CD1EA8E9EF649A05 /* Pods_SingleSignUp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DA560F193791C8B7B271AC5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				47B9BBE3CEE32350C20B3636 /* Pods_SingleSignUp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		11E537622FBF0F3E0C3CFB75 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2169E46DE8EA580A38269BA8 /* Pods-SingleSignUp.debug.xcconfig */,
+				7EFC1F95125A4E9273D4CFDA /* Pods-SingleSignUp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		1A20B47A1F4C73C600F3A44C /* Onboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +116,7 @@
 				1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */,
 				1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */,
 				1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */,
+				1AD244151F615B6A002233EE /* ConfirmViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -156,9 +174,8 @@
 			children = (
 				1AA2BC3E1F4ACEFE00E0C2E5 /* SingleSignUp */,
 				1AA2BC3D1F4ACEFE00E0C2E5 /* Products */,
-				299FA090A28131128BFDAD62 /* Pods */,
-				72C479400C7137E63CB8B25C /* Frameworks */,
-				1AA2BC541F4AE3F000E0C2E5 /* SingleSignUp-Bridging-Header.h */,
+				11E537622FBF0F3E0C3CFB75 /* Pods */,
+				0DA560F193791C8B7B271AC5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,24 +201,6 @@
 				1AA2BC461F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld */,
 			);
 			path = SingleSignUp;
-			sourceTree = "<group>";
-		};
-		299FA090A28131128BFDAD62 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C59662BE208432AC876AB2F3 /* Pods-SingleSignUp.debug.xcconfig */,
-				F8704A4492A371B2AD05FAB7 /* Pods-SingleSignUp.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		72C479400C7137E63CB8B25C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D18D719336A916EE7811732A /* Pods_SingleSingUp.framework */,
-				1896D1627897BA540B0D460D /* Pods_SingleSignUp.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,15 +285,23 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthCore/AWSAuthCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSAuthUI/AWSAuthUI.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCognito/AWSCognito.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAuthUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognito.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -345,6 +352,7 @@
 				1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */,
 				1A900FA41F4C49FE005B3DA4 /* NameViewController.swift in Sources */,
 				1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */,
+				1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */,
 				1A3326E91F67F8B3009247BC /* ViewControllerUtils.swift in Sources */,
 				1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */,
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
@@ -491,7 +499,7 @@
 		};
 		1AA2BC521F4ACEFE00E0C2E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C59662BE208432AC876AB2F3 /* Pods-SingleSignUp.debug.xcconfig */;
+			baseConfigurationReference = 2169E46DE8EA580A38269BA8 /* Pods-SingleSignUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -500,7 +508,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.SingleSignUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SingleSignUp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -508,7 +515,7 @@
 		};
 		1AA2BC531F4ACEFE00E0C2E5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8704A4492A371B2AD05FAB7 /* Pods-SingleSignUp.release.xcconfig */;
+			baseConfigurationReference = 7EFC1F95125A4E9273D4CFDA /* Pods-SingleSignUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -517,7 +524,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.SingleSignUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SingleSignUp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

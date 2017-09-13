@@ -11,12 +11,16 @@ import UIKit
 
 class PasswordViewController: UIViewController {
     
+    var username: String?
+    var email:    String?
+    var password: String?
+    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: IBAction
     @IBAction func saveActionButton(_ sender: Any) {
-        self.saveAction()
+        self.saveAction(sender)
     }
     
     override func viewDidLoad() {
@@ -36,12 +40,25 @@ class PasswordViewController: UIViewController {
     }
     
     //MARK: Segue
-    func saveAction () {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toConfirm", let nextScene = segue.destination as? ConfirmViewController {
+            nextScene.username = self.username
+            nextScene.email =    self.email
+            nextScene.password = self.password
+        }
+    }
+    
+    func saveAction (_ sender: Any?=nil) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
-                let _ = CurrentUser.setPassword(password: (cell as! PasswordSignUpViewCell).passwordTextField.text!)
-                let _ = CurrentUser.localSave()
-                Tools.goToMain(vc: self)
+                do {
+                    try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!)
+                    try CurrentUser.localSave()
+                    Tools.goToMain(vc: self)
+                } catch {
+                    Tools.cellViewErrorAnimation(cell: cell)
+                }
+                
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
@@ -49,11 +66,12 @@ class PasswordViewController: UIViewController {
     }
     
     func readyToSave(cell: UITableViewCell) -> Bool {
-        let isReady: Bool
+        var isReady: Bool = false
         if let textField = (cell as! PasswordSignUpViewCell).passwordTextField {
-            isReady = Tools.validatePassword(pass: textField)
-        } else {
-            isReady = false
+            if Tools.validatePassword(pass: textField) {
+                isReady = true
+                self.password = textField.text!
+            }
         }
         return isReady
     }
