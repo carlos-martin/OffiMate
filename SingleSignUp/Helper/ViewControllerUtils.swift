@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ViewControllerUtils {
+class SpinnerLoader {
     var container: UIView = UIView()
     var loadingView: UIView = UIView()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -34,12 +34,12 @@ class ViewControllerUtils {
         
     }
     
-    func showActivityIndicator(_ view: UIView) {
+    func start(_ view: UIView) {
         view.addSubview(container)
         activityIndicator.startAnimating()
     }
     
-    func hideActivityIndicator() {
+    func stop() {
         activityIndicator.stopAnimating()
         container.removeFromSuperview()
     }

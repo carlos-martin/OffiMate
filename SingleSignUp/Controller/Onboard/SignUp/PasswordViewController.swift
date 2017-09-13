@@ -8,26 +8,31 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class PasswordViewController: UIViewController {
     
     var username: String?
     var email:    String?
     var password: String?
+    var loader:   SpinnerLoader?
     
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: IBAction
     @IBAction func saveActionButton(_ sender: Any) {
-        self.saveAction(sender)
+        self.signUpAction(sender)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         self.tableView.reloadData()
+        
         self.startTextField()
+        
+        loader = SpinnerLoader(view: self.view)
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,17 +53,28 @@ class PasswordViewController: UIViewController {
         }
     }
     
-    func saveAction (_ sender: Any?=nil) {
+    func signUpAction (_ sender: Any?=nil) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
                 do {
+                    self.loader?.start(self.view)
                     try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!)
                     try CurrentUser.localSave()
-                    Tools.goToMain(vc: self)
+                    
+                    Auth.auth().createUser(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
+                        if error == nil {
+                            CurrentUser.user = user!
+                            self.loader?.stop()
+                            Tools.goToMain(vc: self)
+                        } else {
+                            self.loader?.stop()
+                            Alert.showFailiureAlert(message: "Error: \(error.debugDescription)")
+                        }
+                    })
                 } catch {
+                    self.loader?.stop()
                     Tools.cellViewErrorAnimation(cell: cell)
                 }
-                
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
@@ -109,7 +125,7 @@ extension PasswordViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - TextField
 extension PasswordViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.saveAction()
+        self.signUpAction()
         return true
     }
 }

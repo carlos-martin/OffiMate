@@ -126,8 +126,8 @@
 		1A813D131F4B0AE700F190A2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1A20B47A1F4C73C600F3A44C /* Onboard */,
 				1AA2BC411F4ACEFE00E0C2E5 /* MainViewController.swift */,
+				1A20B47A1F4C73C600F3A44C /* Onboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -289,11 +289,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

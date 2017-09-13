@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
@@ -20,6 +21,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func logoutActionButton(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
+        }
         CurrentUser.localClean()
         Tools.goToMain(vc: self)
     }

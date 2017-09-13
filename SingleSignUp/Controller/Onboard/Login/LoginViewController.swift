@@ -8,11 +8,13 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
     var username: String?
     var password: String?
+    var loader:   SpinnerLoader?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -22,9 +24,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         self.tableView.reloadData()
+        
         self.startTextField()
+        
+        loader = SpinnerLoader(view: self.view)
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,7 +43,24 @@ class LoginViewController: UIViewController {
     
     func logInAction (_ sender: Any?=nil) {
         if self.validTextFields() {
-            Alert.showFailiureAlert(message: "Not implemented yet.")
+            //Alert.showFailiureAlert(message: "Not implemented yet.")
+            self.loader?.start(self.view)
+            Auth.auth().signIn(withEmail: self.username!, password: self.password!, completion: { (user: User?, error: Error?) in
+                if let nserror = error as? NSError {
+                    Alert.showFailiureAlert(message: "Error: " + (nserror.userInfo["NSLocalizedDescription"] as? String ?? "Not identify error."))
+                    self.loader?.stop()
+                } else {
+                    CurrentUser.user = user
+                    do {
+                        try CurrentUser.setData(name: "no-name", email: self.username!, password: self.password!)
+                        try CurrentUser.localSave()
+                    } catch {
+                        Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
+                    }
+                    self.loader?.stop()
+                    Tools.goToMain(vc: self)
+                }
+            })
         } else {
             Alert.showFailiureAlert(message: "Please enter valid user and password.")
         }

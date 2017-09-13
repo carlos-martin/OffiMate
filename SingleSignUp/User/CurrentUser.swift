@@ -8,11 +8,14 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class CurrentUser {
     static private(set) var name:       String!
     static private(set) var email:      String!
     static private(set) var password:   String!
+    //FirebaseAuth user
+    static var user: User!
     
     //MARK:- Public funtion
     static func isInit() -> Bool {
