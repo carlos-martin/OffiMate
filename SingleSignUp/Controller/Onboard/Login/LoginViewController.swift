@@ -8,13 +8,11 @@
 
 import Foundation
 import UIKit
-import AWSCognitoIdentityProvider
 
 class LoginViewController: UIViewController {
     
     var username: String?
     var password: String?
-    var passwordAuthenticationCompletion: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -40,10 +38,9 @@ class LoginViewController: UIViewController {
     
     func logInAction (_ sender: Any?=nil) {
         if self.validTextFields() {
-            let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.username!, password: self.password!)
-            self.passwordAuthenticationCompletion?.set(result: authDetails)
+            Alert.showFailiureAlert(message: "Not implemented yet.")
         } else {
-            Alert.showFailiureAlert(message: "Please enter valid user and password")
+            Alert.showFailiureAlert(message: "Please enter valid user and password.")
         }
     }
     
@@ -68,28 +65,6 @@ class LoginViewController: UIViewController {
         }
         
         return valid
-    }
-}
-
-//MARK: - AWSCognitoIdentityPasswordAuthentication
-extension LoginViewController: AWSCognitoIdentityPasswordAuthentication {
-    public func getDetails(_ authenticationInput: AWSCognitoIdentityPasswordAuthenticationInput,
-                           passwordAuthenticationCompletionSource: AWSTaskCompletionSource<AWSCognitoIdentityPasswordAuthenticationDetails>) {
-        self.passwordAuthenticationCompletion = passwordAuthenticationCompletionSource
-        DispatchQueue.main.async {
-            print(authenticationInput.lastKnownUsername ?? "No user!")
-        }
-    }
-    
-    public func didCompleteStepWithError(_ error: Error?) {
-        DispatchQueue.main.async {
-            if let error = error as? NSError {
-                Alert.showFailiureAlert(message: error.userInfo["message"] as! String)
-            } else {
-                print("Loading...")
-                Tools.goToMain(vc: self)
-            }
-        }
     }
 }
 
@@ -138,7 +113,12 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK:- TextField
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.logInAction()
+        switch textField.tag {
+        case 0:
+            (self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! PasswordLoginViewCell).passwordTextField.becomeFirstResponder()
+        default:
+            self.logInAction()
+        }
         return true
     }
 }

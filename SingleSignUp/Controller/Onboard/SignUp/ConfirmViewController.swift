@@ -8,14 +8,12 @@
 
 import Foundation
 import UIKit
-import AWSCognitoIdentityProvider
 
 class ConfirmViewController: UIViewController {
     
     var username: String?
     var email:    String?
     var password: String?
-    var user:     AWSCognitoIdentityUser?
     
     @IBAction func saveActionButton(_ sender: Any) {
     }

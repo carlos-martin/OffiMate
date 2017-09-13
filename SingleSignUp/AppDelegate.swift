@@ -5,60 +5,36 @@
 //  Created by Carlos Martin on 21/08/17.
 //  Copyright © 2017 Carlos Martin. All rights reserved.
 //
-
 import UIKit
 import CoreData
-import AWSAuthCore
-import AWSUserPoolsSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    // set up the initialized flag
-    var isInitialized = false
-    
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        
-        print("didFinishLaunching")
-        
-        AWSSignInManager.sharedInstance().interceptApplication(
-            application, open: url,
-            sourceApplication: sourceApplication,
-            annotation: annotation)
-        
-        if (!isInitialized) {
-            isInitialized = true
-        }
-        
-        return false
-    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        print("didFinishLaunching:")
-        
-        // Register the sign in provider instances with their unique identifier
-        AWSSignInManager.sharedInstance().register(
-            signInProvider: AWSCognitoUserPoolsSignInProvider.sharedInstance())
-        
-        let didFinishLaunching:
-            Bool = AWSSignInManager.sharedInstance().interceptApplication(
-                application, didFinishLaunchingWithOptions: launchOptions)
-        
-        if (!isInitialized) {
-            AWSSignInManager.sharedInstance().resumeSession(completionHandler: {
-                (result: Any?,  error: Error?) in
-                print("Result: \(result)\n Error:\(error)")
-            })
-            
-            isInitialized = true
-            
-        }
-        
-        return didFinishLaunching
+        return true
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -76,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-        let container = NSPersistentContainer(name: "SingleSingUp")
+        let container = NSPersistentContainer(name: "removeit")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
