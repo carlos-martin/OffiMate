@@ -12,25 +12,38 @@ import UIKit
 public class Tools {
     
     //MARK:- Storyboard navigation
+    
+    //.coverVertical .flipHorizontal .crossDissolve
     static func goToMain (vc: UIViewController) {
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-        controller?.modalPresentationStyle = .popover
-        controller?.modalTransitionStyle = .flipHorizontal
-        vc.present(controller!, animated: true, completion: nil)
+        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() {
+            if let splitController = controller.splitViewController {
+                if splitController.isCollapsed {
+                    let detailNC = controller.parent as! UINavigationController
+                    let masterNC = detailNC.parent as! UINavigationController
+                    masterNC.popToRootViewController(animated: true)
+                }
+            } else {
+                controller.modalPresentationStyle = .fullScreen
+                controller.modalTransitionStyle = .flipHorizontal
+                vc.present(controller, animated: true, completion: nil)
+            }
+        }
     }
     
     static func goToOnboard (vc: UIViewController) {
-        let controller = UIStoryboard(name: "Onboard", bundle: nil).instantiateInitialViewController()
-        controller?.modalPresentationStyle = .popover
-        controller?.modalTransitionStyle = .flipHorizontal
-        vc.present(controller!, animated: true, completion: nil)
+        if let controller = UIStoryboard(name: "Onboard", bundle: nil).instantiateInitialViewController() {
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .flipHorizontal
+            vc.present(controller, animated: true, completion: nil)
+        }
     }
     
     static func goToProfile (vc: UIViewController) {
-        let controller = UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController()
-        controller?.modalPresentationStyle = .popover
-        controller?.modalTransitionStyle = .flipHorizontal
-        vc.present(controller!, animated: true, completion: nil)
+        if let controller = UIStoryboard(name: "Profile", bundle: nil).instantiateInitialViewController() {
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .flipHorizontal
+            vc.present(controller, animated: true, completion: nil)
+        }
     }
     
     //MARK:- Validations

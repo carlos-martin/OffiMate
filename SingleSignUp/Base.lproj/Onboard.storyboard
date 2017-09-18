@@ -80,6 +80,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelBarButton" destination="3Tb-GA-Odr" id="mmd-hx-dqt"/>
                         <outlet property="loginButton" destination="iDk-Ls-sXP" id="hLI-wn-EqJ"/>
                         <outlet property="signUpButton" destination="qaM-XY-KLC" id="L2e-ws-V1q"/>
                     </connections>
