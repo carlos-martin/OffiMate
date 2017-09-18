@@ -18,18 +18,22 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         if auto {
-            if let splitController = self.splitViewController {
-                if splitController.isCollapsed {
-                    let detailNC = self.parent as! UINavigationController
-                    let masterNC = detailNC.parent as! UINavigationController
-                    masterNC.popToRootViewController(animated: false)
-                }
-            }
+            self.toMainViewController()
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func toMainViewController () {
+        if let splitController = self.splitViewController {
+            if splitController.isCollapsed {
+                let detailNC = self.parent as! UINavigationController
+                let masterNC = detailNC.parent as! UINavigationController
+                masterNC.popToRootViewController(animated: false)
+            }
+        }
     }
 }
 
