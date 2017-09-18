@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
+enum ProfileSection: Int {
+    case name = 0
+    case mail
+    case pass
+}
+
 class ProfileViewController: UIViewController {
     
     //MARK: IBOutlet
@@ -53,27 +59,35 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "Name:"
-        case 1:
-            return "E-mail:"
-        default:
-            return "Password:"
+        if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
+            switch currentSection {
+            case .name:
+                return "Name:"
+            case .mail:
+                return "E-mail:"
+            case .pass:
+                return "Password:"
+            }
+        } else {
+            return ""
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! ProfileViewCell
-        switch indexPath.section {
-        case 0:
-            cell.profileLabel.text = CurrentUser.name
-        case 1:
-            cell.profileLabel.text = CurrentUser.email
-        default:
-            cell.profileLabel.text = CurrentUser.password
+        if let currentSection: ProfileSection = ProfileSection(rawValue: indexPath.section) {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! ProfileViewCell
+            switch currentSection {
+            case .name:
+                cell.profileLabel.text = CurrentUser.name
+            case .mail:
+                cell.profileLabel.text = CurrentUser.email
+            case .pass:
+                cell.profileLabel.text = CurrentUser.password
+            }
+            return cell
+        } else {
+            return UITableViewCell()
         }
-        return cell
     }
     
 }

@@ -16,17 +16,9 @@ public class Tools {
     //.coverVertical .flipHorizontal .crossDissolve
     static func goToMain (vc: UIViewController) {
         if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() {
-            if let splitController = controller.splitViewController {
-                if splitController.isCollapsed {
-                    let detailNC = controller.parent as! UINavigationController
-                    let masterNC = detailNC.parent as! UINavigationController
-                    masterNC.popToRootViewController(animated: true)
-                }
-            } else {
-                controller.modalPresentationStyle = .fullScreen
-                controller.modalTransitionStyle = .flipHorizontal
-                vc.present(controller, animated: true, completion: nil)
-            }
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .flipHorizontal
+            vc.present(controller, animated: true, completion: nil)
         }
     }
     
@@ -44,6 +36,40 @@ public class Tools {
             controller.modalTransitionStyle = .flipHorizontal
             vc.present(controller, animated: true, completion: nil)
         }
+    }
+    
+    //MARK:- Date
+    static func getCurrentDayWeekNum() -> Int {
+        let calendar = NSCalendar(calendarIdentifier: .gregorian)
+        let components = calendar?.component(.weekday, from: Date())
+        return components!
+    }
+    
+    static func getCurrentDayName(weekDay: Int) -> String {
+        switch weekDay {
+        case 1:
+            return "Sunday"
+        case 2:
+            return "Monday"
+        case 3:
+            return "Tuesday"
+        case 4:
+            return "Wednesday"
+        case 5:
+            return "Thrusday"
+        case 6:
+            return "Friday"
+        case 7:
+            return "Saturday"
+        default:
+            return ""
+        }
+    }
+    
+    static func getWeekNum() -> Int {
+        let calendar = Calendar.current
+        let weekNum = calendar.component(.weekOfYear, from: Date())
+        return weekNum
     }
     
     //MARK:- Validations

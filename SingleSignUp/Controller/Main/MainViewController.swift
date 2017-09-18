@@ -8,6 +8,14 @@
 
 import UIKit
 
+import Firebase
+
+enum MainSection: Int {
+    case current = 0
+    case previous
+}
+
+
 class MainViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
@@ -62,30 +70,65 @@ class MainViewController: UITableViewController {
     }
     
     //MARK:- Table View
+    func getNumberOfRows() -> Int {
+        let currentDay = Tools.getCurrentDayWeekNum()
+        if currentDay >= 6 || currentDay == 1 {
+            return 5
+        } else {
+            return currentDay - 1
+        }
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if let currentSection: MainSection = MainSection(rawValue: section) {
+            switch currentSection {
+            case .current:
+                return getNumberOfRows()
+            case .previous:
+                return 5
+            }
+        } else {
+            return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Current Week"
+        if let currentSection: MainSection = MainSection(rawValue: section) {
+            switch currentSection {
+            case .current:
+                return "Current week"
+            case .previous:
+                return "Week \(Tools.getWeekNum()-1)"
+            }
+        } else {
+            return ""
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell
-        switch indexPath.row {
-        case 0:
-            cell?.label.text = "Today"
-        case 1:
-            cell?.label.text = "Yesterday"
-        default:
-            cell?.label.text = "Two days ago"
+        if let currentSection: MainSection = MainSection(rawValue: indexPath.section) {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell
+            switch currentSection {
+            case .current:
+                switch indexPath.row {
+                case 0:
+                    cell?.label.text = "Today"
+                    break
+                default:
+                    cell?.label.text = Tools.getCurrentDayName(weekDay: 6-indexPath.row)
+                }
+                return cell!
+            case .previous:
+                cell?.label.text = Tools.getCurrentDayName(weekDay: 6-indexPath.row)
+                return cell!
+            }
+        } else {
+            return UITableViewCell()
         }
-        return cell!
     }
 
     

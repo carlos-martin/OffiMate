@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
+enum LoginSection: Int {
+    case mail = 0
+    case pass
+}
+
 class LoginViewController: UIViewController {
     
     var username: String?
@@ -69,8 +74,8 @@ class LoginViewController: UIViewController {
     func validTextFields () -> Bool {
         var valid: Bool = true
         
-        let mailCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! EmailLoginViewCell
-        let passCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! PasswordLoginViewCell
+        let mailCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: LoginSection.mail.rawValue)) as! EmailLoginViewCell
+        let passCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: LoginSection.pass.rawValue)) as! PasswordLoginViewCell
         
         if Tools.validateEmail(email: mailCell.emailTextField) {
             self.username = mailCell.emailTextField.text!
@@ -101,28 +106,36 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "E-mail"
-        default:
-            return "Password"
+        if let currentSection: LoginSection = LoginSection(rawValue: section) {
+            switch currentSection {
+            case .mail:
+                return "E-mail"
+            case .pass:
+                return "Password"
+            }
+        } else {
+            return ""
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "emailLoginCell", for: indexPath) as! EmailLoginViewCell
-            cell.emailTextField.delegate = self
-            cell.emailTextField.placeholder = "Enter your email..."
-            cell.emailTextField.tag = indexPath.section
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "passLoginCell", for: indexPath) as! PasswordLoginViewCell
-            cell.passwordTextField.delegate = self
-            cell.passwordTextField.placeholder = "Enter your password..."
-            cell.passwordTextField.tag = indexPath.section
-            return cell
+        if let currentSection: LoginSection = LoginSection(rawValue: indexPath.section) {
+            switch currentSection {
+            case .mail:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "emailLoginCell", for: indexPath) as! EmailLoginViewCell
+                cell.emailTextField.delegate = self
+                cell.emailTextField.placeholder = "Enter your email..."
+                cell.emailTextField.tag = indexPath.section
+                return cell
+            case .pass:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "passLoginCell", for: indexPath) as! PasswordLoginViewCell
+                cell.passwordTextField.delegate = self
+                cell.passwordTextField.placeholder = "Enter your password..."
+                cell.passwordTextField.tag = indexPath.section
+                return cell
+            }
+        } else {
+            return UITableViewCell()
         }
     }
     
@@ -137,7 +150,7 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField.tag {
         case 0:
-            (self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! PasswordLoginViewCell).passwordTextField.becomeFirstResponder()
+            (self.tableView.cellForRow(at: IndexPath(row: 0, section: LoginSection.pass.rawValue)) as! PasswordLoginViewCell).passwordTextField.becomeFirstResponder()
         default:
             self.logInAction()
         }
