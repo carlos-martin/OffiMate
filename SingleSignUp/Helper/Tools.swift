@@ -38,40 +38,6 @@ public class Tools {
         }
     }
     
-    //MARK:- Date
-    static func getCurrentDayWeekNum() -> Int {
-        let calendar = NSCalendar(calendarIdentifier: .gregorian)
-        let components = calendar?.component(.weekday, from: Date())
-        return components!
-    }
-    
-    static func getCurrentDayName(weekDay: Int) -> String {
-        switch weekDay {
-        case 1:
-            return "Sunday"
-        case 2:
-            return "Monday"
-        case 3:
-            return "Tuesday"
-        case 4:
-            return "Wednesday"
-        case 5:
-            return "Thrusday"
-        case 6:
-            return "Friday"
-        case 7:
-            return "Saturday"
-        default:
-            return ""
-        }
-    }
-    
-    static func getWeekNum() -> Int {
-        let calendar = Calendar.current
-        let weekNum = calendar.component(.weekOfYear, from: Date())
-        return weekNum
-    }
-    
     //MARK:- Validations
     static func validateEmail (email: UITextField) -> Bool {
         if let _email = email.text {

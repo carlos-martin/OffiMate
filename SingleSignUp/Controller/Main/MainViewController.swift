@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 import Firebase
 
 enum MainSection: Int {
@@ -17,20 +16,18 @@ enum MainSection: Int {
 
 
 class MainViewController: UITableViewController {
-
-    var detailViewController: DetailViewController? = nil
+    
+    var         senderDisplayName:      String?
+    private var currentChannels:        [Channel] = []
+    private var previousChannels:       [Channel] = []
+    var         detailViewController:   DetailViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let profileButton = UIBarButtonItem(
-            image: UIImage(named: "user"),
-            style: UIBarButtonItemStyle.plain,
-            target: self,
-            action: #selector(onboardActionButton(_:)))
         
-        self.navigationItem.rightBarButtonItem = profileButton
-        self.navigationItem.title = "OffiMate"
+        self.initUI()
+        self.initUser()
+        self.initChannels()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +49,79 @@ class MainViewController: UITableViewController {
         }
     }
     
+    //MARK:- Init and Fetching Data
+    
+    func initUI() {
+        let profileButton = UIBarButtonItem(
+            image: UIImage(named: "user"),
+            style: UIBarButtonItemStyle.plain,
+            target: self,
+            action: #selector(onboardActionButton(_:)))
+        
+        self.navigationItem.rightBarButtonItem = profileButton
+        self.navigationItem.title = "OffiMate"
+    }
+    
+    func initUser() {
+        CurrentUser.date = NewDate(date: Date())
+    }
+    
+    func initChannels() {
+        func getNumberOfRows() -> Int {
+            let weekDay = CurrentUser.date!.getWeekDay()
+            if weekDay >= 6 || weekDay == 1 {
+                return 5
+            } else {
+                return weekDay - 1
+            }
+        }
+        
+        if let date = CurrentUser.date {
+            
+            //MARK: init self.previousChannels
+            let lower_index: Int
+            let upper_index: Int
+            switch date.getDayName() {
+            case "Saturday":
+                lower_index = 1
+            case "Sunday":
+                lower_index = 2
+            case "Monday":
+                lower_index = 3
+            case "Tuesday":
+                lower_index = 4
+            case "Wednesday":
+                lower_index = 5
+            case "Thrusday":
+                lower_index = 6
+            case "Friday":
+                lower_index = 7
+            default:
+                lower_index = 0
+            }
+            upper_index = lower_index+4
+            
+            for i in lower_index...upper_index {
+                let _date    = Calendar.current.date(byAdding: .day, value: -i, to: date.date)!
+                let _newDate = NewDate(date: _date)
+                let channel  = Channel(id: _newDate.id.description, name: _newDate.getDayName())
+                self.previousChannels.append(channel)
+            }
+            
+            //MARK: init self.currentChannels
+            let today = Channel(id: date.id.description, name: "Today")
+            self.currentChannels.append(today)
+            
+            let rows = getNumberOfRows()
+            for i in 1...(rows-1) {
+                let _date    = Calendar.current.date(byAdding: .day, value: -i, to: date.date)!
+                let _newDate = NewDate(date: _date)
+                let channel  = Channel(id: _newDate.id.description, name: _newDate.getDayName())
+                self.currentChannels.append(channel)
+            }
+        }
+    }
+    
     //MARK:- Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,14 +140,6 @@ class MainViewController: UITableViewController {
     }
     
     //MARK:- Table View
-    func getNumberOfRows() -> Int {
-        let currentDay = Tools.getCurrentDayWeekNum()
-        if currentDay >= 6 || currentDay == 1 {
-            return 5
-        } else {
-            return currentDay - 1
-        }
-    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -87,9 +149,9 @@ class MainViewController: UITableViewController {
         if let currentSection: MainSection = MainSection(rawValue: section) {
             switch currentSection {
             case .current:
-                return getNumberOfRows()
+                return self.currentChannels.count
             case .previous:
-                return 5
+                return self.previousChannels.count
             }
         } else {
             return 0
@@ -102,7 +164,7 @@ class MainViewController: UITableViewController {
             case .current:
                 return "Current week"
             case .previous:
-                return "Week \(Tools.getWeekNum()-1)"
+                return "Week \(CurrentUser.date!.getWeekNum())"
             }
         } else {
             return ""
@@ -119,11 +181,11 @@ class MainViewController: UITableViewController {
                     cell?.label.text = "Today"
                     break
                 default:
-                    cell?.label.text = Tools.getCurrentDayName(weekDay: 6-indexPath.row)
+                    cell?.label.text = self.currentChannels[indexPath.row].name
                 }
                 return cell!
             case .previous:
-                cell?.label.text = Tools.getCurrentDayName(weekDay: 6-indexPath.row)
+                cell?.label.text = self.previousChannels[indexPath.row].name
                 return cell!
             }
         } else {

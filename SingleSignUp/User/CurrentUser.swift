@@ -14,6 +14,8 @@ class CurrentUser {
     static private(set) var name:       String!
     static private(set) var email:      String!
     static private(set) var password:   String!
+    
+    static var date: NewDate!
     //FirebaseAuth user
     static var user: User!
     
