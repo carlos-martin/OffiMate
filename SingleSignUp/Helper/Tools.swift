@@ -8,11 +8,19 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 public class Tools {
+    //place to create internal variables
+}
+
+//MARK:- BackEnd 
+extension Tools {
     
-    //MARK:- Storyboard navigation
-    
+}
+
+//MARK:- Storyboard navigation
+extension Tools {
     //.coverVertical .flipHorizontal .crossDissolve
     static func goToMain (vc: UIViewController) {
         if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() {
@@ -37,8 +45,10 @@ public class Tools {
             vc.present(controller, animated: true, completion: nil)
         }
     }
-    
-    //MARK:- Validations
+}
+
+//MARK:- Validations
+extension Tools {
     static func validateEmail (email: UITextField) -> Bool {
         if let _email = email.text {
             return self.validateEmail(email: _email)
@@ -76,8 +86,10 @@ public class Tools {
         let passTest = NSPredicate(format:"SELF MATCHES %@", passRegEx)
         return passTest.evaluate(with: pass)
     }
-    
-    //MARK:- Error View Animation
+}
+
+//MARK:- Error View Animation
+extension Tools {
     static func textFieldErrorAnimation (textField: UITextField) {
         textField.backgroundColor = UIColor.red
         UIView.animate(withDuration: 1, animations: {
@@ -99,7 +111,10 @@ public class Tools {
         }
     }
     
-    //MARK:- Others
+}
+
+//MARK:- Others
+extension Tools {
     static func randomString(length: Int?=12) -> String {
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let len = UInt32(letters.length)

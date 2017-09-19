@@ -14,13 +14,19 @@ enum MainSection: Int {
     case previous
 }
 
-
 class MainViewController: UITableViewController {
     
-    var         senderDisplayName:      String?
-    private var currentChannels:        [Channel] = []
-    private var previousChannels:       [Channel] = []
-    var         detailViewController:   DetailViewController? = nil
+    var         senderDisplayName:    String?
+    private var currentChannels:      [Channel] = []
+    private var previousChannels:     [Channel] = []
+    private var rawChannels:          [Channel] = []
+    var         detailViewController: DetailViewController? = nil
+    var         spinner:              SpinnerLoader?
+    
+    
+    //Firebase variables
+    private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
+    private      var channelRefHandle:  DatabaseHandle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +34,13 @@ class MainViewController: UITableViewController {
         self.initUI()
         self.initUser()
         self.initChannels()
+        self.initFirebase()
+    }
+    
+    deinit {
+        if let refHandle = channelRefHandle {
+            channelRef.removeObserver(withHandle: refHandle)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,9 +62,9 @@ class MainViewController: UITableViewController {
         }
     }
     
-    //MARK:- Init and Fetching Data
+    //MARK:- Init and Fetching Data Functions
     
-    func initUI() {
+    private func initUI() {
         let profileButton = UIBarButtonItem(
             image: UIImage(named: "user"),
             style: UIBarButtonItemStyle.plain,
@@ -60,13 +73,40 @@ class MainViewController: UITableViewController {
         
         self.navigationItem.rightBarButtonItem = profileButton
         self.navigationItem.title = "OffiMate"
+        self.spinner = SpinnerLoader(view: self.view)
     }
     
-    func initUser() {
+    private func initUser() {
         CurrentUser.date = NewDate(date: Date())
     }
     
-    func initChannels() {
+    private func initFirebase() {
+        
+    }
+    
+    //MARK: Firebase related methods
+    
+    private func initChannels() {
+        //Use the observe method to listen for new channels being written to the Firebase DB
+        
+        self.spinner?.start(self.view)
+        
+        channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
+            let channelData = snapshot.value as! Dictionary<String, AnyObject>
+            let id = snapshot.key
+            if let name = channelData["name"] as! String!, name.characters.count > 0 {
+                self.rawChannels.append(Channel(id: id, name: name))
+                self.shortChannels()
+                self.tableView.reloadData()
+            } else {
+                Alert.showFailiureAlert(message: "Error: Could not decode channel data")
+            }
+            self.spinner?.stop()
+        })
+    }
+    
+    private func shortChannels() {
+        //TODO: do property short channel here
         func getNumberOfRows() -> Int {
             let weekDay = CurrentUser.date!.getWeekDay()
             if weekDay >= 6 || weekDay == 1 {
@@ -99,7 +139,7 @@ class MainViewController: UITableViewController {
             default:
                 lower_index = 0
             }
-            upper_index = lower_index+4
+            upper_index = lower_index + 4
             
             for i in lower_index...upper_index {
                 let _date    = Calendar.current.date(byAdding: .day, value: -i, to: date.date)!
@@ -192,8 +232,4 @@ class MainViewController: UITableViewController {
             return UITableViewCell()
         }
     }
-
-    
 }
-
-

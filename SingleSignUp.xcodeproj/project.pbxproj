@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2338091F6AB54B009D3243 /* MainViewCell.swift */; };
-		1A3326E91F67F8B3009247BC /* ViewControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3326E81F67F8B3009247BC /* ViewControllerUtils.swift */; };
+		1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */; };
 		1A343FE81F6AAB22000CB641 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A343FE71F6AAB22000CB641 /* DetailViewController.swift */; };
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
 		1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */; };
@@ -39,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		1A2338091F6AB54B009D3243 /* MainViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
-		1A3326E81F67F8B3009247BC /* ViewControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUtils.swift; sourceTree = "<group>"; };
+		1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerLoader.swift; sourceTree = "<group>"; };
 		1A343FE71F6AAB22000CB641 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 				1A5BDFDD1F6FE719003C10E5 /* Channel.swift */,
 				1A9CC3881F4DC17E000C6479 /* Alert.swift */,
 				1A9CC38A1F4DC579000C6479 /* Tools.swift */,
-				1A3326E81F67F8B3009247BC /* ViewControllerUtils.swift */,
+				1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */,
 				1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */,
 			);
 			path = Helper;
@@ -408,7 +408,7 @@
 				1A900FA41F4C49FE005B3DA4 /* NameViewController.swift in Sources */,
 				1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */,
 				1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */,
-				1A3326E91F67F8B3009247BC /* ViewControllerUtils.swift in Sources */,
+				1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */,
 				1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */,
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */,
