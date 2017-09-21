@@ -17,9 +17,7 @@ enum MainSection: Int {
 class MainViewController: UITableViewController {
     
     var         senderDisplayName:    String?
-    private var currentChannels:      [Channel] = []
-    private var previousChannels:     [Channel] = []
-    private var rawChannels:          [Channel] = []
+    private var channels:             [Channel] = []
     var         detailViewController: DetailViewController? = nil
     var         spinner:              SpinnerLoader?
     
@@ -32,9 +30,7 @@ class MainViewController: UITableViewController {
         super.viewDidLoad()
         
         self.initUI()
-        self.initUser()
         self.initChannels()
-        self.initFirebase()
     }
     
     deinit {
@@ -76,90 +72,24 @@ class MainViewController: UITableViewController {
         self.spinner = SpinnerLoader(view: self.view)
     }
     
-    private func initUser() {
-        CurrentUser.date = NewDate(date: Date())
-    }
-    
-    private func initFirebase() {
-        
-    }
-    
     //MARK: Firebase related methods
     
     private func initChannels() {
         //Use the observe method to listen for new channels being written to the Firebase DB
-        
-        self.spinner?.start(self.view)
-        
-        channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
-            let channelData = snapshot.value as! Dictionary<String, AnyObject>
-            let id = snapshot.key
-            if let name = channelData["name"] as! String!, name.characters.count > 0 {
-                self.rawChannels.append(Channel(id: id, name: name))
-                self.shortChannels()
-                self.tableView.reloadData()
-            } else {
-                Alert.showFailiureAlert(message: "Error: Could not decode channel data")
-            }
-            self.spinner?.stop()
-        })
-    }
-    
-    private func shortChannels() {
-        //TODO: do property short channel here
-        func getNumberOfRows() -> Int {
-            let weekDay = CurrentUser.date!.getWeekDay()
-            if weekDay >= 6 || weekDay == 1 {
-                return 5
-            } else {
-                return weekDay - 1
-            }
-        }
-        
-        if let date = CurrentUser.date {
-            
-            //MARK: init self.previousChannels
-            let lower_index: Int
-            let upper_index: Int
-            switch date.getDayName() {
-            case "Saturday":
-                lower_index = 1
-            case "Sunday":
-                lower_index = 2
-            case "Monday":
-                lower_index = 3
-            case "Tuesday":
-                lower_index = 4
-            case "Wednesday":
-                lower_index = 5
-            case "Thrusday":
-                lower_index = 6
-            case "Friday":
-                lower_index = 7
-            default:
-                lower_index = 0
-            }
-            upper_index = lower_index + 4
-            
-            for i in lower_index...upper_index {
-                let _date    = Calendar.current.date(byAdding: .day, value: -i, to: date.date)!
-                let _newDate = NewDate(date: _date)
-                let channel  = Channel(id: _newDate.id.description, name: _newDate.getDayName())
-                self.previousChannels.append(channel)
-            }
-            
-            //MARK: init self.currentChannels
-            let today = Channel(id: date.id.description, name: "Today")
-            self.currentChannels.append(today)
-            
-            let rows = getNumberOfRows()
-            for i in 1...(rows-1) {
-                let _date    = Calendar.current.date(byAdding: .day, value: -i, to: date.date)!
-                let _newDate = NewDate(date: _date)
-                let channel  = Channel(id: _newDate.id.description, name: _newDate.getDayName())
-                self.currentChannels.append(channel)
-            }
-        }
+        self.channels.append(Channel(id: CurrentUser.date.id.description, name: CurrentUser.date.getDayName()))
+        //        self.spinner?.start(self.view)
+        //
+        //        channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
+        //            let channelData = snapshot.value as! Dictionary<String, AnyObject>
+        //            let id = snapshot.key
+        //            if let name = channelData["name"] as! String!, name.characters.count > 0 {
+        //                self.channels.append(Channel(id: id, name: name))
+        //                self.tableView.reloadData()
+        //            } else {
+        //                Alert.showFailiureAlert(message: "Error: Could not decode channel data")
+        //            }
+        //            self.spinner?.stop()
+        //        })
     }
     
     //MARK:- Segues
@@ -182,52 +112,21 @@ class MainViewController: UITableViewController {
     //MARK:- Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let currentSection: MainSection = MainSection(rawValue: section) {
-            switch currentSection {
-            case .current:
-                return self.currentChannels.count
-            case .previous:
-                return self.previousChannels.count
-            }
-        } else {
-            return 0
-        }
+        return self.channels.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let currentSection: MainSection = MainSection(rawValue: section) {
-            switch currentSection {
-            case .current:
-                return "Current week"
-            case .previous:
-                return "Week \(CurrentUser.date!.getWeekNum())"
-            }
-        } else {
-            return ""
-        }
+        return "Current week"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let currentSection: MainSection = MainSection(rawValue: indexPath.section) {
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell
-            switch currentSection {
-            case .current:
-                switch indexPath.row {
-                case 0:
-                    cell?.label.text = "Today"
-                    break
-                default:
-                    cell?.label.text = self.currentChannels[indexPath.row].name
-                }
-                return cell!
-            case .previous:
-                cell?.label.text = self.previousChannels[indexPath.row].name
-                return cell!
-            }
+        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell {
+            cell.label.text = "Today"
+            return cell
         } else {
             return UITableViewCell()
         }

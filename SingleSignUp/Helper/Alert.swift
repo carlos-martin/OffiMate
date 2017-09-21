@@ -26,4 +26,10 @@ class Alert {
             topController.present(alert, animated: true, completion: nil)
         }
     }
+    
+    static func showFailiureAlert(error: Error, handler: (((UIAlertAction)?) -> Void)? = nil) {
+        let nserror = error as NSError
+        let message = "Error: " + (nserror.userInfo["NSLocalizedDescription"] as? String ?? "Not identify error.")
+        self.showFailiureAlert(message: message, handler: handler)
+    }
 }

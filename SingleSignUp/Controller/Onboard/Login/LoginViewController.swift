@@ -51,8 +51,8 @@ class LoginViewController: UIViewController {
             //Alert.showFailiureAlert(message: "Not implemented yet.")
             self.loader?.start(self.view)
             Auth.auth().signIn(withEmail: self.username!, password: self.password!, completion: { (user: User?, error: Error?) in
-                if let nserror = error as? NSError {
-                    Alert.showFailiureAlert(message: "Error: " + (nserror.userInfo["NSLocalizedDescription"] as? String ?? "Not identify error."))
+                if let nserror = error {
+                    Alert.showFailiureAlert(error: nserror)
                     self.loader?.stop()
                 } else {
                     CurrentUser.user = user

@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController {
             Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
         }
         CurrentUser.localClean()
-        Tools.goToMain(vc: self)
+        Tools.goToOnboard(vc: self)
     }
     
     override func viewDidLoad() {
