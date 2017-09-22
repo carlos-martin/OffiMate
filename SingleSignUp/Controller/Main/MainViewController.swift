@@ -10,17 +10,16 @@ import UIKit
 import Firebase
 
 enum MainSection: Int {
-    case current = 0
-    case previous
+    case createNewChannel = 0
+    case currentChannel
 }
 
 class MainViewController: UITableViewController {
     
     var         senderDisplayName:    String?
     private var channels:             [Channel] = []
-    var         detailViewController: DetailViewController? = nil
     var         spinner:              SpinnerLoader?
-    
+    var         newChannel:           Channel?
     
     //Firebase variables
     private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
@@ -30,7 +29,7 @@ class MainViewController: UITableViewController {
         super.viewDidLoad()
         
         self.initUI()
-        self.initChannels()
+        self.observeChannels()
     }
     
     deinit {
@@ -74,22 +73,38 @@ class MainViewController: UITableViewController {
     
     //MARK: Firebase related methods
     
-    private func initChannels() {
+    private func observeChannels() {
         //Use the observe method to listen for new channels being written to the Firebase DB
-        self.channels.append(Channel(id: CurrentUser.date.id.description, name: CurrentUser.date.getDayName()))
-        //        self.spinner?.start(self.view)
-        //
-        //        channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
-        //            let channelData = snapshot.value as! Dictionary<String, AnyObject>
-        //            let id = snapshot.key
-        //            if let name = channelData["name"] as! String!, name.characters.count > 0 {
-        //                self.channels.append(Channel(id: id, name: name))
-        //                self.tableView.reloadData()
-        //            } else {
-        //                Alert.showFailiureAlert(message: "Error: Could not decode channel data")
-        //            }
-        //            self.spinner?.stop()
-        //        })
+        //self.channels.append(Channel(id: CurrentUser.date.id.description, name: CurrentUser.date.getDayName()))
+
+        self.spinner?.start(self.view)
+        channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
+            self.spinner?.stop()
+            let channelData = snapshot.value as! Dictionary<String, AnyObject>
+            let id = snapshot.key
+            if let name = channelData["name"] as! String!, name.characters.count > 0 {
+                self.channels.append(Channel(id: id, name: name))
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    @objc func createChannel(_ sender: Any? = nil) {
+        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? NewChannelViewCell {
+            if !cell.newChannelTextField.text!.isEmpty {
+                let name = cell.newChannelTextField.text!
+                let newChannelRef = channelRef.childByAutoId()
+                let channelItem = [
+                    "name": name
+                ]
+                newChannelRef.setValue(channelItem)
+                cell.newChannelTextField.text! = ""
+            } else {
+                Tools.textFieldErrorAnimation(textField: cell.newChannelTextField)
+            }
+        } else {
+            Alert.showFailiureAlert(message: "Oops! Something goes wroung!")
+        }
     }
     
     //MARK:- Segues
@@ -97,13 +112,15 @@ class MainViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                var controller: DetailViewController
+                var controller: ChatViewController
                 if let navigationController = segue.destination as? UINavigationController {
-                    controller = navigationController.topViewController as! DetailViewController
+                    controller = navigationController.topViewController as! ChatViewController
                 } else {
-                    controller = segue.destination as! DetailViewController
+                    controller = segue.destination as! ChatViewController
                 }
-                controller.navigationItem.title = (self.tableView.cellForRow(at: indexPath) as! MainViewCell).label.text
+                let channel = self.channels[indexPath.row]
+                controller.channel = channel
+                controller.channelRef = channelRef.child(channel.id)
                 controller.auto = false
             }
         }
@@ -112,23 +129,81 @@ class MainViewController: UITableViewController {
     //MARK:- Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.channels.count
+        if let currentSection: MainSection = MainSection(rawValue: section) {
+            switch currentSection {
+            case .createNewChannel:
+                return 1
+            case .currentChannel:
+                return self.channels.count
+            }
+        } else {
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if let currentSection: MainSection = MainSection(rawValue: section) {
+            switch currentSection {
+            case .createNewChannel:
+                return 0.1
+            case .currentChannel:
+                return 30.0
+            }
+        } else {
+            return 0.1
+        }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Current week"
+        if let currentSection: MainSection = MainSection(rawValue: section) {
+            switch currentSection {
+            case .createNewChannel:
+                return nil
+            case .currentChannel:
+                return "Channels"
+            }
+        } else {
+            return nil
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell {
-            cell.label.text = "Today"
-            return cell
+        if let currentSection: MainSection = MainSection(rawValue: indexPath.section) {
+            switch currentSection {
+            case .createNewChannel:
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewChannelCell", for: indexPath) as? NewChannelViewCell
+                cell?.newChannelTextField.delegate = self
+                cell?.newChannelTextField.placeholder = "Create a New Channel"
+                cell?.addChannelButton.addTarget(
+                    self,
+                    action: #selector(createChannel(_:)),
+                    for: .touchUpInside)
+                cell?.selectionStyle = .none
+                return cell!
+            case .currentChannel:
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell
+                cell?.label.text = self.channels[indexPath.row].name
+                return cell!
+            }
         } else {
             return UITableViewCell()
         }
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+    }
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //TODO: add action to create a channel
+        self.createChannel(nil)
+        self.view.endEditing(true)
+        return true
     }
 }

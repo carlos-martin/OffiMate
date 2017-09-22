@@ -11,3 +11,8 @@ import UIKit
 class MainViewCell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
 }
+
+class NewChannelViewCell : UITableViewCell {
+    @IBOutlet weak var newChannelTextField: UITextField!
+    @IBOutlet weak var addChannelButton: UIButton!
+}
