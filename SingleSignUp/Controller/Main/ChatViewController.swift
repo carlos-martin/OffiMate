@@ -23,6 +23,17 @@ class ChatViewController: JSQMessagesViewController {
         }
     }
     
+    //User is typing
+    private lazy var usersTypingQuery: DatabaseQuery =
+        self.channelRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
+    private lazy var userIsTypingRef:  DatabaseReference =
+        self.channelRef!.child("typingIndicator").child(self.senderId)
+    private var localTyping = false
+    var isTyping: Bool {
+        get { return localTyping }
+        set { localTyping = newValue; userIsTypingRef.setValue(newValue) }
+    }
+    
     //Chat UI
     lazy var outgoingBubbleImageView: JSQMessagesBubbleImage = self.setupOutgoingBubble()
     lazy var incomingBubbleImageView: JSQMessagesBubbleImage = self.setupIncomingBubble()
@@ -39,15 +50,30 @@ class ChatViewController: JSQMessagesViewController {
         self.senderId = Auth.auth().currentUser?.uid
         self.senderDisplayName = CurrentUser.email!
         
-        // No avatars
-        self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
-        self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
-        
+        self.initUI()
+
         //Necessary for SplitViewController proper behavior
         if auto {
             self.toMainViewController()
         } else {
+            //            self.initMessages()
             self.observeMessage()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if !auto {
+            self.observeTyping()
+        }
+    }
+    
+    private func initUI () {
+        // No avatars
+        self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
+        self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        if #available(iOS 11.0, *) {
+            
         }
     }
     
@@ -55,6 +81,7 @@ class ChatViewController: JSQMessagesViewController {
         super.didReceiveMemoryWarning()
     }
     
+    //=======================================================================//
     //MARK:- Creating, Sending and fetcing Messages
     private func addMessage(withId id: String, name: String, text: String) {
         if let message = JSQMessage(senderId: id, displayName: name, text: text) {
@@ -73,6 +100,7 @@ class ChatViewController: JSQMessagesViewController {
         itemRef.setValue(messageItem)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         finishSendingMessage()
+        self.isTyping = false
     }
     
     private func observeMessage() {
@@ -87,19 +115,27 @@ class ChatViewController: JSQMessagesViewController {
         })
     }
     
-    //MARK:- UI and User Interaction section
-    private func setupOutgoingBubble() -> JSQMessagesBubbleImage {
-        let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        let color = UIColor.jsq_messageBubbleBlue()
-        return bubbleImageFactory!.outgoingMessagesBubbleImage(with: color)
+    private func observeTyping() {
+        let typingIndicatorRef = channelRef!.child("typingIndicator")
+        self.userIsTypingRef = typingIndicatorRef.child(self.senderId)
+        self.userIsTypingRef.onDisconnectRemoveValue()
+        self.usersTypingQuery.observe(.value) { (data: DataSnapshot) in
+            if data.childrenCount == 1 && self.isTyping {
+                return
+            }
+            self.showTypingIndicator = data.childrenCount > 0
+            self.scrollToBottom(animated: true)
+        }
     }
     
-    private func setupIncomingBubble() -> JSQMessagesBubbleImage {
-        let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        let color = UIColor.jsq_messageBubbleLightGray()
-        return bubbleImageFactory!.incomingMessagesBubbleImage(with: color)
+    //=======================================================================//
+    //MARK:- TextView
+    override func textViewDidChange(_ textView: UITextView) {
+        super.textViewDidChange(textView)
+        self.isTyping = textView.text != ""
     }
     
+    //=======================================================================//
     //MARK:- JSQMessagesCollectionView
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         return messages[indexPath.item]
@@ -135,6 +171,58 @@ class ChatViewController: JSQMessagesViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        let message = messages[indexPath.item]
+        
+        if message.senderId == senderId {
+            return nil
+        } else {
+            return NSAttributedString(string: message.senderDisplayName.components(separatedBy: "@").first!)
+        }
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
+        
+        let message: JSQMessage = messages[indexPath.item]
+        var height:  CGFloat    = 0.0
+        
+        if message.senderId != self.senderId {
+            if indexPath.item == 0 { //First message
+                if message.senderId != self.senderId {
+                    height += 17.0
+                }
+            } else { //Rest of messages
+                let prevMessage = messages[indexPath.item-1]
+                if message.senderId != prevMessage.senderId {
+                    height += 17.0
+                }
+            }
+        }
+        return height
+    }
+    
+    //=======================================================================//
+    //MARK:- UI and User Interaction section
+    private func emptyMessage() -> JSQMessagesBubbleImage {
+        let bubbleImageFactory = JSQMessagesBubbleImageFactory()
+        let color = UIColor.white
+        return bubbleImageFactory!.incomingMessagesBubbleImage(with: color)
+    }
+    
+    private func setupOutgoingBubble() -> JSQMessagesBubbleImage {
+        let bubbleImageFactory = JSQMessagesBubbleImageFactory()
+        let color = UIColor.jsq_messageBubbleBlue()
+        return bubbleImageFactory!.outgoingMessagesBubbleImage(with: color)
+    }
+    
+    private func setupIncomingBubble() -> JSQMessagesBubbleImage {
+        let bubbleImageFactory = JSQMessagesBubbleImageFactory()
+        let color = UIColor.jsq_messageBubbleLightGray()
+        return bubbleImageFactory!.incomingMessagesBubbleImage(with: color)
+    }
+    
+    
+    //=======================================================================//
     //MARK:- Navigation
     private func toMainViewController () {
         if let splitController = self.splitViewController {
