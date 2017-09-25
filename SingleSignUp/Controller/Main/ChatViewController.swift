@@ -72,8 +72,11 @@ class ChatViewController: JSQMessagesViewController {
         // No avatars
         self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        self.inputToolbar.contentView.leftBarButtonItem = nil
+        self.inputToolbar.contentView.textView.layer.cornerRadius = 12
+        self.inputToolbar.contentView.textView.placeHolder = "Add new message..."
         if #available(iOS 11.0, *) {
-            
+            self.inputToolbar.contentView.textView.becomeFirstResponder()
         }
     }
     
