@@ -14,5 +14,4 @@ class MainViewCell : UITableViewCell {
 
 class NewChannelViewCell : UITableViewCell {
     @IBOutlet weak var newChannelTextField: UITextField!
-    @IBOutlet weak var addChannelButton: UIButton!
 }

@@ -46,32 +46,19 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f40-kT-q63">
-                                            <rect key="frame" x="16" y="6" width="284" height="30"/>
+                                            <rect key="frame" x="8" y="6" width="359" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Loj-OQ-YMB">
-                                            <rect key="frame" x="308" y="10" width="59" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="22" id="UwO-tF-HnY"/>
-                                                <constraint firstAttribute="width" constant="59" id="g8n-6q-jOs"/>
-                                            </constraints>
-                                            <state key="normal" title="Create">
-                                                <color key="titleColor" red="0.0" green="0.47883093357086182" blue="0.99908953905105591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="f40-kT-q63" firstAttribute="centerY" secondItem="JiX-Zd-Amd" secondAttribute="centerY" id="1nW-we-DPR"/>
-                                        <constraint firstItem="Loj-OQ-YMB" firstAttribute="centerY" secondItem="JiX-Zd-Amd" secondAttribute="centerY" id="IQN-bG-STI"/>
-                                        <constraint firstItem="Loj-OQ-YMB" firstAttribute="leading" secondItem="f40-kT-q63" secondAttribute="trailing" constant="8" id="JIa-GW-e6Q"/>
-                                        <constraint firstItem="f40-kT-q63" firstAttribute="leading" secondItem="JiX-Zd-Amd" secondAttribute="leading" constant="16" id="c8b-kI-AVn"/>
-                                        <constraint firstItem="Loj-OQ-YMB" firstAttribute="trailing" secondItem="JiX-Zd-Amd" secondAttribute="trailingMargin" id="cLG-3p-fyc"/>
+                                        <constraint firstAttribute="trailing" secondItem="f40-kT-q63" secondAttribute="trailing" constant="8" id="Af7-cg-C0K"/>
+                                        <constraint firstItem="f40-kT-q63" firstAttribute="leading" secondItem="JiX-Zd-Amd" secondAttribute="leading" constant="8" id="c8b-kI-AVn"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="addChannelButton" destination="Loj-OQ-YMB" id="AfE-ge-OEy"/>
                                     <outlet property="newChannelTextField" destination="f40-kT-q63" id="yla-zh-m9C"/>
                                 </connections>
                             </tableViewCell>

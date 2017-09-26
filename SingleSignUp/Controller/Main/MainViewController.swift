@@ -20,6 +20,8 @@ class MainViewController: UITableViewController {
     private var channels:             [Channel] = []
     var         spinner:              SpinnerLoader?
     var         newChannel:           Channel?
+    var         newChannelButton:     UIButton?
+    
     
     //Firebase variables
     private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
@@ -89,21 +91,17 @@ class MainViewController: UITableViewController {
         })
     }
     
-    @objc func createChannel(_ sender: Any? = nil) {
-        if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? NewChannelViewCell {
-            if !cell.newChannelTextField.text!.isEmpty {
-                let name = cell.newChannelTextField.text!
-                let newChannelRef = channelRef.childByAutoId()
-                let channelItem = [
-                    "name": name
-                ]
-                newChannelRef.setValue(channelItem)
-                cell.newChannelTextField.text! = ""
-            } else {
-                Tools.textFieldErrorAnimation(textField: cell.newChannelTextField)
-            }
+    func createChannel(_ sender: UITextField) {
+        if !(sender.text!.isEmpty) {
+            let name = sender.text!
+            let newChannelRef = channelRef.childByAutoId()
+            let channelItem = [
+                "name": name
+            ]
+            newChannelRef.setValue(channelItem)
+            sender.text! = ""
         } else {
-            Alert.showFailiureAlert(message: "Oops! Something goes wroung!")
+            Tools.textFieldErrorAnimation(textField: sender)
         }
     }
     
@@ -178,10 +176,12 @@ class MainViewController: UITableViewController {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewChannelCell", for: indexPath) as? NewChannelViewCell
                 cell?.newChannelTextField.delegate = self
                 cell?.newChannelTextField.placeholder = "Create a New Channel"
-                cell?.addChannelButton.addTarget(
-                    self,
-                    action: #selector(createChannel(_:)),
-                    for: .touchUpInside)
+                //self.newChannelButton = cell?.addChannelButton
+                //cell?.addChannelButton.isEnabled = false
+                //cell?.addChannelButton.addTarget(
+                //    self,
+                //    action: #selector(createChannel(_:)),
+                //    for: .touchUpInside)
                 cell?.selectionStyle = .none
                 return cell!
             case .currentChannel:
@@ -202,7 +202,7 @@ class MainViewController: UITableViewController {
 extension MainViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //TODO: add action to create a channel
-        self.createChannel(nil)
+        self.createChannel(textField)
         self.view.endEditing(true)
         return true
     }
