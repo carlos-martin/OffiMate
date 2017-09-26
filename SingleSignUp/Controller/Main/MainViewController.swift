@@ -21,7 +21,10 @@ class MainViewController: UITableViewController {
     var         spinner:              SpinnerLoader?
     var         newChannel:           Channel?
     var         newChannelButton:     UIButton?
+    var         newChannelIsHide:     Bool = true
+    private var lastContentOffset:    CGFloat = 0
     
+    var counter: Int = 0
     
     //Firebase variables
     private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
@@ -77,7 +80,6 @@ class MainViewController: UITableViewController {
     
     private func observeChannels() {
         //Use the observe method to listen for new channels being written to the Firebase DB
-        //self.channels.append(Channel(id: CurrentUser.date.id.description, name: CurrentUser.date.getDayName()))
 
         self.spinner?.start(self.view)
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
@@ -134,7 +136,11 @@ class MainViewController: UITableViewController {
         if let currentSection: MainSection = MainSection(rawValue: section) {
             switch currentSection {
             case .createNewChannel:
-                return 1
+                if self.newChannelIsHide {
+                    return 0
+                } else {
+                    return 1
+                }
             case .currentChannel:
                 return self.channels.count
             }
@@ -176,12 +182,6 @@ class MainViewController: UITableViewController {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "NewChannelCell", for: indexPath) as? NewChannelViewCell
                 cell?.newChannelTextField.delegate = self
                 cell?.newChannelTextField.placeholder = "Create a New Channel"
-                //self.newChannelButton = cell?.addChannelButton
-                //cell?.addChannelButton.isEnabled = false
-                //cell?.addChannelButton.addTarget(
-                //    self,
-                //    action: #selector(createChannel(_:)),
-                //    for: .touchUpInside)
                 cell?.selectionStyle = .none
                 return cell!
             case .currentChannel:
@@ -194,9 +194,24 @@ class MainViewController: UITableViewController {
         }
     }
     
+    //MARK:- ScrollView
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        
+        let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
+        if actualPosition.y > 0 && self.newChannelIsHide {
+            // Dragging down
+            self.newChannelIsHide = false
+            self.tableView.reloadSections(IndexSet(integer: 0), with: .bottom)
+
+        } else if actualPosition.y < 0 && !self.newChannelIsHide {
+            // Dragging up
+            self.newChannelIsHide = true
+            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+
+        }
     }
+
 }
 
 extension MainViewController: UITextFieldDelegate {

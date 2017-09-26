@@ -56,7 +56,6 @@ class ChatViewController: JSQMessagesViewController {
         if auto {
             self.toMainViewController()
         } else {
-            //            self.initMessages()
             self.observeMessage()
         }
     }
@@ -75,6 +74,7 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.inputToolbar.contentView.textView.layer.cornerRadius = 12
         self.inputToolbar.contentView.textView.placeHolder = "Add new message..."
+        self.scrollToBottom(animated: true)
         if #available(iOS 11.0, *) {
             self.inputToolbar.contentView.textView.becomeFirstResponder()
         }
