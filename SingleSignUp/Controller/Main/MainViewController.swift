@@ -48,6 +48,7 @@ class MainViewController: UITableViewController {
             self.clearsSelectionOnViewWillAppear = split.isCollapsed
         }
         super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {

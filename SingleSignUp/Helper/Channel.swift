@@ -32,6 +32,6 @@ internal class Channel {
     }
     
     func toString() -> String {
-        return "\n~ Channel: \(self.name)\n~ id:      \(self.id)\n~ creator: \(self.creator)\n~~~~~~~~~~"
+        return "~~~~~~~~~~\n~ Channel: \(self.name)\n~ id:      \(self.id)\n~ creator: \(self.creator)\n~~~~~~~~~~\n"
     }
 }

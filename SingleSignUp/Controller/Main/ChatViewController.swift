@@ -33,6 +33,7 @@ class ChatViewController: JSQMessagesViewController {
         get { return localTyping }
         set { localTyping = newValue; userIsTypingRef.setValue(newValue) }
     }
+    var isValidating: Bool = false
     
     //Chat UI
     lazy var outgoingBubbleImageView: JSQMessagesBubbleImage = self.setupOutgoingBubble()
@@ -56,7 +57,16 @@ class ChatViewController: JSQMessagesViewController {
         if auto {
             self.toMainViewController()
         } else {
-            self.observeMessage()
+            self.channelStillAlive({ (isAlive: Bool) in
+                if isAlive {
+                    self.observeMessage()
+                } else {
+                    Alert.showFailiureAlert(message: "This channel does not exists anymore!", handler: { (_) in
+                        self.toMainViewController()
+                    })
+                }
+            })
+            
         }
     }
     
@@ -86,24 +96,43 @@ class ChatViewController: JSQMessagesViewController {
     
     //=======================================================================//
     //MARK:- Creating, Sending and fetcing Messages
+    private func channelStillAlive (_ completion: @escaping (_ isAlive: Bool) -> Void) {
+        let currentChannelsRef = Database.database().reference().child("channels")
+        currentChannelsRef.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            if snapshot.hasChild(self.channel!.id) {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
+    }
+    
     private func addMessage(withId id: String, name: String, text: String) {
         if let message = JSQMessage(senderId: id, displayName: name, text: text) {
-            messages.append(message)
+            self.messages.append(message)
         }
     }
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        let itemRef = self.messageRef.childByAutoId()
-        let messageItem = [
-            "senderId":     self.senderId!,
-            "senderName":   self.senderDisplayName,
-            "text":         text!
-        ]
-        
-        itemRef.setValue(messageItem)
-        JSQSystemSoundPlayer.jsq_playMessageSentSound()
-        finishSendingMessage()
-        self.isTyping = false
+        self.channelStillAlive { (isAlive: Bool) in
+            if isAlive {
+                let itemRef = self.messageRef.childByAutoId()
+                let messageItem = [
+                    "senderId":     self.senderId!,
+                    "senderName":   self.senderDisplayName,
+                    "text":         text!
+                ]
+                
+                itemRef.setValue(messageItem)
+                JSQSystemSoundPlayer.jsq_playMessageSentSound()
+                self.finishSendingMessage()
+                self.isTyping = false
+            } else {
+                Alert.showFailiureAlert(message: "This channel does not exists anymore!", handler: { (_) in
+                    self.toMainViewController()
+                })
+            }
+        }
     }
     
     private func observeMessage() {
@@ -135,7 +164,21 @@ class ChatViewController: JSQMessagesViewController {
     //MARK:- TextView
     override func textViewDidChange(_ textView: UITextView) {
         super.textViewDidChange(textView)
-        self.isTyping = textView.text != ""
+        if !self.isValidating {
+            self.isValidating = true
+            self.channelStillAlive { (isAlive: Bool) in
+                self.isValidating = false
+                if isAlive {
+                    self.isTyping = textView.text != ""
+                } else {
+                    Alert.showFailiureAlert(message: "This channel does not exists anymore!", handler: { (_) in
+                        self.toMainViewController()
+                    })
+                }
+            }
+        }
+        
+        
     }
     
     //=======================================================================//
