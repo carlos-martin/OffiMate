@@ -76,7 +76,7 @@ class MainViewController: UITableViewController {
         self.spinner = SpinnerLoader(view: self.view)
     }
     
-    //MARK: Firebase related methods
+    //MARK:- Firebase related methods
     
     private func observeChannels() {
         //Use the observe method to listen for new channels being written to the Firebase DB
@@ -86,8 +86,10 @@ class MainViewController: UITableViewController {
             self.spinner?.stop()
             let channelData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
-            if let name = channelData["name"] as! String!, name.characters.count > 0 {
-                self.channels.append(Channel(id: id, name: name))
+            if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
+                let _channel = Channel(id: id, name: name, creator: creator)
+                print(_channel.toString())
+                self.channels.append(_channel)
                 self.tableView.reloadData()
             }
         })
@@ -98,12 +100,21 @@ class MainViewController: UITableViewController {
             let name = sender.text!
             let newChannelRef = channelRef.childByAutoId()
             let channelItem = [
-                "name": name
+                "name":     name,
+                "creator":  CurrentUser.email!
             ]
             newChannelRef.setValue(channelItem)
             sender.text! = ""
         } else {
             Tools.textFieldErrorAnimation(textField: sender)
+        }
+    }
+    
+    func deleteChannel(_ sender: Channel, completion: @escaping (_ error: Error?) -> Void) {
+        let toRemoveChannelRef = channelRef.child(sender.id)
+        print(toRemoveChannelRef)
+        toRemoveChannelRef.removeValue { (error: Error?, ref: DatabaseReference) in
+            completion(error)
         }
     }
     
@@ -191,6 +202,46 @@ class MainViewController: UITableViewController {
             }
         } else {
             return UITableViewCell()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if let currentSection: MainSection = MainSection(rawValue: indexPath.section) {
+            switch currentSection {
+            case .createNewChannel:
+                return false
+            case .currentChannel:
+                let row = indexPath.row
+                if self.channels[row].creator == CurrentUser.email! {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        } else {
+            return false
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let channel = self.channels[indexPath.row]
+            let title   = "Do you wanna continue?"
+            let message = "You are gonna delete \"\(channel.name)\" channel"
+            
+            Alert.showAlertOptions(title: title, message: message, okAction: { (_) in
+                self.deleteChannel(channel, completion: { (error: Error?) in
+                    if error == nil {
+                        self.channels.remove(at: indexPath.row)
+                        self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+                        self.tableView.reloadData()
+                    } else {
+                        Alert.showFailiureAlert(error: error!)
+                    }
+                })
+            }, cancelAction: { (_) in
+                print("Deleting channel canceled")
+            })
         }
     }
     

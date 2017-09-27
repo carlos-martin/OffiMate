@@ -21,11 +21,17 @@
  */
 
 internal class Channel {
-  internal let id: String
-  internal let name: String
-  
-  init(id: String, name: String) {
-    self.id = id
-    self.name = name
-  }
+    internal let id: String
+    internal let name: String
+    internal let creator: String
+    
+    init(id: String, name: String, creator: String) {
+        self.id = id
+        self.name = name
+        self.creator = creator
+    }
+    
+    func toString() -> String {
+        return "\n~ Channel: \(self.name)\n~ id:      \(self.id)\n~ creator: \(self.creator)\n~~~~~~~~~~"
+    }
 }
