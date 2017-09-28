@@ -18,6 +18,8 @@ enum ProfileSection: Int {
 
 class ProfileViewController: UIViewController {
     
+    var isHidden:       Bool = true
+    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
@@ -75,18 +77,37 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let currentSection: ProfileSection = ProfileSection(rawValue: indexPath.section) {
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! ProfileViewCell
             switch currentSection {
             case .name:
-                cell.profileLabel.text = CurrentUser.name
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
+                cell.textField.text = CurrentUser.name
+                return cell
             case .mail:
-                cell.profileLabel.text = CurrentUser.email
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
+                cell.textField.text = CurrentUser.email
+                return cell
             case .pass:
-                cell.profileLabel.text = CurrentUser.password
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "passwordCell", for: indexPath) as! PasswordViewCell
+                cell.passwordTextField.text = CurrentUser.password
+                cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
+                return cell
             }
-            return cell
+            
         } else {
             return UITableViewCell()
+        }
+    }
+    
+    func showHidePassword (_ sender: Any) {
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: ProfileSection.pass.rawValue)) as! PasswordViewCell
+        if self.isHidden {
+            self.isHidden = false
+            cell.showHideButton.setImage(UIImage(named: "hide"), for: .normal)
+            cell.passwordTextField.isSecureTextEntry = false
+        } else {
+            self.isHidden = true
+            cell.showHideButton.setImage(UIImage(named: "show"), for: .normal)
+            cell.passwordTextField.isSecureTextEntry = true
         }
     }
     
