@@ -20,7 +20,23 @@
                     <view key="view" contentMode="scaleToFill" id="5Gf-x4-Afe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IzJ-Oy-Mof">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="kUr-ib-uBt" id="sE6-8W-V2a"/>
+                                    <outlet property="delegate" destination="kUr-ib-uBt" id="xeo-Nc-lq8"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IzJ-Oy-Mof" firstAttribute="leading" secondItem="5Gf-x4-Afe" secondAttribute="leading" id="YwV-0A-erK"/>
+                            <constraint firstItem="IzJ-Oy-Mof" firstAttribute="top" secondItem="5Gf-x4-Afe" secondAttribute="top" id="gFp-pw-AN4"/>
+                            <constraint firstItem="lyI-3Y-XyP" firstAttribute="top" secondItem="IzJ-Oy-Mof" secondAttribute="bottom" id="nXs-w3-plB"/>
+                            <constraint firstAttribute="trailing" secondItem="IzJ-Oy-Mof" secondAttribute="trailing" id="umC-xd-JpH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ZvJ-uo-DEg"/>
                 </viewController>

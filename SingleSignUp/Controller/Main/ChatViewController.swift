@@ -50,13 +50,13 @@ class ChatViewController: JSQMessagesViewController {
         
         self.senderId = Auth.auth().currentUser?.uid
         self.senderDisplayName = CurrentUser.email!
-        
-        self.initUI()
 
         //Necessary for SplitViewController proper behavior
         if auto {
+            self.inputToolbar.isHidden = true
             self.toMainViewController()
         } else {
+            self.initUI()
             self.channelStillAlive({ (isAlive: Bool) in
                 if isAlive {
                     self.observeMessage()
@@ -84,10 +84,10 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.inputToolbar.contentView.textView.layer.cornerRadius = 12
         self.inputToolbar.contentView.textView.placeHolder = "Add new message..."
-        self.scrollToBottom(animated: true)
         if #available(iOS 11.0, *) {
             self.inputToolbar.contentView.textView.becomeFirstResponder()
         }
+        self.scrollToBottom(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
