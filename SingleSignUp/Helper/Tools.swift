@@ -45,6 +45,14 @@ extension Tools {
             vc.present(controller, animated: true, completion: nil)
         }
     }
+    
+    static func goToCoworkers (vc: UIViewController) {
+        if let controller = UIStoryboard(name: "Coworkers", bundle: nil).instantiateInitialViewController() {
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .flipHorizontal
+            vc.present(controller, animated: true, completion: nil)
+        }
+    }
 }
 
 //MARK:- Validations

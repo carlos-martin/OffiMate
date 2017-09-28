@@ -56,11 +56,11 @@ class MainViewController: UITableViewController {
     }
     
     func onboardActionButton(_ sender: Any) {
-        if CurrentUser.isInit() {
-            Tools.goToProfile(vc: self)
-        } else {
-            Tools.goToOnboard(vc: self)
-        }
+        Tools.goToProfile(vc: self)
+    }
+    
+    func menuActionButton(_ sender: Any) {
+        Tools.goToCoworkers(vc: self)
     }
     
     //MARK:- Init and Fetching Data Functions
@@ -68,11 +68,18 @@ class MainViewController: UITableViewController {
     private func initUI() {
         let profileButton = UIBarButtonItem(
             image: UIImage(named: "user"),
-            style: UIBarButtonItemStyle.plain,
+            style: .plain,
             target: self,
             action: #selector(onboardActionButton(_:)))
         
+        let menuButton = UIBarButtonItem(
+            image: UIImage(named: "menu"),
+            style: .plain,
+            target: self,
+            action: #selector(menuActionButton(_:)))
+        
         self.navigationItem.rightBarButtonItem = profileButton
+        self.navigationItem.leftBarButtonItem = menuButton
         self.navigationItem.title = "OffiMate"
         self.spinner = SpinnerLoader(view: self.view)
     }
