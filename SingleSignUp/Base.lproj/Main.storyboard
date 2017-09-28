@@ -32,7 +32,7 @@
         <!--Root View Controller-->
         <scene sceneID="kVX-PL-tfF">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Ppk-1b-wEn" customClass="MainViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Main" clearsSelectionOnViewWillAppear="NO" id="Ppk-1b-wEn" customClass="MainViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="xjg-Ld-3UC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

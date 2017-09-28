@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1611" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mwI-4A-5aw">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mwI-4A-5aw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -109,7 +109,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3UN-iI-uOk" id="C07-yB-psf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-Nb-lDa">
@@ -134,7 +134,7 @@
                                         <rect key="frame" x="0.0" y="100" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTm-3k-ln5" id="HSX-fj-Oct">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lFQ-xA-myT">
@@ -171,7 +171,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="1k0-85-Otr">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ccj-G5-8H8">
+                        <barButtonItem key="rightBarButtonItem" image="login" id="ccj-G5-8H8">
                             <connections>
                                 <action selector="doneActionButton:" destination="ecc-2m-2Dy" id="BtN-VX-4nu"/>
                             </connections>
@@ -205,7 +205,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gyh-hl-bEg" id="LBn-F9-4xe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iKA-yd-9IL">
@@ -242,7 +242,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Name" id="VQV-Ub-9ij">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="xPN-sM-xdd">
+                        <barButtonItem key="rightBarButtonItem" image="next" id="xPN-sM-xdd">
                             <connections>
                                 <action selector="nextActionButton:" destination="Vcv-Zs-1cK" id="8Ve-nH-xkW"/>
                             </connections>
@@ -277,7 +277,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ofm-Cz-YSa" id="B70-G3-zjk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Udp-Qa-Ose">
@@ -314,7 +314,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="E-mail" id="K5U-Bk-aCr">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="ZEp-aj-JM7">
+                        <barButtonItem key="rightBarButtonItem" image="next" id="ZEp-aj-JM7">
                             <connections>
                                 <action selector="nextActionButton:" destination="c3q-Lp-Ump" id="9bA-Jo-Z57"/>
                             </connections>
@@ -349,7 +349,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jt1-uo-tbB" id="VXZ-ok-1cd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-t5-PUx">
@@ -386,7 +386,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Password" id="iU0-93-Igb">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Up" id="Sqt-9o-PIV">
+                        <barButtonItem key="rightBarButtonItem" image="done" id="Sqt-9o-PIV">
                             <connections>
                                 <action selector="saveActionButton:" destination="Xh8-rv-BpQ" id="8gr-cl-pdt"/>
                             </connections>
@@ -421,7 +421,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9r1-QU-Q1M" id="CMi-vi-kV9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eYf-Qx-LMU">
@@ -443,7 +443,7 @@
                                         <rect key="frame" x="0.0" y="100" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="40K-TZ-0f3" id="hXJ-eO-5eG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sge-Tw-aii">
@@ -492,4 +492,9 @@
             <point key="canvasLocation" x="3861.5999999999999" y="-178.56071964017991"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="done" width="25" height="25"/>
+        <image name="login" width="25" height="25"/>
+        <image name="next" width="25" height="25"/>
+    </resources>
 </document>

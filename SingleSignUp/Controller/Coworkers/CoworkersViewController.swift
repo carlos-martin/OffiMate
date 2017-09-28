@@ -21,18 +21,7 @@ class CoworkersViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func mainActionButton(_ sender: Any) {
-        Tools.goToMain(vc: self)
-    }
-    
     private func initUI() {
-        let backButton = UIBarButtonItem(
-            title:  "back",
-            style:  .plain,
-            target: self,
-            action: #selector(mainActionButton(_:)))
-        
-        self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.title = "Coworkers"
     }
 

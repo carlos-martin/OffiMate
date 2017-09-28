@@ -60,7 +60,13 @@ class MainViewController: UITableViewController {
     }
     
     func menuActionButton(_ sender: Any) {
-        Tools.goToCoworkers(vc: self)
+        //Tools.goToCoworkers(vc: self)
+        guard let vc = UIStoryboard(name: "Coworkers", bundle: nil).instantiateViewController(withIdentifier: "Coworkers") as? CoworkersViewController else {
+            let message = "Could not instantiate view controller with identifier of type CoworkersViewController"
+            Alert.showFailiureAlert(message: message)
+            return
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     //MARK:- Init and Fetching Data Functions
@@ -73,13 +79,13 @@ class MainViewController: UITableViewController {
             action: #selector(onboardActionButton(_:)))
         
         let menuButton = UIBarButtonItem(
-            image: UIImage(named: "menu"),
+            image: UIImage(named: "coworkers"),
             style: .plain,
             target: self,
             action: #selector(menuActionButton(_:)))
         
-        self.navigationItem.rightBarButtonItem = profileButton
-        self.navigationItem.leftBarButtonItem = menuButton
+        self.navigationItem.rightBarButtonItem = menuButton
+        self.navigationItem.leftBarButtonItem = profileButton
         self.navigationItem.title = "OffiMate"
         self.spinner = SpinnerLoader(view: self.view)
     }

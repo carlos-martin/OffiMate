@@ -12,7 +12,7 @@
         <!--Title-->
         <scene sceneID="fYf-4W-RD0">
             <objects>
-                <viewController id="kUr-ib-uBt" customClass="CoworkersViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Coworkers" id="kUr-ib-uBt" customClass="CoworkersViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7fC-SC-7be"/>
                         <viewControllerLayoutGuide type="bottom" id="lyI-3Y-XyP"/>
