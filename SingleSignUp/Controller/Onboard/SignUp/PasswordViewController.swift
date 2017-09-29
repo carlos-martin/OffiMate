@@ -16,6 +16,7 @@ class PasswordViewController: UIViewController {
     var email:    String?
     var password: String?
     var loader:   SpinnerLoader?
+    var isHidden: Bool = true
     
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
@@ -113,7 +114,22 @@ extension PasswordViewController: UITableViewDelegate, UITableViewDataSource {
         cell.passwordTextField.delegate = self
         cell.passwordTextField.placeholder = "Enter password..."
         cell.passwordTextField.tag = indexPath.row
+        cell.passwordTextField.clearsOnBeginEditing = false
+        cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
         return cell
+    }
+    
+    func showHidePassword (_ sender: Any) {
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! PasswordSignUpViewCell
+        if self.isHidden {
+            self.isHidden = false
+            cell.showHideButton.setImage(UIImage(named: "hide"), for: .normal)
+            cell.passwordTextField.isSecureTextEntry = false
+        } else {
+            self.isHidden = true
+            cell.showHideButton.setImage(UIImage(named: "show"), for: .normal)
+            cell.passwordTextField.isSecureTextEntry = true
+        }
     }
 
     //Dismissing Keyboard

@@ -13,12 +13,6 @@ class OnboardViewController: UIViewController {
     //MARK: IBOutlet
     @IBOutlet weak var signUpButton:    UIButton!
     @IBOutlet weak var loginButton:     UIButton!
-    @IBOutlet weak var cancelBarButton: UIBarButtonItem!
-    
-    //MARK: IBAction
-    @IBAction func cancelActionButton(_ sender: Any) {
-        Tools.goToMain(vc: self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +26,8 @@ class OnboardViewController: UIViewController {
     }
     
     private func initButtons () {
-        if !CurrentUser.isInit() {
-            self.cancelBarButton.isEnabled = false
-        } else {
-            self.cancelBarButton.isEnabled = true
-        }
-        self.signUpButton.layer.cornerRadius = 15
-        self.loginButton.layer.cornerRadius = 15
+        self.signUpButton.layer.cornerRadius = 18
+        self.loginButton.layer.cornerRadius = 18
     }
     
 }

@@ -123,6 +123,13 @@ extension Tools {
 
 //MARK:- Others
 extension Tools {
+    static func iOS () -> Int {
+        guard let version = Int(UIDevice.current.systemVersion.components(separatedBy: ".").first!) else {
+            return 0
+        }
+        return version
+    }
+    
     static func randomString(length: Int?=12) -> String {
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let len = UInt32(letters.length)

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CoworkersViewController: UIViewController {
-
+class CoworkersViewController: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
@@ -24,5 +24,5 @@ class CoworkersViewController: UIViewController {
     private func initUI() {
         self.navigationItem.title = "Coworkers"
     }
-
+    
 }

@@ -13,5 +13,6 @@ class EmailLoginViewCell : UITableViewCell {
 }
 
 class PasswordLoginViewCell : UITableViewCell {
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var showHideButton: UIButton!
 }

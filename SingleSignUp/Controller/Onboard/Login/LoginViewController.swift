@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     var username: String?
     var password: String?
     var loader:   SpinnerLoader?
+    var isHidden: Bool = true
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -132,12 +133,28 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.passwordTextField.delegate = self
                 cell.passwordTextField.placeholder = "Enter your password..."
                 cell.passwordTextField.tag = indexPath.section
+                cell.passwordTextField.clearsOnBeginEditing = false
+                cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
                 return cell
             }
         } else {
             return UITableViewCell()
         }
     }
+    
+    func showHidePassword (_ sender: Any) {
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: LoginSection.pass.rawValue)) as! PasswordLoginViewCell
+        if self.isHidden {
+            self.isHidden = false
+            cell.showHideButton.setImage(UIImage(named: "hide"), for: .normal)
+            cell.passwordTextField.isSecureTextEntry = false
+        } else {
+            self.isHidden = true
+            cell.showHideButton.setImage(UIImage(named: "show"), for: .normal)
+            cell.passwordTextField.isSecureTextEntry = true
+        }
+    }
+    
     
     //Dismissing Keyboard
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

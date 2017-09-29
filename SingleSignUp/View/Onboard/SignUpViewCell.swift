@@ -18,4 +18,5 @@ class EmailSignUpViewCell : UITableViewCell {
 
 class PasswordSignUpViewCell : UITableViewCell {
     @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var showHideButton: UIButton!
 }
