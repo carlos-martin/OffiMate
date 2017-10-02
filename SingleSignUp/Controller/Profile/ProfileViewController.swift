@@ -167,6 +167,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 self.isEditMode = false
                 nameViewCell.textField.isEnabled = false
                 editViewCell.actionButton.setTitle("Edit", for: UIControlState.normal)
+                editViewCell.actionButton.setTitleColor(Tools.blueSystem, for: UIControlState.normal)
                 self.tableView.reloadSections(sections as IndexSet, with: animation)
                 
             } else {
@@ -178,6 +179,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             nameViewCell.textField.isEnabled = true
             nameViewCell.textField.becomeFirstResponder()
             editViewCell.actionButton.setTitle("Save", for: UIControlState.normal)
+            editViewCell.actionButton.setTitleColor(UIColor.red, for: UIControlState.normal)
             self.tableView.reloadSections(sections as IndexSet, with: animation)
         }
     }

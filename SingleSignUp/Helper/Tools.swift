@@ -12,6 +12,7 @@ import Firebase
 
 public class Tools {
     //place to create internal variables
+    static let blueSystem: UIColor = UIColor(colorLiteralRed: 0.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1.0)
 }
 
 //MARK:- BackEnd 
