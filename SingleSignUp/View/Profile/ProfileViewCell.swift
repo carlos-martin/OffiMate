@@ -8,10 +8,6 @@
 
 import UIKit
 
-class ProfileViewCell : UITableViewCell {
-    @IBOutlet weak var profileLabel: UILabel!
-}
-
 class PasswordViewCell : UITableViewCell {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var showHideButton: UIButton!
@@ -19,4 +15,8 @@ class PasswordViewCell : UITableViewCell {
 
 class InformationViewCell : UITableViewCell {
     @IBOutlet weak var textField: UITextField!
+}
+
+class EditViewCell : UITableViewCell {
+    @IBOutlet weak var actionButton: UIButton!
 }

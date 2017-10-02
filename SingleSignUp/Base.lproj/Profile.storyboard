@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -88,7 +87,7 @@
                                                     <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -100,6 +99,29 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="textField" destination="uDd-aW-Pup" id="U7W-vr-l68"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="editCell" id="9md-2g-QlX" customClass="EditViewCell" customModule="SingleSignUp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="144" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9md-2g-QlX" id="JIU-uW-WZc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BXM-HR-haE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BXM-HR-haE" firstAttribute="top" secondItem="JIU-uW-WZc" secondAttribute="top" id="93I-Pc-mDz"/>
+                                                <constraint firstAttribute="trailing" secondItem="BXM-HR-haE" secondAttribute="trailing" id="IKq-ue-7F2"/>
+                                                <constraint firstAttribute="bottom" secondItem="BXM-HR-haE" secondAttribute="bottom" id="pJM-oj-D2e"/>
+                                                <constraint firstItem="BXM-HR-haE" firstAttribute="leading" secondItem="JIU-uW-WZc" secondAttribute="leading" id="vAw-Fb-37d"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="actionButton" destination="BXM-HR-haE" id="ehn-El-Qnq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

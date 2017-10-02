@@ -63,12 +63,11 @@ class PasswordViewController: UIViewController {
                     try CurrentUser.localSave()
                     
                     Auth.auth().createUser(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
+                        self.loader?.stop()
                         if error == nil {
                             CurrentUser.user = user!
-                            self.loader?.stop()
                             Tools.goToMain(vc: self)
                         } else {
-                            self.loader?.stop()
                             Alert.showFailiureAlert(message: "Error: \(error.debugDescription)")
                         }
                     })

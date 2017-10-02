@@ -180,7 +180,7 @@ class MainViewController: UITableViewController {
             case .createNewChannel:
                 return 0.1
             case .currentChannel:
-                return 40.0
+                return 30.0
             }
         } else {
             return 0.1

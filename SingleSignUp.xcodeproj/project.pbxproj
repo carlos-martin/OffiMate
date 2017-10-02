@@ -467,7 +467,7 @@
 				1AA2BC441F4ACEFE00E0C2E5 /* Base */,
 			);
 			name = Main.storyboard;
-			path = /Users/carlos.martin/Develop/iOS/AWS/SingleSignUp/SingleSignUp;
+			path = /Users/carlos.martin/Develop/iOS/OffiMate/SingleSignUp;
 			sourceTree = "<absolute>";
 		};
 		1AA2BC4B1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard */ = {
