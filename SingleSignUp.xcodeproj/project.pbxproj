@@ -31,6 +31,8 @@
 		1AA2BC481F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2BC461F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld */; };
 		1AA2BC4A1F4ACEFE00E0C2E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */; };
 		1AA2BC4D1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2BC4B1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard */; };
+		1AAA5CAB1F8253E000C59597 /* Coworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA5CAA1F8253E000C59597 /* Coworker.swift */; };
+		1AAA5CAE1F82798600C59597 /* CoworkersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA5CAD1F82798600C59597 /* CoworkersViewCell.swift */; };
 		1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD244151F615B6A002233EE /* ConfirmViewController.swift */; };
 		1AD3A0381F7BBFDB002DD969 /* Coworkers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD3A0361F7BBFDB002DD969 /* Coworkers.storyboard */; };
 		1AD3A03B1F7BC10D002DD969 /* CoworkersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */; };
@@ -66,6 +68,8 @@
 		1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1AA2BC4C1F4ACEFE00E0C2E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AA2BC4E1F4ACEFE00E0C2E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AAA5CAA1F8253E000C59597 /* Coworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coworker.swift; sourceTree = "<group>"; };
+		1AAA5CAD1F82798600C59597 /* CoworkersViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkersViewCell.swift; sourceTree = "<group>"; };
 		1AD244151F615B6A002233EE /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1AD3A0371F7BBFDB002DD969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Coworkers.storyboard; sourceTree = "<group>"; };
 		1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkersViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 				1A343FE91F6AAC58000CB641 /* Main */,
 				1A343FEB1F6AAC69000CB641 /* Profile */,
 				1A343FEA1F6AAC63000CB641 /* Onboard */,
+				1AAA5CAC1F82795200C59597 /* Coworkers */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,7 +225,6 @@
 		1A9CC3871F4DC133000C6479 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				1A5BDFDD1F6FE719003C10E5 /* Channel.swift */,
 				1A9CC3881F4DC17E000C6479 /* Alert.swift */,
 				1A9CC38A1F4DC579000C6479 /* Tools.swift */,
 				1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */,
@@ -252,6 +256,7 @@
 			children = (
 				1AA2BC3F1F4ACEFE00E0C2E5 /* AppDelegate.swift */,
 				1A813D1B1F4B1C3300F190A2 /* User */,
+				1AAA5CA91F82534400C59597 /* Models */,
 				1A9CC3871F4DC133000C6479 /* Helper */,
 				1A813D131F4B0AE700F190A2 /* Controller */,
 				1A900FA71F4C4B2B005B3DA4 /* View */,
@@ -262,6 +267,23 @@
 				1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */,
 			);
 			path = SingleSignUp;
+			sourceTree = "<group>";
+		};
+		1AAA5CA91F82534400C59597 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1A5BDFDD1F6FE719003C10E5 /* Channel.swift */,
+				1AAA5CAA1F8253E000C59597 /* Coworker.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1AAA5CAC1F82795200C59597 /* Coworkers */ = {
+			isa = PBXGroup;
+			children = (
+				1AAA5CAD1F82798600C59597 /* CoworkersViewCell.swift */,
+			);
+			path = Coworkers;
 			sourceTree = "<group>";
 		};
 		1AD3A0391F7BC09C002DD969 /* Coworkers */ = {
@@ -424,10 +446,12 @@
 				1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */,
 				1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */,
 				1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */,
+				1AAA5CAB1F8253E000C59597 /* Coworker.swift in Sources */,
 				1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */,
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */,
 				1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */,
+				1AAA5CAE1F82798600C59597 /* CoworkersViewCell.swift in Sources */,
 				1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */,
 				1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */,
 				1AA2BC421F4ACEFE00E0C2E5 /* MainViewController.swift in Sources */,

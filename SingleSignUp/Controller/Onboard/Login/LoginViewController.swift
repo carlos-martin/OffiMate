@@ -6,8 +6,8 @@
 //  Copyright © 2017 Carlos Martin. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Firebase
 import FirebaseAuth
 
 enum LoginSection: Int {
@@ -57,14 +57,19 @@ class LoginViewController: UIViewController {
                     self.loader?.stop()
                 } else {
                     CurrentUser.user = user
-                    do {
-                        try CurrentUser.setData(name: "no-name", email: self.username!, password: self.password!)
-                        try CurrentUser.localSave()
-                    } catch {
-                        Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
-                    }
-                    self.loader?.stop()
-                    Tools.goToMain(vc: self)
+                    
+                    Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?) in
+                        let username = (name != nil ? name! : "#logInAction#")
+                        do {
+                            try CurrentUser.setData(name: username, email: self.username!, password: self.password!)
+                            try CurrentUser.localSave()
+                        } catch {
+                            Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
+                        }
+
+                        self.loader?.stop()
+                        Tools.goToMain(vc: self)
+                    })
                 }
             })
         } else {
@@ -94,6 +99,7 @@ class LoginViewController: UIViewController {
         
         return valid
     }
+    
 }
 
 //MARK: - TableView

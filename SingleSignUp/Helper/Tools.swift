@@ -13,11 +13,29 @@ import Firebase
 public class Tools {
     //place to create internal variables
     static let blueSystem: UIColor = UIColor(colorLiteralRed: 0.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+
 }
 
 //MARK:- BackEnd 
 extension Tools {
-
+    static func fetchCoworker (uid: String, completion: @escaping (_ email: String?, _ name: String?) -> Void) {
+        let coworkerRef = Database.database().reference().child("coworkers")
+        let coworkerHandle = coworkerRef.queryOrdered(byChild: "userId").queryEqual(toValue: uid)
+        coworkerHandle.observe(.value) { (snapshot: DataSnapshot) in
+            let rawData = snapshot.value as! Dictionary<String, AnyObject>
+            if let coworkerID = rawData.keys.first {
+                let coworkerData = rawData[coworkerID] as! Dictionary<String, String>
+                
+                if let name = coworkerData["name"], let email = coworkerData["email"] {
+                    completion(email, name)
+                } else {
+                    completion(nil, nil)
+                }
+            } else {
+                completion(nil, nil)
+            }
+        }
+    }
 }
 
 //MARK:- Storyboard navigation

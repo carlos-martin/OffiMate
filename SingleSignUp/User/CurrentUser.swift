@@ -91,7 +91,11 @@ class CurrentUser {
             Auth.auth().signIn(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
                 if error == nil {
                     self.user = user
-                    completion(true, nil)
+                    
+                    Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?) in
+                        self.name = (name != nil ? name! : "#tryToLogin#")
+                        completion(true, nil)
+                    })
                 } else {
                     completion(false, error)
                 }

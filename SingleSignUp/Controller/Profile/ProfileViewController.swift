@@ -66,7 +66,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
             case .edit:
-                return 1
+                return 0//1
             case .name:
                 return 1
             case .mail:

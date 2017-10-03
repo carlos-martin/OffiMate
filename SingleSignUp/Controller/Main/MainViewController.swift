@@ -24,8 +24,6 @@ class MainViewController: UITableViewController {
     var         newChannelIsHide:     Bool = true
     private var lastContentOffset:    CGFloat = 0
     
-    var counter: Int = 0
-    
     //Firebase variables
     private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
     private      var channelRefHandle:  DatabaseHandle?
@@ -60,7 +58,6 @@ class MainViewController: UITableViewController {
     }
     
     func menuActionButton(_ sender: Any) {
-        //Tools.goToCoworkers(vc: self)
         guard let vc = UIStoryboard(name: "Coworkers", bundle: nil).instantiateViewController(withIdentifier: "Coworkers") as? CoworkersViewController else {
             let message = "Could not instantiate view controller with identifier of type CoworkersViewController"
             Alert.showFailiureAlert(message: message)
@@ -102,7 +99,7 @@ class MainViewController: UITableViewController {
             let id = snapshot.key
             if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
                 let _channel = Channel(id: id, name: name, creator: creator)
-                print(_channel.toString())
+                print(_channel)
                 self.channels.append(_channel)
                 self.tableView.reloadData()
             }
