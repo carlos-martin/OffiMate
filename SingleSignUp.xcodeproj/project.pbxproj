@@ -33,6 +33,7 @@
 		1AA2BC4D1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2BC4B1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard */; };
 		1AAA5CAB1F8253E000C59597 /* Coworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA5CAA1F8253E000C59597 /* Coworker.swift */; };
 		1AAA5CAE1F82798600C59597 /* CoworkersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA5CAD1F82798600C59597 /* CoworkersViewCell.swift */; };
+		1AAA5CB01F838FC400C59597 /* CoworkerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA5CAF1F838FC400C59597 /* CoworkerProfileViewController.swift */; };
 		1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD244151F615B6A002233EE /* ConfirmViewController.swift */; };
 		1AD3A0381F7BBFDB002DD969 /* Coworkers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD3A0361F7BBFDB002DD969 /* Coworkers.storyboard */; };
 		1AD3A03B1F7BC10D002DD969 /* CoworkersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */; };
@@ -70,6 +71,7 @@
 		1AA2BC4E1F4ACEFE00E0C2E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AAA5CAA1F8253E000C59597 /* Coworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coworker.swift; sourceTree = "<group>"; };
 		1AAA5CAD1F82798600C59597 /* CoworkersViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkersViewCell.swift; sourceTree = "<group>"; };
+		1AAA5CAF1F838FC400C59597 /* CoworkerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkerProfileViewController.swift; sourceTree = "<group>"; };
 		1AD244151F615B6A002233EE /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1AD3A0371F7BBFDB002DD969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Coworkers.storyboard; sourceTree = "<group>"; };
 		1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkersViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */,
+				1AAA5CAF1F838FC400C59597 /* CoworkerProfileViewController.swift */,
 			);
 			path = Coworkers;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */,
 				1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */,
 				1AA2BC421F4ACEFE00E0C2E5 /* MainViewController.swift in Sources */,
+				1AAA5CB01F838FC400C59597 /* CoworkerProfileViewController.swift in Sources */,
 				1A9CC3891F4DC17E000C6479 /* Alert.swift in Sources */,
 				1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */,
 				1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */,

@@ -13,7 +13,12 @@ import Firebase
 public class Tools {
     //place to create internal variables
     static let blueSystem: UIColor = UIColor(colorLiteralRed: 0.0, green: 122.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-
+    static let backgrounsColors: [UIColor] = [
+        UIColor(colorLiteralRed:  74.0/255.0, green: 143.0/255.0, blue: 138.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 115.0/255.0, green: 175.0/255.0, blue: 173.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 217.0/255.0, green: 133.0/255.0, blue:  59.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 236.0/255.0, green: 236.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+    ]
 }
 
 //MARK:- BackEnd 
@@ -159,5 +164,10 @@ extension Tools {
             randomString += NSString(characters: &nextChar, length: 1) as String
         }
         return randomString
+    }
+    
+    static func randomColor() -> UIColor {
+        let rand = Int(arc4random_uniform(UInt32(self.backgrounsColors.count)))
+        return self.backgrounsColors[rand]
     }
 }

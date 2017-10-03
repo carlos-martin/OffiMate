@@ -11,3 +11,9 @@ import UIKit
 class CoworkersViewCell : UITableViewCell {
     @IBOutlet weak var coworkerLabel: UILabel!
 }
+
+class CoworkerProfileViewCell : UITableViewCell {
+    @IBOutlet weak var coworkerPictureProfile:  UIImageView!
+    @IBOutlet weak var coworkerNameLabel:       UILabel!
+    @IBOutlet weak var coworkerEmailLabel:      UILabel!
+}

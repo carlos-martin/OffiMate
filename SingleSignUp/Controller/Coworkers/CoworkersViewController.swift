@@ -48,23 +48,36 @@ class CoworkersViewController: UITableViewController {
             self.spinner?.stop()
             let coworkerData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
-            //"name"; "email"; "uid"
             if let name = coworkerData["name"] as! String!, let email = coworkerData["email"] as! String!, let uid = coworkerData["userId"] as! String! {
-                let _coworker = Coworker(id: id, uid: uid, email: email, name: name)
-                print(_coworker)
-                self.coworkers.append(_coworker)
-                self.tableView.reloadData()
+                if CurrentUser.user!.uid != uid {
+                    let _coworker = Coworker(id: id, uid: uid, email: email, name: name)
+                    print(_coworker)
+                    self.coworkers.append(_coworker)
+                    self.tableView.reloadData()
+                }
             }
         })
+    }
+    
+    //MARK:- Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showProfile" {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                var controller: CoworkerProfileViewController
+                if let navigationController = segue.destination as? UINavigationController {
+                    controller = navigationController.topViewController as! CoworkerProfileViewController
+                } else {
+                    controller = segue.destination as! CoworkerProfileViewController
+                }
+                controller.coworker = self.coworkers[indexPath.row]
+                controller.index = indexPath.row % Tools.backgrounsColors.count
+            }
+        }
     }
     
     //MARK:- Table View
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Coworkers"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
