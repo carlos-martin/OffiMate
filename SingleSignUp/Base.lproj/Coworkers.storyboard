@@ -41,7 +41,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="coworkerLabel" destination="A3Y-su-CVz" id="H1e-fS-dtF"/>
-                                    <segue destination="B9c-6K-H6e" kind="showDetail" identifier="showProfile" id="CR6-lV-lft"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -51,6 +50,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Coworkers" id="MsW-HY-CSO"/>
+                    <connections>
+                        <segue destination="cAE-2z-8kO" kind="show" identifier="showProfile" id="GQ1-Ph-H1x"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4w-hY-H68" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -120,23 +122,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwH-fq-86g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1088.8" y="892.80359820089961"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gtI-RM-ZFf">
-            <objects>
-                <navigationController id="B9c-6K-H6e" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HVa-y9-DiN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="cAE-2z-8kO" kind="relationship" relationship="rootViewController" id="V8j-8U-EyN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bzJ-Li-opS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="150" y="893"/>
+            <point key="canvasLocation" x="1967" y="131"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fNq-dd-nco">

@@ -62,7 +62,7 @@ class CoworkersViewController: UITableViewController {
     //MARK:- Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showProfile" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
+            if let indexPath = sender as? IndexPath {
                 var controller: CoworkerProfileViewController
                 if let navigationController = segue.destination as? UINavigationController {
                     controller = navigationController.topViewController as! CoworkerProfileViewController
@@ -90,4 +90,8 @@ class CoworkersViewController: UITableViewController {
         return cell!
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showProfile", sender: indexPath)
+    }
 }
