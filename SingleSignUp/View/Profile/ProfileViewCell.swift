@@ -20,3 +20,10 @@ class InformationViewCell : UITableViewCell {
 class EditViewCell : UITableViewCell {
     @IBOutlet weak var actionButton: UIButton!
 }
+
+class PictureViewCell : UITableViewCell {
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var topView:       UIView!
+    @IBOutlet weak var bottomView:    UIView!
+    @IBOutlet weak var profileImage:  UIImageView!
+}

@@ -11,20 +11,20 @@ import UIKit
 import FirebaseAuth
 
 enum ProfileSection: Int {
-    case edit = 0
+    case profile = 0
+    case password
+}
+
+enum ProfileCell: Int {
+    case image = 0
     case name
-    case mail
-    case pass
+    case email
 }
 
 class ProfileViewController: UIViewController {
     
     var isHidden:   Bool = true
     var isEditMode: Bool = false
-    let notEditableCells: [IndexPath] = [
-        IndexPath(row: 0, section: ProfileSection.mail.rawValue),
-        IndexPath(row: 0, section: ProfileSection.pass.rawValue)
-    ]
     
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
@@ -59,133 +59,109 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
-            case .edit:
-                return 0//1
-            case .name:
+            case .profile:
+                return 3
+            case .password:
                 return 1
-            case .mail:
-                return (self.isEditMode ? 0 : 1)
-            case .pass:
-                return (self.isEditMode ? 0 : 1)
             }
         }
-        return 1
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if section == ProfileSection.profile.rawValue && row == ProfileCell.image.rawValue {
+            return UITableViewAutomaticDimension
+        } else {
+            return 44.0
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if section == ProfileSection.profile.rawValue && row == ProfileCell.image.rawValue {
+            return UITableViewAutomaticDimension
+        } else {
+            return 44.0
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
-            case .edit:
+            case .profile:
                 return nil
-            case .name:
-                return "Name:"
-            case .mail:
-                return (self.isEditMode ? nil : "E-mail:")
-            case .pass:
-                return (self.isEditMode ? nil : "Password:")
+            case .password:
+                return "Password"
             }
         } else {
-            return ""
+            return nil
         }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
-            case .edit:
+            case .profile:
                 return 0.1
-            default:
-                return 30.0
+            case .password:
+                return 18.0
             }
         } else {
             return 0.1
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 18.0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let currentSection: ProfileSection = ProfileSection(rawValue: indexPath.section) {
             switch currentSection {
-            case .edit:
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath) as! EditViewCell
-                if self.isEditMode {
-                    cell.actionButton.setTitle("Save", for: UIControlState.normal)
-                } else {
-                    cell.actionButton.setTitle("Edit", for: UIControlState.normal)
+            case .profile:
+                let currentRow: ProfileCell = ProfileCell(rawValue: indexPath.row)!
+                switch currentRow {
+                case .image:
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! PictureViewCell
+                    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width / 2
+                    cell.profileImage.layer.borderWidth = 0.5
+                    cell.profileImage.layer.borderColor = Tools.separator.cgColor
+                    cell.profileImage.backgroundColor = Tools.backgrounsColors.first!
+                    cell.profileImage.clipsToBounds = true
+                    return cell
+                case .name:
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
+                    cell.textField.text = CurrentUser.name
+                    cell.textField.font = UIFont(name: cell.textField.font!.fontName, size: 22)
+                    return cell
+                case .email:
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
+                    cell.textField.text = CurrentUser.email
+                    return cell
                 }
-                cell.actionButton.addTarget(self, action: #selector(actionButtonPress(_:)), for: UIControlEvents.touchUpInside)
-                return cell
-            case .name:
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
-                cell.textField.text = CurrentUser.name
-                cell.textField.delegate = self
-                return cell
-            case .mail:
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
-                cell.textField.text = CurrentUser.email
-                return cell
-            case .pass:
+            case .password:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "passwordCell", for: indexPath) as! PasswordViewCell
                 cell.passwordTextField.text = CurrentUser.password
                 cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
                 return cell
             }
-            
         } else {
             return UITableViewCell()
         }
     }
     
-    func actionButtonPress (_ sender: Any) {
-        let sections = NSIndexSet(indexesIn: NSMakeRange(2, 2))
-        let animation: UITableViewRowAnimation = UITableViewRowAnimation.automatic
-        let editViewCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: ProfileSection.edit.rawValue)) as! EditViewCell
-        let nameViewCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: ProfileSection.name.rawValue)) as! InformationViewCell
-        if self.isEditMode {
-            //do save stuff
-            if let newName = nameViewCell.textField.text {
-                if newName.isEmpty {
-                    let message = "Name text field cannot be empty!"
-                    Alert.showFailiureAlert(message: message, handler: { (_) in
-                        Tools.cellViewErrorAnimation(cell: nameViewCell)
-                    })
-                    return
-                } else if newName != CurrentUser.name {
-                    do {
-                        try CurrentUser.setName(name: newName)
-                        try CurrentUser.localSave()
-                    } catch {
-                        Alert.showFailiureAlert(message: "Oops! Something goes wrong!")
-                    }
-                }
-                
-                self.isEditMode = false
-                nameViewCell.textField.isEnabled = false
-                editViewCell.actionButton.setTitle("Edit", for: UIControlState.normal)
-                editViewCell.actionButton.setTitleColor(Tools.blueSystem, for: UIControlState.normal)
-                self.tableView.reloadSections(sections as IndexSet, with: animation)
-                
-            } else {
-                Alert.showFailiureAlert(message: "Oops! Something goes wrong!")
-            }
-        } else {
-            //prepare for editing stuff
-            self.isEditMode = true
-            nameViewCell.textField.isEnabled = true
-            nameViewCell.textField.becomeFirstResponder()
-            editViewCell.actionButton.setTitle("Save", for: UIControlState.normal)
-            editViewCell.actionButton.setTitleColor(UIColor.red, for: UIControlState.normal)
-            self.tableView.reloadSections(sections as IndexSet, with: animation)
-        }
-    }
-    
     func showHidePassword (_ sender: Any) {
-        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: ProfileSection.pass.rawValue)) as! PasswordViewCell
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: ProfileSection.password.rawValue)) as! PasswordViewCell
         if self.isHidden {
             self.isHidden = false
             cell.showHideButton.setImage(UIImage(named: "hide"), for: .normal)
@@ -195,13 +171,5 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             cell.showHideButton.setImage(UIImage(named: "show"), for: .normal)
             cell.passwordTextField.isSecureTextEntry = true
         }
-    }
-    
-}
-
-extension ProfileViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.actionButtonPress(self)
-        return true
     }
 }

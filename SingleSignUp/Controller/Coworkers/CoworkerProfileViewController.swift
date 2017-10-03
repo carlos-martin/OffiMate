@@ -52,7 +52,7 @@ class CoworkerProfileViewController: UITableViewController {
         cell.coworkerEmailLabel.text = self.coworker?.email
         cell.coworkerPictureProfile.layer.cornerRadius = cell.coworkerPictureProfile.frame.size.width / 2
         cell.coworkerPictureProfile.layer.borderWidth = 1.0
-        cell.coworkerPictureProfile.layer.borderColor = UIColor.gray.cgColor
+        cell.coworkerPictureProfile.layer.borderColor = Tools.separator.cgColor
         cell.coworkerPictureProfile.backgroundColor = Tools.backgrounsColors[index!]
         cell.coworkerPictureProfile.clipsToBounds = true
         return cell
