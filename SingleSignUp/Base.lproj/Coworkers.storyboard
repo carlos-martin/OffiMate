@@ -206,25 +206,24 @@
                                                 <constraint firstAttribute="height" constant="55" id="wfF-nm-RSn"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oB-M6-p8x">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hUW-Mm-ICH">
                                             <rect key="frame" x="333" y="22" width="22" height="22"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="22" id="Yfx-Sd-BSe"/>
-                                                <constraint firstAttribute="width" constant="22" id="slQ-YZ-UDe"/>
+                                                <constraint firstAttribute="width" constant="22" id="14z-uV-kjH"/>
+                                                <constraint firstAttribute="height" constant="22" id="SHG-1x-6YX"/>
                                             </constraints>
-                                            <state key="normal" image="up"/>
-                                        </button>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="s7S-Nf-FJb" firstAttribute="top" secondItem="rpy-TC-LFq" secondAttribute="top" constant="5" id="6pJ-Pq-RaZ"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="1oB-M6-p8x" secondAttribute="trailing" constant="12" id="JlS-xB-Pma"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="hUW-Mm-ICH" secondAttribute="trailing" constant="12" id="NrR-hf-ptr"/>
+                                        <constraint firstItem="hUW-Mm-ICH" firstAttribute="centerY" secondItem="rpy-TC-LFq" secondAttribute="centerY" id="R3I-FO-AQK"/>
                                         <constraint firstItem="s7S-Nf-FJb" firstAttribute="centerX" secondItem="rpy-TC-LFq" secondAttribute="centerX" id="UHT-7R-dCW"/>
-                                        <constraint firstItem="1oB-M6-p8x" firstAttribute="centerY" secondItem="rpy-TC-LFq" secondAttribute="centerY" id="a3o-pr-V2C"/>
                                         <constraint firstAttribute="bottom" secondItem="s7S-Nf-FJb" secondAttribute="bottom" constant="5" id="d8z-oC-0bJ"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="actionButton" destination="1oB-M6-p8x" id="NYV-oR-gI0"/>
+                                    <outlet property="arrow" destination="hUW-Mm-ICH" id="hSL-1R-URA"/>
                                     <outlet property="icon" destination="s7S-Nf-FJb" id="AjE-73-0R3"/>
                                 </connections>
                             </tableViewCell>
@@ -287,6 +286,5 @@
     <resources>
         <image name="next" width="25" height="25"/>
         <image name="profile" width="75" height="75"/>
-        <image name="up" width="25" height="25"/>
     </resources>
 </document>

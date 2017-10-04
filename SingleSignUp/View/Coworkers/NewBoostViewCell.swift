@@ -10,7 +10,7 @@ import UIKit
 
 class NewBoostHeaderViewCell: UITableViewCell {
     @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var arrow: UIImageView!
 }
 
 class NewBoostTypeViewCell: UITableViewCell {

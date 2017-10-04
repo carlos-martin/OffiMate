@@ -23,8 +23,8 @@ enum BoostRow: Int {
 class NewBoostCardViewController: UITableViewController {
     
     var coworker: Coworker?
-    var passionIsHidden:   Bool = false
-    var executionIsHidden: Bool = false 
+    var passionIsHidden:   Bool = true
+    var executionIsHidden: Bool = true
     
     var passionOptions: [String] = [
         "Customer focus",
@@ -93,13 +93,28 @@ class NewBoostCardViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section: BoostSection = BoostSection(rawValue: indexPath.section)!
+        let row: BoostRow = BoostRow(rawValue: indexPath.row)!
         switch section {
         case .passion:
-            self.passionIsHidden = (self.passionIsHidden ? false : true)
-            self.tableView.reloadSections(IndexSet(integer: section.rawValue), with: .fade)
+            switch row {
+            case .header:
+                self.passionIsHidden = (self.passionIsHidden ? false : true)
+                self.tableView.reloadSections(IndexSet(integer: section.rawValue), with: .fade)
+            default:
+                //TODO: segue
+                break
+            }
+            
         case .execution:
-            self.executionIsHidden = (self.executionIsHidden ? false : true)
-            self.tableView.reloadSections(IndexSet(integer: section.rawValue), with: .fade)
+            switch row {
+            case .header:
+                self.executionIsHidden = (self.executionIsHidden ? false : true)
+                self.tableView.reloadSections(IndexSet(integer: section.rawValue), with: .fade)
+            default:
+                //TODO: segue
+                break
+            }
+            
         }
     }
 
@@ -114,9 +129,7 @@ class NewBoostCardViewController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.backgroundColor = Tools.redPassion
                 cell.icon.image = UIImage(named: "passion-big")
-                
-                let image: UIImage = (self.passionIsHidden ? UIImage(named: "down")! : UIImage(named: "up")!)
-                cell.actionButton.setImage(image, for: .normal)
+                cell.arrow.image = (self.passionIsHidden ? UIImage(named: "down")! : UIImage(named: "up")!)
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "boostCardTypeCell", for: indexPath) as! NewBoostTypeViewCell
@@ -132,9 +145,7 @@ class NewBoostCardViewController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.backgroundColor = Tools.greenExecution
                 cell.icon.image = UIImage(named: "execution-big")
-                
-                let image: UIImage = (self.executionIsHidden ? UIImage(named: "down")! : UIImage(named: "up")!)
-                cell.actionButton.setImage(image, for: .normal)
+                cell.arrow.image = (self.executionIsHidden ? UIImage(named: "down")! : UIImage(named: "up")!)
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "boostCardTypeCell", for: indexPath) as! NewBoostTypeViewCell
