@@ -8,11 +8,16 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class CurrentUser {
     static private(set) var name:       String!
     static private(set) var email:      String!
     static private(set) var password:   String!
+    
+    static var date: NewDate = NewDate(date: Date())
+    //FirebaseAuth user
+    static var user: User!
     
     //MARK:- Public funtion
     static func isInit() -> Bool {
@@ -79,7 +84,34 @@ class CurrentUser {
         }
     }
     
+    //MARK:- Firebase
+ 
+    static func tryToLogin (completion: @escaping (_ isLogin: Bool, _ error: Error?) -> Void) {
+        if self.email != nil && self.password != nil {
+            Auth.auth().signIn(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
+                if error == nil {
+                    self.user = user
+                    
+                    Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?) in
+                        self.name = (name != nil ? name! : "#tryToLogin#")
+                        completion(true, nil)
+                    })
+                } else {
+                    completion(false, error)
+                }
+            })
+        } else {
+            let error: NSError = NSError(
+                domain:     "CurrentUser empty",
+                code:       0,
+                userInfo:   ["NSLocalizedDescription" : "CurrentUser static class has no data stored"])
+            
+            completion(false, error)
+        }
+    }
+    
     //MARK:- Private local function
+    
     private static func localFetch() -> Bool {
         if let name = UserDefaults.standard.string(forKey: "name"),
             let email = UserDefaults.standard.string(forKey: "email"),

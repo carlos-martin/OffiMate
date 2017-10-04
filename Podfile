@@ -1,15 +1,15 @@
+# Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
 
-target :'SingleSignUp' do
-    use_frameworks!
-#    
-#    pod 'AWSS3', '~> 2.6.1'
-#    pod 'AWSCore', '~> 2.6.1'
-#    pod 'AWSAuthCore', '~> 2.6.1'
-#    pod 'AWSUserPoolsSignIn', '~> 2.6.1'
-#    pod 'AWSCognito', '~> 2.6.1'
-#    pod 'AWSCognitoIdentityProvider', '~> 2.6.1'
-#    pod 'AWSAuthUI', '~> 2.6.1'
-#    # other pods
-#    
+target 'SingleSignUp' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+  
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
+  pod 'JSQMessagesViewController'
+ 
+  # Pods for SingleSignUp
 end

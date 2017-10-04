@@ -8,26 +8,33 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class PasswordViewController: UIViewController {
     
     var username: String?
     var email:    String?
     var password: String?
+    var loader:   SpinnerLoader?
+    var isHidden: Bool = true
     
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: IBAction
     @IBAction func saveActionButton(_ sender: Any) {
-        self.saveAction(sender)
+        self.signUpAction(sender)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         self.tableView.reloadData()
+        
         self.startTextField()
+        
+        loader = SpinnerLoader(view: self.view)
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,21 +55,43 @@ class PasswordViewController: UIViewController {
         }
     }
     
-    func saveAction (_ sender: Any?=nil) {
+    func signUpAction (_ sender: Any?=nil) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
                 do {
+                    self.loader?.start(self.view)
                     try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!)
                     try CurrentUser.localSave()
-                    Tools.goToMain(vc: self)
+                    
+                    Auth.auth().createUser(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
+                        self.loader?.stop()
+                        if error == nil {
+                            CurrentUser.user = user!
+                            self.createCoworker(uid: user!.uid, email: self.email!, name: self.username!)
+                            Tools.goToMain(vc: self)
+                        } else {
+                            Alert.showFailiureAlert(message: "Error: \(error.debugDescription)")
+                        }
+                    })
                 } catch {
+                    self.loader?.stop()
                     Tools.cellViewErrorAnimation(cell: cell)
                 }
-                
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
         }
+    }
+    
+    func createCoworker(uid: String, email: String, name: String) {
+        let coworkerRef = Database.database().reference().child("coworkers")
+        let newCoworkerRef = coworkerRef.childByAutoId()
+        let newCoworkerItem = [
+            "userId":   uid,
+            "name":     name,
+            "email":    email
+        ]
+        newCoworkerRef.setValue(newCoworkerItem)
     }
     
     func readyToSave(cell: UITableViewCell) -> Bool {
@@ -97,7 +126,22 @@ extension PasswordViewController: UITableViewDelegate, UITableViewDataSource {
         cell.passwordTextField.delegate = self
         cell.passwordTextField.placeholder = "Enter password..."
         cell.passwordTextField.tag = indexPath.row
+        cell.passwordTextField.clearsOnBeginEditing = false
+        cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
         return cell
+    }
+    
+    func showHidePassword (_ sender: Any) {
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! PasswordSignUpViewCell
+        if self.isHidden {
+            self.isHidden = false
+            cell.showHideButton.setImage(UIImage(named: "hide"), for: .normal)
+            cell.passwordTextField.isSecureTextEntry = false
+        } else {
+            self.isHidden = true
+            cell.showHideButton.setImage(UIImage(named: "show"), for: .normal)
+            cell.passwordTextField.isSecureTextEntry = true
+        }
     }
 
     //Dismissing Keyboard
@@ -109,7 +153,7 @@ extension PasswordViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - TextField
 extension PasswordViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.saveAction()
+        self.signUpAction()
         return true
     }
 }

@@ -15,6 +15,7 @@ class NameViewController: UIViewController {
     
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nextBarButtonItem: UIBarButtonItem!
     
     //MARK: IBAction
     @IBAction func nextActionButton(_ sender: Any) {
@@ -25,7 +26,7 @@ class NameViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.tableView.reloadData()
-        self.startTextField()
+        self.initUI()
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,7 +34,10 @@ class NameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func startTextField(){
+    private func initUI(){
+        if Tools.iOS() <= 10 {
+            self.nextBarButtonItem.image = UIImage(named: "nextOld")
+        }
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! NameSignUpViewCell).nameTextField.becomeFirstResponder()
     }
     
