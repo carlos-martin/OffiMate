@@ -17,3 +17,9 @@ class CoworkerProfileViewCell : UITableViewCell {
     @IBOutlet weak var coworkerNameLabel:       UILabel!
     @IBOutlet weak var coworkerEmailLabel:      UILabel!
 }
+
+class CoworkerOptionViewCell : UITableViewCell {
+    @IBOutlet weak var iconImage:   UIImageView!
+    @IBOutlet weak var arrowImage:  UIImageView!
+    @IBOutlet weak var actionLaben: UILabel!
+}

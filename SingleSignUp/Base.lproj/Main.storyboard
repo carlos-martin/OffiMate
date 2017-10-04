@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -70,16 +69,34 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-IW-4pE">
-                                            <rect key="frame" x="16" y="11" width="351" height="21"/>
+                                            <rect key="frame" x="61" y="11" width="265" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat" translatesAutoresizingMaskIntoConstraints="NO" id="nnq-y6-pM5">
+                                            <rect key="frame" x="18" y="9" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="vAE-3B-wer"/>
+                                                <constraint firstAttribute="height" constant="25" id="wEM-np-43G"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next" translatesAutoresizingMaskIntoConstraints="NO" id="WYO-Xq-YSV">
+                                            <rect key="frame" x="334" y="9" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="QuS-Gh-Ja6"/>
+                                                <constraint firstAttribute="width" constant="25" id="W8K-Jt-Uyd"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="TLK-IW-4pE" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="5KU-hu-yME"/>
-                                        <constraint firstItem="TLK-IW-4pE" firstAttribute="leading" secondItem="l7b-DJ-6mY" secondAttribute="leadingMargin" constant="8" id="6jY-wu-OrI"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="TLK-IW-4pE" secondAttribute="trailing" id="Vkt-2l-Avd"/>
+                                        <constraint firstItem="nnq-y6-pM5" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="EBk-gn-MJu"/>
+                                        <constraint firstItem="nnq-y6-pM5" firstAttribute="leading" secondItem="l7b-DJ-6mY" secondAttribute="leadingMargin" constant="10" id="aiM-Ar-99U"/>
+                                        <constraint firstItem="TLK-IW-4pE" firstAttribute="leading" secondItem="nnq-y6-pM5" secondAttribute="trailing" constant="18" id="eoU-2o-18d"/>
+                                        <constraint firstItem="TLK-IW-4pE" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="exh-Il-jfs"/>
+                                        <constraint firstItem="WYO-Xq-YSV" firstAttribute="leading" secondItem="TLK-IW-4pE" secondAttribute="trailing" constant="8" id="ssO-el-akq"/>
+                                        <constraint firstItem="WYO-Xq-YSV" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="zJf-6k-HI2"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="WYO-Xq-YSV" secondAttribute="trailing" constant="8" id="zQ0-oQ-nMX"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -147,6 +164,10 @@
             <point key="canvasLocation" x="-1444" y="757"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chat" width="25" height="25"/>
+        <image name="next" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rfV-sh-X4v"/>
     </inferredMetricsTieBreakers>

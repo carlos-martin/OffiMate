@@ -59,7 +59,7 @@ class CoworkersViewController: UITableViewController {
         })
     }
     
-    //MARK:- Segues
+    //MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showProfile" {
             if let indexPath = sender as? IndexPath {
@@ -75,7 +75,7 @@ class CoworkersViewController: UITableViewController {
         }
     }
     
-    //MARK:- Table View
+    //MARK: - Table View
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
