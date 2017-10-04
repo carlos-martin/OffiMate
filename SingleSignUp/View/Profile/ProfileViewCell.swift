@@ -27,3 +27,8 @@ class PictureViewCell : UITableViewCell {
     @IBOutlet weak var bottomView:    UIView!
     @IBOutlet weak var profileImage:  UIImageView!
 }
+
+class OptionsViewCell : UITableViewCell {
+    @IBOutlet weak var optionImage: UIImageView!
+    @IBOutlet weak var optionLabel: UILabel!
+}

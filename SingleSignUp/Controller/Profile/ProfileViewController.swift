@@ -13,12 +13,17 @@ import FirebaseAuth
 enum ProfileSection: Int {
     case profile = 0
     case password
+    case options
 }
 
-enum ProfileCell: Int {
+enum ProfileInfoCell: Int {
     case image = 0
     case name
     case email
+}
+
+enum ProfileOptionsCell: Int {
+    case logout = 0
 }
 
 class ProfileViewController: UIViewController {
@@ -28,13 +33,28 @@ class ProfileViewController: UIViewController {
     
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
     
     //MARK: IBAction
     @IBAction func cancelActionButton(_ sender: Any) {
         Tools.goToMain(vc: self)
     }
     
-    @IBAction func logoutActionButton(_ sender: Any) {
+    @IBAction func editActionButton(_ sender: Any) {
+        print("edit press!")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.editBarButtonItem.isEnabled = false //TODO: add editing option
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func logoutAction() {
         do {
             try Auth.auth().signOut()
         } catch {
@@ -44,22 +64,12 @@ class ProfileViewController: UIViewController {
         Tools.goToOnboard(vc: self)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,7 +77,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch currentSection {
             case .profile:
                 return 3
-            case .password:
+            case .password, .options:
                 return 1
             }
         }
@@ -78,7 +88,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let section = indexPath.section
         let row = indexPath.row
         
-        if section == ProfileSection.profile.rawValue && row == ProfileCell.image.rawValue {
+        if section == ProfileSection.profile.rawValue && row == ProfileInfoCell.image.rawValue {
             return UITableViewAutomaticDimension
         } else {
             return 44.0
@@ -88,7 +98,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let section = indexPath.section
         let row = indexPath.row
         
-        if section == ProfileSection.profile.rawValue && row == ProfileCell.image.rawValue {
+        if section == ProfileSection.profile.rawValue && (row == ProfileInfoCell.image.rawValue || row == ProfileInfoCell.name.rawValue) {
             return UITableViewAutomaticDimension
         } else {
             return 44.0
@@ -98,7 +108,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
-            case .profile:
+            case .profile, .options:
                 return nil
             case .password:
                 return "Password"
@@ -115,6 +125,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 return 0.1
             case .password:
                 return 18.0
+            case .options:
+                return 30.0
             }
         } else {
             return 0.1
@@ -125,14 +137,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return 18.0
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        if section == ProfileSection.options.rawValue && row == ProfileOptionsCell.logout.rawValue {
+            self.logoutAction()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let currentSection: ProfileSection = ProfileSection(rawValue: indexPath.section) {
             switch currentSection {
             case .profile:
-                let currentRow: ProfileCell = ProfileCell(rawValue: indexPath.row)!
+                let currentRow: ProfileInfoCell = ProfileInfoCell(rawValue: indexPath.row)!
                 switch currentRow {
                 case .image:
                     let cell = self.tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! PictureViewCell
+                    cell.selectionStyle = .none
                     cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width / 2
                     cell.profileImage.layer.borderWidth = 0.5
                     cell.profileImage.layer.borderColor = Tools.separator.cgColor
@@ -141,19 +162,32 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     return cell
                 case .name:
                     let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
+                    cell.selectionStyle = .none
                     cell.textField.text = CurrentUser.name
                     cell.textField.font = UIFont(name: cell.textField.font!.fontName, size: 22)
                     return cell
                 case .email:
                     let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
+                    cell.selectionStyle = .none
                     cell.textField.text = CurrentUser.email
                     return cell
                 }
             case .password:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "passwordCell", for: indexPath) as! PasswordViewCell
+                cell.selectionStyle = .none
                 cell.passwordTextField.text = CurrentUser.password
                 cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
                 return cell
+            case .options:
+                let currentRow: ProfileOptionsCell = ProfileOptionsCell(rawValue: indexPath.row)!
+                switch currentRow {
+                case .logout:
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
+                    cell.selectionStyle = .gray
+                    cell.optionImage.image = UIImage(named: "logout")
+                    cell.optionLabel.text = "Logout"
+                    return cell
+                }
             }
         } else {
             return UITableViewCell()
