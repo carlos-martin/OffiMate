@@ -36,6 +36,8 @@
 		1AAA5CB01F838FC400C59597 /* CoworkerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA5CAF1F838FC400C59597 /* CoworkerProfileViewController.swift */; };
 		1AC439621F84E3E300CCBF22 /* NewBoostCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC439611F84E3E300CCBF22 /* NewBoostCardViewController.swift */; };
 		1AC439641F84F27F00CCBF22 /* NewBoostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC439631F84F27F00CCBF22 /* NewBoostViewCell.swift */; };
+		1AC439661F8532C000CCBF22 /* BoostCardMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC439651F8532C000CCBF22 /* BoostCardMessageViewController.swift */; };
+		1AC439681F85347F00CCBF22 /* BoostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC439671F85347F00CCBF22 /* BoostCard.swift */; };
 		1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD244151F615B6A002233EE /* ConfirmViewController.swift */; };
 		1AD3A0381F7BBFDB002DD969 /* Coworkers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD3A0361F7BBFDB002DD969 /* Coworkers.storyboard */; };
 		1AD3A03B1F7BC10D002DD969 /* CoworkersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */; };
@@ -76,6 +78,8 @@
 		1AAA5CAF1F838FC400C59597 /* CoworkerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkerProfileViewController.swift; sourceTree = "<group>"; };
 		1AC439611F84E3E300CCBF22 /* NewBoostCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBoostCardViewController.swift; sourceTree = "<group>"; };
 		1AC439631F84F27F00CCBF22 /* NewBoostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBoostViewCell.swift; sourceTree = "<group>"; };
+		1AC439651F8532C000CCBF22 /* BoostCardMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCardMessageViewController.swift; sourceTree = "<group>"; };
+		1AC439671F85347F00CCBF22 /* BoostCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCard.swift; sourceTree = "<group>"; };
 		1AD244151F615B6A002233EE /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1AD3A0371F7BBFDB002DD969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Coworkers.storyboard; sourceTree = "<group>"; };
 		1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkersViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 			children = (
 				1A5BDFDD1F6FE719003C10E5 /* Channel.swift */,
 				1AAA5CAA1F8253E000C59597 /* Coworker.swift */,
+				1AC439671F85347F00CCBF22 /* BoostCard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 				1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */,
 				1AAA5CAF1F838FC400C59597 /* CoworkerProfileViewController.swift */,
 				1AC439611F84E3E300CCBF22 /* NewBoostCardViewController.swift */,
+				1AC439651F8532C000CCBF22 /* BoostCardMessageViewController.swift */,
 			);
 			path = Coworkers;
 			sourceTree = "<group>";
@@ -448,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AC439681F85347F00CCBF22 /* BoostCard.swift in Sources */,
 				1A9CC38B1F4DC579000C6479 /* Tools.swift in Sources */,
 				1A5BDFDE1F6FE719003C10E5 /* Channel.swift in Sources */,
 				1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */,
@@ -456,6 +463,7 @@
 				1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */,
 				1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */,
 				1AAA5CAB1F8253E000C59597 /* Coworker.swift in Sources */,
+				1AC439661F8532C000CCBF22 /* BoostCardMessageViewController.swift in Sources */,
 				1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */,
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */,
