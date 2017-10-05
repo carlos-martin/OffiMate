@@ -31,4 +31,5 @@ class PictureViewCell : UITableViewCell {
 class OptionsViewCell : UITableViewCell {
     @IBOutlet weak var optionImage: UIImageView!
     @IBOutlet weak var optionLabel: UILabel!
+    @IBOutlet weak var arrowImage:  UIImageView!
 }
