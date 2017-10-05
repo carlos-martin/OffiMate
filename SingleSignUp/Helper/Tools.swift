@@ -42,6 +42,18 @@ public class Tools {
 
 //MARK:- BackEnd 
 extension Tools {
+    //MARK: Coworker
+    static func createCoworker(uid: String, email: String, name: String) {
+        let coworkerRef = Database.database().reference().child("coworkers")
+        let newCoworkerRef = coworkerRef.childByAutoId()
+        let newCoworkerItem = [
+            "userId":   uid,
+            "name":     name,
+            "email":    email
+        ]
+        newCoworkerRef.setValue(newCoworkerItem)
+    }
+    
     static func fetchCoworker (uid: String, completion: @escaping (_ email: String?, _ name: String?) -> Void) {
         let coworkerRef = Database.database().reference().child("coworkers")
         let coworkerHandle = coworkerRef.queryOrdered(byChild: "userId").queryEqual(toValue: uid)
@@ -59,6 +71,20 @@ extension Tools {
                 completion(nil, nil)
             }
         }
+    }
+    
+    //MARK: BoostCard
+    static func createBoostCard(boostCard: BoostCard) {
+        let boostcardRef = Database.database().reference().child("boostcard")
+        let newBoostcardRef = boostcardRef.childByAutoId()
+        let newBoostcardItem = [
+            "senderId":     boostCard.senderId,
+            "receiverId":   boostCard.receiverId,
+            "type":         String(describing: boostCard.type),
+            "header":       boostCard.header,
+            "message":      boostCard.message
+        ]
+        newBoostcardRef.setValue(newBoostcardItem)
     }
 }
 

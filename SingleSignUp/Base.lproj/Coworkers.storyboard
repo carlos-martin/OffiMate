@@ -267,7 +267,7 @@
             </objects>
             <point key="canvasLocation" x="2834" y="131"/>
         </scene>
-        <!--Boost Card Message View Controller-->
+        <!--Why?-->
         <scene sceneID="5SF-PQ-GKy">
             <objects>
                 <viewController id="NYg-5o-afE" customClass="BoostCardMessageViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
@@ -334,15 +334,26 @@
                             <constraint firstItem="ht1-XB-Ef6" firstAttribute="leading" secondItem="abZ-Sb-NPR" secondAttribute="trailing" constant="8" id="xyU-Cs-nlJ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Why?" id="phM-K0-mPX">
+                        <barButtonItem key="rightBarButtonItem" title="Send" id="JnX-HV-fQg">
+                            <connections>
+                                <action selector="sendBarButtonAction:" destination="NYg-5o-afE" id="iKg-Gn-daQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cardImageView" destination="QPS-XK-xxu" id="1ds-ZI-KWo"/>
                         <outlet property="coworkerLabel" destination="5An-qO-ZBC" id="wpY-Ea-DSI"/>
                         <outlet property="frameImageView" destination="abZ-Sb-NPR" id="75H-Ob-vUX"/>
                         <outlet property="headerLabel" destination="ht1-XB-Ef6" id="tJX-z3-eoF"/>
+                        <outlet property="keyboardHeightLayoutConstraint" destination="OrQ-oL-ehH" id="Eaw-nE-yAg"/>
+                        <outlet property="sendBarButtonItem" destination="JnX-HV-fQg" id="SyN-MH-AZK"/>
                         <outlet property="textView" destination="dfh-Gs-fdx" id="3fQ-ii-QMe"/>
+                        <segue destination="QNG-8U-k4c" kind="unwind" identifier="unwindSegueToCoworkers" unwindAction="unwindToCoworkersWithSegue:" id="zoD-9a-VN0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gi-NO-to3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="QNG-8U-k4c" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3676" y="133.5832083958021"/>
         </scene>

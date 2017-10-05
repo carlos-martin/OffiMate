@@ -14,17 +14,31 @@ class BoostCardMessageViewController: UIViewController {
     var type:     BoostCardType?
     var header:   String?
     
-    @IBOutlet weak var frameImageView: UIView!
-    @IBOutlet weak var cardImageView:  UIImageView!
-    @IBOutlet weak var headerLabel:    UILabel!
-    @IBOutlet weak var coworkerLabel:  UILabel!
-    @IBOutlet weak var textView:       UITextView!
+    @IBOutlet weak var frameImageView:    UIView!
+    @IBOutlet weak var cardImageView:     UIImageView!
+    @IBOutlet weak var headerLabel:       UILabel!
+    @IBOutlet weak var coworkerLabel:     UILabel!
+    @IBOutlet weak var textView:          UITextView!
+    @IBOutlet weak var sendBarButtonItem: UIBarButtonItem!
+    //for the keyboard
+    @IBOutlet var keyboardHeightLayoutConstraint: NSLayoutConstraint?
     
     var tap: UITapGestureRecognizer = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
+        
+        //change view 
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardNotification(notification:)),
+            name:     NSNotification.Name.UIKeyboardWillChangeFrame,
+            object:   nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,14 +67,54 @@ class BoostCardMessageViewController: UIViewController {
         self.textView.delegate = self
         self.textView.text = "Why?"
         self.textView.textColor = UIColor.lightGray
-        self.textView.becomeFirstResponder()
-        
-        //MARK: tap
-        self.tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
     
-    func dismissKeyboard() {
-        view.endEditing(true)
+    @IBAction func sendBarButtonAction(_ sender: Any) {
+        self.sendBarButtonItem.isEnabled = false
+        if let message = self.textView.text {
+            if !message.isEmpty && message != "Why?" {
+                let boostCard = BoostCard(
+                    senderId:   CurrentUser.user!.uid,
+                    receiverId: self.coworker!.uid,
+                    type:       self.type!,
+                    header:     self.header!,
+                    message:    message
+                )
+                Tools.createBoostCard(boostCard: boostCard)
+                performSegue(withIdentifier: "unwindSegueToCoworkers", sender: self)
+            } else {
+                let error_message = "The message cannot be empty!"
+                Alert.showFailiureAlert(message: error_message, handler: { (_) in
+                    if !self.textView.isFirstResponder {
+                        self.textView.becomeFirstResponder()
+                    }
+                    self.sendBarButtonItem.isEnabled = true
+                })
+            }
+        }
+        
+    }
+    
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame: CGRect? =         (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let duration: TimeInterval =    (userInfo[UIKeyboardAnimationDurationUserInfoKey]as? NSNumber)?.doubleValue ?? 0
+            let aniCurvRawNSN: NSNumber? =  userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let aniCurvRaw: UInt =          aniCurvRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let aniCurv: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: aniCurvRaw)
+            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+                self.keyboardHeightLayoutConstraint?.constant = 0.0
+            } else {
+                self.keyboardHeightLayoutConstraint?.constant = endFrame?.size.height ?? 0.0
+            }
+            UIView.animate(
+                withDuration:   duration,
+                delay:          TimeInterval(0),
+                options:        aniCurv,
+                animations:     { self.view.layoutIfNeeded() },
+                completion:     nil)
+        }
     }
 }
 
