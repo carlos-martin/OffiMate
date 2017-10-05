@@ -32,7 +32,7 @@ class CoworkerProfileViewController: UITableViewController {
 
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showBoostCard" {
+        if segue.identifier == "showBoostCard" { 
             if let indexPath = sender as? IndexPath {
                 if indexPath.section == CoworkerSection.options.rawValue && indexPath.row == CoworkerOptions.boost.rawValue {
                     var controller: NewBoostCardViewController

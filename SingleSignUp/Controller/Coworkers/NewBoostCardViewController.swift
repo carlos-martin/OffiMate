@@ -46,6 +46,35 @@ class NewBoostCardViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: - Segue
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showBCMessage" {
+            if let indexPath = sender as? IndexPath {
+                let section = BoostSection(rawValue: indexPath.section)!
+                let row     = indexPath.row-1
+                
+                var controller: BoostCardMessageViewController
+                if let navigationController = segue.destination as? UINavigationController {
+                    controller = navigationController.topViewController as! BoostCardMessageViewController
+                } else {
+                    controller = segue.destination as! BoostCardMessageViewController
+                }
+                
+                controller.coworker = self.coworker
+                controller.type = BoostCardType(rawValue: indexPath.section)
+                switch section {
+                case .passion:
+                    controller.header = self.passionOptions[row]
+                case .execution:
+                    controller.header = self.executionOptions[row]
+                }
+                
+            }
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -102,7 +131,8 @@ class NewBoostCardViewController: UITableViewController {
                 self.tableView.reloadSections(IndexSet(integer: section.rawValue), with: .fade)
             default:
                 //TODO: segue
-                break
+                tableView.deselectRow(at: indexPath, animated: true)
+                performSegue(withIdentifier: "showBCMessage", sender: indexPath)
             }
             
         case .execution:
@@ -112,7 +142,8 @@ class NewBoostCardViewController: UITableViewController {
                 self.tableView.reloadSections(IndexSet(integer: section.rawValue), with: .fade)
             default:
                 //TODO: segue
-                break
+                tableView.deselectRow(at: indexPath, animated: true)
+                performSegue(withIdentifier: "showBCMessage", sender: indexPath)
             }
             
         }
@@ -188,16 +219,6 @@ class NewBoostCardViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
     */
 

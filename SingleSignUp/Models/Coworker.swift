@@ -17,11 +17,9 @@ internal class Coworker: CustomStringConvertible {
     }
     
     init(id: String, uid: String, email: String, name: String) {
-        self.id =    id
+        self.id =    id 
         self.uid =   uid
         self.email = email
         self.name =  name
     }
-    
-    
 }

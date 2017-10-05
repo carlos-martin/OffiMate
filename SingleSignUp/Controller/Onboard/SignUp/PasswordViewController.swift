@@ -67,7 +67,7 @@ class PasswordViewController: UIViewController {
                         self.loader?.stop()
                         if error == nil {
                             CurrentUser.user = user!
-                            self.createCoworker(uid: user!.uid, email: self.email!, name: self.username!)
+                            Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!)
                             Tools.goToMain(vc: self)
                         } else {
                             Alert.showFailiureAlert(message: "Error: \(error.debugDescription)")
@@ -81,17 +81,6 @@ class PasswordViewController: UIViewController {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
         }
-    }
-    
-    func createCoworker(uid: String, email: String, name: String) {
-        let coworkerRef = Database.database().reference().child("coworkers")
-        let newCoworkerRef = coworkerRef.childByAutoId()
-        let newCoworkerItem = [
-            "userId":   uid,
-            "name":     name,
-            "email":    email
-        ]
-        newCoworkerRef.setValue(newCoworkerItem)
     }
     
     func readyToSave(cell: UITableViewCell) -> Bool {
