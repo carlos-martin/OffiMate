@@ -36,7 +36,59 @@ class InboxViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    // MARK: - Segue showBoostCard
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showBoostCard" {
+            if let indexPath = sender as? IndexPath {
+                let row = indexPath.row
+                
+                var controller: BoostCardViewController
+                if let navigationController = segue.destination as? UINavigationController {
+                    controller = navigationController.topViewController as! BoostCardViewController
+                } else {
+                    controller = segue.destination as! BoostCardViewController
+                }
+                controller.boostCard =  self.boostCards[row]
+                controller.senderName = self.senderName[row]
+                controller.senderMail = self.senderMail[row]
+            }
+        }
+    }
+    
+    // MARK: - Table view data source
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.boostCards.count
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showBoostCard", sender: indexPath)
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "inboxCell", for: indexPath) as! InboxViewCell
+        let row = indexPath.row
+        let boostCard = self.boostCards[row]
+        cell.senderLabel.text = self.senderName[row]
+        cell.headerLabel.text = "\(boostCard.type): \(boostCard.header)"
+        cell.messangeLabel.text = boostCard.message
+        return cell
+    }
+    
     // MARK: - Firebase related methods
     
     private func observerBoostcards() {
@@ -76,34 +128,6 @@ class InboxViewController: UITableViewController {
             }
         })
         
-    }
-    
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.boostCards.count
-    }
-    
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "inboxCell", for: indexPath) as! InboxViewCell
-        let row = indexPath.row
-        let boostCard = self.boostCards[row]
-        cell.senderLabel.text = self.senderName[row]
-        cell.headerLabel.text = "\(boostCard.type): \(boostCard.header)"
-        cell.messangeLabel.text = boostCard.message
-        return cell
     }
 
 }

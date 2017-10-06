@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2338091F6AB54B009D3243 /* MainViewCell.swift */; };
+		1A26F48F1F875D3E00C6B434 /* BoostCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */; };
 		1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */; };
 		1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A343FE71F6AAB22000CB641 /* ChatViewController.swift */; };
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		1A2338091F6AB54B009D3243 /* MainViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
+		1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCardViewController.swift; sourceTree = "<group>"; };
 		1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerLoader.swift; sourceTree = "<group>"; };
 		1A343FE71F6AAB22000CB641 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */,
 				1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */,
+				1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */,
 				1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */,
 				1AA2BC481F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld in Sources */,
+				1A26F48F1F875D3E00C6B434 /* BoostCardViewController.swift in Sources */,
 				1A813D1A1F4B0F0D00F190A2 /* OnboardViewController.swift in Sources */,
 				1A995F5D1F867B7D00EE72C5 /* InboxViewCell.swift in Sources */,
 				1A995F5B1F862AA400EE72C5 /* InboxViewController.swift in Sources */,

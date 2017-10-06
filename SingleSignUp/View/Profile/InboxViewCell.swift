@@ -9,8 +9,20 @@
 import UIKit
 
 class InboxViewCell: UITableViewCell {
-    @IBOutlet weak var senderLabel: UILabel!
-    @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var senderLabel:   UILabel!
+    @IBOutlet weak var headerLabel:   UILabel!
     @IBOutlet weak var messangeLabel: UILabel!
-    @IBOutlet weak var readedImage: UIImageView!
+    @IBOutlet weak var readedImage:   UIImageView!
+}
+
+class BoostCardHeaderViewCell: UITableViewCell {
+    @IBOutlet weak var iconView:      UIView!
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var headerLabel:   UILabel!
+    @IBOutlet weak var fromLabel:     UILabel!
+    @IBOutlet weak var senderButton:  UIButton!
+}
+
+class BoostCardBodyViewCell: UITableViewCell {
+    @IBOutlet weak var messageTextView: UITextView!
 }
