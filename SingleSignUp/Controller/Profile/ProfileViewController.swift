@@ -237,12 +237,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.passwordTextField.text = CurrentUser.password
                 cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
                 return cell
+                
             case .inbox:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
                 cell.selectionStyle = .gray
                 cell.optionImage.image = UIImage(named: "inbox")
-                //cell.optionImage.backgroundColor = Tools.blueInbox
-                //cell.optionImage.layer.cornerRadius = 4
+                cell.optionImage.backgroundColor = UIColor.white
                 cell.optionLabel.text = "Inbox"
                 return cell
                 
