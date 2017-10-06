@@ -14,6 +14,7 @@ class CurrentUser {
     static private(set) var name:       String!
     static private(set) var email:      String!
     static private(set) var password:   String!
+    static private(set) var coworkerId: String!
     
     static var date: NewDate = NewDate(date: Date())
     //FirebaseAuth user
@@ -31,10 +32,11 @@ class CurrentUser {
     }
     
     static func localSave() throws {
-        if self.name != nil && self.email != nil && self.password != nil {
-            UserDefaults.standard.set(self.name,     forKey: "name")
-            UserDefaults.standard.set(self.email,    forKey: "email")
-            UserDefaults.standard.set(self.password, forKey: "password")
+        if self.name != nil && self.email != nil && self.password != nil && self.coworkerId != nil {
+            UserDefaults.standard.set(self.name,       forKey: "name")
+            UserDefaults.standard.set(self.email,      forKey: "email")
+            UserDefaults.standard.set(self.password,   forKey: "password")
+            UserDefaults.standard.set(self.coworkerId, forKey: "coworkerId")
         } else {
             throw NSError(domain: "Some of the internal variables are nil", code: 0, userInfo: nil)
         }
@@ -44,9 +46,11 @@ class CurrentUser {
         self.name = nil
         self.email = nil
         self.password = nil
+        self.coworkerId = nil
         UserDefaults.standard.removeObject(forKey: "name")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.removeObject(forKey: "coworkerId")
     }
     
     static func setName(name: String) throws {
@@ -55,7 +59,6 @@ class CurrentUser {
         } else {
             throw NSError(domain: "Not valid name", code: 0, userInfo: nil)
         }
-        
     }
     
     static func setEmail(email: String) throws {
@@ -74,11 +77,20 @@ class CurrentUser {
         }
     }
     
-    static func setData(name: String, email: String, password: String) throws {
+    static func setCoworkerId(coworkerId: String) throws {
+        if !coworkerId.isEmpty {
+            self.coworkerId = coworkerId
+        } else {
+            throw NSError(domain: "Not valid name", code: 0, userInfo: nil)
+        }
+    }
+    
+    static func setData(name: String, email: String, password: String, coworkerId: String) throws {
         do {
             try self.setName(name: name)
             try self.setEmail(email: email)
             try self.setPassword(password: password)
+            try self.setCoworkerId(coworkerId: coworkerId)
         } catch {
             throw NSError(domain: "Not valid input data", code: 0, userInfo: nil)
         }
@@ -92,8 +104,9 @@ class CurrentUser {
                 if error == nil {
                     self.user = user
                     
-                    Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?) in
+                    Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?, coworkerId: String?) in
                         self.name = (name != nil ? name! : "#tryToLogin#")
+                        self.coworkerId = coworkerId!
                         completion(true, nil)
                     })
                 } else {
@@ -115,10 +128,12 @@ class CurrentUser {
     private static func localFetch() -> Bool {
         if let name = UserDefaults.standard.string(forKey: "name"),
             let email = UserDefaults.standard.string(forKey: "email"),
-            let password = UserDefaults.standard.string(forKey: "password"){
+            let password = UserDefaults.standard.string(forKey: "password"),
+            let coworkerId = UserDefaults.standard.string(forKey: "coworkerId"){
             self.name = name
             self.email = email
             self.password = password
+            self.coworkerId = coworkerId
             return true
         } else {
             return false
@@ -126,6 +141,6 @@ class CurrentUser {
     }
     
     private static func alreadyFetched() -> Bool {
-        return self.name != nil && self.email != nil && self.password != nil
+        return self.name != nil && self.email != nil && self.password != nil && self.coworkerId != nil
     }
 }

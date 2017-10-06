@@ -43,7 +43,6 @@ class InboxViewController: UITableViewController {
     private func mackAsRead (indexPath: IndexPath) {
         let readRef = boostCardRef.child(boostCards[indexPath.row].id)
         readRef.child("unread").setValue(false)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -126,7 +125,7 @@ class InboxViewController: UITableViewController {
                 let _type =     entry.value["type"]     as! String
                 let type = (_type == "passion" ? BoostCardType(rawValue: 0) : BoostCardType(rawValue: 1))!
                 
-                Tools.fetchCoworker(uid: senderId, completion: { (_email: String?, _name: String?) in
+                Tools.fetchCoworker(uid: senderId, completion: { (_email: String?, _name: String?, _) in
                     if let email = _email, let name = _name {
                         
                         let tmp = BoostCard(

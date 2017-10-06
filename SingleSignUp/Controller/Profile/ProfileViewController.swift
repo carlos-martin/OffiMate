@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 import FirebaseAuth
 
 enum ProfileSection: Int {
@@ -31,6 +32,7 @@ class ProfileViewController: UIViewController {
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
     
     //MARK: IBAction
     @IBAction func cancelActionButton(_ sender: Any) {
@@ -38,12 +40,11 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func editActionButton(_ sender: Any) {
-        print("edit press!")
+        self.editAction()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.editBarButtonItem.isEnabled = false //TODO: add editing option
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,6 +62,47 @@ class ProfileViewController: UIViewController {
         Tools.goToOnboard(vc: self)
     }
     
+    func editAction(name: String?=nil) {
+        if self.isEditMode {
+            self.view.endEditing(true)
+            self.editBarButtonItem.title = "Edit"
+            self.cancelBarButtonItem.isEnabled = true
+            //TODO: backend conexion to save new name
+            if let newname = name {
+                self.updateName(name: newname)
+            }
+            
+        } else {
+            self.view.endEditing(false)
+            self.editBarButtonItem.title = "Cancel"
+            self.cancelBarButtonItem.isEnabled = false
+        }
+        
+        self.isEditMode = (self.isEditMode ? false : true)
+        self.updateTableView()
+    }
+    
+    func updateName(name: String) {
+        do {
+            try CurrentUser.setName(name: name)
+            try CurrentUser.localSave()
+            Database.database().reference().child("coworkers").child(CurrentUser.coworkerId!).child("name").setValue(name)
+        } catch {
+            Alert.showFailiureAlert(message: "Oops! Something goes wrong!")
+        }
+    }
+    
+    func updateTableView() {
+        var indexSet = IndexSet()
+        indexSet.insert(ProfileSection.password.rawValue)
+        indexSet.insert(ProfileSection.inbox.rawValue)
+        indexSet.insert(ProfileSection.logout.rawValue)
+        self.tableView.reloadSections(indexSet, with: .fade)
+        
+        let indexParhArray = [IndexPath(row: ProfileInfoCell.name.rawValue, section: ProfileSection.profile.rawValue)]
+        self.tableView.reloadRows(at: indexParhArray, with: .fade)
+    }
+    
 }
 
 //MARK: - TableView
@@ -75,8 +117,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch currentSection {
             case .profile:
                 return 3
-            case .password, .logout, .inbox:
-                return 1
+            case .logout, .inbox, .password:
+                return (self.isEditMode ? 0 : 1)
             }
         }
         return 0
@@ -110,7 +152,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case .profile, .logout, .inbox:
                 return nil
             case .password:
-                return "Password"
+                return (self.isEditMode ? nil : "Password")
             }
         } else {
             return nil
@@ -123,7 +165,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case .profile:
                 return 0.1
             case .password:
-                return 18.0
+                return 22.0
             case .logout, .inbox:
                 return 33.0
             }
@@ -168,7 +210,20 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
                     cell.selectionStyle = .none
                     cell.textField.text = CurrentUser.name
-                    cell.textField.font = UIFont(name: cell.textField.font!.fontName, size: 22)
+                    cell.textField.delegate = self
+                    
+                    if self.isEditMode {
+                        cell.textField.font = UIFont(name: ".SFUIText-Italic", size: 22)
+                        cell.textField.borderStyle = UITextBorderStyle.roundedRect
+                        cell.textField.backgroundColor = Tools.grayTextField
+                        cell.textField.isEnabled = true
+                    } else {
+                        cell.textField.font = UIFont(name: ".SFUIText", size: 22)
+                        cell.textField.borderStyle = UITextBorderStyle.none
+                        cell.textField.backgroundColor = UIColor.white
+                        cell.textField.isEnabled = false
+                    }
+                    
                     return cell
                 case .email:
                     let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
@@ -234,5 +289,26 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+    }
+}
+
+extension ProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        var result: Bool = false
+        if let name = textField.text {
+            if name.isEmpty {
+                let message = "Oops! Your name cannot be empty!"
+                Alert.showFailiureAlert(message: message, handler: { (_) in
+                    Tools.textFieldErrorAnimation(textField: textField)
+                })
+            } else if name == CurrentUser.name! {
+                self.editAction()
+                result = true
+            } else {
+                self.editAction(name: name)
+                result = true
+            }
+        }
+        return result
     }
 }

@@ -42,6 +42,11 @@ public class Tools {
         green:             2.0/255.0,
         blue:             27.0/255.0,
         alpha:           1.0)
+    static let grayTextField: UIColor = UIColor(
+        colorLiteralRed: 238.0/255.0,
+        green:           238.0/255.0,
+        blue:            238.0/255.0,
+        alpha:           1.0)
     static let backgrounsColors: [UIColor] = [
         UIColor(colorLiteralRed:  74.0/255.0, green: 143.0/255.0, blue: 138.0/255.0, alpha: 1.0),
         UIColor(colorLiteralRed: 115.0/255.0, green: 175.0/255.0, blue: 173.0/255.0, alpha: 1.0),
@@ -53,7 +58,7 @@ public class Tools {
 //MARK:- BackEnd 
 extension Tools {
     //MARK: Coworker
-    static func createCoworker(uid: String, email: String, name: String) {
+    static func createCoworker(uid: String, email: String, name: String) -> String {
         let coworkerRef = Database.database().reference().child("coworkers")
         let newCoworkerRef = coworkerRef.childByAutoId()
         let newCoworkerItem = [
@@ -62,23 +67,26 @@ extension Tools {
             "email":    email
         ]
         newCoworkerRef.setValue(newCoworkerItem)
+        return newCoworkerRef.key
     }
     
-    static func fetchCoworker (uid: String, completion: @escaping (_ email: String?, _ name: String?) -> Void) {
+    static func fetchCoworker (uid: String, completion: @escaping (_ email: String?, _ name: String?, _ id: String?) -> Void) {
         let coworkerRef = Database.database().reference().child("coworkers")
         let coworkerHandle = coworkerRef.queryOrdered(byChild: "userId").queryEqual(toValue: uid)
         coworkerHandle.observe(.value) { (snapshot: DataSnapshot) in
             let rawData = snapshot.value as! Dictionary<String, AnyObject>
+            
             if let coworkerID = rawData.keys.first {
+                let id = coworkerID
                 let coworkerData = rawData[coworkerID] as! Dictionary<String, String>
                 
                 if let name = coworkerData["name"], let email = coworkerData["email"] {
-                    completion(email, name)
+                    completion(email, name, id)
                 } else {
-                    completion(nil, nil)
+                    completion(nil, nil, nil)
                 }
             } else {
-                completion(nil, nil)
+                completion(nil, nil, nil)
             }
         }
     }
