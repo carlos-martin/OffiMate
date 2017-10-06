@@ -241,6 +241,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             case .inbox:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
                 cell.selectionStyle = .gray
+                cell.arrowImage.isHidden = false
                 cell.optionImage.image = UIImage(named: "inbox")
                 cell.optionImage.backgroundColor = UIColor.white
                 cell.optionLabel.text = "Inbox"
