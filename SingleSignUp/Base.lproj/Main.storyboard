@@ -81,7 +81,7 @@
                                                 <constraint firstAttribute="height" constant="25" id="wEM-np-43G"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next" translatesAutoresizingMaskIntoConstraints="NO" id="WYO-Xq-YSV">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowIn" translatesAutoresizingMaskIntoConstraints="NO" id="WYO-Xq-YSV">
                                             <rect key="frame" x="334" y="9" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="QuS-Gh-Ja6"/>
@@ -165,8 +165,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowIn" width="25" height="25"/>
         <image name="chat" width="25" height="25"/>
-        <image name="next" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rfV-sh-X4v"/>

@@ -32,6 +32,16 @@ public class Tools {
         green:           214.0/255.0,
         blue:            227.0/255.0,
         alpha:           1.0)
+    static let blueInbox: UIColor = UIColor(
+        colorLiteralRed:  74.0/255.0,
+        green:           144.0/255.0,
+        blue:            226.0/255.0,
+        alpha:           1.0)
+    static let redLogout: UIColor = UIColor(
+        colorLiteralRed: 208.0/255.0,
+        green:             2.0/255.0,
+        blue:             27.0/255.0,
+        alpha:           1.0)
     static let backgrounsColors: [UIColor] = [
         UIColor(colorLiteralRed:  74.0/255.0, green: 143.0/255.0, blue: 138.0/255.0, alpha: 1.0),
         UIColor(colorLiteralRed: 115.0/255.0, green: 175.0/255.0, blue: 173.0/255.0, alpha: 1.0),
@@ -82,8 +92,9 @@ extension Tools {
             "receiverId":   boostCard.receiverId,
             "type":         String(describing: boostCard.type),
             "header":       boostCard.header,
-            "message":      boostCard.message
-        ]
+            "message":      boostCard.message,
+            "unread":       true
+        ] as [String : Any]
         newBoostcardRef.setValue(newBoostcardItem)
     }
 }

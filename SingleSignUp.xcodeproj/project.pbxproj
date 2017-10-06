@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2338091F6AB54B009D3243 /* MainViewCell.swift */; };
+		1A26F48F1F875D3E00C6B434 /* BoostCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */; };
 		1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */; };
 		1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A343FE71F6AAB22000CB641 /* ChatViewController.swift */; };
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
@@ -23,6 +24,8 @@
 		1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */; };
 		1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */; };
 		1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */; };
+		1A995F5B1F862AA400EE72C5 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */; };
+		1A995F5D1F867B7D00EE72C5 /* InboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A995F5C1F867B7C00EE72C5 /* InboxViewCell.swift */; };
 		1A9CC3891F4DC17E000C6479 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9CC3881F4DC17E000C6479 /* Alert.swift */; };
 		1A9CC38B1F4DC579000C6479 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9CC38A1F4DC579000C6479 /* Tools.swift */; };
 		1AA2BC401F4ACEFE00E0C2E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2BC3F1F4ACEFE00E0C2E5 /* AppDelegate.swift */; };
@@ -48,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		1A2338091F6AB54B009D3243 /* MainViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
+		1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCardViewController.swift; sourceTree = "<group>"; };
 		1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerLoader.swift; sourceTree = "<group>"; };
 		1A343FE71F6AAB22000CB641 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 		1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewCell.swift; sourceTree = "<group>"; };
 		1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewCell.swift; sourceTree = "<group>"; };
+		1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
+		1A995F5C1F867B7C00EE72C5 /* InboxViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewCell.swift; sourceTree = "<group>"; };
 		1A9CC3881F4DC17E000C6479 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		1A9CC38A1F4DC579000C6479 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		1AA2BC3C1F4ACEFE00E0C2E5 /* SingleSignUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleSignUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */,
+				1A995F5C1F867B7C00EE72C5 /* InboxViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -186,6 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */,
+				1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */,
+				1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -478,7 +487,10 @@
 				1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */,
 				1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */,
 				1AA2BC481F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld in Sources */,
+				1A26F48F1F875D3E00C6B434 /* BoostCardViewController.swift in Sources */,
 				1A813D1A1F4B0F0D00F190A2 /* OnboardViewController.swift in Sources */,
+				1A995F5D1F867B7D00EE72C5 /* InboxViewCell.swift in Sources */,
+				1A995F5B1F862AA400EE72C5 /* InboxViewController.swift in Sources */,
 				1AC439621F84E3E300CCBF22 /* NewBoostCardViewController.swift in Sources */,
 				1AA2BC401F4ACEFE00E0C2E5 /* AppDelegate.swift in Sources */,
 				1AD3A03B1F7BC10D002DD969 /* CoworkersViewController.swift in Sources */,

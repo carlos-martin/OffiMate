@@ -13,17 +13,14 @@ import FirebaseAuth
 enum ProfileSection: Int {
     case profile = 0
     case password
-    case options
+    case inbox
+    case logout
 }
 
 enum ProfileInfoCell: Int {
     case image = 0
     case name
     case email
-}
-
-enum ProfileOptionsCell: Int {
-    case logout = 0
 }
 
 class ProfileViewController: UIViewController {
@@ -66,10 +63,11 @@ class ProfileViewController: UIViewController {
     
 }
 
+//MARK: - TableView
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,7 +75,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch currentSection {
             case .profile:
                 return 3
-            case .password, .options:
+            case .password, .logout, .inbox:
                 return 1
             }
         }
@@ -94,6 +92,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return 44.0
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section = indexPath.section
         let row = indexPath.row
@@ -108,7 +107,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
-            case .profile, .options:
+            case .profile, .logout, .inbox:
                 return nil
             case .password:
                 return "Password"
@@ -125,8 +124,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 return 0.1
             case .password:
                 return 18.0
-            case .options:
-                return 30.0
+            case .logout, .inbox:
+                return 33.0
             }
         } else {
             return 0.1
@@ -138,10 +137,15 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = indexPath.section
-        let row = indexPath.row
-        if section == ProfileSection.options.rawValue && row == ProfileOptionsCell.logout.rawValue {
+        let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
+        switch section {
+        case .inbox:
+            self.tableView.deselectRow(at: indexPath, animated: true)
+            performSegue(withIdentifier: "showInbox", sender: indexPath)
+        case .logout:
             self.logoutAction()
+        default:
+            break
         }
     }
     
@@ -178,16 +182,24 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.passwordTextField.text = CurrentUser.password
                 cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
                 return cell
-            case .options:
-                let currentRow: ProfileOptionsCell = ProfileOptionsCell(rawValue: indexPath.row)!
-                switch currentRow {
-                case .logout:
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
-                    cell.selectionStyle = .gray
-                    cell.optionImage.image = UIImage(named: "logout")
-                    cell.optionLabel.text = "Logout"
-                    return cell
-                }
+            case .inbox:
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
+                cell.selectionStyle = .gray
+                cell.optionImage.image = UIImage(named: "inbox")
+                cell.optionImage.backgroundColor = Tools.blueInbox
+                cell.optionImage.layer.cornerRadius = 4
+                cell.optionLabel.text = "Inbox"
+                return cell
+                
+            case .logout:
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
+                cell.selectionStyle = .gray
+                cell.arrowImage.isHidden = true
+                cell.optionImage.image = UIImage(named: "logout")
+                cell.optionImage.backgroundColor = Tools.redLogout
+                cell.optionImage.layer.cornerRadius = 4
+                cell.optionLabel.text = "Logout"
+                return cell
             }
         } else {
             return UITableViewCell()
@@ -204,6 +216,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             self.isHidden = true
             cell.showHideButton.setImage(UIImage(named: "show"), for: .normal)
             cell.passwordTextField.isSecureTextEntry = true
+        }
+    }
+    
+    //MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //showInbox
+        if segue.identifier == "showInbox" {
+            if let indexPath = sender as? IndexPath {
+                if indexPath.section == ProfileSection.inbox.rawValue {
+                    var controller: InboxViewController
+                    if let navigationController = segue.destination as? UINavigationController {
+                        controller = navigationController.topViewController as! InboxViewController
+                    } else {
+                        controller = segue.destination as! InboxViewController
+                    }
+                    controller.navigationItem.title = "Inbox"
+                }
+            }
         }
     }
 }
