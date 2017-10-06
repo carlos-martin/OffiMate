@@ -11,13 +11,18 @@ enum BoostCardType: Int {
     case execution
 }
 
-internal class BoostCard: CustomStringConvertible {
+internal func == (left: BoostCard, rigth: BoostCard) -> Bool {
+    return left.hashValue == rigth.hashValue
+}
+
+internal class BoostCard: CustomStringConvertible, Hashable {
     internal let id:         String
     internal let senderId:   String
     internal let receiverId: String
     internal let type:       BoostCardType
     internal let header:     String
     internal let message:    String
+    public   var hashValue:  Int
     
     public var description: String {
         return "BoostCard:\n├── id:          \(self.id)\n├── senderId:    \(self.senderId)\n├── receiverId:  \(self.receiverId)\n├── type:        \(self.type)\n├── header:      \(self.header)\n└── message:     \(self.message)\n"
@@ -25,6 +30,7 @@ internal class BoostCard: CustomStringConvertible {
     
     init(id: String?=nil, senderId: String, receiverId: String, type: BoostCardType, header: String, message: String) {
         self.id =         id ?? "~unknown~"
+        self.hashValue =  self.id.hashValue
         self.senderId =   senderId
         self.receiverId = receiverId
         self.type =       type

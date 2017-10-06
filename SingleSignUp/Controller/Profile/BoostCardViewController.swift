@@ -72,7 +72,8 @@ class BoostCardViewController: UITableViewController {
         case .body:
             let cell = tableView.dequeueReusableCell(withIdentifier: "boostcardBodyCell", for: indexPath) as! BoostCardBodyViewCell
             
-            cell.messageTextView.text = self.boostCard?.message
+            //cell.messageTextView.text = self.boostCard?.message
+            cell.messageLabel.text = self.boostCard?.message
             
             return cell
         }

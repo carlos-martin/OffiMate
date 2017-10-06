@@ -24,5 +24,5 @@ class BoostCardHeaderViewCell: UITableViewCell {
 }
 
 class BoostCardBodyViewCell: UITableViewCell {
-    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var messageLabel: UILabel!
 }

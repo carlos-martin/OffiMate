@@ -14,9 +14,10 @@ class InboxViewController: UITableViewController {
     var spinner: SpinnerLoader?
     
     //BoostCard
-    private var boostCards: [BoostCard] = [BoostCard]()
-    private var senderName: [String] = [String]()
-    private var senderMail: [String] = [String]()
+    private var boostCards: [BoostCard] =   [BoostCard]()
+    private var senderName: [String] =      [String]()
+    private var senderMail: [String] =      [String]()
+    private var unread:     [Bool] =        [Bool]()
     
     
     //Firebase variables
@@ -38,6 +39,13 @@ class InboxViewController: UITableViewController {
     }
     
     // MARK: - Segue showBoostCard
+    
+    private func mackAsRead (indexPath: IndexPath) {
+        let readRef = boostCardRef.child(boostCards[indexPath.row].id)
+        readRef.child("unread").setValue(false)
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showBoostCard" {
             if let indexPath = sender as? IndexPath {
@@ -49,6 +57,7 @@ class InboxViewController: UITableViewController {
                 } else {
                     controller = segue.destination as! BoostCardViewController
                 }
+                
                 controller.boostCard =  self.boostCards[row]
                 controller.senderName = self.senderName[row]
                 controller.senderMail = self.senderMail[row]
@@ -74,8 +83,18 @@ class InboxViewController: UITableViewController {
         return UITableViewAutomaticDimension
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
+        
+        if self.unread[indexPath.row] {
+            self.unread[indexPath.row] = false
+            self.mackAsRead(indexPath: indexPath)
+        }
+        
         performSegue(withIdentifier: "showBoostCard", sender: indexPath)
     }
 
@@ -83,6 +102,7 @@ class InboxViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "inboxCell", for: indexPath) as! InboxViewCell
         let row = indexPath.row
         let boostCard = self.boostCards[row]
+        cell.readedImage.isHidden = !self.unread[row]
         cell.senderLabel.text = self.senderName[row]
         cell.headerLabel.text = "\(boostCard.type): \(boostCard.header)"
         cell.messangeLabel.text = boostCard.message
@@ -102,22 +122,28 @@ class InboxViewController: UITableViewController {
                 let header =    entry.value["header"]   as! String
                 let message =   entry.value["message"]  as! String
                 let senderId =  entry.value["senderId"] as! String
+                let unread =    entry.value["unread"]   as! Bool
                 let _type =     entry.value["type"]     as! String
                 let type = (_type == "passion" ? BoostCardType(rawValue: 0) : BoostCardType(rawValue: 1))!
                 
                 Tools.fetchCoworker(uid: senderId, completion: { (_email: String?, _name: String?) in
                     if let email = _email, let name = _name {
-                        self.senderMail.append(email)
-                        self.senderName.append(name)
-                        self.boostCards.append(
-                            BoostCard(
-                                id:         entry.key,
-                                senderId:   senderId,
-                                receiverId: receiver,
-                                type:       type,
-                                header:     header,
-                                message:    message)
-                        )
+                        
+                        let tmp = BoostCard(
+                            id:         entry.key,
+                            senderId:   senderId,
+                            receiverId: receiver,
+                            type:       type,
+                            header:     header,
+                            message:    message)
+                        
+                        if !self.boostCards.contains(tmp) {
+                            self.unread.append(unread)
+                            self.senderMail.append(email)
+                            self.senderName.append(name)
+                            self.boostCards.append(tmp)
+                        }
+                        
                     }
                     counter -= 1
                     if counter == 0 {

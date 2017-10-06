@@ -92,8 +92,9 @@ extension Tools {
             "receiverId":   boostCard.receiverId,
             "type":         String(describing: boostCard.type),
             "header":       boostCard.header,
-            "message":      boostCard.message
-        ]
+            "message":      boostCard.message,
+            "unread":       true
+        ] as [String : Any]
         newBoostcardRef.setValue(newBoostcardItem)
     }
 }
