@@ -12,6 +12,7 @@ import Firebase
 class InboxViewController: UITableViewController {
 
     var spinner: SpinnerLoader?
+    @IBOutlet weak var emptyInboxLabel: UILabel!
     
     //BoostCard
     private var boostCards: [BoostCard] =   [BoostCard]()
@@ -32,6 +33,7 @@ class InboxViewController: UITableViewController {
     
     func initUI() {
         self.spinner = SpinnerLoader(view: self.tableView)
+        self.emptyInboxLabel.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +45,6 @@ class InboxViewController: UITableViewController {
     private func mackAsRead (indexPath: IndexPath) {
         let readRef = boostCardRef.child(boostCards[indexPath.row].id)
         readRef.child("unread").setValue(false)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -116,41 +117,46 @@ class InboxViewController: UITableViewController {
         let receiver = CurrentUser.user!.uid
         boostCardRefQuery = boostCardRef.queryOrdered(byChild: "receiverId").queryEqual(toValue: receiver)
         boostCardRefQuery?.observe(.value, with: { (snapshot: DataSnapshot) in
-            let rawData = snapshot.value as! Dictionary<String, AnyObject>
-            var counter = rawData.count
-            for entry in rawData {
-                let header =    entry.value["header"]   as! String
-                let message =   entry.value["message"]  as! String
-                let senderId =  entry.value["senderId"] as! String
-                let unread =    entry.value["unread"]   as! Bool
-                let _type =     entry.value["type"]     as! String
-                let type = (_type == "passion" ? BoostCardType(rawValue: 0) : BoostCardType(rawValue: 1))!
+            if let rawData = snapshot.value as? Dictionary<String, AnyObject> {
                 
-                Tools.fetchCoworker(uid: senderId, completion: { (_email: String?, _name: String?) in
-                    if let email = _email, let name = _name {
-                        
-                        let tmp = BoostCard(
-                            id:         entry.key,
-                            senderId:   senderId,
-                            receiverId: receiver,
-                            type:       type,
-                            header:     header,
-                            message:    message)
-                        
-                        if !self.boostCards.contains(tmp) {
-                            self.unread.append(unread)
-                            self.senderMail.append(email)
-                            self.senderName.append(name)
-                            self.boostCards.append(tmp)
+                var counter = rawData.count
+                for entry in rawData {
+                    let header =    entry.value["header"]   as! String
+                    let message =   entry.value["message"]  as! String
+                    let senderId =  entry.value["senderId"] as! String
+                    let unread =    entry.value["unread"]   as! Bool
+                    let _type =     entry.value["type"]     as! String
+                    let type = (_type == "passion" ? BoostCardType(rawValue: 0) : BoostCardType(rawValue: 1))!
+                    
+                    Tools.fetchCoworker(uid: senderId, completion: { (_email: String?, _name: String?, _) in
+                        if let email = _email, let name = _name {
+                            
+                            let tmp = BoostCard(
+                                id:         entry.key,
+                                senderId:   senderId,
+                                receiverId: receiver,
+                                type:       type,
+                                header:     header,
+                                message:    message)
+                            
+                            if !self.boostCards.contains(tmp) {
+                                self.unread.append(unread)
+                                self.senderMail.append(email)
+                                self.senderName.append(name)
+                                self.boostCards.append(tmp)
+                            }
+                            
                         }
-                        
-                    }
-                    counter -= 1
-                    if counter == 0 {
-                        self.spinner?.stop()
-                        self.tableView.reloadData()
-                    }
-                })
+                        counter -= 1
+                        if counter == 0 {
+                            self.spinner?.stop()
+                            self.tableView.reloadData()
+                        }
+                    })
+                }
+            } else {
+                self.spinner?.stop()
+                self.emptyInboxLabel.isHidden = (self.emptyInboxLabel.isHidden ? false : true)
             }
         })
         

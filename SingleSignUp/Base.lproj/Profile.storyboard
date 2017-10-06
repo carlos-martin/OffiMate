@@ -86,7 +86,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uDd-aW-Pup">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
@@ -94,9 +94,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="uDd-aW-Pup" secondAttribute="bottom" id="Ufs-Lc-AbG"/>
-                                                <constraint firstItem="uDd-aW-Pup" firstAttribute="leading" secondItem="yZP-0F-Qwu" secondAttribute="leading" id="lRa-8q-kB0"/>
+                                                <constraint firstItem="uDd-aW-Pup" firstAttribute="leading" secondItem="yZP-0F-Qwu" secondAttribute="leading" constant="8" id="lRa-8q-kB0"/>
                                                 <constraint firstItem="uDd-aW-Pup" firstAttribute="top" secondItem="yZP-0F-Qwu" secondAttribute="top" id="nRZ-JH-3oL"/>
-                                                <constraint firstAttribute="trailing" secondItem="uDd-aW-Pup" secondAttribute="trailing" id="rq8-lF-Rsq"/>
+                                                <constraint firstAttribute="trailing" secondItem="uDd-aW-Pup" secondAttribute="trailing" constant="8" id="rq8-lF-Rsq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -213,18 +213,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="3w6-gf-4qD">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XxB-6p-ztN">
+                        <barButtonItem key="leftBarButtonItem" title="Go back" id="XxB-6p-ztN">
                             <connections>
                                 <action selector="cancelActionButton:" destination="PNI-gG-MUl" id="B2e-Ml-mme"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="f79-r7-k6b">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="f79-r7-k6b">
                             <connections>
                                 <action selector="editActionButton:" destination="PNI-gG-MUl" id="NQh-vW-S2V"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelBarButtonItem" destination="XxB-6p-ztN" id="evD-V5-5FE"/>
                         <outlet property="editBarButtonItem" destination="f79-r7-k6b" id="E6Q-3T-S5w"/>
                         <outlet property="tableView" destination="W66-Wc-jbp" id="zmB-2s-f9b"/>
                         <segue destination="C4m-RW-pcW" kind="show" identifier="showInbox" id="xdy-VZ-u8t"/>
@@ -242,6 +243,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any Boost Card yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rgi-y7-Td5">
+                            <rect key="frame" x="0.0" y="172" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="inboxCell" rowHeight="98" id="YrX-Vg-evp" customClass="InboxViewCell" customModule="SingleSignUp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="56" width="375" height="98"/>
@@ -321,6 +329,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="emptyInboxLabel" destination="Rgi-y7-Td5" id="q17-QT-Rov"/>
                         <segue destination="p6C-Jw-oCZ" kind="show" identifier="showBoostCard" id="6i4-xh-Udr"/>
                     </connections>
                 </tableViewController>
@@ -341,7 +350,7 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lyM-dm-fPN" id="gkY-x7-q6b">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JK4-O8-jrC">
@@ -365,6 +374,9 @@
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7t-AO-Ox4">
                                             <rect key="frame" x="80" y="32" width="41" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="41" id="w6l-1a-ClF"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>

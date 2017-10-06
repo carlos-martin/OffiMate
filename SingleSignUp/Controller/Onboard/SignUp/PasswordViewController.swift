@@ -58,25 +58,27 @@ class PasswordViewController: UIViewController {
     func signUpAction (_ sender: Any?=nil) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
-                do {
-                    self.loader?.start(self.view)
-                    try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!)
-                    try CurrentUser.localSave()
-                    
-                    Auth.auth().createUser(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
-                        self.loader?.stop()
-                        if error == nil {
-                            CurrentUser.user = user!
-                            Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!)
-                            Tools.goToMain(vc: self)
-                        } else {
-                            Alert.showFailiureAlert(message: "Error: \(error.debugDescription)")
-                        }
-                    })
-                } catch {
+                self.loader?.start(self.view)
+                
+                Auth.auth().createUser(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
                     self.loader?.stop()
-                    Tools.cellViewErrorAnimation(cell: cell)
-                }
+                    if error == nil {
+                        CurrentUser.user = user!
+                        
+                        let coworkerId = Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!)
+                        
+                        do {
+                            try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!, coworkerId: coworkerId)
+                            try CurrentUser.localSave()
+                        } catch {
+                            Tools.cellViewErrorAnimation(cell: cell)
+                        }
+                        
+                        Tools.goToMain(vc: self)
+                    } else {
+                        Alert.showFailiureAlert(message: "Error: \(error.debugDescription)")
+                    }
+                })
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }
