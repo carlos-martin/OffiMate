@@ -247,7 +247,6 @@
 				1A9CC3881F4DC17E000C6479 /* Alert.swift */,
 				1A9CC38A1F4DC579000C6479 /* Tools.swift */,
 				1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */,
-				1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -294,6 +293,7 @@
 				1A5BDFDD1F6FE719003C10E5 /* Channel.swift */,
 				1AAA5CAA1F8253E000C59597 /* Coworker.swift */,
 				1AC439671F85347F00CCBF22 /* BoostCard.swift */,
+				1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

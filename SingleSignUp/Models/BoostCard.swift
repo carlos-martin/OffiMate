@@ -6,6 +6,8 @@
 //  Copyright © 2017 Carlos Martin. All rights reserved.
 //
 
+import UIKit
+
 enum BoostCardType: Int {
     case passion = 0
     case execution
@@ -22,13 +24,20 @@ internal class BoostCard: CustomStringConvertible, Hashable {
     internal let type:       BoostCardType
     internal let header:     String
     internal let message:    String
+    internal let date:       NewDate
     public   var hashValue:  Int
     
     public var description: String {
-        return "BoostCard:\n├── id:          \(self.id)\n├── senderId:    \(self.senderId)\n├── receiverId:  \(self.receiverId)\n├── type:        \(self.type)\n├── header:      \(self.header)\n└── message:     \(self.message)\n"
+        return "BoostCard:\n" +
+            "├── id:          \(self.id)\n" +
+            "├── senderId:    \(self.senderId)\n" +
+            "├── receiverId:  \(self.receiverId)\n" +
+            "├── type:        \(self.type)\n" +
+            "├── header:      \(self.header)\n" +
+            "└── message:     \(self.message)\n"
     }
     
-    init(id: String?=nil, senderId: String, receiverId: String, type: BoostCardType, header: String, message: String) {
+    init(id: String?=nil, senderId: String, receiverId: String, type: BoostCardType, header: String, message: String, date: NewDate?=nil) {
         self.id =         id ?? "~unknown~"
         self.hashValue =  self.id.hashValue
         self.senderId =   senderId
@@ -36,5 +45,6 @@ internal class BoostCard: CustomStringConvertible, Hashable {
         self.type =       type
         self.header =     header
         self.message =    message
+        self.date =       (date != nil ? date! : NewDate(date: Date()))
     }
 }

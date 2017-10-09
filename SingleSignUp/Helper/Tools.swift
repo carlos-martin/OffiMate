@@ -101,6 +101,7 @@ extension Tools {
             "type":         String(describing: boostCard.type),
             "header":       boostCard.header,
             "message":      boostCard.message,
+            "date":         boostCard.date.id,
             "unread":       true
         ] as [String : Any]
         newBoostcardRef.setValue(newBoostcardItem)
