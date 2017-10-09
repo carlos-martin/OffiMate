@@ -8,7 +8,28 @@
 
 import Foundation
 
-class NewDate: CustomStringConvertible {
+
+internal func == (left: NewDate, rigth: NewDate) -> Bool {
+    return left.id == rigth.id
+}
+
+internal func > (left: NewDate, rigth: NewDate) -> Bool {
+    return left.id > rigth.id
+}
+
+internal func < (left: NewDate, rigth: NewDate) -> Bool {
+    return left.id < rigth.id
+}
+
+internal func >= (left: NewDate, rigth: NewDate) -> Bool {
+    return left.id >= rigth.id
+}
+
+internal func <= (left: NewDate, rigth: NewDate) -> Bool {
+    return left.id <= rigth.id
+}
+
+class NewDate: CustomStringConvertible, Hashable {
     let date:       Date
     let year:       Int64
     let month:      Int64
@@ -16,14 +37,25 @@ class NewDate: CustomStringConvertible {
     let hour:       Int64
     let minutes:    Int64
     let id:         Int64
+    public var hashValue:  Int
     
     public var description: String {
-        let syear =     String(year)
-        let smonth =    (month > 9   ? "\(month)"   : "0\(month)")
-        let sday =      (day > 9     ? "\(day)"     : "0\(day)")
-        let shour =     (hour > 9    ? "\(hour)"    : "0\(hour)")
-        let sminutes =  (minutes > 9 ? "\(minutes)" : "0\(minutes)")
-        return "\(syear)-\(smonth)-\(sday) \(shour):\(sminutes)"
+        let toString: String
+        let current = NewDate(date: Date())
+        
+        if current == self {
+            toString = "Now"
+        } else if (self.year == current.year && self.month == current.month && self.day == current.day) {
+            let minToString = (self.minutes > 9 ? "\(self.minutes)" : "0\(self.minutes)")
+            toString = "\(self.hour):\(minToString)"
+        } else if (self.year == current.year && self.month == current.month && (current.day - self.day == 7)) {
+            toString = "Yesterday"
+        } else if (self.year == current.year && self.month == current.month && (current.day - self.day < 7)) {
+            toString = self.getDayName()
+        } else {
+            toString = "\(day)/\(month)/\(String(String(year).characters.suffix(2)))"
+        }
+        return toString
     }
     
     init(date: Date) {
@@ -35,6 +67,7 @@ class NewDate: CustomStringConvertible {
         self.hour =     Int64(calendar.component(.hour,   from: date))
         self.minutes =  Int64(calendar.component(.minute, from: date))
         self.id =       (self.year * 100000000) + (self.month * 1000000) + (self.day * 10000) + (self.hour * 100) + self.minutes
+        self.hashValue = Int((self.year * 10000) + (self.month * 100) + (self.day))
     }
     
     init(id: Int64) throws {
@@ -54,6 +87,7 @@ class NewDate: CustomStringConvertible {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
         if let _date = dateFormatter.date(from: string) {
             self.date = _date
+            self.hashValue = self.date.hashValue
         } else {
             throw NSError(domain: "boom", code: 2, userInfo: nil)
         }

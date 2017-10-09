@@ -244,7 +244,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any Boost Card yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rgi-y7-Td5">
-                            <rect key="frame" x="0.0" y="172" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="171.5" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -259,7 +259,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carlos Martín Cornejo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pD4-0h-iXr">
-                                            <rect key="frame" x="26" y="8" width="317" height="20"/>
+                                            <rect key="frame" x="26" y="8" width="261" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="Isi-WC-k8W"/>
                                             </constraints>
@@ -297,25 +297,38 @@
                                                 <constraint firstAttribute="height" constant="16" id="oQr-m9-Vd9"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99/99/99" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NV9-VO-3xQ">
+                                            <rect key="frame" x="287" y="8" width="64" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="bEV-54-Wd0"/>
+                                                <constraint firstAttribute="width" constant="64" id="pO5-7k-CLx"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="uQb-v7-Nnx" firstAttribute="trailing" secondItem="iXC-HD-1Pw" secondAttribute="trailingMargin" id="0v4-Mn-SmN"/>
                                         <constraint firstItem="duw-OT-SIq" firstAttribute="leading" secondItem="iXC-HD-1Pw" secondAttribute="leadingMargin" constant="18" id="1P0-Lm-mFG"/>
-                                        <constraint firstItem="t0e-ts-OLb" firstAttribute="leading" secondItem="pD4-0h-iXr" secondAttribute="trailing" constant="8" id="6DS-0g-VOJ"/>
                                         <constraint firstItem="pD4-0h-iXr" firstAttribute="top" secondItem="iXC-HD-1Pw" secondAttribute="topMargin" id="7hk-Z3-5Cb"/>
                                         <constraint firstItem="uQb-v7-Nnx" firstAttribute="leading" secondItem="iXC-HD-1Pw" secondAttribute="leadingMargin" constant="18" id="EBE-2R-vZj"/>
                                         <constraint firstItem="uQb-v7-Nnx" firstAttribute="top" secondItem="pD4-0h-iXr" secondAttribute="bottom" constant="2" id="ElM-JG-LyU"/>
                                         <constraint firstAttribute="bottom" secondItem="duw-OT-SIq" secondAttribute="bottom" constant="6" id="Eq0-gT-54U"/>
                                         <constraint firstItem="duw-OT-SIq" firstAttribute="top" secondItem="uQb-v7-Nnx" secondAttribute="bottom" constant="2" id="FJy-dV-ATP"/>
                                         <constraint firstItem="t0e-ts-OLb" firstAttribute="trailing" secondItem="iXC-HD-1Pw" secondAttribute="trailingMargin" id="KdA-pH-BN6"/>
+                                        <constraint firstItem="t0e-ts-OLb" firstAttribute="leading" secondItem="NV9-VO-3xQ" secondAttribute="trailing" id="Qnq-O5-0eu"/>
                                         <constraint firstItem="pD4-0h-iXr" firstAttribute="leading" secondItem="6fO-6T-Og2" secondAttribute="trailing" constant="8" id="RMh-gB-ufv"/>
                                         <constraint firstItem="6fO-6T-Og2" firstAttribute="top" secondItem="iXC-HD-1Pw" secondAttribute="topMargin" constant="5" id="SkV-zN-r1h"/>
+                                        <constraint firstItem="NV9-VO-3xQ" firstAttribute="leading" secondItem="pD4-0h-iXr" secondAttribute="trailing" id="Z5c-M7-566"/>
                                         <constraint firstItem="duw-OT-SIq" firstAttribute="trailing" secondItem="iXC-HD-1Pw" secondAttribute="trailingMargin" id="gXg-R1-B6t"/>
                                         <constraint firstItem="t0e-ts-OLb" firstAttribute="top" secondItem="iXC-HD-1Pw" secondAttribute="topMargin" constant="2" id="hgt-OP-OUG"/>
                                         <constraint firstItem="6fO-6T-Og2" firstAttribute="leading" secondItem="iXC-HD-1Pw" secondAttribute="leadingMargin" id="k43-v9-XZ1"/>
+                                        <constraint firstItem="t0e-ts-OLb" firstAttribute="centerY" secondItem="NV9-VO-3xQ" secondAttribute="centerY" id="nba-1w-c8O"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="dateLabel" destination="NV9-VO-3xQ" id="t45-xu-iJJ"/>
                                     <outlet property="headerLabel" destination="uQb-v7-Nnx" id="BaH-Ls-Oqc"/>
                                     <outlet property="messangeLabel" destination="duw-OT-SIq" id="o0e-6o-FZf"/>
                                     <outlet property="readedImage" destination="6fO-6T-Og2" id="tfh-Qb-u3o"/>
@@ -335,7 +348,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txa-Kg-9BO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1222" y="117"/>
+            <point key="canvasLocation" x="1221.5999999999999" y="116.49175412293854"/>
         </scene>
         <!--Boost Card View Controller-->
         <scene sceneID="zrZ-Nm-Dek">

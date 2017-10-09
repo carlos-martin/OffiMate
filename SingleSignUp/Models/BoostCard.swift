@@ -14,7 +14,23 @@ enum BoostCardType: Int {
 }
 
 internal func == (left: BoostCard, rigth: BoostCard) -> Bool {
-    return left.hashValue == rigth.hashValue
+    return left.date == rigth.date
+}
+
+internal func > (left: BoostCard, rigth: BoostCard) -> Bool {
+    return left.date > rigth.date
+}
+
+internal func < (left: BoostCard, rigth: BoostCard) -> Bool {
+    return left.date < rigth.date
+}
+
+internal func >= (left: BoostCard, rigth: BoostCard) -> Bool {
+    return left.date >= rigth.date
+}
+
+internal func <= (left: BoostCard, rigth: BoostCard) -> Bool {
+    return left.date <= rigth.date
 }
 
 internal class BoostCard: CustomStringConvertible, Hashable {
@@ -29,6 +45,7 @@ internal class BoostCard: CustomStringConvertible, Hashable {
     
     public var description: String {
         return "BoostCard:\n" +
+            "├── date:        \(self.date)\n" +
             "├── id:          \(self.id)\n" +
             "├── senderId:    \(self.senderId)\n" +
             "├── receiverId:  \(self.receiverId)\n" +
@@ -39,12 +56,12 @@ internal class BoostCard: CustomStringConvertible, Hashable {
     
     init(id: String?=nil, senderId: String, receiverId: String, type: BoostCardType, header: String, message: String, date: NewDate?=nil) {
         self.id =         id ?? "~unknown~"
-        self.hashValue =  self.id.hashValue
         self.senderId =   senderId
         self.receiverId = receiverId
         self.type =       type
         self.header =     header
         self.message =    message
         self.date =       (date != nil ? date! : NewDate(date: Date()))
+        self.hashValue =  self.date.hashValue
     }
 }
