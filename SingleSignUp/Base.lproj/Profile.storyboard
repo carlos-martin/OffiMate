@@ -394,9 +394,9 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manages ambiguity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW5-09-4F5">
-                                            <rect key="frame" x="80" y="12" width="287" height="21"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VW5-09-4F5">
+                                            <rect key="frame" x="80" y="11" width="287" height="23"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -428,16 +428,54 @@
                                     <outlet property="senderButton" destination="HWv-Qg-gen" id="kG4-0k-VbC"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostcardTitleCell" rowHeight="60" id="pyY-v2-tkj" customClass="BoostCardTitleViewCell" customModule="SingleSignUp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="121" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pyY-v2-tkj" id="Abl-57-8gq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manages ambiguity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BN-WK-snA">
+                                            <rect key="frame" x="16" y="8" width="351" height="22.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="october 9, 2017 - 11:41" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-wZ-Awa">
+                                            <rect key="frame" x="16" y="32.5" width="351" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="EDF-48-dK1"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="VwX-wZ-Awa" firstAttribute="leading" secondItem="Abl-57-8gq" secondAttribute="leadingMargin" constant="8" id="1AN-p8-At5"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="VwX-wZ-Awa" secondAttribute="bottom" constant="4" id="DXh-Ft-z4e"/>
+                                        <constraint firstItem="7BN-WK-snA" firstAttribute="trailing" secondItem="Abl-57-8gq" secondAttribute="trailingMargin" id="IEA-a2-EPL"/>
+                                        <constraint firstItem="VwX-wZ-Awa" firstAttribute="trailing" secondItem="Abl-57-8gq" secondAttribute="trailingMargin" id="Q5m-bE-Neg"/>
+                                        <constraint firstItem="7BN-WK-snA" firstAttribute="leading" secondItem="Abl-57-8gq" secondAttribute="leadingMargin" constant="8" id="Qcb-SK-2ai"/>
+                                        <constraint firstItem="VwX-wZ-Awa" firstAttribute="top" secondItem="7BN-WK-snA" secondAttribute="bottom" constant="2" id="XtQ-MT-vw0"/>
+                                        <constraint firstItem="7BN-WK-snA" firstAttribute="top" secondItem="Abl-57-8gq" secondAttribute="topMargin" id="hkP-j7-mik"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLabel" destination="VwX-wZ-Awa" id="Zhd-8p-7py"/>
+                                    <outlet property="titleLabel" destination="7BN-WK-snA" id="3cb-sO-gxj"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostcardBodyCell" id="tcE-7U-kyh" customClass="BoostCardBodyViewCell" customModule="SingleSignUp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="121" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="181" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tcE-7U-kyh" id="f2G-i7-1kS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQA-M8-2yD">
                                             <rect key="frame" x="18" y="11" width="341" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>

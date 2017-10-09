@@ -24,6 +24,11 @@ class BoostCardHeaderViewCell: UITableViewCell {
     @IBOutlet weak var senderButton:  UIButton!
 }
 
+class BoostCardTitleViewCell: UITableViewCell {
+    @IBOutlet weak var titleLabel:  UILabel!
+    @IBOutlet weak var dateLabel:   UILabel!
+}
+
 class BoostCardBodyViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
 }

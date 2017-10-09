@@ -10,6 +10,7 @@ import UIKit
 
 enum BoostCardRow: Int {
     case header = 0
+    case title
     case body
 }
 
@@ -34,7 +35,7 @@ class BoostCardViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -55,7 +56,8 @@ class BoostCardViewController: UITableViewController {
         case .header:
             let cell = tableView.dequeueReusableCell(withIdentifier: "boostcardHeaderCell", for: indexPath) as! BoostCardHeaderViewCell
             
-            cell.headerLabel.text = self.boostCard?.header
+            let header = (boostCard?.type == .passion ? "Passion" : "Execution")
+            cell.headerLabel.text = header
             cell.senderButton.setTitle(self.senderName, for: UIControlState.normal)
             
             if self.boostCard?.type == BoostCardType.execution {
@@ -69,10 +71,16 @@ class BoostCardViewController: UITableViewController {
             }
             
             return cell
+        case .title:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "boostcardTitleCell", for: indexPath) as! BoostCardTitleViewCell
+            
+            cell.titleLabel.text = self.boostCard?.header
+            cell.dateLabel.text = self.boostCard?.date.getCompleteString()
+            
+            return cell
         case .body:
             let cell = tableView.dequeueReusableCell(withIdentifier: "boostcardBodyCell", for: indexPath) as! BoostCardBodyViewCell
             
-            //cell.messageTextView.text = self.boostCard?.message
             cell.messageLabel.text = self.boostCard?.message
             
             return cell
