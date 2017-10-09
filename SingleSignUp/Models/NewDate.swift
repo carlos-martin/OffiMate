@@ -131,4 +131,10 @@ class NewDate: CustomStringConvertible, Hashable {
             return ""
         }
     }
+    
+    func getCompleteString () -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, yyyy - HH:mm"
+        return dateFormatter.string(from: self.date)
+    }
 }
