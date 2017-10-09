@@ -12,7 +12,10 @@ internal class Channel: CustomStringConvertible {
     internal let creator:   String
     
     public var description: String {
-        return "Channel:\n├── id:      \(self.id)\n├── name:    \(self.name)\n└── creator: \(self.creator)\n"
+        return "Channel:\n" +
+            "├── id:      \(self.id)\n" +
+            "├── name:    \(self.name)\n" +
+            "└── creator: \(self.creator)\n"
     }
     
     init(id: String, name: String, creator: String) {
