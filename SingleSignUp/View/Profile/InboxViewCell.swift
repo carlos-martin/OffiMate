@@ -9,6 +9,7 @@
 import UIKit
 
 class InboxViewCell: UITableViewCell {
+    @IBOutlet weak var dateLabel:     UILabel!
     @IBOutlet weak var senderLabel:   UILabel!
     @IBOutlet weak var headerLabel:   UILabel!
     @IBOutlet weak var messangeLabel: UILabel!

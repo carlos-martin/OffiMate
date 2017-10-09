@@ -14,11 +14,16 @@ class InboxViewController: UITableViewController {
     var spinner: SpinnerLoader?
     @IBOutlet weak var emptyInboxLabel: UILabel!
     
+    var counter: Int = 0
+    
     //BoostCard
-    private var boostCards: [BoostCard] =   [BoostCard]()
-    private var senderName: [String] =      [String]()
-    private var senderMail: [String] =      [String]()
-    private var unread:     [Bool] =        [Bool]()
+    private var boostCards: [(BoostCard, String, String, Bool)] = [] {
+        didSet {
+            boostCards.sort { $0.0 > $1.0 }
+        }
+    }
+    
+    private var _boostCards: [BoostCard] = []
     
     
     //Firebase variables
@@ -43,7 +48,7 @@ class InboxViewController: UITableViewController {
     // MARK: - Segue showBoostCard
     
     private func mackAsRead (indexPath: IndexPath) {
-        let readRef = boostCardRef.child(boostCards[indexPath.row].id)
+        let readRef = boostCardRef.child(self.boostCards[indexPath.row].0.id)
         readRef.child("unread").setValue(false)
     }
     
@@ -59,9 +64,9 @@ class InboxViewController: UITableViewController {
                     controller = segue.destination as! BoostCardViewController
                 }
                 
-                controller.boostCard =  self.boostCards[row]
-                controller.senderName = self.senderName[row]
-                controller.senderMail = self.senderMail[row]
+                controller.boostCard =  self.boostCards[row].0//boostCard
+                controller.senderName = self.boostCards[row].1//name
+                controller.senderMail = self.boostCards[row].2//email
             }
         }
     }
@@ -91,8 +96,8 @@ class InboxViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         
-        if self.unread[indexPath.row] {
-            self.unread[indexPath.row] = false
+        if self.boostCards[indexPath.row].3 {
+            self.boostCards[indexPath.row].3 = false
             self.mackAsRead(indexPath: indexPath)
         }
         
@@ -102,10 +107,11 @@ class InboxViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "inboxCell", for: indexPath) as! InboxViewCell
         let row = indexPath.row
-        let boostCard = self.boostCards[row]
-        cell.readedImage.isHidden = !self.unread[row]
-        cell.senderLabel.text = self.senderName[row]
+        let boostCard = self.boostCards[row].0
+        cell.readedImage.isHidden = !self.boostCards[row].3
+        cell.senderLabel.text = self.boostCards[row].1
         cell.headerLabel.text = "\(boostCard.type): \(boostCard.header)"
+        cell.dateLabel.text = "\(boostCard.date)"
         cell.messangeLabel.text = boostCard.message
         return cell
     }
@@ -125,26 +131,34 @@ class InboxViewController: UITableViewController {
                     let message =   entry.value["message"]  as! String
                     let senderId =  entry.value["senderId"] as! String
                     let unread =    entry.value["unread"]   as! Bool
+                    let date =      entry.value["date"]     as! Int64
                     let _type =     entry.value["type"]     as! String
                     let type = (_type == "passion" ? BoostCardType(rawValue: 0) : BoostCardType(rawValue: 1))!
                     
                     Tools.fetchCoworker(uid: senderId, completion: { (_email: String?, _name: String?, _) in
                         if let email = _email, let name = _name {
+                            let newdate: NewDate
+                            do {
+                                newdate = try NewDate(id: date)
+                            } catch {
+                                newdate = NewDate(date: Date())
+                            }
                             
-                            let tmp = BoostCard(
+                            let boostCard = BoostCard(
                                 id:         entry.key,
                                 senderId:   senderId,
                                 receiverId: receiver,
                                 type:       type,
                                 header:     header,
-                                message:    message)
+                                message:    message,
+                                date:       newdate)
                             
-                            if !self.boostCards.contains(tmp) {
-                                self.unread.append(unread)
-                                self.senderMail.append(email)
-                                self.senderName.append(name)
-                                self.boostCards.append(tmp)
+                            if !self._boostCards.contains(boostCard) {
+                                self._boostCards.append(boostCard)
+                                let element = (boostCard, name, email, unread)
+                                self.boostCards.append(element)
                             }
+                            
                             
                         }
                         counter -= 1
