@@ -14,7 +14,11 @@ enum BoostCardType: Int {
 }
 
 internal func == (left: BoostCard, rigth: BoostCard) -> Bool {
-    return left.date == rigth.date
+    if left.date == rigth.date {
+        return left.id == rigth.id
+    } else {
+        return false
+    }
 }
 
 internal func > (left: BoostCard, rigth: BoostCard) -> Bool {

@@ -23,6 +23,8 @@ class InboxViewController: UITableViewController {
         }
     }
     
+    private var _boostCards: [BoostCard] = []
+    
     
     //Firebase variables
     private lazy var boostCardRef:       DatabaseReference = Database.database().reference().child("boostcard")
@@ -151,8 +153,13 @@ class InboxViewController: UITableViewController {
                                 message:    message,
                                 date:       newdate)
                             
-                            let element = (boostCard, name, email, unread)
-                            self.boostCards.append(element)
+                            if !self._boostCards.contains(boostCard) {
+                                self._boostCards.append(boostCard)
+                                let element = (boostCard, name, email, unread)
+                                self.boostCards.append(element)
+                            }
+                            
+                            
                         }
                         counter -= 1
                         if counter == 0 {
