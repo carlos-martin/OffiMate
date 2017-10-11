@@ -16,22 +16,13 @@ enum MainSection: Int {
 
 class MainViewController: UITableViewController {
 
-    private var channels: [Channel] = [] {
-        didSet {
-            if channels.count == 1 {
-                self.emptyChannelsLabel.isHidden = true
-            } else if channels.isEmpty {
-                self.emptyChannelsLabel.isHidden = false
-            }
-        }
-    }
-    
-    var         senderDisplayName:    String?
-    var         spinner:              SpinnerLoader?
-    var         newChannel:           Channel?
-    var         newChannelButton:     UIButton?
-    var         newChannelIsHide:     Bool = true
-    private var lastContentOffset:    CGFloat = 0
+    var channels:           [Channel] = []
+    var senderDisplayName:  String?
+    var spinner:            SpinnerLoader?
+    var newChannel:         Channel?
+    var newChannelButton:   UIButton?
+    var newChannelIsHide:   Bool = true
+    var lastContentOffset:  CGFloat = 0
     
     @IBOutlet weak var emptyChannelsLabel: UILabel!
     
@@ -102,23 +93,23 @@ class MainViewController: UITableViewController {
     //MARK:- Firebase related methods
     
     private func observeChannels() {
-        //Use the observe method to listen for new channels being written to the Firebase DB
-
         self.spinner?.start(self.view)
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.spinner?.stop()
-            self.emptyChannelsLabel.isHidden = true
-            let channelData = snapshot.value as! Dictionary<String, AnyObject>
-            let id = snapshot.key
-            if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
-                let _channel = Channel(id: id, name: name, creator: creator)
-                self.channels.append(_channel)
-                self.tableView.reloadData()
+            if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
+                let id = snapshot.key
+                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
+                    let _channel = Channel(id: id, name: name, creator: creator)
+                    self.channels.append(_channel)
+                    self.tableView.reloadData()
+                }
             }
         })
-        if self.channels.isEmpty {
-            self.spinner?.stop()
-            self.emptyChannelsLabel.isHidden = false
+        channelRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.childrenCount == 0 {
+                self.spinner?.stop()
+                self.emptyChannelsLabel.isHidden = (self.emptyChannelsLabel.isHidden ? false : true)
+            }
         }
     }
     
