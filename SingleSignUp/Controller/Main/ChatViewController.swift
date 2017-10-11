@@ -18,9 +18,7 @@ class ChatViewController: JSQMessagesViewController {
     //Chat settings
     var channelRef: DatabaseReference?
     var channel:    Channel? {
-        didSet {
-            self.title = channel?.name
-        }
+        didSet { self.title = channel?.name }
     }
     
     //Chat Firebase
@@ -46,11 +44,7 @@ class ChatViewController: JSQMessagesViewController {
     
     //Data source
     var messages = [JSQMessage]() {
-        didSet {
-            if messages.count > 1 {
-                messages.sort { $0.0.date < $0.1.date }
-            }
-        }
+        didSet { messages.sort { $0.0.date < $0.1.date } }
     }
     
     //=======================================================================//
