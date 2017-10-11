@@ -157,4 +157,16 @@ class NewDate: CustomStringConvertible, Hashable {
         }
         return toString
     }
+    
+    /*
+     result == 0 -> self == date
+     result > 0 --> self > date
+     result < 0 --> self < date
+     */
+    func compare (date: NewDate) -> Int64 {
+        var total = self.year - date.year
+        total += (total == 0 ? self.month - date.month : 0)
+        total += (total == 0 ? self.day - date.day : 0)
+        return total
+    }
 }

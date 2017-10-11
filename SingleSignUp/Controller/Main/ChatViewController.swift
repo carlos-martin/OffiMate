@@ -39,7 +39,6 @@ class ChatViewController: JSQMessagesViewController {
     //Chat UI
     lazy var outgoingBubble: JSQMessagesBubbleImage = self.setupOutgoingBubble()
     lazy var incomingBubble: JSQMessagesBubbleImage = self.setupIncomingBubble()
-    var lastDatePrinted: NewDate = NewDate(date: Date())
     
     //Channel is alive
     var isValidating: Bool = false
@@ -59,8 +58,8 @@ class ChatViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.senderId = Auth.auth().currentUser?.uid
-        self.senderDisplayName = CurrentUser.name!
+        self.senderId = Auth.auth().currentUser?.uid ?? ""
+        self.senderDisplayName = CurrentUser.name ?? ""
         
         //Necessary for SplitViewController proper behavior
         if self.auto {
@@ -189,7 +188,6 @@ class ChatViewController: JSQMessagesViewController {
             return message
         } else {
             let text = "\(message.senderDisplayName!)\n\(message.text!)"
-            print("[messageDataForItemAt]:\n~\(text)~\n")
             let finalMessage = JSQMessage(
                 senderId: message.senderId!,
                 senderDisplayName: message.senderDisplayName!,
@@ -228,7 +226,6 @@ class ChatViewController: JSQMessagesViewController {
             let final_text = NSMutableAttributedString(string: message.senderDisplayName!+"\n", attributes: attrs_name)
             let array_text = message.text.components(separatedBy: "\n")
             let rawMessage = (array_text.count > 1 ? array_text.joined(separator: "\n") : array_text.first!)
-            print("[cellForItemAt]:\n~\(rawMessage)~\n")
             let message_text = NSMutableAttributedString(string: rawMessage, attributes: attrs_text)
             final_text.append(message_text)
             
@@ -239,48 +236,53 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
-        let message = messages[indexPath.item]
-        let currentNewdate = NewDate(date: message.date!)
+        let row = indexPath.row
+        let currentMessage = self.messages[row]
+        let currentDate = NewDate(date: currentMessage.date!)
         
-        if (indexPath.row == 0) ||
-            (currentNewdate.year == self.lastDatePrinted.year
-                && currentNewdate.month == self.lastDatePrinted.month
-                && currentNewdate.day != self.lastDatePrinted.day) ||
-            (currentNewdate.year == self.lastDatePrinted.year
-                && currentNewdate.month != self.lastDatePrinted.month) ||
-            (currentNewdate.year != self.lastDatePrinted.year) {
-            self.lastDatePrinted = currentNewdate
-            
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = NSTextAlignment.center
-            
-            let nsattributestring = NSAttributedString(
-                string: currentNewdate.getChannelFormat(),
-                attributes: [
-                    NSParagraphStyleAttributeName: paragraphStyle,
-                    NSBaselineOffsetAttributeName: NSNumber(value: 0)
-                ])
-            return nsattributestring
+        let timeStamp : NSAttributedString?
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.center
+        
+        if row == 0 {
+            timeStamp = NSAttributedString(
+                string:     currentDate.getChannelFormat(),
+                attributes: [NSParagraphStyleAttributeName: paragraphStyle, NSBaselineOffsetAttributeName: NSNumber(value: 0)]
+            )
         } else {
-            return nil
+            let previousMessage = self.messages[row-1]
+            let previousDate = NewDate(date: previousMessage.date)
+            
+            if currentDate.compare(date: previousDate) > 0 {
+                timeStamp = NSAttributedString(
+                    string:     NewDate(date: currentMessage.date!).getChannelFormat(),
+                    attributes: [NSParagraphStyleAttributeName: paragraphStyle, NSBaselineOffsetAttributeName: NSNumber(value: 0)]
+                )
+            } else {
+                timeStamp = nil
+            }
         }
+        return timeStamp
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
-        let message = messages[indexPath.item]
-        var height: CGFloat = 0.0
-        let currentNewdate = NewDate(date: message.date!)
+        let row = indexPath.row
+
+        let height : CGFloat
         
-        if (indexPath.row == 0) ||
-            (currentNewdate.year == self.lastDatePrinted.year
-                && currentNewdate.month == self.lastDatePrinted.month
-                && currentNewdate.day != self.lastDatePrinted.day) ||
-            (currentNewdate.year == self.lastDatePrinted.year
-                && currentNewdate.month != self.lastDatePrinted.month) ||
-            (currentNewdate.year != self.lastDatePrinted.year) {
-            self.lastDatePrinted = currentNewdate
-            height += 32.0
+        if row == 0 {
+            height = 32.0
+        } else {
+            let currentDate =  NewDate(date: self.messages[row].date!)
+            let previousDate = NewDate(date: self.messages[row-1].date)
+            
+            if currentDate.compare(date: previousDate) > 0 {
+                height = 32.0
+            } else {
+                height = 0.0
+            }
         }
+        
         return height
     }
     
