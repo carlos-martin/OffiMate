@@ -53,6 +53,22 @@ public class Tools {
         UIColor(colorLiteralRed: 217.0/255.0, green: 133.0/255.0, blue:  59.0/255.0, alpha: 1.0),
         UIColor(colorLiteralRed: 236.0/255.0, green: 236.0/255.0, blue: 234.0/255.0, alpha: 1.0)
     ]
+    
+    static let bubbleColors: [UIColor] = [
+        UIColor(colorLiteralRed: 218.0/255.0, green: 241.0/255.0, blue: 220.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 210.0/255.0, green: 237.0/255.0, blue: 199.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 184.0/255.0, green: 229.0/255.0, blue: 199.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 178.0/255.0, green: 227.0/255.0, blue: 187.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 102.0/255.0, green: 206.0/255.0, blue: 173.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 171.0/255.0, green: 208.0/255.0, blue: 205.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 160.0/255.0, green: 236.0/255.0, blue: 220.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 169.0/255.0, green: 243.0/255.0, blue: 203.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 179.0/255.0, green: 219.0/255.0, blue: 245.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 163.0/255.0, green: 225.0/255.0, blue: 213.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 176.0/255.0, green: 211.0/255.0, blue: 234.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 169.0/255.0, green: 233.0/255.0, blue: 197.0/255.0, alpha: 1.0)
+    ]
+    
 }
 
 //MARK:- BackEnd 
@@ -105,6 +121,18 @@ extension Tools {
             "unread":       true
         ] as [String : Any]
         newBoostcardRef.setValue(newBoostcardItem)
+    }
+    
+    //MARK: Chat
+    static func createChannelMessage(uid: String, text: String, date: NewDate) {
+        let messageRef = Database.database().reference().child("messages")
+        let newMessageRef = messageRef.childByAutoId()
+        let newMessageItem = [
+            "uid":  uid,
+            "text": text,
+            "date": date.id
+        ] as [String : Any]
+        newMessageRef.setValue(newMessageItem)
     }
 }
 

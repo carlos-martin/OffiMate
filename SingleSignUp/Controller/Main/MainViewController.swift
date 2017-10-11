@@ -15,14 +15,25 @@ enum MainSection: Int {
 }
 
 class MainViewController: UITableViewController {
+
+    private var channels: [Channel] = [] {
+        didSet {
+            if channels.count == 1 {
+                self.emptyChannelsLabel.isHidden = true
+            } else if channels.isEmpty {
+                self.emptyChannelsLabel.isHidden = false
+            }
+        }
+    }
     
     var         senderDisplayName:    String?
-    private var channels:             [Channel] = []
     var         spinner:              SpinnerLoader?
     var         newChannel:           Channel?
     var         newChannelButton:     UIButton?
     var         newChannelIsHide:     Bool = true
     private var lastContentOffset:    CGFloat = 0
+    
+    @IBOutlet weak var emptyChannelsLabel: UILabel!
     
     //Firebase variables
     private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
@@ -85,6 +96,7 @@ class MainViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = profileButton
         self.navigationItem.title = "OffiMate"
         self.spinner = SpinnerLoader(view: self.view)
+        self.emptyChannelsLabel.isHidden = true
     }
     
     //MARK:- Firebase related methods
@@ -95,15 +107,19 @@ class MainViewController: UITableViewController {
         self.spinner?.start(self.view)
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.spinner?.stop()
+            self.emptyChannelsLabel.isHidden = true
             let channelData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
             if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
                 let _channel = Channel(id: id, name: name, creator: creator)
-                print(_channel)
                 self.channels.append(_channel)
                 self.tableView.reloadData()
             }
         })
+        if self.channels.isEmpty {
+            self.spinner?.stop()
+            self.emptyChannelsLabel.isHidden = false
+        }
     }
     
     func createChannel(_ sender: UITextField) {
@@ -112,7 +128,7 @@ class MainViewController: UITableViewController {
             let newChannelRef = channelRef.childByAutoId()
             let channelItem = [
                 "name":     name,
-                "creator":  CurrentUser.email!
+                "creator":  CurrentUser.user!.uid
             ]
             newChannelRef.setValue(channelItem)
             sender.text! = ""
@@ -158,11 +174,7 @@ class MainViewController: UITableViewController {
         if let currentSection: MainSection = MainSection(rawValue: section) {
             switch currentSection {
             case .createNewChannel:
-                if self.newChannelIsHide {
-                    return 0
-                } else {
-                    return 1
-                }
+                return (self.newChannelIsHide ? 0 : 1)
             case .currentChannel:
                 return self.channels.count
             }
@@ -177,7 +189,7 @@ class MainViewController: UITableViewController {
             case .createNewChannel:
                 return 0.1
             case .currentChannel:
-                return 30.0
+                return (self.channels.isEmpty ? 0.1 : 30.0)
             }
         } else {
             return 0.1
@@ -190,7 +202,7 @@ class MainViewController: UITableViewController {
             case .createNewChannel:
                 return nil
             case .currentChannel:
-                return "Channels"
+                return (self.channels.isEmpty ? nil : "Channels")
             }
         } else {
             return nil
@@ -223,7 +235,7 @@ class MainViewController: UITableViewController {
                 return false
             case .currentChannel:
                 let row = indexPath.row
-                if self.channels[row].creator == CurrentUser.email! {
+                if self.channels[row].creator == CurrentUser.user!.uid {
                     return true
                 } else {
                     return false
@@ -259,18 +271,17 @@ class MainViewController: UITableViewController {
     //MARK:- ScrollView
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
-        
         let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if actualPosition.y > 0 && self.newChannelIsHide {
             // Dragging down
             self.newChannelIsHide = false
             self.tableView.reloadSections(IndexSet(integer: 0), with: .bottom)
-
+            
         } else if actualPosition.y < 0 && !self.newChannelIsHide {
             // Dragging up
             self.newChannelIsHide = true
             self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-
+            
         }
     }
 

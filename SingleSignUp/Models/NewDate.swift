@@ -48,7 +48,7 @@ class NewDate: CustomStringConvertible, Hashable {
         } else if (self.year == current.year && self.month == current.month && self.day == current.day) {
             let minToString = (self.minutes > 9 ? "\(self.minutes)" : "0\(self.minutes)")
             toString = "\(self.hour):\(minToString)"
-        } else if (self.year == current.year && self.month == current.month && (current.day - self.day == 7)) {
+        } else if (self.year == current.year && self.month == current.month && (current.day - self.day == 1)) {
             toString = "Yesterday"
         } else if (self.year == current.year && self.month == current.month && (current.day - self.day < 7)) {
             toString = self.getDayName()
@@ -136,5 +136,25 @@ class NewDate: CustomStringConvertible, Hashable {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM d, yyyy - HH:mm"
         return dateFormatter.string(from: self.date)
+    }
+    
+    func getChannelFormat () -> String {
+        let toString: String
+        let current = NewDate(date: Date())
+        
+        if current == self {
+            toString = "Now"
+        } else if (self.year == current.year && self.month == current.month && self.day == current.day) {
+            toString = "Today"
+        } else if (self.year == current.year && self.month == current.month && (current.day - self.day == 1)) {
+            toString = "Yesterday"
+        } else if (self.year == current.year && self.month == current.month && (current.day - self.day < 7)) {
+            toString = self.getDayName()
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM d, yyyy"
+            toString = dateFormatter.string(from: self.date)
+        }
+        return toString
     }
 }
