@@ -119,7 +119,7 @@ class InboxViewController: UITableViewController {
     // MARK: - Firebase related methods
     
     private func observerBoostcards() {
-        self.spinner?.start(self.tableView)
+        self.spinner?.start()
         let receiver = CurrentUser.user!.uid
         boostCardRefQuery = boostCardRef.queryOrdered(byChild: "receiverId").queryEqual(toValue: receiver)
         boostCardRefQuery?.observe(.value, with: { (snapshot: DataSnapshot) in

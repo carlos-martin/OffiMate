@@ -48,7 +48,21 @@ class MainViewController: UITableViewController {
             self.clearsSelectionOnViewWillAppear = split.isCollapsed
         }
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        
+        var counter = channels.count
+        if counter > 0 {
+            self.spinner?.start()
+            for i in channels {
+                self.updateCounter(i, completion: { (num: Int) in
+                    i.num = num
+                    counter -= 1
+                    if counter == 0 {
+                        self.spinner?.stop()
+                        self.tableView.reloadData()
+                    }
+                })
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,15 +107,18 @@ class MainViewController: UITableViewController {
     //MARK:- Firebase related methods
     
     private func observeChannels() {
-        self.spinner?.start(self.view)
+        self.spinner?.start()
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.spinner?.stop()
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
-                    let _channel = Channel(id: id, name: name, creator: creator)
-                    self.channels.append(_channel)
-                    self.tableView.reloadData()
+                    let channel = Channel(id: id, name: name, creator: creator)
+                    self.updateCounter(channel, completion: { (counter: Int) in
+                        channel.num = counter
+                        self.channels.append(channel)
+                        self.tableView.reloadData()
+                    })
                 }
             }
         })
@@ -110,6 +127,12 @@ class MainViewController: UITableViewController {
                 self.spinner?.stop()
                 self.emptyChannelsLabel.isHidden = (self.emptyChannelsLabel.isHidden ? false : true)
             }
+        }
+    }
+    
+    private func updateCounter(_ channel: Channel, completion: @escaping (_ num: Int) -> Void) {
+        self.channelRef.child(channel.id).child("messages").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            completion(Int(snapshot.childrenCount))
         }
     }
     
@@ -151,6 +174,7 @@ class MainViewController: UITableViewController {
                 controller.channel = channel
                 controller.channelRef = channelRef.child(channel.id)
                 controller.auto = false
+                controller.totalMessages = channel.num
             }
         }
     }
@@ -211,7 +235,15 @@ class MainViewController: UITableViewController {
                 return cell!
             case .currentChannel:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell
-                cell?.label.text = self.channels[indexPath.row].name
+                let channel = self.channels[indexPath.row]
+                cell?.label.text = channel.name
+                cell?.counter.text = String(channel.num)
+                cell?.counter.textColor = UIColor.lightGray
+                cell?.counter.layer.backgroundColor = UIColor.white.cgColor
+                cell?.counter.layer.cornerRadius = 9
+                cell?.counter.layer.borderWidth = 0.5
+                cell?.counter.layer.borderColor = UIColor.lightGray.cgColor
+
                 return cell!
             }
         } else {

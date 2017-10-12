@@ -46,6 +46,13 @@ class ChatViewController: JSQMessagesViewController {
     var messages = [JSQMessage]() {
         didSet { messages.sort { $0.0.date < $0.1.date } }
     }
+    var totalMessages: Int? {
+        didSet { self.counter = self.totalMessages }
+    }
+    
+    //Spinner data
+    var spinner: SpinnerLoader?
+    var counter: Int?
     
     //=======================================================================//
     
@@ -83,15 +90,21 @@ class ChatViewController: JSQMessagesViewController {
     //=======================================================================//
     //MARK:- UI Initializing
     private func initUI () {
+        self.spinner = SpinnerLoader(view: self.view)
         self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.inputToolbar.contentView.textView.layer.cornerRadius = 12
         self.inputToolbar.contentView.textView.placeHolder = "Add new message..."
-        if #available(iOS 11.0, *) {
-            self.inputToolbar.contentView.textView.becomeFirstResponder()
-        }
         self.scrollToBottom(animated: true)
+
+        if Tools.iOS() > 10 {
+            let navigationHeight = self.navigationController?.navigationBar.bounds.height
+            let inputtoolHeight = self.inputToolbar.bounds.height
+            
+            self.collectionView.contentInset = UIEdgeInsetsMake(navigationHeight! + 12, 0, inputtoolHeight, 0)
+            self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset
+        }
     }
     
     //=======================================================================//
@@ -132,7 +145,12 @@ class ChatViewController: JSQMessagesViewController {
     
     private func observeMessage() {
         self.messagesRef = self.channelRef!.child("messages")
-        let messageQuery = self.messagesRef.queryLimited(toLast: 25)
+        let messageQuery = self.messagesRef.queryLimited(toLast: UInt(self.totalMessages!))
+        
+        if self.counter! > 0 {
+            self.spinner?.start()
+        }
+        
         self.newMessageRefHandle = messageQuery.observe(.childAdded, with: { (snapshot: DataSnapshot) in
             let messageData = snapshot.value as! Dictionary<String, Any>
 
@@ -147,6 +165,11 @@ class ChatViewController: JSQMessagesViewController {
                             message = JSQMessage(senderId: uid, displayName: name, text: text)
                         }
                         self.messages.append(message)
+                        
+                        self.counter! -= 1
+                        if self.counter! <= 0 {
+                            self.spinner?.stop()
+                        }
                         
                         self.finishSendingMessage()
                     } else {
@@ -215,7 +238,7 @@ class ChatViewController: JSQMessagesViewController {
         if message.senderId == self.senderId {
             cell.textView.textColor = UIColor.white
         } else {
-            let attrs_name = [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.gray]
+            let attrs_name = [NSFontAttributeName : font.withSize(16.0), NSForegroundColorAttributeName : UIColor.gray]
             let attrs_text = [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black]
             let final_text = NSMutableAttributedString(string: message.senderDisplayName!+"\n", attributes: attrs_name)
             let array_text = message.text.components(separatedBy: "\n")

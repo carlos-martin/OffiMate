@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     
     var username: String?
     var password: String?
-    var loader:   SpinnerLoader?
+    var spinner:  SpinnerLoader?
     var isHidden: Bool = true
     
     @IBOutlet weak var tableView: UITableView!
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
         
         self.startTextField()
         
-        loader = SpinnerLoader(view: self.view)
+        spinner = SpinnerLoader(view: self.view)
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,11 +50,11 @@ class LoginViewController: UIViewController {
     func logInAction (_ sender: Any?=nil) {
         if self.validTextFields() {
             //Alert.showFailiureAlert(message: "Not implemented yet.")
-            self.loader?.start(self.view)
+            self.spinner?.start()
             Auth.auth().signIn(withEmail: self.username!, password: self.password!, completion: { (user: User?, error: Error?) in
                 if let nserror = error {
                     Alert.showFailiureAlert(error: nserror)
-                    self.loader?.stop()
+                    self.spinner?.stop()
                 } else {
                     CurrentUser.user = user
                     
@@ -67,7 +67,7 @@ class LoginViewController: UIViewController {
                             Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
                         }
 
-                        self.loader?.stop()
+                        self.spinner?.stop()
                         Tools.goToMain(vc: self)
                     })
                 }
