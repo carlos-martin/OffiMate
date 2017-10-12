@@ -29,6 +29,10 @@ class ProfileViewController: UIViewController {
     var isHidden:   Bool = true
     var isEditMode: Bool = false
     
+    var hasUnread: Bool = false {
+        didSet { self.tableView.reloadData() }
+    }
+    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
@@ -45,6 +49,14 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Tools.unreadBoostCard(uid: CurrentUser.user!.uid) { (unread: Bool) in
+            self.hasUnread = unread
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -203,7 +215,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width / 2
                     cell.profileImage.layer.borderWidth = 0.5
                     cell.profileImage.layer.borderColor = Tools.separator.cgColor
-                    cell.profileImage.backgroundColor = Tools.backgrounsColors.first!
+                    cell.profileImage.backgroundColor = Tools.getColor(id: CurrentUser.user!.uid)
                     cell.profileImage.clipsToBounds = true
                     return cell
                 case .name:
@@ -242,6 +254,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
                 cell.selectionStyle = .gray
                 cell.arrowImage.isHidden = false
+                cell.unreadImage.isHidden = (self.hasUnread ? false : true)
                 cell.optionImage.image = UIImage(named: "inbox")
                 cell.optionImage.backgroundColor = UIColor.white
                 cell.optionLabel.text = "Inbox"
@@ -251,6 +264,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
                 cell.selectionStyle = .gray
                 cell.arrowImage.isHidden = true
+                cell.unreadImage.isHidden = true
                 cell.optionImage.image = UIImage(named: "logout")
                 cell.optionImage.backgroundColor = Tools.redLogout
                 cell.optionImage.layer.cornerRadius = 4

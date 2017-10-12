@@ -55,6 +55,17 @@ public class Tools {
     ]
     
     static let bubbleColors: [UIColor] = [
+        UIColor(colorLiteralRed:   0.0/255.0, green: 165.0/255.0, blue: 133.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed:   0.0/255.0, green: 183.0/255.0, blue:  89.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed:  23.0/255.0, green: 124.0/255.0, blue: 188.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 152.0/255.0, green:  34.0/255.0, blue: 178.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed:  20.0/255.0, green:  83.0/255.0, blue:  87.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 240.0/255.0, green: 119.0/255.0, blue:   0.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 203.0/255.0, green:  27.0/255.0, blue:  37.0/255.0, alpha: 1.0),
+        UIColor(colorLiteralRed: 101.0/255.0, green:  77.0/255.0, blue: 179.0/255.0, alpha: 1.0)
+    ]
+    
+    static let bubbleColorsLight: [UIColor] = [
         UIColor(colorLiteralRed: 218.0/255.0, green: 241.0/255.0, blue: 220.0/255.0, alpha: 1.0),
         UIColor(colorLiteralRed: 210.0/255.0, green: 237.0/255.0, blue: 199.0/255.0, alpha: 1.0),
         UIColor(colorLiteralRed: 184.0/255.0, green: 229.0/255.0, blue: 199.0/255.0, alpha: 1.0),
@@ -122,6 +133,25 @@ extension Tools {
         ] as [String : Any]
         newBoostcardRef.setValue(newBoostcardItem)
     }
+    
+    static func unreadBoostCard(uid: String, completion: @escaping(_ unreads: Bool) -> Void) {
+        let coworkerRef = Database.database().reference().child("boostcard")
+        let coworkerHandle = coworkerRef.queryOrdered(byChild: "receiverId").queryEqual(toValue: uid)
+        coworkerHandle.observe(.value) { (snapshot: DataSnapshot) in
+            var counter = 0
+            if let rawData = snapshot.value as? Dictionary<String, AnyObject> {
+                for entry in rawData {
+                    if (entry.value["unread"] as! Bool) {
+                        counter += 1
+                        break
+                    }
+                }
+            }
+            completion((counter > 0 ? true : false))
+        }
+    }
+    
+    //SELECT * FROM Users WHERE Age = 28 && Location = 'Berlin';
     
     //MARK: Chat
     static func createChannelMessage(uid: String, text: String, date: NewDate) {
@@ -262,5 +292,17 @@ extension Tools {
     static func randomColor() -> UIColor {
         let rand = Int(arc4random_uniform(UInt32(self.backgrounsColors.count)))
         return self.backgrounsColors[rand]
+    }
+    
+    static func getColor(id: String) -> UIColor {
+        let _tmp_ = String(id.hashValue).characters.suffix(2)
+        let value = Int(String(_tmp_.first!))! + Int(String(_tmp_.last!))!
+        let index: Int
+        if value < self.bubbleColors.count {
+            index = value
+        } else {
+            index = value % self.bubbleColors.count
+        }
+        return self.bubbleColors[index]
     }
 }

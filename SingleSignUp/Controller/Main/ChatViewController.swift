@@ -238,7 +238,8 @@ class ChatViewController: JSQMessagesViewController {
         if message.senderId == self.senderId {
             cell.textView.textColor = UIColor.white
         } else {
-            let attrs_name = [NSFontAttributeName : font.withSize(16.0), NSForegroundColorAttributeName : UIColor.gray]
+            let color = Tools.getColor(id: message.senderId)
+            let attrs_name = [NSFontAttributeName : font, NSForegroundColorAttributeName : color]
             let attrs_text = [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black]
             let final_text = NSMutableAttributedString(string: message.senderDisplayName!+"\n", attributes: attrs_name)
             let array_text = message.text.components(separatedBy: "\n")
@@ -356,6 +357,7 @@ extension ChatViewController {
     func setupIncomingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
         let color = UIColor.jsq_messageBubbleLightGray()
-        return bubbleImageFactory!.incomingMessagesBubbleImage(with: color)
+        let bubble = bubbleImageFactory!.incomingMessagesBubbleImage(with: color)
+        return bubble!
     }
 }
