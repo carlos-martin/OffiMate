@@ -16,7 +16,7 @@ class PasswordViewController: UIViewController {
     var username: String?
     var email:    String?
     var password: String?
-    var loader:   SpinnerLoader?
+    var spinner:  SpinnerLoader?
     var isHidden: Bool = true
     
     //MARK: IBOutlet
@@ -34,7 +34,7 @@ class PasswordViewController: UIViewController {
         
         self.startTextField()
         
-        loader = SpinnerLoader(view: self.view)
+        spinner = SpinnerLoader(view: self.view)
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,10 +58,10 @@ class PasswordViewController: UIViewController {
     func signUpAction (_ sender: Any?=nil) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
-                self.loader?.start(self.view)
+                self.spinner?.start()
                 
                 Auth.auth().createUser(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
-                    self.loader?.stop()
+                    self.spinner?.stop()
                     if error == nil {
                         CurrentUser.user = user!
                         

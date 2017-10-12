@@ -43,7 +43,7 @@ class CoworkersViewController: UITableViewController {
     }
     
     private func observeCoworkers() {
-        self.spinner?.start(self.view)
+        self.spinner?.start()
         self.coworkerRefHandle = self.coworkerRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.spinner?.stop()
             let coworkerData = snapshot.value as! Dictionary<String, AnyObject>

@@ -10,6 +10,7 @@ internal class Channel: CustomStringConvertible {
     internal let id:        String
     internal let name:      String
     internal let creator:   String
+    public   var num:       Int
     
     public var description: String {
         return "Channel:\n" +
@@ -18,9 +19,10 @@ internal class Channel: CustomStringConvertible {
             "└── creator: \(self.creator)\n"
     }
     
-    init(id: String, name: String, creator: String) {
+    init(id: String, name: String, creator: String, num: Int?=0) {
         self.id = id
         self.name = name
         self.creator = creator
+        self.num = num!
     }
 }
