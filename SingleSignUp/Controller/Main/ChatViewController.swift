@@ -52,7 +52,14 @@ class ChatViewController: JSQMessagesViewController {
     
     //Spinner data
     var spinner: SpinnerLoader?
-    var counter: Int?
+    var counter: Int? {
+        didSet {
+            if self.counter == 0 {
+                let duration: Double = (self.totalMessages! > 25 ? 0.75 : Double(self.totalMessages!)/32)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) { self.spinner?.stop() }
+            }
+        }
+    }
     
     //=======================================================================//
     
@@ -167,9 +174,6 @@ class ChatViewController: JSQMessagesViewController {
                         self.messages.append(message)
                         
                         self.counter! -= 1
-                        if self.counter! <= 0 {
-                            self.spinner?.stop()
-                        }
                         
                         self.finishSendingMessage()
                     } else {

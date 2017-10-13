@@ -18,9 +18,17 @@ class SpinnerLoader {
     init(view: UIView) {
         self.view = view
         
-        self.container.frame = UIScreen.main.bounds
-        self.container.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
-        self.container.backgroundColor = UIColor(red: 255/256.0, green: 255/256.0, blue: 255/256.0, alpha: 0.3)
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+            self.container = UIVisualEffectView(effect: blurEffect)
+            self.container.frame = UIScreen.main.bounds
+            self.container.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+            self.container.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        } else {
+            self.container.frame = UIScreen.main.bounds
+            self.container.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+            self.container.backgroundColor = UIColor(red: 255/256.0, green: 255/256.0, blue: 255/256.0, alpha: 1.0)
+        }
         
         self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
         self.loadingView.center = self.container.center
@@ -43,7 +51,15 @@ class SpinnerLoader {
     }
     
     func stop() {
-        activityIndicator.stopAnimating()
-        container.removeFromSuperview()
+        UIView.animate(
+            withDuration: 0.5,
+            animations: {
+                self.container.alpha = 0
+            },
+            completion: { (_) in
+                self.activityIndicator.stopAnimating()
+                self.container.removeFromSuperview()
+            }
+        )
     }
 }
