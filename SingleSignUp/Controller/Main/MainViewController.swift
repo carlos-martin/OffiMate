@@ -17,8 +17,7 @@ enum MainSection: Int {
 class MainViewController: UITableViewController {
 
     var firstAccess: Bool = true
-    
-    var channels:           [Channel] = []
+
     var senderDisplayName:  String?
     var newChannel:         Channel?
     var newChannelButton:   UIButton?
@@ -54,9 +53,13 @@ class MainViewController: UITableViewController {
     //Firebase variables
     private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
     private      var channelRefHandle:  DatabaseHandle?
+    private      var messageRefHandle:  DatabaseHandle?
+    private      var deletedRefHandle:  DatabaseHandle?
     
     override func viewDidLoad() {
         self.initUI()
+        self.observeChannels()
+        self.observeMessage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,8 +67,7 @@ class MainViewController: UITableViewController {
         if self.spinner == nil {
             self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
         }
-        if channelRefHandle == nil { self.observeChannels() }
-        if channels.count > 0 { self.updateChannelCounter() }
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,8 +77,14 @@ class MainViewController: UITableViewController {
     }
     
     deinit {
-        if let refHandle = channelRefHandle {
-            channelRef.removeObserver(withHandle: refHandle)
+        if let refChannelHandle = channelRefHandle {
+            channelRef.removeObserver(withHandle: refChannelHandle)
+        }
+        if let refMessageHandle = messageRefHandle {
+            channelRef.removeObserver(withHandle: refMessageHandle)
+        }
+        if let refDeletedHandle = deletedRefHandle {
+            channelRef.removeObserver(withHandle: refDeletedHandle)
         }
     }
     
@@ -127,20 +135,26 @@ class MainViewController: UITableViewController {
     
     private func observeChannels() {
         self.startLoading = true
-        channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
+        self.channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.stopLoading = true
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
-                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
-                    let channel = Channel(id: id, name: name, creator: creator)
-                    self.channelRef.child(channel.id).child("messages").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-                        channel.num = Int(snapshot.childrenCount)
-                        self.channels.append(channel)
+                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
+                    let channel: Channel
+                    if let message = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                        channel = Channel(id: id, name: name, creator: creator, num: message.count)
+                    } else {
+                        channel = Channel(id: id, name: name, creator: creator, num: 0)
+                    }
+                    if self.getChannelIndex(channel: channel) == nil {
+                        CurrentUser.channels.append(channel)
+                        CurrentUser.channelsCounter.append(channel.num)
                         self.tableView.reloadData()
                     }
                 }
             }
         })
+        
         channelRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
                 self.stopLoading = true
@@ -149,24 +163,54 @@ class MainViewController: UITableViewController {
         }
     }
     
-    private func updateChannelCounter() {
-        var counter = self.channels.count
-        self.startLoading = true
-        for channel in channels {
-            self.channelRef.child(channel.id).child("messages").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-                channel.num = Int(snapshot.childrenCount)
-                counter -= 1
-                if counter == 0 {
-                    self.tableView.reloadData()
-                    self.stopLoading = true
+    private func observeMessage() {
+        self.messageRefHandle = channelRef.observe(.childChanged, with: { (snapshot: DataSnapshot) in
+            if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
+                let id = snapshot.key
+                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, let message = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                    let channel = Channel(id: id, name: name, creator: creator, num: message.count)
+                    if let index = self.getChannelIndex(channel: channel) {
+                        if CurrentUser.channelsCounter[index] != channel.num {
+                            CurrentUser.channelsCounter[index] = channel.num
+                            self.tableView.reloadData()
+                        }
+                    }
                 }
-                
             }
+        })
+        
+        self.deletedRefHandle = channelRef.observe(.childRemoved, with: { (snapshot: DataSnapshot) in
+            if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
+                let id = snapshot.key
+                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
+                    let channel = Channel(id: id, name: name, creator: creator)
+                    if let index = self.getChannelIndex(channel: channel) {
+                        let indexPath = IndexPath(row: index, section: MainSection.currentChannel.rawValue)
+                        self.removeChannel(indexPath: indexPath)
+                    }
+                }
+            }
+        })
+    }
+    
+    private func getChannelIndex (channel: Channel) -> Int? {
+        var index: Int = 0
+        var fond: Bool = false
+        for i in CurrentUser.channels {
+            if i.id == channel.id {
+                fond = true
+                break
+            }
+            index += 1
+        }
+        if fond {
+            return index
+        } else {
+            return nil
         }
     }
-
     
-    func createChannel(_ sender: UITextField) {
+    func createChannelFB(_ sender: UITextField) {
         if !(sender.text!.isEmpty) {
             let name = sender.text!
             let newChannelRef = channelRef.childByAutoId()
@@ -181,11 +225,20 @@ class MainViewController: UITableViewController {
         }
     }
     
-    func deleteChannel(_ sender: Channel, completion: @escaping (_ error: Error?) -> Void) {
+    func deleteChannelFB(_ sender: Channel, completion: @escaping (_ error: Error?) -> Void) {
         let toRemoveChannelRef = channelRef.child(sender.id)
         print(toRemoveChannelRef)
         toRemoveChannelRef.removeValue { (error: Error?, ref: DatabaseReference) in
             completion(error)
+        }
+    }
+    
+    func removeChannel(indexPath: IndexPath) {
+        if indexPath.row < CurrentUser.channels.count {
+            CurrentUser.channels.remove(at: indexPath.row)
+            CurrentUser.channelsCounter.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+            self.tableView.reloadData()
         }
     }
     
@@ -200,7 +253,8 @@ class MainViewController: UITableViewController {
                 } else {
                     controller = segue.destination as! ChatViewController
                 }
-                let channel = self.channels[indexPath.row]
+                let channel = CurrentUser.channels[indexPath.row]
+                channel.num = CurrentUser.channelsCounter[indexPath.row]
                 controller.channel = channel
                 controller.channelRef = channelRef.child(channel.id)
                 controller.totalMessages = channel.num
@@ -220,7 +274,7 @@ class MainViewController: UITableViewController {
             case .createNewChannel:
                 return (self.newChannelIsHide ? 0 : 1)
             case .currentChannel:
-                return self.channels.count
+                return CurrentUser.channels.count
             }
         } else {
             return 0
@@ -233,7 +287,7 @@ class MainViewController: UITableViewController {
             case .createNewChannel:
                 return 0.1
             case .currentChannel:
-                return (self.channels.isEmpty ? 0.1 : 30.0)
+                return (CurrentUser.channels.isEmpty ? 0.1 : 30.0)
             }
         } else {
             return 0.1
@@ -246,7 +300,7 @@ class MainViewController: UITableViewController {
             case .createNewChannel:
                 return nil
             case .currentChannel:
-                return (self.channels.isEmpty ? nil : "Channels")
+                return (CurrentUser.channels.isEmpty ? nil : "Channels")
             }
         } else {
             return nil
@@ -264,14 +318,21 @@ class MainViewController: UITableViewController {
                 return cell!
             case .currentChannel:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell
-                let channel = self.channels[indexPath.row]
+                let channel = CurrentUser.channels[indexPath.row]
+                let newNum = CurrentUser.channelsCounter[indexPath.row]
                 cell?.label.text = channel.name
-                cell?.counter.text = String(channel.num)
-                cell?.counter.textColor = UIColor.lightGray
-                cell?.counter.layer.backgroundColor = UIColor.white.cgColor
-                cell?.counter.layer.cornerRadius = 9
-                cell?.counter.layer.borderWidth = 0.5
-                cell?.counter.layer.borderColor = UIColor.lightGray.cgColor
+                if channel.num == newNum {
+                    cell?.counter.isHidden = true
+                } else {
+                    cell?.counter.isHidden = false
+                    cell?.counter.text = String(abs(channel.num-newNum))
+                    cell?.counter.textColor = UIColor.white
+                    cell?.counter.layer.backgroundColor = UIColor.red.cgColor
+                    cell?.counter.layer.cornerRadius = 9
+                    cell?.counter.layer.borderWidth = 0.5
+                    cell?.counter.layer.borderColor = UIColor.white.cgColor
+                }
+                
 
                 return cell!
             }
@@ -287,7 +348,7 @@ class MainViewController: UITableViewController {
                 return false
             case .currentChannel:
                 let row = indexPath.row
-                if self.channels[row].creator == CurrentUser.user!.uid {
+                if CurrentUser.channels[row].creator == CurrentUser.user!.uid {
                     return true
                 } else {
                     return false
@@ -300,16 +361,14 @@ class MainViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let channel = self.channels[indexPath.row]
+            let channel = CurrentUser.channels[indexPath.row]
             let title   = "Do you wanna continue?"
             let message = "You are gonna delete \"\(channel.name)\" channel"
             
             Alert.showAlertOptions(title: title, message: message, okAction: { (_) in
-                self.deleteChannel(channel, completion: { (error: Error?) in
+                self.deleteChannelFB(channel, completion: { (error: Error?) in
                     if error == nil {
-                        self.channels.remove(at: indexPath.row)
-                        self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
-                        self.tableView.reloadData()
+                        self.removeChannel(indexPath: indexPath)
                     } else {
                         Alert.showFailiureAlert(error: error!)
                     }
@@ -342,7 +401,7 @@ class MainViewController: UITableViewController {
 extension MainViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //TODO: add action to create a channel
-        self.createChannel(textField)
+        self.createChannelFB(textField)
         self.view.endEditing(true)
         return true
     }
