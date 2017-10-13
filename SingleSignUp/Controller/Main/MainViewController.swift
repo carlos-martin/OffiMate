@@ -28,9 +28,18 @@ class MainViewController: UITableViewController {
     
     var stopLoading: Bool! {
         didSet {
-            if self.stopLoading! {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: { self.spinner?.stop() })
-            } else { self.spinner?.start() }
+            if self.firstAccess {
+                if self.stopLoading! {
+                    self.spinnerView.isHidden = true
+                    self.spinnerView.stopAnimating()
+                }
+                else {
+                    self.spinnerView.isHidden = false
+                    self.spinnerView.startAnimating()
+                }
+            } else {
+                if self.stopLoading! { self.spinner?.stop() } else { self.spinner?.start() }
+            }
         }
     }
     
@@ -40,6 +49,7 @@ class MainViewController: UITableViewController {
     }
     
     @IBOutlet weak var emptyChannelsLabel: UILabel!
+    @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     
     //Firebase variables
     private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
@@ -61,6 +71,7 @@ class MainViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.spinner = nil
+        self.firstAccess = false
     }
     
     deinit {
@@ -91,6 +102,8 @@ class MainViewController: UITableViewController {
     //MARK:- Init and Fetching Data Functions
     
     private func initUI() {
+        self.firstAccess = true
+        
         let profileButton = UIBarButtonItem(
             image: UIImage(named: "user"),
             style: .plain,
