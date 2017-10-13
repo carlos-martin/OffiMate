@@ -51,6 +51,8 @@ class CurrentUser {
         self.email = nil
         self.password = nil
         self.coworkerId = nil
+        self.channels = []
+        self.channelsCounter = []
         UserDefaults.standard.removeObject(forKey: "name")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
