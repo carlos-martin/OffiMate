@@ -9,10 +9,12 @@
 import UIKit
 
 class BoostCardMessageViewController: UIViewController {
-
+    
     var coworker: Coworker?
     var type:     BoostCardType?
     var header:   String?
+    
+    var spinner: SpinnerLoader?
     
     @IBOutlet weak var frameImageView:    UIView!
     @IBOutlet weak var cardImageView:     UIImageView!
@@ -67,6 +69,9 @@ class BoostCardMessageViewController: UIViewController {
         self.textView.delegate = self
         self.textView.text = "Why?"
         self.textView.textColor = UIColor.lightGray
+        
+        //MARK: spinner
+        self.spinner = SpinnerLoader(view: self.view, alpha: 0.1)
     }
     
     @IBAction func sendBarButtonAction(_ sender: Any) {
@@ -81,7 +86,12 @@ class BoostCardMessageViewController: UIViewController {
                     message:    message
                 )
                 Tools.createBoostCard(boostCard: boostCard)
-                performSegue(withIdentifier: "unwindSegueToCoworkers", sender: self)
+                self.textView.endEditing(true)
+                self.spinner?.start()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2 , execute: { 
+                    self.spinner?.stop()
+                    self.performSegue(withIdentifier: "unwindSegueToCoworkers", sender: self)
+                })
             } else {
                 let error_message = "The message cannot be empty!"
                 Alert.showFailiureAlert(message: error_message, handler: { (_) in
