@@ -16,7 +16,9 @@ enum MainSection: Int {
 
 class MainViewController: UITableViewController {
 
-    var firstAccess: Bool = true
+    var firstAccess: Bool = true {
+        didSet { if firstAccess == false { CurrentUser.saveCurrentDay() } }
+    }
 
     var senderDisplayName:  String?
     var newChannel:         Channel?
@@ -135,25 +137,46 @@ class MainViewController: UITableViewController {
     
     private func observeChannels() {
         self.startLoading = true
+        var readed = 0
+        var unreaded = 0
         self.channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.stopLoading = true
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
                     let channel: Channel
-                    if let message = channelData["messages"] as! Dictionary<String, AnyObject>! {
-                        channel = Channel(id: id, name: name, creator: creator, num: message.count)
+                    if let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                        if self.firstAccess {
+                            readed = 0
+                            unreaded = 0
+                            for message in messages {
+                                if let rawData = message.value as? Dictionary<String, AnyObject>, let date = rawData["date"] as? Int64 {
+                                    if date > CurrentUser.lastDate {
+                                        unreaded += 1
+                                    } else {
+                                        readed += 1
+                                    }
+                                } else {
+                                    readed = messages.count
+                                    unreaded = 0
+                                }
+                            }
+                            channel = Channel(id: id, name: name, creator: creator, num: readed)
+                        } else {
+                            channel = Channel(id: id, name: name, creator: creator, num: messages.count)
+                        }
                     } else {
                         channel = Channel(id: id, name: name, creator: creator, num: 0)
                     }
-                    if self.getChannelIndex(channel: channel) == nil {
+                    if CurrentUser.getChannelIndex(channel: channel) == nil {
                         CurrentUser.channels.append(channel)
-                        CurrentUser.channelsCounter.append(channel.num)
+                        CurrentUser.channelsCounter.append(readed + unreaded)
                         self.tableView.reloadData()
                     }
                 }
             }
         })
+  
         
         channelRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
@@ -169,7 +192,7 @@ class MainViewController: UITableViewController {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, let message = channelData["messages"] as! Dictionary<String, AnyObject>! {
                     let channel = Channel(id: id, name: name, creator: creator, num: message.count)
-                    if let index = self.getChannelIndex(channel: channel) {
+                    if let index = CurrentUser.getChannelIndex(channel: channel) {
                         if CurrentUser.channelsCounter[index] != channel.num {
                             CurrentUser.channelsCounter[index] = channel.num
                             self.tableView.reloadData()
@@ -184,30 +207,13 @@ class MainViewController: UITableViewController {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
                     let channel = Channel(id: id, name: name, creator: creator)
-                    if let index = self.getChannelIndex(channel: channel) {
+                    if let index = CurrentUser.getChannelIndex(channel: channel) {
                         let indexPath = IndexPath(row: index, section: MainSection.currentChannel.rawValue)
                         self.removeChannel(indexPath: indexPath)
                     }
                 }
             }
         })
-    }
-    
-    private func getChannelIndex (channel: Channel) -> Int? {
-        var index: Int = 0
-        var fond: Bool = false
-        for i in CurrentUser.channels {
-            if i.id == channel.id {
-                fond = true
-                break
-            }
-            index += 1
-        }
-        if fond {
-            return index
-        } else {
-            return nil
-        }
     }
     
     func createChannelFB(_ sender: UITextField) {
@@ -261,6 +267,8 @@ class MainViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {}
     
     //MARK:- Table View
     
@@ -329,8 +337,6 @@ class MainViewController: UITableViewController {
                     cell?.counter.textColor = UIColor.white
                     cell?.counter.layer.backgroundColor = UIColor.red.cgColor
                     cell?.counter.layer.cornerRadius = 9
-                    cell?.counter.layer.borderWidth = 0.5
-                    cell?.counter.layer.borderColor = UIColor.white.cgColor
                 }
                 
 

@@ -83,6 +83,13 @@ class ChatViewController: JSQMessagesViewController {
         self.observeTyping()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if let index = CurrentUser.getChannelIndex(channel: self.channel!) {
+            CurrentUser.channels[index].num = self.messages.count
+            CurrentUser.channelsCounter[index] = self.messages.count
+        }
+    }
+    
     //=======================================================================//
     //MARK:- UI Initializing
     private func initUI () {

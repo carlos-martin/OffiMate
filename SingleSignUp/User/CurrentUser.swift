@@ -20,7 +20,14 @@ class CurrentUser {
     static var channels:           [Channel] = []
     static var channelsCounter:    [Int] = []
     
-    static var date: NewDate = NewDate(date: Date())
+    //Last connexion day
+    static var lastDate: Int64! {
+        didSet {
+            print(self.lastDate)
+        }
+    }
+    
+    //static var date: NewDate = NewDate(date: Date())
     //FirebaseAuth user
     static var user: User!
     
@@ -53,6 +60,7 @@ class CurrentUser {
         self.coworkerId = nil
         self.channels = []
         self.channelsCounter = []
+        UserDefaults.standard.removeObject(forKey: "lastDate")
         UserDefaults.standard.removeObject(forKey: "name")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
@@ -100,6 +108,53 @@ class CurrentUser {
         } catch {
             throw NSError(domain: "Not valid input data", code: 0, userInfo: nil)
         }
+    }
+    
+    static func getChannelIndex (channel: Channel) -> Int? {
+        var index: Int = 0
+        var fond: Bool = false
+        for i in CurrentUser.channels {
+            if i.id == channel.id {
+                fond = true
+                break
+            }
+            index += 1
+        }
+        if fond {
+            return index
+        } else {
+            return nil
+        }
+    }
+    
+    //MARK:- Connexion date
+    
+    static func saveFistAccessDay () {
+        do {
+            self.lastDate = try NewDate(id: 200001010800).id
+            UserDefaults.standard.set(self.lastDate, forKey: "lastDate")
+        } catch {
+            print("error")
+        }
+ 
+    }
+    
+    static func saveCurrentDay () {
+        self.lastDate = NewDate(date: Date()).id
+        UserDefaults.standard.set(self.lastDate, forKey: "lastDate")
+    }
+    
+    static func tryLoadLastDay () {
+        if let date = UserDefaults.standard.object(forKey: "lastDate") as? Int64 {
+            self.lastDate = date
+        } else {
+            do {
+                self.lastDate = try NewDate(id: 200001010800).id
+            } catch {
+                print("error")
+            }
+        }
+        print(self.lastDate)
     }
     
     //MARK:- Firebase

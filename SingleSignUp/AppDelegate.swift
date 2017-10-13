@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CurrentUser.tryToLogin(completion: { (isLogin: Bool, error: Error?) in
                 if !isLogin {
                     self.onboardMainView()
+                } else {
+                    CurrentUser.tryLoadLastDay()
                 }
             })
         } else {

@@ -23,8 +23,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Kru-ak-il5"/>
+                    <connections>
+                        <segue destination="FBB-0b-VRZ" kind="unwind" identifier="unwindSegueToMain" unwindAction="unwindToMainWithSegue:" id="MgB-lB-2Oh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxe-EF-ier" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FBB-0b-VRZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="330" y="-3"/>
         </scene>
