@@ -20,7 +20,6 @@ class MainViewController: UITableViewController {
     
     var channels:           [Channel] = []
     var senderDisplayName:  String?
-    var spinner:            SpinnerLoader?
     var newChannel:         Channel?
     var newChannelButton:   UIButton?
     var newChannelIsHide:   Bool = true
@@ -32,8 +31,7 @@ class MainViewController: UITableViewController {
                 if self.stopLoading! {
                     self.spinnerView.isHidden = true
                     self.spinnerView.stopAnimating()
-                }
-                else {
+                } else {
                     self.spinnerView.isHidden = false
                     self.spinnerView.startAnimating()
                 }
@@ -48,6 +46,8 @@ class MainViewController: UITableViewController {
         get { return !(self.stopLoading!) }
     }
     
+    //UI
+    var spinner: SpinnerLoader?
     @IBOutlet weak var emptyChannelsLabel: UILabel!
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     
@@ -143,7 +143,6 @@ class MainViewController: UITableViewController {
         })
         channelRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
-                //self.spinner?.stop()
                 self.stopLoading = true
                 self.emptyChannelsLabel.isHidden = (self.emptyChannelsLabel.isHidden ? false : true)
             }

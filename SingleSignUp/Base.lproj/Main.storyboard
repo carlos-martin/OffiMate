@@ -40,9 +40,8 @@
                             <rect key="frame" x="0.0" y="162" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="There are no channel yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcS-LU-O1o">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no channel yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcS-LU-O1o">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -56,6 +55,10 @@
                                 </activityIndicatorView>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="CcS-LU-O1o" firstAttribute="top" secondItem="1Nt-tL-k7k" secondAttribute="top" id="FgP-7w-R0L"/>
+                                <constraint firstAttribute="bottom" secondItem="CcS-LU-O1o" secondAttribute="bottom" id="G0Z-Oa-t0H"/>
+                                <constraint firstAttribute="trailing" secondItem="CcS-LU-O1o" secondAttribute="trailing" id="MYj-JI-i36"/>
+                                <constraint firstItem="CcS-LU-O1o" firstAttribute="leading" secondItem="1Nt-tL-k7k" secondAttribute="leading" id="V5h-F3-E3N"/>
                                 <constraint firstItem="VxW-6v-XPd" firstAttribute="centerX" secondItem="1Nt-tL-k7k" secondAttribute="centerX" id="hjt-ug-Z84"/>
                                 <constraint firstItem="VxW-6v-XPd" firstAttribute="centerY" secondItem="1Nt-tL-k7k" secondAttribute="centerY" id="mVF-EL-lPn"/>
                             </constraints>

@@ -12,7 +12,25 @@ import Firebase
 class CoworkersViewController: UITableViewController {
     
     //UI
-    var spinner: SpinnerLoader?
+    @IBOutlet weak var emptyCoworkerLabel: UILabel!
+    @IBOutlet weak var spinnerView: UIActivityIndicatorView!
+    
+    var stopLoading: Bool! {
+        didSet {
+            if self.stopLoading! {
+                self.spinnerView.isHidden = true
+                self.spinnerView.stopAnimating()
+            } else {
+                self.spinnerView.isHidden = false
+                self.spinnerView.startAnimating()
+            }
+        }
+    }
+    
+    var startLoading: Bool! {
+        set { self.stopLoading = (newValue != nil ? !(newValue!) : true) }
+        get { return !(self.stopLoading!) }
+    }
     
     //Firebase
     private      var coworkers:         [Coworker] = []
@@ -26,15 +44,7 @@ class CoworkersViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.spinner == nil {
-            self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
-        }
         if coworkerRefHandle == nil { self.observeCoworkers() }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.spinner = nil
     }
     
     deinit {
@@ -49,12 +59,13 @@ class CoworkersViewController: UITableViewController {
     
     private func initUI() {
         self.navigationItem.title = "Coworkers"
+        self.emptyCoworkerLabel.isHidden = true
     }
     
     private func observeCoworkers() {
-        self.spinner?.start()
+        self.startLoading = true
         self.coworkerRefHandle = self.coworkerRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
-            self.spinner?.stop()
+            self.stopLoading = true
             let coworkerData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
             if let name = coworkerData["name"] as! String!, let email = coworkerData["email"] as! String!, let uid = coworkerData["userId"] as! String! {
@@ -66,6 +77,12 @@ class CoworkersViewController: UITableViewController {
                 }
             }
         })
+        coworkerRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.childrenCount == 0 {
+                self.stopLoading = true
+                self.emptyCoworkerLabel.isHidden = false
+            }
+        }
     }
     
     //MARK: - Segues
