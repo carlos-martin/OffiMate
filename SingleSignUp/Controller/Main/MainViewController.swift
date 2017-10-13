@@ -24,6 +24,17 @@ class MainViewController: UITableViewController {
     var newChannelIsHide:   Bool = true
     var lastContentOffset:  CGFloat = 0
     
+    var stopLoading: Bool! {
+        didSet {
+            if self.stopLoading! { self.spinner?.stop() } else { self.spinner?.start() }
+        }
+    }
+    
+    var startLoading: Bool! {
+        set { self.stopLoading = (newValue != nil ? !(newValue!) : true) }
+        get { return !(self.stopLoading!) }
+    }
+    
     @IBOutlet weak var emptyChannelsLabel: UILabel!
     
     //Firebase variables
@@ -51,14 +62,16 @@ class MainViewController: UITableViewController {
         
         var counter = channels.count
         if counter > 0 {
-            self.spinner?.start()
+            //self.spinner?.start()
+            self.startLoading = true
             for i in channels {
                 self.updateCounter(i, completion: { (num: Int) in
                     i.num = num
                     counter -= 1
                     if counter == 0 {
-                        self.spinner?.stop()
                         self.tableView.reloadData()
+                        //self.spinner?.stop()
+                        self.stopLoading = true
                     }
                 })
             }
@@ -100,16 +113,18 @@ class MainViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = menuButton
         self.navigationItem.leftBarButtonItem = profileButton
         self.navigationItem.title = "OffiMate"
-        self.spinner = SpinnerLoader(view: self.view)
+        self.spinner = SpinnerLoader(view: self.view)//self.splitViewController!.view)
         self.emptyChannelsLabel.isHidden = true
     }
     
     //MARK:- Firebase related methods
     
     private func observeChannels() {
-        self.spinner?.start()
+        //self.spinner?.start()
+        self.startLoading = true
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
-            self.spinner?.stop()
+            //self.spinner?.stop()
+            self.stopLoading = true
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
@@ -124,7 +139,8 @@ class MainViewController: UITableViewController {
         })
         channelRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
-                self.spinner?.stop()
+                //self.spinner?.stop()
+                self.stopLoading = true
                 self.emptyChannelsLabel.isHidden = (self.emptyChannelsLabel.isHidden ? false : true)
             }
         }
