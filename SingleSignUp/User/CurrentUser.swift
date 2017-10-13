@@ -16,6 +16,10 @@ class CurrentUser {
     static private(set) var password:   String!
     static private(set) var coworkerId: String!
     
+    //Main view controller
+    static var channels:           [Channel] = []
+    static var channelsCounter:    [Int] = []
+    
     static var date: NewDate = NewDate(date: Date())
     //FirebaseAuth user
     static var user: User!

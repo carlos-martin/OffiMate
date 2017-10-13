@@ -92,15 +92,7 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.inputToolbar.contentView.textView.layer.cornerRadius = 12
         self.inputToolbar.contentView.textView.placeHolder = "Add new message..."
-        self.scrollToBottom(animated: true)
-
-        if Tools.iOS() > 10 {
-            let navigationHeight = self.navigationController?.navigationBar.bounds.height
-            let inputtoolHeight = self.inputToolbar.bounds.height
-            
-            self.collectionView.contentInset = UIEdgeInsetsMake(navigationHeight! + 12, 0, inputtoolHeight, 0)
-            self.collectionView.scrollIndicatorInsets = self.collectionView.contentInset
-        }
+        //self.scrollToBottom(animated: true)
     }
     
     //=======================================================================//
@@ -141,7 +133,8 @@ class ChatViewController: JSQMessagesViewController {
     
     private func observeMessage() {
         self.messagesRef = self.channelRef!.child("messages")
-        let messageQuery = self.messagesRef.queryLimited(toLast: UInt(self.totalMessages!))
+        let limit = UInt(self.totalMessages! == 0 ? 25 : self.totalMessages!)
+        let messageQuery = self.messagesRef.queryLimited(toLast: limit)
         
         if self.counter! > 0 {
             self.spinner?.start()
