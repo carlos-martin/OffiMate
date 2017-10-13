@@ -16,6 +16,8 @@ enum MainSection: Int {
 
 class MainViewController: UITableViewController {
 
+    var firstAccess: Bool = true
+    
     var channels:           [Channel] = []
     var senderDisplayName:  String?
     var spinner:            SpinnerLoader?
@@ -26,7 +28,9 @@ class MainViewController: UITableViewController {
     
     var stopLoading: Bool! {
         didSet {
-            if self.stopLoading! { self.spinner?.stop() } else { self.spinner?.start() }
+            if self.stopLoading! {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: { self.spinner?.stop() })
+            } else { self.spinner?.start() }
         }
     }
     
@@ -42,10 +46,21 @@ class MainViewController: UITableViewController {
     private      var channelRefHandle:  DatabaseHandle?
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         self.initUI()
-        self.observeChannels()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.spinner == nil {
+            self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
+        }
+        if channelRefHandle == nil { self.observeChannels() }
+        if channels.count > 0 { self.updateChannelCounter() }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.spinner = nil
     }
     
     deinit {
@@ -54,29 +69,7 @@ class MainViewController: UITableViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if let split = self.splitViewController {
-            self.clearsSelectionOnViewWillAppear = split.isCollapsed
-        }
-        super.viewWillAppear(animated)
-        
-        var counter = channels.count
-        if counter > 0 {
-            //self.spinner?.start()
-            self.startLoading = true
-            for i in channels {
-                self.updateCounter(i, completion: { (num: Int) in
-                    i.num = num
-                    counter -= 1
-                    if counter == 0 {
-                        self.tableView.reloadData()
-                        //self.spinner?.stop()
-                        self.stopLoading = true
-                    }
-                })
-            }
-        }
-    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -113,27 +106,25 @@ class MainViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = menuButton
         self.navigationItem.leftBarButtonItem = profileButton
         self.navigationItem.title = "OffiMate"
-        self.spinner = SpinnerLoader(view: self.view)//self.splitViewController!.view)
         self.emptyChannelsLabel.isHidden = true
+        self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
     }
     
     //MARK:- Firebase related methods
     
     private func observeChannels() {
-        //self.spinner?.start()
         self.startLoading = true
         channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
-            //self.spinner?.stop()
             self.stopLoading = true
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, name.characters.count > 0 {
                     let channel = Channel(id: id, name: name, creator: creator)
-                    self.updateCounter(channel, completion: { (counter: Int) in
-                        channel.num = counter
+                    self.channelRef.child(channel.id).child("messages").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+                        channel.num = Int(snapshot.childrenCount)
                         self.channels.append(channel)
                         self.tableView.reloadData()
-                    })
+                    }
                 }
             }
         })
@@ -146,11 +137,22 @@ class MainViewController: UITableViewController {
         }
     }
     
-    private func updateCounter(_ channel: Channel, completion: @escaping (_ num: Int) -> Void) {
-        self.channelRef.child(channel.id).child("messages").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            completion(Int(snapshot.childrenCount))
+    private func updateChannelCounter() {
+        var counter = self.channels.count
+        self.startLoading = true
+        for channel in channels {
+            self.channelRef.child(channel.id).child("messages").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+                channel.num = Int(snapshot.childrenCount)
+                counter -= 1
+                if counter == 0 {
+                    self.tableView.reloadData()
+                    self.stopLoading = true
+                }
+                
+            }
         }
     }
+
     
     func createChannel(_ sender: UITextField) {
         if !(sender.text!.isEmpty) {
@@ -189,7 +191,6 @@ class MainViewController: UITableViewController {
                 let channel = self.channels[indexPath.row]
                 controller.channel = channel
                 controller.channelRef = channelRef.child(channel.id)
-                controller.auto = false
                 controller.totalMessages = channel.num
             }
         }

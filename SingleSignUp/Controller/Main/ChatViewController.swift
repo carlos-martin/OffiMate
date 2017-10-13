@@ -12,9 +12,6 @@ import JSQMessagesViewController
 
 class ChatViewController: JSQMessagesViewController {
     
-    //Variable necessary for SplitViewController proper behavior
-    var auto: Bool = true
-    
     //Chat settings
     var channelRef: DatabaseReference?
     var channel:    Channel? {
@@ -69,29 +66,21 @@ class ChatViewController: JSQMessagesViewController {
         self.senderId = Auth.auth().currentUser?.uid ?? ""
         self.senderDisplayName = CurrentUser.name ?? ""
         
-        //Necessary for SplitViewController proper behavior
-        if self.auto {
-            self.inputToolbar.isHidden = true
-            self.toMainViewController()
-        } else {
-            self.initUI()
-            self.channelStillAlive({ (isAlive: Bool) in
-                if isAlive {
-                    self.observeMessage()
-                } else {
-                    Alert.showFailiureAlert(message: self.notExistsError, handler: { (_) in
-                        self.toMainViewController()
-                    })
-                }
-            })
-        }
+        self.initUI()
+        self.channelStillAlive({ (isAlive: Bool) in
+            if isAlive {
+                self.observeMessage()
+            } else {
+                Alert.showFailiureAlert(message: self.notExistsError, handler: { (_) in
+                    self.toMainViewController()
+                })
+            }
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !self.auto {
-            self.observeTyping()
-        }
+        self.observeTyping()
     }
     
     //=======================================================================//

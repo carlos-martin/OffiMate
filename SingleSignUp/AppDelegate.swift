@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
@@ -19,10 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
         if CurrentUser.isInit() {
             CurrentUser.tryToLogin(completion: { (isLogin: Bool, error: Error?) in
-                if isLogin {
-                    let splitViewController = self.window!.rootViewController as! UISplitViewController
-                    splitViewController.delegate = self
-                } else {
+                if !isLogin {
                     self.onboardMainView()
                 }
             })
@@ -36,6 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     private func onboardMainView() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Onboard", bundle: nil)
+        let initialViewController = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+    }
+    
+    private func channelMainView() {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initialViewController = storyboard.instantiateInitialViewController()
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
@@ -62,12 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-    }
-    
-    // MARK: - Split view
-    
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
-        return true
     }
     
 }

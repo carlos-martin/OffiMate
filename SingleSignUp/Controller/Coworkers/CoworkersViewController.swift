@@ -15,15 +15,26 @@ class CoworkersViewController: UITableViewController {
     var spinner: SpinnerLoader?
     
     //Firebase
-    private      var coworkers:         [Coworker] =        []
+    private      var coworkers:         [Coworker] = []
     private lazy var coworkerRef:       DatabaseReference = Database.database().reference().child("coworkers")
     private      var coworkerRefHandle: DatabaseHandle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.initUI()
-        self.observeCoworkers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.spinner == nil {
+            self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
+        }
+        if coworkerRefHandle == nil { self.observeCoworkers() }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.spinner = nil
     }
     
     deinit {
@@ -34,12 +45,10 @@ class CoworkersViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     private func initUI() {
         self.navigationItem.title = "Coworkers"
-        self.spinner = SpinnerLoader(view: self.view)
     }
     
     private func observeCoworkers() {
