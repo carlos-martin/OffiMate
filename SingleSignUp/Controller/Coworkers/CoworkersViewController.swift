@@ -12,18 +12,39 @@ import Firebase
 class CoworkersViewController: UITableViewController {
     
     //UI
-    var spinner: SpinnerLoader?
+    @IBOutlet weak var emptyCoworkerLabel: UILabel!
+    @IBOutlet weak var spinnerView: UIActivityIndicatorView!
+    
+    var stopLoading: Bool! {
+        didSet {
+            if self.stopLoading! {
+                self.spinnerView.isHidden = true
+                self.spinnerView.stopAnimating()
+            } else {
+                self.spinnerView.isHidden = false
+                self.spinnerView.startAnimating()
+            }
+        }
+    }
+    
+    var startLoading: Bool! {
+        set { self.stopLoading = (newValue != nil ? !(newValue!) : true) }
+        get { return !(self.stopLoading!) }
+    }
     
     //Firebase
-    private      var coworkers:         [Coworker] =        []
+    private      var coworkers:         [Coworker] = []
     private lazy var coworkerRef:       DatabaseReference = Database.database().reference().child("coworkers")
     private      var coworkerRefHandle: DatabaseHandle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.initUI()
-        self.observeCoworkers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if coworkerRefHandle == nil { self.observeCoworkers() }
     }
     
     deinit {
@@ -34,18 +55,17 @@ class CoworkersViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     private func initUI() {
         self.navigationItem.title = "Coworkers"
-        self.spinner = SpinnerLoader(view: self.view)
+        self.emptyCoworkerLabel.isHidden = true
     }
     
     private func observeCoworkers() {
-        self.spinner?.start()
+        self.startLoading = true
         self.coworkerRefHandle = self.coworkerRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
-            self.spinner?.stop()
+            self.stopLoading = true
             let coworkerData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
             if let name = coworkerData["name"] as! String!, let email = coworkerData["email"] as! String!, let uid = coworkerData["userId"] as! String! {
@@ -57,6 +77,12 @@ class CoworkersViewController: UITableViewController {
                 }
             }
         })
+        coworkerRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.childrenCount == 0 {
+                self.stopLoading = true
+                self.emptyCoworkerLabel.isHidden = false
+            }
+        }
     }
     
     //MARK: - Segues

@@ -203,9 +203,9 @@
 			isa = PBXGroup;
 			children = (
 				1A343FE61F6AAAC3000CB641 /* Main */,
+				1AD3A0391F7BC09C002DD969 /* Coworkers */,
 				1A343FEC1F6AACDB000CB641 /* Profile */,
 				1A20B47A1F4C73C600F3A44C /* Onboard */,
-				1AD3A0391F7BC09C002DD969 /* Coworkers */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
