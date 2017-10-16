@@ -70,7 +70,7 @@ class PasswordViewController: UIViewController {
                         do {
                             try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!, coworkerId: coworkerId)
                             try CurrentUser.localSave()
-                            CurrentUser.saveFistAccessDay()
+                            //CurrentUser.saveFistAccessDay()
                         } catch {
                             Tools.cellViewErrorAnimation(cell: cell)
                         }

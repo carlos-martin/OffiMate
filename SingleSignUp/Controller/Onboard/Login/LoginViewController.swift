@@ -63,7 +63,7 @@ class LoginViewController: UIViewController {
                         do {
                             try CurrentUser.setData(name: username, email: self.username!, password: self.password!, coworkerId: coworkerId!)
                             try CurrentUser.localSave()
-                            CurrentUser.saveFistAccessDay()
+                            //CurrentUser.saveFistAccessDay()
                         } catch {
                             Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
                         }

@@ -21,11 +21,7 @@ class CurrentUser {
     static private(set) var channels:           [Channel] = []
     
     //Last connexion day
-    static var lastDate: Int64! {
-        didSet {
-            print(self.lastDate)
-        }
-    }
+    static var lastDate: Int64!
     
     //static var date: NewDate = NewDate(date: Date())
     //FirebaseAuth user
@@ -127,24 +123,17 @@ class CurrentUser {
     }
     
     //MARK:- Connexion date
-    
-    static func saveFistAccessDay () {
-        self.lastDate = NewDate(id: 20000101080059).id
-        UserDefaults.standard.set(self.lastDate, forKey: "lastDate")
+
+    static func saveChannelsLastAccess () {
+        UserDefaults.standard.set(self.channelsLastAccess, forKey: "channelsLastAccess")
     }
     
-    static func saveCurrentDay () {
-        self.lastDate = NewDate(date: Date()).id
-        UserDefaults.standard.set(self.lastDate, forKey: "lastDate")
-    }
-    
-    static func tryLoadLastDay () {
-        if let date = UserDefaults.standard.object(forKey: "lastDate") as? Int64 {
-            self.lastDate = date
+    static func tryLoadingChannelsLastAccess () {
+        if let dateArray = UserDefaults.standard.array(forKey: "channelsLastAccess") as? [Int64] {
+            self.channelsLastAccess = dateArray
         } else {
-            self.lastDate = NewDate(id: 20000101080059).id
+            self.channelsLastAccess = []
         }
-        print(self.lastDate)
     }
     
     //MARK:- Firebase
@@ -154,7 +143,7 @@ class CurrentUser {
             Auth.auth().signIn(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
                 if error == nil {
                     self.user = user
-                    
+                    self.tryLoadingChannelsLastAccess()
                     Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?, coworkerId: String?) in
                         self.name = (name != nil ? name! : "#tryToLogin#")
                         self.coworkerId = coworkerId!
@@ -175,13 +164,16 @@ class CurrentUser {
     }
     
     //MARK:- updates channels
+    static func initChannel (channels: [Channel]) {
+        self.channels = channels
+    }
     
     static func addChannel (channel: Channel, lastAccess: NewDate?=nil) {
         if let index = getChannelIndex(channel: channel) {
             self.channels[index] = channel
             self.channelsLastAccess[index] = (lastAccess != nil ? lastAccess!.id : NewDate(id: 20000101080059).id)
         } else {
-            print("Adding new channel: \(channel)")
+            //print("Adding new channel: \(channel)")
             self.channels.append(channel)
             let id = (lastAccess != nil ? lastAccess!.id : NewDate(id: 20000101080059).id)
             self.channelsLastAccess.append(id)
@@ -191,10 +183,10 @@ class CurrentUser {
     static func updateChannel (channel: Channel, lastAccess: NewDate?=nil) {
         
         if let index = getChannelIndex(channel: channel) {
-            print(" ~ Channel will be update! \(self.channels[index].messages.count) ~> \(channel.messages.count)")
+            //print(" ~ Channel will be update! \(self.channels[index].messages.count) ~> \(channel.messages.count)")
             self.channels[index] = channel
             if let date = lastAccess {
-                print(" ~ Also the access date: \(date)")
+                //print(" ~ Also the access date: \(date)")
                 self.channelsLastAccess[index] = date.id
             }
         }         

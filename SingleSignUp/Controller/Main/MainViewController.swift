@@ -225,7 +225,7 @@ class MainViewController: UITableViewController {
     
     func deleteChannelFB(_ sender: Channel, completion: @escaping (_ error: Error?) -> Void) {
         let toRemoveChannelRef = channelRef.child(sender.id)
-        print(toRemoveChannelRef)
+        //print(toRemoveChannelRef)
         toRemoveChannelRef.removeValue { (error: Error?, ref: DatabaseReference) in
             completion(error)
         }
@@ -320,7 +320,7 @@ class MainViewController: UITableViewController {
                 cell?.label.text = channel.name
                 
                 let counter = channel.getUnread(from: lastAccess)
-                print("[\(indexPath.row)]: \(counter)")
+                //print("[\(indexPath.row)]: \(counter)")
                 if counter == 0 {
                     cell?.counter.isHidden = true
                 } else {

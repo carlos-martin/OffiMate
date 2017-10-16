@@ -24,6 +24,8 @@
 		1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */; };
 		1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */; };
 		1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */; };
+		1A9800E11F94C912002EED53 /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A9800DF1F94C912002EED53 /* Loading.storyboard */; };
+		1A9800E31F94C97A002EED53 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9800E21F94C97A002EED53 /* LoadingViewController.swift */; };
 		1A995F5B1F862AA400EE72C5 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */; };
 		1A995F5D1F867B7D00EE72C5 /* InboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A995F5C1F867B7C00EE72C5 /* InboxViewCell.swift */; };
 		1A9CC3891F4DC17E000C6479 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9CC3881F4DC17E000C6479 /* Alert.swift */; };
@@ -67,6 +69,8 @@
 		1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewCell.swift; sourceTree = "<group>"; };
 		1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewCell.swift; sourceTree = "<group>"; };
+		1A9800E01F94C912002EED53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Loading.storyboard; sourceTree = "<group>"; };
+		1A9800E21F94C97A002EED53 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		1A995F5C1F867B7C00EE72C5 /* InboxViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewCell.swift; sourceTree = "<group>"; };
 		1A9CC3881F4DC17E000C6479 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 		1A813D131F4B0AE700F190A2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1A9800E21F94C97A002EED53 /* LoadingViewController.swift */,
 				1A343FE61F6AAAC3000CB641 /* Main */,
 				1AD3A0391F7BC09C002DD969 /* Coworkers */,
 				1A343FEC1F6AACDB000CB641 /* Profile */,
@@ -218,6 +223,7 @@
 				1A417FC41F55886700ADC6B5 /* Profile.storyboard */,
 				1AD3A0361F7BBFDB002DD969 /* Coworkers.storyboard */,
 				1AA2BC4B1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard */,
+				1A9800DF1F94C912002EED53 /* Loading.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -389,6 +395,7 @@
 				1AA2BC451F4ACEFE00E0C2E5 /* Main.storyboard in Resources */,
 				1AD3A0381F7BBFDB002DD969 /* Coworkers.storyboard in Resources */,
 				1A6A5F131F692E1E0052F1FB /* GoogleService-Info.plist in Resources */,
+				1A9800E11F94C912002EED53 /* Loading.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +478,7 @@
 				1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */,
 				1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */,
 				1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */,
+				1A9800E31F94C97A002EED53 /* LoadingViewController.swift in Sources */,
 				1AAA5CAB1F8253E000C59597 /* Coworker.swift in Sources */,
 				1AC439661F8532C000CCBF22 /* BoostCardMessageViewController.swift in Sources */,
 				1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */,
@@ -515,6 +523,14 @@
 				1A813D171F4B0DCD00F190A2 /* Base */,
 			);
 			name = Onboard.storyboard;
+			sourceTree = "<group>";
+		};
+		1A9800DF1F94C912002EED53 /* Loading.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A9800E01F94C912002EED53 /* Base */,
+			);
+			name = Loading.storyboard;
 			sourceTree = "<group>";
 		};
 		1AA2BC431F4ACEFE00E0C2E5 /* Main.storyboard */ = {

@@ -80,6 +80,8 @@ public class Tools {
         UIColor(colorLiteralRed: 169.0/255.0, green: 233.0/255.0, blue: 197.0/255.0, alpha: 1.0)
     ]
     
+    static var channelRef = Database.database().reference().child("channels")
+    static var channelsHandle:  DatabaseHandle?
 }
 
 //MARK:- BackEnd 
@@ -151,7 +153,40 @@ extension Tools {
         }
     }
     
-    //SELECT * FROM Users WHERE Age = 28 && Location = 'Berlin';
+    //MARK: Channels
+    
+    static func initChannelsList (completion: @escaping() -> Void) {
+        self.channelsHandle = self.channelRef.observe(.value) { (snapshot: DataSnapshot) in
+            if let rawChannels = snapshot.value as? Dictionary<String, AnyObject> {
+                if rawChannels.count == CurrentUser.channelsLastAccess.count {
+                    var channels: [Channel] = []
+                    for rawChannel in rawChannels {
+                        let id = rawChannel.key
+                        if let channelData = rawChannel.value as? Dictionary<String, AnyObject> {
+                            if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
+                                if let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                                    channels.append(Channel(id: id, name: name, creator: creator, messages: messages))
+                                } else {
+                                    channels.append(Channel(id: id, name: name, creator: creator))
+                                }
+                            }
+                        }
+                    }
+                    if channels.count == CurrentUser.channelsLastAccess.count {
+                        CurrentUser.initChannel(channels: channels)
+                    }
+                }
+                completion()
+            }
+        }
+    }
+    
+    static func removeChannelObserver () {
+        if let refChannelHandle = self.channelsHandle {
+            self.channelRef.removeObserver(withHandle: refChannelHandle)
+        }
+    }
+    
     
     //MARK: Chat
     static func createChannelMessage(uid: String, text: String, date: NewDate) {
