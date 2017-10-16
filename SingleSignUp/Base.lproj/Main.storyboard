@@ -145,6 +145,7 @@
                                 <connections>
                                     <outlet property="counter" destination="6o5-zQ-3cP" id="9nD-pR-5hd"/>
                                     <outlet property="label" destination="TLK-IW-4pE" id="lGx-96-TZL"/>
+                                    <outlet property="labelRigthConstraint" destination="A7c-Fj-LmC" id="Xbw-4J-ZVR"/>
                                     <segue destination="Bji-Jy-H59" kind="show" identifier="showDetail" id="gy9-Jk-ebs"/>
                                 </connections>
                             </tableViewCell>

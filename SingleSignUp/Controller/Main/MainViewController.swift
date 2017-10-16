@@ -330,8 +330,10 @@ class MainViewController: UITableViewController {
                 //print("[\(indexPath.row)]: \(counter)")
                 if counter == 0 {
                     cell?.counter.isHidden = true
+                    cell?.labelRigthConstraint.constant = 0.0
                 } else {
                     cell?.counter.isHidden = false
+                    cell?.labelRigthConstraint.constant = 23.0
                     cell?.counter.text = String(counter)
                     cell?.counter.textColor = UIColor.white
                     cell?.counter.layer.backgroundColor = UIColor.red.cgColor
@@ -339,6 +341,8 @@ class MainViewController: UITableViewController {
                     cell?.counter.layer.borderWidth = 0.5
                     cell?.counter.layer.borderColor = UIColor.white.cgColor
                 }
+                
+                
                 
                 
                 return cell!
