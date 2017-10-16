@@ -317,6 +317,13 @@ class MainViewController: UITableViewController {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell
                 let channel = CurrentUser.channels[indexPath.row]
                 let lastAccess = CurrentUser.channelsLastAccess[indexPath.row]
+                
+                if channel.creator == CurrentUser.user!.uid {
+                    cell?.label.font = UIFont.boldSystemFont(ofSize: 17)
+                } else {
+                    cell?.label.font = UIFont.systemFont(ofSize: 17)
+                }
+                
                 cell?.label.text = channel.name
                 
                 let counter = channel.getUnread(from: lastAccess)
