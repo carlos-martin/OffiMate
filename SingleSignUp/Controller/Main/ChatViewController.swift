@@ -84,9 +84,8 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let index = CurrentUser.getChannelIndex(channel: self.channel!) {
-            CurrentUser.channels[index].num = self.messages.count
-            CurrentUser.channelsCounter[index] = self.messages.count
+        if let _ = CurrentUser.getChannelIndex(channel: self.channel!) {
+            CurrentUser.updateChannel(channel: self.channel!, lastAccess: NewDate(date: Date()))
         }
     }
     
@@ -153,14 +152,8 @@ class ChatViewController: JSQMessagesViewController {
             if let uid = messageData["uid"] as? String, let text = messageData["text"] as? String, let date = messageData["date"] as? Int64 {
                 Tools.fetchCoworker(uid: uid, completion: { (_, _name: String?, _) in
                     if let name = _name {
-                        let message: JSQMessage
-                        do {
-                            let newDate = try NewDate(id: date)
-                            message = JSQMessage(senderId: uid, senderDisplayName: name, date: newDate.date, text: text)
-                        } catch {
-                            message = JSQMessage(senderId: uid, displayName: name, text: text)
-                        }
-                        self.messages.append(message)
+                        let newDate = NewDate(id: date)
+                        self.messages.append(JSQMessage(senderId: uid, senderDisplayName: name, date: newDate.date, text: text))
                         
                         self.counter! -= 1
                         

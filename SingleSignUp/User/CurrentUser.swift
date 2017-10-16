@@ -17,8 +17,8 @@ class CurrentUser {
     static private(set) var coworkerId: String!
     
     //Main view controller
-    static var channels:           [Channel] = []
-    static var channelsCounter:    [Int] = []
+    static private(set) var channelsLastAccess: [Int64] = []
+    static private(set) var channels:           [Channel] = []
     
     //Last connexion day
     static var lastDate: Int64! {
@@ -59,7 +59,6 @@ class CurrentUser {
         self.password = nil
         self.coworkerId = nil
         self.channels = []
-        self.channelsCounter = []
         UserDefaults.standard.removeObject(forKey: "lastDate")
         UserDefaults.standard.removeObject(forKey: "name")
         UserDefaults.standard.removeObject(forKey: "email")
@@ -130,13 +129,8 @@ class CurrentUser {
     //MARK:- Connexion date
     
     static func saveFistAccessDay () {
-        do {
-            self.lastDate = try NewDate(id: 200001010800).id
-            UserDefaults.standard.set(self.lastDate, forKey: "lastDate")
-        } catch {
-            print("error")
-        }
- 
+        self.lastDate = NewDate(id: 20000101080059).id
+        UserDefaults.standard.set(self.lastDate, forKey: "lastDate")
     }
     
     static func saveCurrentDay () {
@@ -148,11 +142,7 @@ class CurrentUser {
         if let date = UserDefaults.standard.object(forKey: "lastDate") as? Int64 {
             self.lastDate = date
         } else {
-            do {
-                self.lastDate = try NewDate(id: 200001010800).id
-            } catch {
-                print("error")
-            }
+            self.lastDate = NewDate(id: 20000101080059).id
         }
         print(self.lastDate)
     }
@@ -182,6 +172,37 @@ class CurrentUser {
             
             completion(false, error)
         }
+    }
+    
+    //MARK:- updates channels
+    
+    static func addChannel (channel: Channel, lastAccess: NewDate?=nil) {
+        if let index = getChannelIndex(channel: channel) {
+            self.channels[index] = channel
+            self.channelsLastAccess[index] = (lastAccess != nil ? lastAccess!.id : NewDate(id: 20000101080059).id)
+        } else {
+            print("Adding new channel: \(channel)")
+            self.channels.append(channel)
+            let id = (lastAccess != nil ? lastAccess!.id : NewDate(id: 20000101080059).id)
+            self.channelsLastAccess.append(id)
+        }
+    }
+    
+    static func updateChannel (channel: Channel, lastAccess: NewDate?=nil) {
+        
+        if let index = getChannelIndex(channel: channel) {
+            print(" ~ Channel will be update! \(self.channels[index].messages.count) ~> \(channel.messages.count)")
+            self.channels[index] = channel
+            if let date = lastAccess {
+                print(" ~ Also the access date: \(date)")
+                self.channelsLastAccess[index] = date.id
+            }
+        }         
+    }
+    
+    static func removeChannel (index: Int) {
+        self.channels.remove(at: index)
+        self.channelsLastAccess.remove(at: index)
     }
     
     //MARK:- Private local function

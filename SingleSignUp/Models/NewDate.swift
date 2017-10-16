@@ -36,6 +36,7 @@ class NewDate: CustomStringConvertible, Hashable {
     let day:        Int64
     let hour:       Int64
     let minutes:    Int64
+    let seconds:    Int64
     let id:         Int64
     public var hashValue:  Int
     
@@ -66,31 +67,34 @@ class NewDate: CustomStringConvertible, Hashable {
         self.day =      Int64(calendar.component(.day,    from: date))
         self.hour =     Int64(calendar.component(.hour,   from: date))
         self.minutes =  Int64(calendar.component(.minute, from: date))
-        self.id =       (self.year * 100000000) + (self.month * 1000000) + (self.day * 10000) + (self.hour * 100) + self.minutes
+        self.seconds =  Int64(calendar.component(.second, from: date))
+        self.id =       (self.year * 10000000000) + (self.month * 100000000) + (self.day * 1000000) + (self.hour * 10000) + (self.minutes * 100) + self.seconds
         self.hashValue = Int((self.year * 10000) + (self.month * 100) + (self.day))
     }
     
-    init(id: Int64) throws {
+    init(id: Int64) {
         self.id = id
-        self.year =     Int64( self.id/100000000)
-        self.month =    Int64((self.id-year*100000000)/1000000)
-        self.day =      Int64((self.id-(year*100000000)-(month*1000000))/10000)
-        self.hour =     Int64((self.id-(year*100000000)-(month*1000000)-(day*10000))/100)
-        self.minutes =  Int64( self.id-(year*100000000)-(month*1000000)-(day*10000)-(hour*100))
+        self.year =     Int64( self.id/10000000000)
+        self.month =    Int64((self.id-year*10000000000)/100000000)
+        self.day =      Int64((self.id-(year*10000000000)-(month*100000000))/1000000)
+        self.hour =     Int64((self.id-(year*10000000000)-(month*100000000)-(day*1000000))/10000)
+        self.minutes =  Int64((self.id-(year*10000000000)-(month*100000000)-(day*1000000)-(hour*10000))/100)
+        self.seconds =  Int64( self.id-(year*10000000000)-(month*100000000)-(day*1000000)-(hour*10000)-(minutes*100))
         let syear =     "\(year)"
         let smonth =    (month > 9   ? "\(month)"   : "0\(month)")
         let sday =      (day > 9     ? "\(day)"     : "0\(day)")
         let shour =     (hour > 9    ? "\(hour)"    : "0\(hour)")
         let sminutes =  (minutes > 9 ? "\(minutes)" : "0\(minutes)")
-        let string = syear + "-" + smonth + "-" + sday + "T" + shour + ":" + sminutes
+        let sseconds =  (seconds > 9 ? "\(seconds)" : "0\(seconds)")
+        let string = syear + "-" + smonth + "-" + sday + "T" + shour + ":" + sminutes + ":" + sseconds
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         if let _date = dateFormatter.date(from: string) {
             self.date = _date
-            self.hashValue = self.date.hashValue
         } else {
-            throw NSError(domain: "boom", code: 2, userInfo: nil)
+            self.date = Date()
         }
+        self.hashValue = self.date.hashValue
     }
     
     func getWeekNum() -> Int {

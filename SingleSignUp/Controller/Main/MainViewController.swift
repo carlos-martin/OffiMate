@@ -5,7 +5,6 @@
 //  Created by Carlos Martin on 21/08/17.
 //  Copyright © 2017 Carlos Martin. All rights reserved.
 //
-
 import UIKit
 import Firebase
 
@@ -15,11 +14,9 @@ enum MainSection: Int {
 }
 
 class MainViewController: UITableViewController {
-
-    var firstAccess: Bool = true {
-        didSet { if firstAccess == false { CurrentUser.saveCurrentDay() } }
-    }
-
+    
+    var firstAccess: Bool = true
+    
     var senderDisplayName:  String?
     var newChannel:         Channel?
     var newChannelButton:   UIButton?
@@ -61,7 +58,7 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         self.initUI()
         self.observeChannels()
-        self.observeMessage()
+        self.observeChannelsChanges()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +88,7 @@ class MainViewController: UITableViewController {
     }
     
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -137,8 +134,6 @@ class MainViewController: UITableViewController {
     
     private func observeChannels() {
         self.startLoading = true
-        var readed = 0
-        var unreaded = 0
         self.channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.stopLoading = true
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
@@ -146,37 +141,17 @@ class MainViewController: UITableViewController {
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
                     let channel: Channel
                     if let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
-                        if self.firstAccess {
-                            readed = 0
-                            unreaded = 0
-                            for message in messages {
-                                if let rawData = message.value as? Dictionary<String, AnyObject>, let date = rawData["date"] as? Int64 {
-                                    if date > CurrentUser.lastDate {
-                                        unreaded += 1
-                                    } else {
-                                        readed += 1
-                                    }
-                                } else {
-                                    readed = messages.count
-                                    unreaded = 0
-                                }
-                            }
-                            channel = Channel(id: id, name: name, creator: creator, num: readed)
-                        } else {
-                            channel = Channel(id: id, name: name, creator: creator, num: messages.count)
-                        }
+                        channel = Channel(id: id, name: name, creator: creator, messages: messages)
                     } else {
-                        channel = Channel(id: id, name: name, creator: creator, num: 0)
+                        channel = Channel(id: id, name: name, creator: creator)
                     }
-                    if CurrentUser.getChannelIndex(channel: channel) == nil {
-                        CurrentUser.channels.append(channel)
-                        CurrentUser.channelsCounter.append(readed + unreaded)
+                    if self.getChannelIndex(channel: channel) == nil {
+                        CurrentUser.addChannel(channel: channel)
                         self.tableView.reloadData()
                     }
                 }
             }
         })
-  
         
         channelRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
@@ -186,15 +161,15 @@ class MainViewController: UITableViewController {
         }
     }
     
-    private func observeMessage() {
+    private func observeChannelsChanges() {
         self.messageRefHandle = channelRef.observe(.childChanged, with: { (snapshot: DataSnapshot) in
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
-                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, let message = channelData["messages"] as! Dictionary<String, AnyObject>! {
-                    let channel = Channel(id: id, name: name, creator: creator, num: message.count)
-                    if let index = CurrentUser.getChannelIndex(channel: channel) {
-                        if CurrentUser.channelsCounter[index] != channel.num {
-                            CurrentUser.channelsCounter[index] = channel.num
+                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                    let channel = Channel(id: id, name: name, creator: creator, messages: messages)
+                    if let index = self.getChannelIndex(channel: channel) {
+                        if CurrentUser.channels[index].messages.count != messages.count {
+                            CurrentUser.updateChannel(channel: channel)
                             self.tableView.reloadData()
                         }
                     }
@@ -207,13 +182,30 @@ class MainViewController: UITableViewController {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
                     let channel = Channel(id: id, name: name, creator: creator)
-                    if let index = CurrentUser.getChannelIndex(channel: channel) {
+                    if let index = self.getChannelIndex(channel: channel) {
                         let indexPath = IndexPath(row: index, section: MainSection.currentChannel.rawValue)
                         self.removeChannel(indexPath: indexPath)
                     }
                 }
             }
         })
+    }
+    
+    private func getChannelIndex (channel: Channel) -> Int? {
+        var index: Int = 0
+        var fond: Bool = false
+        for i in CurrentUser.channels {
+            if i.id == channel.id {
+                fond = true
+                break
+            }
+            index += 1
+        }
+        if fond {
+            return index
+        } else {
+            return nil
+        }
     }
     
     func createChannelFB(_ sender: UITextField) {
@@ -241,8 +233,7 @@ class MainViewController: UITableViewController {
     
     func removeChannel(indexPath: IndexPath) {
         if indexPath.row < CurrentUser.channels.count {
-            CurrentUser.channels.remove(at: indexPath.row)
-            CurrentUser.channelsCounter.remove(at: indexPath.row)
+            CurrentUser.removeChannel(index: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
             self.tableView.reloadData()
         }
@@ -260,15 +251,13 @@ class MainViewController: UITableViewController {
                     controller = segue.destination as! ChatViewController
                 }
                 let channel = CurrentUser.channels[indexPath.row]
-                channel.num = CurrentUser.channelsCounter[indexPath.row]
+                //channel.num = CurrentUser.channelsCounter[indexPath.row]
                 controller.channel = channel
                 controller.channelRef = channelRef.child(channel.id)
-                controller.totalMessages = channel.num
+                controller.totalMessages = channel.messages.count
             }
         }
     }
-    
-    @IBAction func unwindToMain(segue: UIStoryboardSegue) {}
     
     //MARK:- Table View
     
@@ -327,19 +316,24 @@ class MainViewController: UITableViewController {
             case .currentChannel:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as? MainViewCell
                 let channel = CurrentUser.channels[indexPath.row]
-                let newNum = CurrentUser.channelsCounter[indexPath.row]
+                let lastAccess = CurrentUser.channelsLastAccess[indexPath.row]
                 cell?.label.text = channel.name
-                if channel.num == newNum {
+                
+                let counter = channel.getUnread(from: lastAccess)
+                print("[\(indexPath.row)]: \(counter)")
+                if counter == 0 {
                     cell?.counter.isHidden = true
                 } else {
                     cell?.counter.isHidden = false
-                    cell?.counter.text = String(abs(channel.num-newNum))
+                    cell?.counter.text = String(counter)
                     cell?.counter.textColor = UIColor.white
                     cell?.counter.layer.backgroundColor = UIColor.red.cgColor
                     cell?.counter.layer.cornerRadius = 9
+                    cell?.counter.layer.borderWidth = 0.5
+                    cell?.counter.layer.borderColor = UIColor.white.cgColor
                 }
                 
-
+                
                 return cell!
             }
         } else {
@@ -401,7 +395,7 @@ class MainViewController: UITableViewController {
             
         }
     }
-
+    
 }
 
 extension MainViewController: UITextFieldDelegate {

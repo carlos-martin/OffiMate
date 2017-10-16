@@ -138,11 +138,7 @@ class InboxViewController: UITableViewController {
                     Tools.fetchCoworker(uid: senderId, completion: { (_email: String?, _name: String?, _) in
                         if let email = _email, let name = _name {
                             let newdate: NewDate
-                            do {
-                                newdate = try NewDate(id: date)
-                            } catch {
-                                newdate = NewDate(date: Date())
-                            }
+                            newdate = NewDate(id: date)
                             
                             let boostCard = BoostCard(
                                 id:         entry.key,
