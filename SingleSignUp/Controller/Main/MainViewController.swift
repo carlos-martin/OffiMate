@@ -66,7 +66,7 @@ class MainViewController: UITableViewController {
         if self.spinner == nil {
             self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
         }
-        self.tableView.reloadData()
+        self.reloadView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -130,6 +130,15 @@ class MainViewController: UITableViewController {
         self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
     }
     
+    private func reloadView() {
+        self.tableView.reloadData()
+        if CurrentUser.channels.count > 0 {
+            self.emptyChannelsLabel.isHidden = true
+        } else {
+            self.emptyChannelsLabel.isHidden = false
+        }
+    }
+    
     //MARK:- Firebase related methods
     
     private func observeChannels() {
@@ -147,7 +156,7 @@ class MainViewController: UITableViewController {
                     }
                     if self.getChannelIndex(channel: channel) == nil {
                         CurrentUser.addChannel(channel: channel)
-                        self.tableView.reloadData()
+                        self.reloadView()
                     }
                 }
             }
@@ -170,7 +179,7 @@ class MainViewController: UITableViewController {
                     if let index = self.getChannelIndex(channel: channel) {
                         if CurrentUser.channels[index].messages.count != messages.count {
                             CurrentUser.updateChannel(channel: channel)
-                            self.tableView.reloadData()
+                            self.reloadView()
                         }
                     }
                 }
@@ -184,7 +193,7 @@ class MainViewController: UITableViewController {
                     let channel = Channel(id: id, name: name, creator: creator)
                     if let index = self.getChannelIndex(channel: channel) {
                         let indexPath = IndexPath(row: index, section: MainSection.currentChannel.rawValue)
-                        self.removeChannel(indexPath: indexPath)
+                        self.deleteChannelUI(indexPath: indexPath)
                     }
                 }
             }
@@ -225,17 +234,17 @@ class MainViewController: UITableViewController {
     
     func deleteChannelFB(_ sender: Channel, completion: @escaping (_ error: Error?) -> Void) {
         let toRemoveChannelRef = channelRef.child(sender.id)
-        //print(toRemoveChannelRef)
         toRemoveChannelRef.removeValue { (error: Error?, ref: DatabaseReference) in
             completion(error)
         }
     }
     
-    func removeChannel(indexPath: IndexPath) {
+    func deleteChannelUI(indexPath: IndexPath) {
         if indexPath.row < CurrentUser.channels.count {
             CurrentUser.removeChannel(index: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
-            self.tableView.reloadData()
+        } else {
+            self.reloadView()
         }
     }
     
@@ -339,12 +348,8 @@ class MainViewController: UITableViewController {
                     cell?.counter.layer.backgroundColor = UIColor.red.cgColor
                     cell?.counter.layer.cornerRadius = 9
                     cell?.counter.layer.borderWidth = 0.5
-                    cell?.counter.layer.borderColor = UIColor.white.cgColor
+                    cell?.counter.layer.borderColor = UIColor.red.cgColor
                 }
-                
-                
-                
-                
                 return cell!
             }
         } else {
@@ -378,11 +383,12 @@ class MainViewController: UITableViewController {
             
             Alert.showAlertOptions(title: title, message: message, okAction: { (_) in
                 self.deleteChannelFB(channel, completion: { (error: Error?) in
-                    if error == nil {
-                        self.removeChannel(indexPath: indexPath)
-                    } else {
+                    if error != nil {
                         Alert.showFailiureAlert(error: error!)
                     }
+                    //else {
+                    //    self.deleteChannelUI(indexPath: indexPath)
+                    //}
                 })
             }, cancelAction: { (_) in
                 print("Deleting channel canceled")
