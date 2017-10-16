@@ -49,7 +49,6 @@ class LoginViewController: UIViewController {
     
     func logInAction (_ sender: Any?=nil) {
         if self.validTextFields() {
-            //Alert.showFailiureAlert(message: "Not implemented yet.")
             self.spinner?.start()
             Auth.auth().signIn(withEmail: self.username!, password: self.password!, completion: { (user: User?, error: Error?) in
                 if let nserror = error {
@@ -96,6 +95,15 @@ class LoginViewController: UIViewController {
         } else {
             valid = false
             Tools.cellViewErrorAnimation(cell: passCell)
+        }
+        
+        if valid {
+            if mailCell.emailTextField.isEditing {
+                mailCell.emailTextField.endEditing(true)
+            }
+            if passCell.passwordTextField.isEditing {
+                passCell.passwordTextField.endEditing(true)
+            }
         }
         
         return valid

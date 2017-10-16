@@ -176,8 +176,8 @@ extension Tools {
                         CurrentUser.initChannel(channels: channels)
                     }
                 }
-                completion()
             }
+            completion()
         }
     }
     

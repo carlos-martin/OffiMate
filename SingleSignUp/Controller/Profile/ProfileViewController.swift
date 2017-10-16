@@ -67,11 +67,12 @@ class ProfileViewController: UIViewController {
     func logoutAction() {
         do {
             try Auth.auth().signOut()
+            CurrentUser.localClean()
+            Tools.goToOnboard(vc: self)
         } catch {
             Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
         }
-        CurrentUser.localClean()
-        Tools.goToOnboard(vc: self)
+        
     }
     
     func editAction(name: String?=nil) {

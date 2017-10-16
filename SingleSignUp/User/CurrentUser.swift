@@ -55,11 +55,13 @@ class CurrentUser {
         self.password = nil
         self.coworkerId = nil
         self.channels = []
+        self.channelsLastAccess = []
         UserDefaults.standard.removeObject(forKey: "lastDate")
         UserDefaults.standard.removeObject(forKey: "name")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.removeObject(forKey: "coworkerId")
+        UserDefaults.standard.removeObject(forKey: "channelsLastAccess")
     }
     
     static func setName(name: String) throws {

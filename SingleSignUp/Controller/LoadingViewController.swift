@@ -15,6 +15,9 @@ class LoadingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.spinner = SpinnerLoader(view: self.view)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         self.spinner.start()
         if CurrentUser.isInit() {
             CurrentUser.tryToLogin(completion: { (isLogin: Bool, error: Error?) in
@@ -30,6 +33,7 @@ class LoadingViewController: UIViewController {
                 }
             })
         } else {
+            self.spinner.stop()
             self.goToOnboard(vc: self)
         }
     }
