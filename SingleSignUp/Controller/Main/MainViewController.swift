@@ -319,9 +319,9 @@ class MainViewController: UITableViewController {
                 let lastAccess = CurrentUser.channelsLastAccess[indexPath.row]
                 
                 if channel.creator == CurrentUser.user!.uid {
-                    cell?.label.font = UIFont.boldSystemFont(ofSize: 17)
+                    cell?.label.textColor = UIColor.jsq_messageBubbleBlue()
                 } else {
-                    cell?.label.font = UIFont.systemFont(ofSize: 17)
+                    cell?.label.textColor = UIColor.darkGray
                 }
                 
                 cell?.label.text = channel.name
