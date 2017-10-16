@@ -159,7 +159,9 @@ extension Tools {
         self.channelsHandle = self.channelRef.observe(.value) { (snapshot: DataSnapshot) in
             if let rawChannels = snapshot.value as? Dictionary<String, AnyObject> {
                 if rawChannels.count == CurrentUser.channelsLastAccess.count {
-                    var channels: [Channel] = []
+                    var channels: [Channel] = [] {
+                        didSet { channels.sort { $0.0.id < $0.1.id } }
+                    }
                     for rawChannel in rawChannels {
                         let id = rawChannel.key
                         if let channelData = rawChannel.value as? Dictionary<String, AnyObject> {
