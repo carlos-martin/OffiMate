@@ -292,8 +292,11 @@ class MainViewController: UITableViewController {
     
     func deleteChannelUI(indexPath: IndexPath) {
         if indexPath.row < CurrentUser.channels.count {
+            print("~\(indexPath.row)~")
             CurrentUser.removeChannel(index: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
+            self.tableView.endUpdates()
+            self.reloadView()
         } else {
             self.reloadView()
         }
@@ -311,7 +314,6 @@ class MainViewController: UITableViewController {
                     controller = segue.destination as! ChatViewController
                 }
                 let channel = CurrentUser.channels[indexPath.row]
-                //channel.num = CurrentUser.channelsCounter[indexPath.row]
                 controller.channel = channel
                 controller.channelRef = channelRef.child(channel.id)
                 controller.totalMessages = channel.messages.count
@@ -428,16 +430,18 @@ class MainViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let channel = CurrentUser.channels[indexPath.row]
+            let index = indexPath.row
+            let channel = CurrentUser.channels[index]
+            let lastAccess = CurrentUser.channelsLastAccess[index]
             let title   = "Do you wanna continue?"
             let message = "You are gonna delete \"\(channel.name)\" channel"
             
             Alert.showAlertOptions(title: title, message: message, okAction: { (_) in
+                self.deleteChannelUI(indexPath: indexPath)
                 self.deleteChannelFB(channel, completion: { (error: Error?) in
                     if error != nil {
                         Alert.showFailiureAlert(error: error!)
-                    } else {
-                        self.deleteChannelUI(indexPath: indexPath)
+                        CurrentUser.insertChannel(at: index, channel: channel, lastAccess: NewDate(id: lastAccess))
                     }
                 })
             }, cancelAction: { (_) in

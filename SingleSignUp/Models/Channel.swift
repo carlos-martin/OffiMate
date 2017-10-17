@@ -34,11 +34,6 @@ internal class Channel: CustomStringConvertible, Hashable {
     public   var hashValue:  Int
     
     public var description: String {
-        //        return "Channel:\n" +
-        //            "├── id:      \(self.id)\n" +
-        //            "├── name:    \(self.name)\n" +
-        //            "├── creator: \(self.creator)\n" +
-        //            "└── Message: \n{\(self.messages)}"
         return "Channel:\n" +
             "├── id:      \(self.id)\n" +
             "├── name:    \(self.name)\n" +
