@@ -149,15 +149,21 @@ class MainViewController: UITableViewController {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
                     let channel: Channel
+                    
                     if let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
                         channel = Channel(id: id, name: name, creator: creator, messages: messages)
                     } else {
                         channel = Channel(id: id, name: name, creator: creator)
                     }
-                    if self.getChannelIndex(channel: channel) == nil {
+                    
+                    if let index = self.getChannelIndex(channel: channel) {
+                        let lastAccess = NewDate(id: CurrentUser.channelsLastAccess[index])
+                        CurrentUser.updateChannel(channel: channel, lastAccess: lastAccess)
+                    } else {
                         CurrentUser.addChannel(channel: channel)
-                        self.reloadView()
                     }
+                    
+                    self.reloadView()
                 }
             }
         })
@@ -385,10 +391,9 @@ class MainViewController: UITableViewController {
                 self.deleteChannelFB(channel, completion: { (error: Error?) in
                     if error != nil {
                         Alert.showFailiureAlert(error: error!)
+                    } else {
+                        self.deleteChannelUI(indexPath: indexPath)
                     }
-                    //else {
-                    //    self.deleteChannelUI(indexPath: indexPath)
-                    //}
                 })
             }, cancelAction: { (_) in
                 print("Deleting channel canceled")
