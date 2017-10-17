@@ -56,7 +56,7 @@ class MainViewController: UITableViewController {
     var menuButton:     UIBarButtonItem!
     
     var spinner: SpinnerLoader?
-    @IBOutlet weak var emptyChannelsLabel: UILabel!
+    @IBOutlet weak var emptyChannelsLabel: UILabel! 
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     
     //MARK:- Firebase variables
@@ -81,7 +81,6 @@ class MainViewController: UITableViewController {
         if self.spinner == nil {
             self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
         }
-        self.reloadView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -146,7 +145,8 @@ class MainViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = menuButton
         self.navigationItem.leftBarButtonItem = profileButton
         self.navigationItem.title = "OffiMate"
-        self.emptyChannelsLabel.isHidden = true
+        self.emptyChannelsLabel.isHidden = (CurrentUser.channels.isEmpty ? false : true)
+        print(CurrentUser.channels)
         self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
     }
     

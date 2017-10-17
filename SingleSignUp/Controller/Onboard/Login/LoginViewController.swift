@@ -56,19 +56,22 @@ class LoginViewController: UIViewController {
                     self.spinner?.stop()
                 } else {
                     CurrentUser.user = user
-                    
                     Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?, coworkerId: String?) in
                         let username = (name != nil ? name! : "#logInAction#")
                         do {
                             try CurrentUser.setData(name: username, email: self.username!, password: self.password!, coworkerId: coworkerId!)
                             try CurrentUser.localSave()
-                            //CurrentUser.saveFistAccessDay()
                         } catch {
                             Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
                         }
-
-                        self.spinner?.stop()
-                        Tools.goToMain(vc: self)
+                        
+                        if user!.isEmailVerified {
+                            self.spinner?.stop()
+                            Tools.goToMain(vc: self)
+                        } else {
+                            self.spinner?.stop()
+                            Tools.goToWaitingRoom(vc: self)
+                        }
                     })
                 }
             })
