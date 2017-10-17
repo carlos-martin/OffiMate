@@ -15,13 +15,14 @@ enum MainSection: Int {
 
 class MainViewController: UITableViewController {
     
-    var firstAccess: Bool = true
-    
     var senderDisplayName:  String?
     var newChannel:         Channel?
     var newChannelButton:   UIButton?
     var newChannelIsHide:   Bool = true
     var lastContentOffset:  CGFloat = 0
+    
+    //MARK:- Spinner
+    var firstAccess: Bool = true
     
     var stopLoading: Bool! {
         didSet {
@@ -44,21 +45,35 @@ class MainViewController: UITableViewController {
         get { return !(self.stopLoading!) }
     }
     
-    //UI
+    //MARK:- Boostcard
+    var unreadBoostcard: [BoostCard]! {
+        didSet { if !self.unreadBoostcard.isEmpty { self.profileButton.addBadge() } }
+        willSet { if self.unreadBoostcard != nil { if newValue.isEmpty && !self.unreadBoostcard.isEmpty {self.profileButton.removeBadge()} } }
+    }
+    
+    //MARK:- UI
+    var profileButton:  UIBarButtonItem!
+    var menuButton:     UIBarButtonItem!
+    
     var spinner: SpinnerLoader?
     @IBOutlet weak var emptyChannelsLabel: UILabel!
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     
-    //Firebase variables
-    private lazy var channelRef:        DatabaseReference = Database.database().reference().child("channels")
-    private      var channelRefHandle:  DatabaseHandle?
-    private      var messageRefHandle:  DatabaseHandle?
-    private      var deletedRefHandle:  DatabaseHandle?
+    //MARK:- Firebase variables
+    private lazy var channelRef:    DatabaseReference = Database.database().reference().child("channels")
+    private lazy var boostcardRef:  DatabaseReference = Database.database().reference().child("boostcard")
     
+    private var channelRefHandle:   DatabaseHandle?
+    private var messageRefHandle:   DatabaseHandle?
+    private var deletedRefHandle:   DatabaseHandle?
+    private var boostcardRefHandle: DatabaseHandle?
+    
+    //MARK:- View Func
     override func viewDidLoad() {
         self.initUI()
         self.observeChannels()
         self.observeChannelsChanges()
+        self.observeBoostCard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +99,9 @@ class MainViewController: UITableViewController {
         }
         if let refDeletedHandle = deletedRefHandle {
             channelRef.removeObserver(withHandle: refDeletedHandle)
+        }
+        if let refBoostcardHandle = boostcardRefHandle {
+            boostcardRef.removeObserver(withHandle: refBoostcardHandle)
         }
     }
     
@@ -111,13 +129,15 @@ class MainViewController: UITableViewController {
     private func initUI() {
         self.firstAccess = true
         
-        let profileButton = UIBarButtonItem(
+        self.unreadBoostcard = []
+        
+        self.profileButton = UIBarButtonItem(
             image: UIImage(named: "user"),
             style: .plain,
             target: self,
             action: #selector(onboardActionButton(_:)))
         
-        let menuButton = UIBarButtonItem(
+        self.menuButton = UIBarButtonItem(
             image: UIImage(named: "coworkers"),
             style: .plain,
             target: self,
@@ -204,6 +224,31 @@ class MainViewController: UITableViewController {
                 }
             }
         })
+    }
+    
+    private func observeBoostCard() {
+        let receiverId = CurrentUser.user!.uid
+        self.boostcardRefHandle = self.boostcardRef.queryOrdered(byChild: "receiverId").queryEqual(toValue: receiverId).observe(.childAdded, with: { (snapshot: DataSnapshot) in
+            let id = snapshot.key
+            if let rawData = snapshot.value as? Dictionary<String, AnyObject> {
+                let header =    rawData["header"]   as! String
+                let message =   rawData["message"]  as! String
+                let senderId =  rawData["senderId"] as! String
+                let unread =    rawData["unread"]   as! Bool
+                let date =      rawData["date"]     as! Int64
+                let _type =     rawData["type"]     as! String
+                let type = (_type == "passion" ? BoostCardType(rawValue: 0) : BoostCardType(rawValue: 1))!
+                let boostcard = BoostCard(id: id, senderId: senderId, receiverId: receiverId, type: type, header: header, message: message, date: NewDate(id: date))
+                
+                if unread {
+                    if self.unreadBoostcard.index(of: boostcard) == nil {
+                        self.unreadBoostcard.append(boostcard)
+                    }
+                }
+                
+            }
+        })
+        
     }
     
     private func getChannelIndex (channel: Channel) -> Int? {
@@ -426,5 +471,66 @@ extension MainViewController: UITextFieldDelegate {
         self.createChannelFB(textField)
         self.view.endEditing(true)
         return true
+    }
+}
+
+//MARK:- BarButtonItme badge
+
+//MARK:- Badge
+private var handle: UInt8 = 0
+
+extension CAShapeLayer {
+    func drawCircleAtLocation(location: CGPoint, withRadius radius: CGFloat, andColor color: UIColor, filled: Bool) {
+        fillColor = filled ? color.cgColor : UIColor.white.cgColor
+        strokeColor = color.cgColor
+        let origin = CGPoint(x: location.x - radius, y: location.y - radius)
+        path = UIBezierPath(ovalIn: CGRect(origin: origin, size: CGSize(width: radius * 2, height: radius * 2))).cgPath
+    }
+}
+
+extension UIBarButtonItem {
+    private var badgeLayer: CAShapeLayer? {
+        if let b: AnyObject = objc_getAssociatedObject(self, &handle) as AnyObject? {
+            return b as? CAShapeLayer
+        } else {
+            return nil
+        }
+    }
+    
+    func addBadge(number: Int?=nil, withOffset offset: CGPoint = CGPoint.zero, andColor color: UIColor = UIColor.red, andFilled filled: Bool = true) {
+        guard let view = self.value(forKey: "view") as? UIView else { return }
+        
+        badgeLayer?.removeFromSuperlayer()
+        
+        // Initialize Badge
+        let badge = CAShapeLayer()
+        let radius = (number == nil ? CGFloat(5) : CGFloat(7))
+        let location = CGPoint(x: view.frame.width - (radius + offset.x), y: (radius + offset.y))
+        badge.drawCircleAtLocation(location: location, withRadius: radius, andColor: color, filled: filled)
+        view.layer.addSublayer(badge)
+        
+        // Initialiaze Badge's label
+        let label = CATextLayer()
+        label.string = (number == nil ? "" : "\(number!)")
+        label.alignmentMode = kCAAlignmentCenter
+        label.fontSize = 11
+        label.frame = CGRect(origin: CGPoint(x: location.x - 4, y: offset.y), size: CGSize(width: 8, height: 16))
+        label.foregroundColor = filled ? UIColor.white.cgColor : color.cgColor
+        label.backgroundColor = UIColor.clear.cgColor
+        label.contentsScale = UIScreen.main.scale
+        badge.addSublayer(label)
+        
+        // Save Badge as UIBarButtonItem property
+        objc_setAssociatedObject(self, &handle, badge, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+    
+    func updateBadge(number: Int) {
+        if let text = badgeLayer?.sublayers?.filter({ $0 is CATextLayer }).first as? CATextLayer {
+            text.string = "\(number)"
+        }
+    }
+    
+    func removeBadge() {
+        badgeLayer?.removeFromSuperlayer()
     }
 }
