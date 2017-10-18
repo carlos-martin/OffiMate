@@ -34,7 +34,7 @@ class PasswordViewController: UIViewController {
         
         self.startTextField()
         
-        spinner = SpinnerLoader(view: self.view)
+        self.spinner = SpinnerLoader(view: self.view, alpha: 0.1)
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,6 +47,7 @@ class PasswordViewController: UIViewController {
     }
     
     func signUpAction (_ sender: Any?=nil) {
+        self.spinner = SpinnerLoader(view: self.view, alpha: 0.1)
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
                 self.spinner?.start()
@@ -70,11 +71,17 @@ class PasswordViewController: UIViewController {
                             }
                         })
                     } else {
-                        Alert.showFailiureAlert(message: "Error: \(error.debugDescription)")
+                        Alert.showFailiureAlert(error: error!, handler: { (_) in
+                            self.navigationController?.popToRootViewController(animated: true)
+                            self.dismiss(animated: true, completion: nil)
+                        })
                     }
                 })
                 
             } else {
+                let title = "Validation Password Error"
+                let message = "The password must be a minimum of 8 characters and must contain at least one uppercase, one lowercase, one number and one special character."
+                Alert.showFailiureAlert(title: title, message: message)
                 Tools.cellViewErrorAnimation(cell: cell)
             }
         }

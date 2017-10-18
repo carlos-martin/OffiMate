@@ -56,6 +56,9 @@ class EmailViewController: UIViewController {
                 self.email = (cell as! EmailSignUpViewCell).emailTextField.text!
                 self.moveToPassword()
             } else {
+                let title = "Validation Email Error"
+                let message = "Your email must have one of this two domains: sigma.se or sigmatechnology.se"
+                Alert.showFailiureAlert(title: title, message: message)
                 Tools.cellViewErrorAnimation(cell: cell)
             }
         }
@@ -64,7 +67,7 @@ class EmailViewController: UIViewController {
     func readyToMove (cell: UITableViewCell) -> Bool {
         let isReady: Bool
         if let textField = (cell as! EmailSignUpViewCell).emailTextField {
-            isReady = Tools.validateEmail(email: textField)
+            isReady = Tools.validateSigmaEmail(email: textField)
         } else {
             isReady = false
         }
@@ -88,7 +91,7 @@ extension EmailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "What's your e-mail?"
+        return "What's your Sigma e-mail?"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

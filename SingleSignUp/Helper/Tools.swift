@@ -249,6 +249,23 @@ extension Tools {
 
 //MARK:- Validations
 extension Tools {
+    static func validateSigmaEmail (email: UITextField) -> Bool {
+        if let _email = email.text {
+            return self.validateSigmaEmail(email: _email)
+        } else {
+            return false
+        }
+    }
+    
+    static func validateSigmaEmail (email: String) -> Bool {
+        let sigmaRegEx = "[A-Z0-9a-z._%+-]+@sigma.se"
+        let technRegEx = "[A-Z0-9a-z._%+-]+@sigmatechnology.se"
+        let sigmaTest = NSPredicate(format:"SELF MATCHES %@", sigmaRegEx)
+        let technTest = NSPredicate(format:"SELF MATCHES %@", technRegEx)
+        
+        return (sigmaTest.evaluate(with: email) || technTest.evaluate(with: email))
+    }
+    
     static func validateEmail (email: UITextField) -> Bool {
         if let _email = email.text {
             return self.validateEmail(email: _email)

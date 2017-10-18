@@ -47,6 +47,6 @@ class Alert {
         let nserror = error as NSError
         let title = "Error"
         let message = (nserror.userInfo["NSLocalizedDescription"] as? String ?? "Not identify error.")
-        self.showFailiureAlert(title: title, message: message)
+        self.showFailiureAlert(title: title, message: message, handler: handler)
     }
 }
