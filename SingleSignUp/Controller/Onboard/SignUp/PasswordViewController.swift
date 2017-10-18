@@ -46,15 +46,6 @@ class PasswordViewController: UIViewController {
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! PasswordSignUpViewCell).passwordTextField.becomeFirstResponder()
     }
     
-    //MARK: Segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toConfirm", let nextScene = segue.destination as? ConfirmViewController {
-            nextScene.username = self.username
-            nextScene.email =    self.email
-            nextScene.password = self.password
-        }
-    }
-    
     func signUpAction (_ sender: Any?=nil) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {
@@ -63,23 +54,26 @@ class PasswordViewController: UIViewController {
                 Auth.auth().createUser(withEmail: self.email!, password: self.password!, completion: { (user: User?, error: Error?) in
                     self.spinner?.stop()
                     if error == nil {
-                        CurrentUser.user = user!
-                        
-                        let coworkerId = Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!)
-                        
-                        do {
-                            try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!, coworkerId: coworkerId)
-                            try CurrentUser.localSave()
-                            //CurrentUser.saveFistAccessDay()
-                        } catch {
-                            Tools.cellViewErrorAnimation(cell: cell)
-                        }
-                        
-                        Tools.goToMain(vc: self)
+                        user!.sendEmailVerification(completion: { (emailError: Error?) in
+                            if emailError == nil {
+                                CurrentUser.user = user!
+                                let coworkerId = Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!)
+                                do {
+                                    try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!, coworkerId: coworkerId)
+                                    try CurrentUser.localSave()
+                                } catch {
+                                    Tools.cellViewErrorAnimation(cell: cell)
+                                }
+                                Tools.goToWaitingRoom(vc: self)
+                            } else {
+                                Alert.showFailiureAlert(error: emailError!)
+                            }
+                        })
                     } else {
                         Alert.showFailiureAlert(message: "Error: \(error.debugDescription)")
                     }
                 })
+                
             } else {
                 Tools.cellViewErrorAnimation(cell: cell)
             }

@@ -24,18 +24,16 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var doneBarButton: UIBarButtonItem!
     @IBAction func doneActionButton(_ sender: Any) {
         self.logInAction(sender)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.reloadData()
-        
         self.startTextField()
-        
-        spinner = SpinnerLoader(view: self.view)
+        spinner = SpinnerLoader(view: self.view, alpha: 0.1)
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,32 +46,41 @@ class LoginViewController: UIViewController {
     }
     
     func logInAction (_ sender: Any?=nil) {
+        spinner = SpinnerLoader(view: self.view, alpha: 0.1)
         if self.validTextFields() {
             self.spinner?.start()
+            self.doneBarButton.isEnabled = false
             Auth.auth().signIn(withEmail: self.username!, password: self.password!, completion: { (user: User?, error: Error?) in
+                
                 if let nserror = error {
                     Alert.showFailiureAlert(error: nserror)
                     self.spinner?.stop()
+                    self.doneBarButton.isEnabled = true
                 } else {
                     CurrentUser.user = user
-                    
                     Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?, coworkerId: String?) in
                         let username = (name != nil ? name! : "#logInAction#")
                         do {
                             try CurrentUser.setData(name: username, email: self.username!, password: self.password!, coworkerId: coworkerId!)
                             try CurrentUser.localSave()
-                            //CurrentUser.saveFistAccessDay()
                         } catch {
                             Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
                         }
-
-                        self.spinner?.stop()
-                        Tools.goToMain(vc: self)
+                        
+                        if user!.isEmailVerified {
+                            self.spinner?.stop()
+                            self.doneBarButton.isEnabled = true
+                            Tools.goToMain(vc: self)
+                        } else {
+                            self.spinner?.stop()
+                            self.doneBarButton.isEnabled = true
+                            Tools.goToWaitingRoom(vc: self)
+                        }
                     })
                 }
             })
         } else {
-            Alert.showFailiureAlert(message: "Please enter valid user and password.")
+            Alert.showFailiureAlert(title: "Error", message: "Please enter valid user and password.")
         }
     }
     

@@ -237,6 +237,14 @@ extension Tools {
             vc.present(controller, animated: true, completion: nil)
         }
     }
+    
+    static func goToWaitingRoom (vc: UIViewController) {
+        if let controller = UIStoryboard(name: "Loading", bundle: nil).instantiateInitialViewController() {
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .crossDissolve
+            vc.present(controller, animated: true, completion: nil)
+        }
+    }
 }
 
 //MARK:- Validations

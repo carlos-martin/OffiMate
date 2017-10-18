@@ -11,6 +11,7 @@
 		1A26F48F1F875D3E00C6B434 /* BoostCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */; };
 		1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */; };
 		1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A343FE71F6AAB22000CB641 /* ChatViewController.swift */; };
+		1A3DB57F1F9728D600F05EF6 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3DB57E1F9728D600F05EF6 /* ForgotPasswordViewController.swift */; };
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
 		1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */; };
 		1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */; };
@@ -43,7 +44,6 @@
 		1AC439641F84F27F00CCBF22 /* NewBoostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC439631F84F27F00CCBF22 /* NewBoostViewCell.swift */; };
 		1AC439661F8532C000CCBF22 /* BoostCardMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC439651F8532C000CCBF22 /* BoostCardMessageViewController.swift */; };
 		1AC439681F85347F00CCBF22 /* BoostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC439671F85347F00CCBF22 /* BoostCard.swift */; };
-		1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD244151F615B6A002233EE /* ConfirmViewController.swift */; };
 		1AD3A0381F7BBFDB002DD969 /* Coworkers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD3A0361F7BBFDB002DD969 /* Coworkers.storyboard */; };
 		1AD3A03B1F7BC10D002DD969 /* CoworkersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */; };
 		1AD8B95B1F4D7F7600F6777C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */; };
@@ -56,6 +56,7 @@
 		1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCardViewController.swift; sourceTree = "<group>"; };
 		1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerLoader.swift; sourceTree = "<group>"; };
 		1A343FE71F6AAB22000CB641 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		1A3DB57E1F9728D600F05EF6 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewCell.swift; path = SingleSignUp/View/Profile/ProfileViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -90,7 +91,6 @@
 		1AC439631F84F27F00CCBF22 /* NewBoostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBoostViewCell.swift; sourceTree = "<group>"; };
 		1AC439651F8532C000CCBF22 /* BoostCardMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCardMessageViewController.swift; sourceTree = "<group>"; };
 		1AC439671F85347F00CCBF22 /* BoostCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCard.swift; sourceTree = "<group>"; };
-		1AD244151F615B6A002233EE /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		1AD3A0371F7BBFDB002DD969 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Coworkers.storyboard; sourceTree = "<group>"; };
 		1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkersViewController.swift; sourceTree = "<group>"; };
 		1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */,
+				1A3DB57E1F9728D600F05EF6 /* ForgotPasswordViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -153,7 +154,6 @@
 				1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */,
 				1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */,
 				1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */,
-				1AD244151F615B6A002233EE /* ConfirmViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -472,11 +472,11 @@
 			files = (
 				1AC439681F85347F00CCBF22 /* BoostCard.swift in Sources */,
 				1A9CC38B1F4DC579000C6479 /* Tools.swift in Sources */,
+				1A3DB57F1F9728D600F05EF6 /* ForgotPasswordViewController.swift in Sources */,
 				1A5BDFDE1F6FE719003C10E5 /* Channel.swift in Sources */,
 				1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */,
 				1A900FA41F4C49FE005B3DA4 /* NameViewController.swift in Sources */,
 				1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */,
-				1AD244161F615B6A002233EE /* ConfirmViewController.swift in Sources */,
 				1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */,
 				1A9800E31F94C97A002EED53 /* LoadingViewController.swift in Sources */,
 				1AAA5CAB1F8253E000C59597 /* Coworker.swift in Sources */,

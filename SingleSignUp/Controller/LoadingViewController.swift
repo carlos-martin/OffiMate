@@ -14,28 +14,55 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.spinner = SpinnerLoader(view: self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.start()
+    }
+    
+    private func start () {
+        self.spinner = SpinnerLoader(view: self.view)
         self.spinner.start()
-        if CurrentUser.isInit() {
-            CurrentUser.tryToLogin(completion: { (isLogin: Bool, error: Error?) in
-                if !isLogin {
-                    self.spinner.stop()
-                    self.goToOnboard(vc: self)
-                } else {
-                    Tools.initChannelsList(completion: {
+        
+            if CurrentUser.isInit() {
+                CurrentUser.tryToLogin(completion: { (isLogin: Bool, error: Error?) in
+                    if !isLogin {
                         self.spinner.stop()
-                        Tools.removeChannelObserver()
-                        self.goToMain(vc: self)
-                    })
-                }
-            })
-        } else {
-            self.spinner.stop()
-            self.goToOnboard(vc: self)
-        }
+                        self.goToOnboard(vc: self)
+                    } else {
+                        if CurrentUser.user!.isEmailVerified {
+                            Tools.initChannelsList(completion: {
+                                self.spinner.stop()
+                                Tools.removeChannelObserver()
+                                self.goToMain(vc: self)
+                            })
+                        } else {
+                            let title = "Email Not Verified"
+                            let message = "Your email has not yet been verified. Do you want us to send another verification email to \(CurrentUser.email!)?"
+                            let verifytxt = "Check you email inbox, verify your account and try to login again"
+                            Alert.showAlertOptions(
+                                title: title, message: message,
+                                okAction: { (_) in
+                                    CurrentUser.user!.sendEmailVerification(completion: { (emailError: Error?) in
+                                        self.spinner.stop()
+                                        if emailError == nil {
+                                            self.goToOnboard(vc: self, text: verifytxt)
+                                        } else {
+                                            Alert.showFailiureAlert(error: emailError!, handler: { (_) in
+                                                self.goToOnboard(vc: self)
+                                            })
+                                        }
+                                    }) },
+                                cancelAction: { (_) in
+                                    self.spinner.stop()
+                                    self.goToOnboard(vc: self, text: verifytxt)})
+                        }
+                    }
+                })
+            } else {
+                self.spinner.stop()
+                self.goToOnboard(vc: self)
+            }
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,11 +80,21 @@ class LoadingViewController: UIViewController {
         }
     }
     
-    private func goToOnboard (vc: UIViewController) {
-        if let controller = UIStoryboard(name: "Onboard", bundle: nil).instantiateInitialViewController() {
-            controller.modalPresentationStyle = .fullScreen
-            controller.modalTransitionStyle = .coverVertical
-            vc.present(controller, animated: true, completion: nil)
+    private func goToOnboard (vc: UIViewController, text: String?=nil) {
+        if let message = text {
+            Alert.showFailiureAlert(message: message) { (_) in
+                if let controller = UIStoryboard(name: "Onboard", bundle: nil).instantiateInitialViewController() {
+                    controller.modalPresentationStyle = .fullScreen
+                    controller.modalTransitionStyle = .coverVertical
+                    vc.present(controller, animated: true, completion: nil)
+                }
+            }
+        } else {
+            if let controller = UIStoryboard(name: "Onboard", bundle: nil).instantiateInitialViewController() {
+                controller.modalPresentationStyle = .fullScreen
+                controller.modalTransitionStyle = .coverVertical
+                vc.present(controller, animated: true, completion: nil)
+            }
         }
     }
 
