@@ -16,3 +16,7 @@ class PasswordLoginViewCell : UITableViewCell {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var showHideButton: UIButton!
 }
+
+class ForgetPasswordViewCell : UITableViewCell {
+    @IBOutlet var emailTextField: UITextField!
+}

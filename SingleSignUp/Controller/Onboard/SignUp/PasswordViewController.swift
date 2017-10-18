@@ -46,15 +46,6 @@ class PasswordViewController: UIViewController {
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! PasswordSignUpViewCell).passwordTextField.becomeFirstResponder()
     }
     
-    //MARK: Segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toConfirm", let nextScene = segue.destination as? ConfirmViewController {
-            nextScene.username = self.username
-            nextScene.email =    self.email
-            nextScene.password = self.password
-        }
-    }
-    
     func signUpAction (_ sender: Any?=nil) {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToSave(cell: cell) {

@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 
 class Alert {
-    static func showFailiureAlert(message: String, handler: (((UIAlertAction)?) -> Void)? = nil) {
-        let alertTitle = message
+    static func showFailiureAlert(title: String?=nil, message: String, handler: (((UIAlertAction)?) -> Void)? = nil) {
+        let alertTitle = (title == nil ? message : title!)
+        let alertMessage = (title == nil ? nil : message)
         let alertButtonTitle = "OK"
         
-        let alert = UIAlertController(title: alertTitle, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
         
         alert.addAction(UIAlertAction(title: alertButtonTitle, style: UIAlertActionStyle.default, handler: handler))
         
@@ -44,7 +45,8 @@ class Alert {
     
     static func showFailiureAlert(error: Error, handler: (((UIAlertAction)?) -> Void)? = nil) {
         let nserror = error as NSError
-        let message = "Error: " + (nserror.userInfo["NSLocalizedDescription"] as? String ?? "Not identify error.")
-        self.showFailiureAlert(message: message, handler: handler)
+        let title = "Error"
+        let message = (nserror.userInfo["NSLocalizedDescription"] as? String ?? "Not identify error.")
+        self.showFailiureAlert(title: title, message: message)
     }
 }

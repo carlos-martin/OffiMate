@@ -78,6 +78,7 @@ class MainViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.reloadView()
         if self.spinner == nil {
             self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
         }
