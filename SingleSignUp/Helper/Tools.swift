@@ -357,13 +357,21 @@ extension Tools {
     }
     
     static func getColor(id: String) -> UIColor {
-        let _tmp_ = String(id.hashValue).characters.suffix(2)
-        let value = Int(String(_tmp_.first!))! + Int(String(_tmp_.last!))!
         let index: Int
-        if value < self.bubbleColors.count {
-            index = value
+        if id.hashValue > 0 {
+            let value = Int(String(String(id.hashValue).characters.suffix(1)))!
+            if value < bubbleColors.count/2 {
+                index = value
+            } else {
+                index = value % bubbleColors.count/2
+            }
         } else {
-            index = value % self.bubbleColors.count
+            let value = Int(String(String(id.hashValue).characters.suffix(1)))!
+            if value < bubbleColors.count/2 {
+                index = value + (bubbleColors.count/2)
+            } else {
+                index = (value % bubbleColors.count/2) + (bubbleColors.count/2)
+            }
         }
         return self.bubbleColors[index]
     }
