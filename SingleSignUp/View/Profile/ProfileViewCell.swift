@@ -34,3 +34,7 @@ class OptionsViewCell : UITableViewCell {
     @IBOutlet weak var arrowImage:  UIImageView!
     @IBOutlet weak var unreadImage: UIImageView!
 }
+
+class OfficePickerViewCell : UITableViewCell {
+    @IBOutlet weak var officePickerView: UIPickerView!
+}

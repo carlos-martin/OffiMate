@@ -78,15 +78,16 @@ class ProfileViewController: UIViewController {
     
     func editAction(name: String?=nil) {
         if self.isEditMode {
+            self.tableView.isScrollEnabled = true
             self.view.endEditing(true)
             self.editBarButtonItem.title = "Edit"
             self.cancelBarButtonItem.isEnabled = true
-            //TODO: backend conexion to save new name
             if let newname = name {
                 self.updateName(name: newname)
             }
             
         } else {
+            self.tableView.isScrollEnabled = false
             self.view.endEditing(false)
             self.editBarButtonItem.title = "Cancel"
             self.cancelBarButtonItem.isEnabled = false
@@ -113,8 +114,11 @@ class ProfileViewController: UIViewController {
         indexSet.insert(ProfileSection.logout.rawValue)
         self.tableView.reloadSections(indexSet, with: .fade)
         
-        let indexParhArray = [IndexPath(row: ProfileInfoRow.name.rawValue, section: ProfileSection.profile.rawValue)]
+        let indexParhArray = [
+            IndexPath(row: ProfileInfoRow.name.rawValue, section: ProfileSection.profile.rawValue),
+            IndexPath(row: 0, section: ProfileSection.office.rawValue)]
         self.tableView.reloadRows(at: indexParhArray, with: .fade)
+        //self.tableView.reloadData()
     }
     
 }
@@ -150,18 +154,26 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 return 44.0
             }
+        case .office:
+            return (self.isEditMode ? 70.0 : 44.0)
         default:
             return 44.0
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let section = indexPath.section
-        let row = indexPath.row
-        
-        if section == ProfileSection.profile.rawValue && (row == ProfileInfoRow.image.rawValue || row == ProfileInfoRow.name.rawValue) {
-            return UITableViewAutomaticDimension
-        } else {
+        let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
+        switch section {
+        case .profile:
+            let row = ProfileInfoRow(rawValue: indexPath.row)
+            if row == .image {
+                return UITableViewAutomaticDimension
+            } else {
+                return 44.0
+            }
+        case .office:
+            return (self.isEditMode ? 70.0 : 44.0)
+        default:
             return 44.0
         }
     }
@@ -252,15 +264,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     return cell
                 }
             case .office:
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
-                cell.selectionStyle = .none
-                cell.arrowImage.isHidden = true
-                cell.unreadImage.isHidden = true
-                cell.optionImage.image = UIImage(named: "office")
-                cell.optionImage.backgroundColor = UIColor.white
-                cell.optionLabel.text = CurrentUser.office.name
-                return cell
-                
+                if self.isEditMode {
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "officePickerCell", for: indexPath) as! OfficePickerViewCell
+                    cell.officePickerView.delegate = self
+                    cell.officePickerView.dataSource = self
+                    let index = CurrentUser.allOffices.index(of: CurrentUser.office) ?? 0
+                    cell.officePickerView.selectRow(index, inComponent: 0, animated: true)
+                    return cell
+                } else {
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
+                    cell.selectionStyle = .none
+                    cell.arrowImage.isHidden = true
+                    cell.unreadImage.isHidden = true
+                    cell.optionImage.image = UIImage(named: "office")
+                    cell.optionImage.backgroundColor = UIColor.white
+                    cell.optionLabel.text = CurrentUser.office.name
+                    return cell
+                }
             case .password:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "passwordCell", for: indexPath) as! PasswordViewCell
                 cell.selectionStyle = .none
@@ -325,6 +345,22 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+//MARK: - UIPickerView
+extension ProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return CurrentUser.allOffices.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return CurrentUser.allOffices[row].name
+    }
+}
+
+//MARK: - UITextField
 extension ProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         var result: Bool = false

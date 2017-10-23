@@ -111,6 +111,21 @@ extension Tools {
         }
     }
     
+    static func fetchAllOffices(completion: @escaping (_ offices: [Office]) -> Void) {
+        let officeRef = Database.database().reference().child("office")
+        let officeHandle = officeRef.queryOrderedByKey()
+        officeHandle.observe(.value) { (snapshot: DataSnapshot) in
+            let raw = snapshot.value as! Dictionary<String, AnyObject>
+            var offices: [Office] = []
+            for item in raw {
+                let id = item.key
+                let name = item.value["name"] as! String
+                offices.append(Office(id: id, name: name))
+            }
+            completion(offices)
+        }
+    }
+    
     //MARK: Coworker
     static func createCoworker(uid: String, email: String, name: String, officeId: String) -> String {
         let coworkerRef = Database.database().reference().child("coworkers")
@@ -184,7 +199,7 @@ extension Tools {
     //MARK: Channels
     
     static func initChannelsList (completion: @escaping() -> Void) {
-        self.channelsHandle = self.channelRef.observe(.value) { (snapshot: DataSnapshot) in
+        self.channelsHandle = self.channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.value) { (snapshot: DataSnapshot) in
             if let rawChannels = snapshot.value as? Dictionary<String, AnyObject> {
                 if rawChannels.count == CurrentUser.channelsLastAccess.count {
                     var channels: [Channel] = [] {

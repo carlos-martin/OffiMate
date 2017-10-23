@@ -30,6 +30,9 @@ class CurrentUser {
     static private(set) var channelsLastAccess: [Int64] = []
     static private(set) var channels:           [Channel] = []
     
+    //Profile view controller
+    static var allOffices: [Office] = []
+    
     //MARK:- Public funtion
     static func isInit() -> Bool {
         if self.alreadyFetched() {
