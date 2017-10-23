@@ -70,11 +70,14 @@ class NewOfficeViewController: UITableViewController, MFMailComposeViewControlle
         }
         
         if self.readyToSave(nameCell: nameCell, codeCell: codeCell) {
+            
             self.spinner.start()
+            self.saveBarButtonItem.isEnabled = false
             
             Auth.auth().signIn(withEmail: ADMIN_NAME, password: ADMIN_PASS, completion: { (user: User?, error: Error?) in
                 
                 self.spinner.stop()
+                self.saveBarButtonItem.isEnabled = true
                 
                 if let _ = error {
                     let title = "Error"
