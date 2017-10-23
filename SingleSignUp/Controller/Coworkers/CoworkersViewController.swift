@@ -70,8 +70,8 @@ class CoworkersViewController: UITableViewController {
             let id = snapshot.key
             if let name = coworkerData["name"] as! String!, let email = coworkerData["email"] as! String!, let uid = coworkerData["userId"] as! String! {
                 if CurrentUser.user!.uid != uid {
-                    let _coworker = Coworker(id: id, uid: uid, email: email, name: name)
-                    //print(_coworker)
+                    let _coworker = Coworker(id: id, uid: uid, email: email, name: name, office: CurrentUser.office!)
+                    print(_coworker)
                     self.coworkers.append(_coworker)
                     self.tableView.reloadData()
                 }
