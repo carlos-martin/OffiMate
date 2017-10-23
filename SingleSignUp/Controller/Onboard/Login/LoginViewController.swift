@@ -68,16 +68,9 @@ class LoginViewController: UIViewController {
                         } catch {
                             Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
                         }
-                        
-                        if user!.isEmailVerified {
-                            self.spinner?.stop()
-                            self.doneBarButton.isEnabled = true
-                            Tools.goToMain(vc: self)
-                        } else {
-                            self.spinner?.stop()
-                            self.doneBarButton.isEnabled = true
-                            Tools.goToWaitingRoom(vc: self)
-                        }
+                        self.spinner?.stop()
+                        self.doneBarButton.isEnabled = true
+                        Tools.goToWaitingRoom(vc: self)
                     })
                 }
             })
