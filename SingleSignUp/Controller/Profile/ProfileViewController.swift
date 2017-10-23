@@ -13,12 +13,13 @@ import FirebaseAuth
 
 enum ProfileSection: Int {
     case profile = 0
+    case office
     case password
     case inbox
     case logout
 }
 
-enum ProfileInfoCell: Int {
+enum ProfileInfoRow: Int {
     case image = 0
     case name
     case email
@@ -112,7 +113,7 @@ class ProfileViewController: UIViewController {
         indexSet.insert(ProfileSection.logout.rawValue)
         self.tableView.reloadSections(indexSet, with: .fade)
         
-        let indexParhArray = [IndexPath(row: ProfileInfoCell.name.rawValue, section: ProfileSection.profile.rawValue)]
+        let indexParhArray = [IndexPath(row: ProfileInfoRow.name.rawValue, section: ProfileSection.profile.rawValue)]
         self.tableView.reloadRows(at: indexParhArray, with: .fade)
     }
     
@@ -122,7 +123,7 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -130,6 +131,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch currentSection {
             case .profile:
                 return 3
+            case .office:
+                return 1
             case .logout, .inbox, .password:
                 return (self.isEditMode ? 0 : 1)
             }
@@ -138,12 +141,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        let section = indexPath.section
-        let row = indexPath.row
-        
-        if section == ProfileSection.profile.rawValue && row == ProfileInfoCell.image.rawValue {
-            return UITableViewAutomaticDimension
-        } else {
+        let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
+        switch section {
+        case .profile:
+            let row = ProfileInfoRow(rawValue: indexPath.row)
+            if row == .image {
+                return UITableViewAutomaticDimension
+            } else {
+                return 44.0
+            }
+        default:
             return 44.0
         }
     }
@@ -152,7 +159,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let section = indexPath.section
         let row = indexPath.row
         
-        if section == ProfileSection.profile.rawValue && (row == ProfileInfoCell.image.rawValue || row == ProfileInfoCell.name.rawValue) {
+        if section == ProfileSection.profile.rawValue && (row == ProfileInfoRow.image.rawValue || row == ProfileInfoRow.name.rawValue) {
             return UITableViewAutomaticDimension
         } else {
             return 44.0
@@ -166,6 +173,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 return nil
             case .password:
                 return (self.isEditMode ? nil : "Password")
+            case .office:
+                return "Office"
             }
         } else {
             return nil
@@ -177,10 +186,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch currentSection {
             case .profile:
                 return 0.1
-            case .password:
-                return 22.0
-            case .logout, .inbox:
-                return 33.0
+            case .password, .office, .logout, .inbox:
+                return UITableViewAutomaticDimension
             }
         } else {
             return 0.1
@@ -208,7 +215,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         if let currentSection: ProfileSection = ProfileSection(rawValue: indexPath.section) {
             switch currentSection {
             case .profile:
-                let currentRow: ProfileInfoCell = ProfileInfoCell(rawValue: indexPath.row)!
+                let currentRow: ProfileInfoRow = ProfileInfoRow(rawValue: indexPath.row)!
                 switch currentRow {
                 case .image:
                     let cell = self.tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! PictureViewCell
@@ -244,6 +251,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.textField.text = CurrentUser.email
                     return cell
                 }
+            case .office:
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
+                cell.selectionStyle = .none
+                cell.arrowImage.isHidden = true
+                cell.unreadImage.isHidden = true
+                cell.optionImage.image = UIImage(named: "office")
+                cell.optionImage.backgroundColor = UIColor.white
+                cell.optionLabel.text = CurrentUser.office.name
+                return cell
+                
             case .password:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "passwordCell", for: indexPath) as! PasswordViewCell
                 cell.selectionStyle = .none
