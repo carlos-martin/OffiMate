@@ -15,6 +15,9 @@
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
 		1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */; };
 		1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */; };
+		1A5B16531F9DBF160065596B /* NewOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */; };
+		1A5B16561F9DC07B0065596B /* NewOfficeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */; };
+		1A5B165B1F9DD8F30065596B /* Office.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B165A1F9DD8F30065596B /* Office.swift */; };
 		1A5BDFDE1F6FE719003C10E5 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDFDD1F6FE719003C10E5 /* Channel.swift */; };
 		1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */; };
 		1A6A5F131F692E1E0052F1FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */; };
@@ -61,6 +64,9 @@
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewCell.swift; path = SingleSignUp/View/Profile/ProfileViewCell.swift; sourceTree = SOURCE_ROOT; };
+		1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOfficeViewController.swift; sourceTree = "<group>"; };
+		1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOfficeViewCell.swift; sourceTree = "<group>"; };
+		1A5B165A1F9DD8F30065596B /* Office.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Office.swift; sourceTree = "<group>"; };
 		1A5BDFDD1F6FE719003C10E5 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDate.swift; sourceTree = "<group>"; };
 		1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 				1A9B42361F99F96600475620 /* OnboardViewController.swift */,
 				1A20B47C1F4C73F100F3A44C /* SignUp */,
 				1A20B47B1F4C73E900F3A44C /* Login */,
+				1A5B16511F9DBEE40065596B /* Office */,
 			);
 			path = Onboard;
 			sourceTree = "<group>";
@@ -206,6 +213,22 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		1A5B16511F9DBEE40065596B /* Office */ = {
+			isa = PBXGroup;
+			children = (
+				1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */,
+			);
+			path = Office;
+			sourceTree = "<group>";
+		};
+		1A5B16541F9DC0030065596B /* Office */ = {
+			isa = PBXGroup;
+			children = (
+				1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */,
+			);
+			path = Office;
+			sourceTree = "<group>";
+		};
 		1A813D131F4B0AE700F190A2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,9 +266,10 @@
 			isa = PBXGroup;
 			children = (
 				1A343FE91F6AAC58000CB641 /* Main */,
+				1AAA5CAC1F82795200C59597 /* Coworkers */,
 				1A343FEB1F6AAC69000CB641 /* Profile */,
 				1A343FEA1F6AAC63000CB641 /* Onboard */,
-				1AAA5CAC1F82795200C59597 /* Coworkers */,
+				1A5B16541F9DC0030065596B /* Office */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				1A5BDFDD1F6FE719003C10E5 /* Channel.swift */,
+				1A5B165A1F9DD8F30065596B /* Office.swift */,
 				1AAA5CAA1F8253E000C59597 /* Coworker.swift */,
 				1AC439671F85347F00CCBF22 /* BoostCard.swift */,
 				1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */,
@@ -473,6 +498,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5B165B1F9DD8F30065596B /* Office.swift in Sources */,
 				1AC439681F85347F00CCBF22 /* BoostCard.swift in Sources */,
 				1A9CC38B1F4DC579000C6479 /* Tools.swift in Sources */,
 				1A3DB57F1F9728D600F05EF6 /* ForgotPasswordViewController.swift in Sources */,
@@ -484,6 +510,8 @@
 				1A9800E31F94C97A002EED53 /* LoadingViewController.swift in Sources */,
 				1AAA5CAB1F8253E000C59597 /* Coworker.swift in Sources */,
 				1AC439661F8532C000CCBF22 /* BoostCardMessageViewController.swift in Sources */,
+				1A5B16561F9DC07B0065596B /* NewOfficeViewCell.swift in Sources */,
+				1A5B16531F9DBF160065596B /* NewOfficeViewController.swift in Sources */,
 				1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */,
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */,

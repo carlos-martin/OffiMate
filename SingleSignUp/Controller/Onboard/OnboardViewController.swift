@@ -25,14 +25,9 @@ class OnboardViewController: UITableViewController {
     }
 
     private func initUI() {
-        
         var headerHeight = (self.tableView.frame.size.height - ((30+44)*2) + 15) / 2
         headerHeight -= self.navigationController!.navigationBar.frame.size.height
-        
         self.tableView.contentInset = UIEdgeInsetsMake(headerHeight, 0, -headerHeight, 0)
-        
-        print("tableView.height: \(self.tableView.frame.size.height)")
-        print("headerHeight:     \(headerHeight)")
     }
     
     override func didReceiveMemoryWarning() {

@@ -33,10 +33,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I0k-17-ekd">
-                            <rect key="frame" x="0.0" y="162" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="161.5" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="Add new office"/>
+                            <connections>
+                                <segue destination="Olw-s7-Y3v" kind="show" id="ce5-Nr-Uy0"/>
+                            </connections>
                         </button>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="signupCell" id="A4U-TF-lqr" customClass="OnboardSignUpViewCell" customModule="SingleSignUp" customModuleProvider="target">
@@ -109,6 +112,89 @@
             </objects>
             <point key="canvasLocation" x="425" y="164"/>
         </scene>
+        <!--New Office-->
+        <scene sceneID="1Fa-MP-fHQ">
+            <objects>
+                <tableViewController id="Olw-s7-Y3v" customClass="NewOfficeViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="6u2-zn-TUh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="22M-Q3-qUj">
+                            <rect key="frame" x="0.0" y="117.5" width="375" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don't have a validation code, contact to:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9o-FB-ACP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQ9-AI-J1T">
+                                    <rect key="frame" x="0.0" y="16" width="375" height="28"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <state key="normal" title="Carlos.Martin@sigmatechnology.se"/>
+                                    <connections>
+                                        <action selector="mailtoButtonAction:" destination="Olw-s7-Y3v" eventType="touchUpInside" id="bAg-eY-sga"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="v9o-FB-ACP" firstAttribute="top" secondItem="22M-Q3-qUj" secondAttribute="top" id="6Oh-Uq-pFE"/>
+                                <constraint firstItem="v9o-FB-ACP" firstAttribute="leading" secondItem="22M-Q3-qUj" secondAttribute="leading" id="Air-Qc-kke"/>
+                                <constraint firstItem="gQ9-AI-J1T" firstAttribute="top" secondItem="v9o-FB-ACP" secondAttribute="bottom" id="IoQ-Mo-0lD"/>
+                                <constraint firstAttribute="trailing" secondItem="gQ9-AI-J1T" secondAttribute="trailing" id="UvW-Dw-KIV"/>
+                                <constraint firstItem="gQ9-AI-J1T" firstAttribute="leading" secondItem="22M-Q3-qUj" secondAttribute="leading" id="dos-Xx-gBd"/>
+                                <constraint firstAttribute="trailing" secondItem="v9o-FB-ACP" secondAttribute="trailing" id="iMe-Ms-ImB"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newOfficeNameCell" id="wA6-pR-aWb" customClass="NewOfficeNameViewCell" customModule="SingleSignUp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wA6-pR-aWb" id="ZcT-pZ-8DX">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tMt-eh-5cR">
+                                            <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tMt-eh-5cR" firstAttribute="top" secondItem="ZcT-pZ-8DX" secondAttribute="top" id="BC1-yn-nuA"/>
+                                        <constraint firstAttribute="bottom" secondItem="tMt-eh-5cR" secondAttribute="bottom" id="bFI-fi-wks"/>
+                                        <constraint firstAttribute="trailing" secondItem="tMt-eh-5cR" secondAttribute="trailing" id="biu-8o-fTQ"/>
+                                        <constraint firstItem="tMt-eh-5cR" firstAttribute="leading" secondItem="ZcT-pZ-8DX" secondAttribute="leading" constant="20" id="wGk-qR-QRs"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="tMt-eh-5cR" id="muA-Vm-gVY"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Olw-s7-Y3v" id="1cH-ud-1Og"/>
+                            <outlet property="delegate" destination="Olw-s7-Y3v" id="yoY-Xt-dHU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="New Office" id="Yns-QY-2qN">
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Jko-4a-FLP">
+                            <connections>
+                                <action selector="saveBarButtonAction:" destination="Olw-s7-Y3v" id="Cee-tb-VcJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="saveBarButtonItem" destination="Jko-4a-FLP" id="DxH-Fi-4bL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qOV-ZU-8mU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="424.80000000000001" y="982.75862068965523"/>
+        </scene>
         <!--Login-->
         <scene sceneID="MbM-5J-Pgh">
             <objects>
@@ -125,7 +211,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Tfl-Ww-k3C">
-                                    <rect key="frame" x="0.0" y="162" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="161.5" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Forgot your password?"/>
                                     <connections>

@@ -86,6 +86,17 @@ public class Tools {
 
 //MARK:- BackEnd 
 extension Tools {
+    //MARK: Office
+    static func createOffice(name: String) -> String {
+        let officeRef = Database.database().reference().child("office")
+        let newOfficeRef = officeRef.childByAutoId()
+        let newOfficeItem = [
+            "name": name
+        ]
+        newOfficeRef.setValue(newOfficeItem)
+        return newOfficeRef.key
+    }
+    
     //MARK: Coworker
     static func createCoworker(uid: String, email: String, name: String) -> String {
         let coworkerRef = Database.database().reference().child("coworkers")

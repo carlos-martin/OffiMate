@@ -16,16 +16,15 @@ class CurrentUser {
     static private(set) var password:   String!
     static private(set) var coworkerId: String!
     
+    //Office
+    static var office: Office!
+    
+    //FirebaseAuth user
+    static var user: User!
+    
     //Main view controller
     static private(set) var channelsLastAccess: [Int64] = []
     static private(set) var channels:           [Channel] = []
-    
-    //Last connexion day
-    static var lastDate: Int64!
-    
-    //static var date: NewDate = NewDate(date: Date())
-    //FirebaseAuth user
-    static var user: User!
     
     //MARK:- Public funtion
     static func isInit() -> Bool {
