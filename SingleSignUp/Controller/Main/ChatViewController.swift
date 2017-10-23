@@ -150,7 +150,7 @@ class ChatViewController: JSQMessagesViewController {
             let messageData = snapshot.value as! Dictionary<String, Any>
 
             if let uid = messageData["uid"] as? String, let text = messageData["text"] as? String, let date = messageData["date"] as? Int64 {
-                Tools.fetchCoworker(uid: uid, completion: { (_, _name: String?, _) in
+                Tools.fetchCoworker(uid: uid, completion: { (_, _, _name: String?, _) in
                     if let name = _name {
                         let newDate = NewDate(id: date)
                         self.messages.append(JSQMessage(senderId: uid, senderDisplayName: name, date: newDate.date, text: text))

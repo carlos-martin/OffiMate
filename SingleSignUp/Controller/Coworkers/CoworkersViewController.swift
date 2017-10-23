@@ -64,7 +64,7 @@ class CoworkersViewController: UITableViewController {
     
     private func observeCoworkers() {
         self.startLoading = true
-        self.coworkerRefHandle = self.coworkerRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
+        self.coworkerRefHandle = self.coworkerRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.stopLoading = true
             let coworkerData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
@@ -77,7 +77,7 @@ class CoworkersViewController: UITableViewController {
                 }
             }
         })
-        coworkerRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+        coworkerRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
                 self.stopLoading = true
                 self.emptyCoworkerLabel.isHidden = false

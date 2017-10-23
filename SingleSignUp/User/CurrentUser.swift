@@ -17,7 +17,11 @@ class CurrentUser {
     static private(set) var coworkerId: String!
     
     //Office
-    static var office: Office!
+    static var office: Office! {
+        didSet {
+            print(office)
+        }
+    }
     
     //FirebaseAuth user
     static var user: User!
@@ -145,9 +149,10 @@ class CurrentUser {
                 if error == nil {
                     self.user = user
                     self.tryLoadingChannelsLastAccess()
-                    Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?, coworkerId: String?) in
+                    Tools.fetchCoworker(uid: user!.uid, completion: { (coworkerId: String?, _, name: String?, office: Office?) in
                         self.name = (name != nil ? name! : "#tryToLogin#")
                         self.coworkerId = coworkerId!
+                        self.office = office
                         completion(true, nil)
                     })
                 } else {

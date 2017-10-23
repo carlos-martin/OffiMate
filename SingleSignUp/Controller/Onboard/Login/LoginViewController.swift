@@ -58,11 +58,13 @@ class LoginViewController: UIViewController {
                     self.doneBarButton.isEnabled = true
                 } else {
                     CurrentUser.user = user
-                    Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?, coworkerId: String?) in
+                    Tools.fetchCoworker(uid: user!.uid, completion: { (coworkerId: String?, _, name: String?, office: Office?) in
+                        
                         let username = (name != nil ? name! : "#logInAction#")
                         do {
                             try CurrentUser.setData(name: username, email: self.username!, password: self.password!, coworkerId: coworkerId!)
                             try CurrentUser.localSave()
+                            CurrentUser.office = office
                         } catch {
                             Alert.showFailiureAlert(message: "Ops! Something goes wrong!")
                         }
