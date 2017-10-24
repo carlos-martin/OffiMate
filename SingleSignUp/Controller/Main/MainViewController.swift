@@ -147,7 +147,6 @@ class MainViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = profileButton
         self.navigationItem.title = "OffiMate"
         self.emptyChannelsLabel.isHidden = (CurrentUser.channels.isEmpty ? false : true)
-        print(CurrentUser.channels)
         self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
     }
     
@@ -192,7 +191,7 @@ class MainViewController: UITableViewController {
         channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
                 self.stopLoading = true
-                self.emptyChannelsLabel.isHidden = (self.emptyChannelsLabel.isHidden ? false : true)
+                self.emptyChannelsLabel.isHidden = false
             }
         }
     }
