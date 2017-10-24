@@ -92,12 +92,28 @@
                     <connections>
                         <outlet property="emptyCoworkerLabel" destination="3PD-HI-XYP" id="s6v-Y8-cqV"/>
                         <outlet property="spinnerView" destination="Gfe-5R-UpZ" id="llx-TD-wT6"/>
-                        <segue destination="cAE-2z-8kO" kind="show" identifier="showProfile" id="GQ1-Ph-H1x"/>
+                        <segue destination="c13-dS-DuH" kind="showDetail" identifier="showProfile" action="showViewController:sender:" id="iZZ-dk-SUa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4w-hY-H68" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1088.8" y="130.88455772113943"/>
+            <point key="canvasLocation" x="271" y="131"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fDB-El-Zf9">
+            <objects>
+                <navigationController storyboardIdentifier="CoworkerProfile" id="c13-dS-DuH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d5c-hy-2bX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cAE-2z-8kO" kind="relationship" relationship="rootViewController" id="rHH-Dk-Tn3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eev-EM-hHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1110" y="131"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Dag-17-NjI">
@@ -207,9 +223,12 @@
                     <navigationItem key="navigationItem" title="Profile" id="3iN-Qj-Fgn"/>
                     <connections>
                         <segue destination="WPR-bz-aGZ" kind="show" identifier="showBoostCard" id="c98-jD-Tsz"/>
+                        <segue destination="iVy-AT-frm" kind="unwind" identifier="unwindSegueToBoostCard" unwindAction="unwindToBoostCardWithSegue:" id="RtT-72-Kg2"/>
+                        <segue destination="iVy-AT-frm" kind="unwind" identifier="unwindSegueToCoworkers" unwindAction="unwindToCoworkersWithSegue:" id="O0j-BW-i5l"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwH-fq-86g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="iVy-AT-frm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1967" y="131"/>
         </scene>
@@ -380,7 +399,7 @@
                         <outlet property="keyboardHeightLayoutConstraint" destination="OrQ-oL-ehH" id="Eaw-nE-yAg"/>
                         <outlet property="sendBarButtonItem" destination="JnX-HV-fQg" id="SyN-MH-AZK"/>
                         <outlet property="textView" destination="dfh-Gs-fdx" id="3fQ-ii-QMe"/>
-                        <segue destination="QNG-8U-k4c" kind="unwind" identifier="unwindSegueToCoworkers" unwindAction="unwindToCoworkersWithSegue:" id="zoD-9a-VN0"/>
+                        <segue destination="QNG-8U-k4c" kind="unwind" identifier="unwindSegueToCoworkerProfile" unwindAction="unwindToCoworkerProfileWithSegue:" id="zoD-9a-VN0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4gi-NO-to3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -404,7 +423,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CT6-Oh-LDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="131"/>
+            <point key="canvasLocation" x="-604" y="131"/>
         </scene>
     </scenes>
     <resources>

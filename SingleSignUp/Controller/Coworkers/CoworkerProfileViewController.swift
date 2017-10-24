@@ -25,14 +25,29 @@ enum CoworkerProfile: Int {
 class CoworkerProfileViewController: UITableViewController {
 
     var coworker: Coworker?
-    var index:    Int?
+    var unwindSegue: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.initUI()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func initUI () {
+        let backButton = UIBarButtonItem(
+            title: "Go Back",
+            style: .plain,
+            target: self,
+            action: #selector(goBackAction))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    func goBackAction() {
+        print(unwindSegue!)
+        self.performSegue(withIdentifier: unwindSegue!, sender: self)
     }
 
     // MARK: - Segues
@@ -51,6 +66,8 @@ class CoworkerProfileViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func unwindToCoworkerProfile(segue: UIStoryboardSegue) {}
     
     // MARK: - Table view data source
 

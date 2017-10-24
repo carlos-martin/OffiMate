@@ -33,7 +33,7 @@ class CoworkersViewController: UITableViewController {
     }
     
     //Firebase
-    private      var coworkers:         [Coworker] = [] {
+    private var coworkers: [Coworker] = [] {
         willSet {
             if newValue.isEmpty { self.emptyCoworkerLabel.isHidden = false }
             else { self.emptyCoworkerLabel.isHidden = true }
@@ -101,7 +101,7 @@ class CoworkersViewController: UITableViewController {
                     controller = segue.destination as! CoworkerProfileViewController
                 }
                 controller.coworker = self.coworkers[indexPath.row]
-                controller.index = indexPath.row % Tools.backgrounsColors.count
+                controller.unwindSegue = "unwindSegueToCoworkers"
             }
         }
     }
