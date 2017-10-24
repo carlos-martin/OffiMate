@@ -10,9 +10,9 @@ import UIKit
 import MessageUI
 import FirebaseAuth
 
-let ADMIN_NAME = "carlos.martin@sigmatechnology.se"
-let ADMIN_PASS = "Sigma4ALL?"
-let SIGMA_CODE = "Sigma4Code!"
+let ADMIN_NAME = "offimate@sigmatechnology.se"
+let ADMIN_PASS = "wPFur5n2GFc!"
+let SIGMA_CODE = "bNXtQckyZFyR"
 
 enum NewOfficeSection: Int {
     case name = 0
