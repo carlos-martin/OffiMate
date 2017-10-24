@@ -90,7 +90,7 @@ class BoostCardMessageViewController: UIViewController {
                 self.spinner?.start()
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2 , execute: { 
                     self.spinner?.stop()
-                    self.performSegue(withIdentifier: "unwindSegueToCoworkers", sender: self)
+                    self.performSegue(withIdentifier: "unwindSegueToCoworkerProfile", sender: self)
                 })
             } else {
                 let error_message = "The message cannot be empty!"

@@ -15,20 +15,25 @@
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
 		1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */; };
 		1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */; };
+		1A5B16531F9DBF160065596B /* NewOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */; };
+		1A5B16561F9DC07B0065596B /* NewOfficeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */; };
+		1A5B165B1F9DD8F30065596B /* Office.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B165A1F9DD8F30065596B /* Office.swift */; };
 		1A5BDFDE1F6FE719003C10E5 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDFDD1F6FE719003C10E5 /* Channel.swift */; };
 		1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */; };
 		1A6A5F131F692E1E0052F1FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */; };
 		1A813D181F4B0DCD00F190A2 /* Onboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A813D161F4B0DCD00F190A2 /* Onboard.storyboard */; };
-		1A813D1A1F4B0F0D00F190A2 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */; };
 		1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */; };
 		1A900FA41F4C49FE005B3DA4 /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */; };
 		1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */; };
 		1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */; };
 		1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */; };
+		1A95130A1F9F1280004A404B /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9513091F9F1280004A404B /* FloatingButton.swift */; };
 		1A9800E11F94C912002EED53 /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A9800DF1F94C912002EED53 /* Loading.storyboard */; };
 		1A9800E31F94C97A002EED53 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9800E21F94C97A002EED53 /* LoadingViewController.swift */; };
 		1A995F5B1F862AA400EE72C5 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */; };
 		1A995F5D1F867B7D00EE72C5 /* InboxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A995F5C1F867B7C00EE72C5 /* InboxViewCell.swift */; };
+		1A9B42371F99F96600475620 /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B42361F99F96600475620 /* OnboardViewController.swift */; };
+		1A9B423B1F99FAA200475620 /* OnboardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B423A1F99FAA200475620 /* OnboardViewCell.swift */; };
 		1A9CC3891F4DC17E000C6479 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9CC3881F4DC17E000C6479 /* Alert.swift */; };
 		1A9CC38B1F4DC579000C6479 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9CC38A1F4DC579000C6479 /* Tools.swift */; };
 		1AA2BC401F4ACEFE00E0C2E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2BC3F1F4ACEFE00E0C2E5 /* AppDelegate.swift */; };
@@ -60,20 +65,25 @@
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewCell.swift; path = SingleSignUp/View/Profile/ProfileViewCell.swift; sourceTree = SOURCE_ROOT; };
+		1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOfficeViewController.swift; sourceTree = "<group>"; };
+		1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOfficeViewCell.swift; sourceTree = "<group>"; };
+		1A5B165A1F9DD8F30065596B /* Office.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Office.swift; sourceTree = "<group>"; };
 		1A5BDFDD1F6FE719003C10E5 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDate.swift; sourceTree = "<group>"; };
 		1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A813D171F4B0DCD00F190A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboard.storyboard; sourceTree = "<group>"; };
-		1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardViewController.swift; path = SingleSignUp/Controller/Onboard/OnboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
 		1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewCell.swift; sourceTree = "<group>"; };
 		1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewCell.swift; sourceTree = "<group>"; };
+		1A9513091F9F1280004A404B /* FloatingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		1A9800E01F94C912002EED53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Loading.storyboard; sourceTree = "<group>"; };
 		1A9800E21F94C97A002EED53 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
 		1A995F5C1F867B7C00EE72C5 /* InboxViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewCell.swift; sourceTree = "<group>"; };
+		1A9B42361F99F96600475620 /* OnboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
+		1A9B423A1F99FAA200475620 /* OnboardViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewCell.swift; sourceTree = "<group>"; };
 		1A9CC3881F4DC17E000C6479 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		1A9CC38A1F4DC579000C6479 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		1AA2BC3C1F4ACEFE00E0C2E5 /* SingleSignUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleSignUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,9 +142,10 @@
 		1A20B47A1F4C73C600F3A44C /* Onboard */ = {
 			isa = PBXGroup;
 			children = (
-				1A813D191F4B0F0D00F190A2 /* OnboardViewController.swift */,
+				1A9B42361F99F96600475620 /* OnboardViewController.swift */,
 				1A20B47C1F4C73F100F3A44C /* SignUp */,
 				1A20B47B1F4C73E900F3A44C /* Login */,
+				1A5B16511F9DBEE40065596B /* Office */,
 			);
 			path = Onboard;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 		1A343FEA1F6AAC63000CB641 /* Onboard */ = {
 			isa = PBXGroup;
 			children = (
+				1A9B423A1F99FAA200475620 /* OnboardViewCell.swift */,
 				1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */,
 				1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */,
 			);
@@ -201,6 +213,22 @@
 				1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		1A5B16511F9DBEE40065596B /* Office */ = {
+			isa = PBXGroup;
+			children = (
+				1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */,
+			);
+			path = Office;
+			sourceTree = "<group>";
+		};
+		1A5B16541F9DC0030065596B /* Office */ = {
+			isa = PBXGroup;
+			children = (
+				1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */,
+			);
+			path = Office;
 			sourceTree = "<group>";
 		};
 		1A813D131F4B0AE700F190A2 /* Controller */ = {
@@ -240,9 +268,10 @@
 			isa = PBXGroup;
 			children = (
 				1A343FE91F6AAC58000CB641 /* Main */,
+				1AAA5CAC1F82795200C59597 /* Coworkers */,
 				1A343FEB1F6AAC69000CB641 /* Profile */,
 				1A343FEA1F6AAC63000CB641 /* Onboard */,
-				1AAA5CAC1F82795200C59597 /* Coworkers */,
+				1A5B16541F9DC0030065596B /* Office */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +282,7 @@
 				1A9CC3881F4DC17E000C6479 /* Alert.swift */,
 				1A9CC38A1F4DC579000C6479 /* Tools.swift */,
 				1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */,
+				1A9513091F9F1280004A404B /* FloatingButton.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -297,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				1A5BDFDD1F6FE719003C10E5 /* Channel.swift */,
+				1A5B165A1F9DD8F30065596B /* Office.swift */,
 				1AAA5CAA1F8253E000C59597 /* Coworker.swift */,
 				1AC439671F85347F00CCBF22 /* BoostCard.swift */,
 				1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */,
@@ -470,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A5B165B1F9DD8F30065596B /* Office.swift in Sources */,
 				1AC439681F85347F00CCBF22 /* BoostCard.swift in Sources */,
 				1A9CC38B1F4DC579000C6479 /* Tools.swift in Sources */,
 				1A3DB57F1F9728D600F05EF6 /* ForgotPasswordViewController.swift in Sources */,
@@ -481,6 +513,8 @@
 				1A9800E31F94C97A002EED53 /* LoadingViewController.swift in Sources */,
 				1AAA5CAB1F8253E000C59597 /* Coworker.swift in Sources */,
 				1AC439661F8532C000CCBF22 /* BoostCardMessageViewController.swift in Sources */,
+				1A5B16561F9DC07B0065596B /* NewOfficeViewCell.swift in Sources */,
+				1A5B16531F9DBF160065596B /* NewOfficeViewController.swift in Sources */,
 				1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */,
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */,
@@ -490,18 +524,20 @@
 				1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */,
 				1AA2BC421F4ACEFE00E0C2E5 /* MainViewController.swift in Sources */,
 				1AC439641F84F27F00CCBF22 /* NewBoostViewCell.swift in Sources */,
+				1A95130A1F9F1280004A404B /* FloatingButton.swift in Sources */,
 				1AAA5CB01F838FC400C59597 /* CoworkerProfileViewController.swift in Sources */,
 				1A9CC3891F4DC17E000C6479 /* Alert.swift in Sources */,
 				1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */,
 				1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */,
 				1AA2BC481F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld in Sources */,
 				1A26F48F1F875D3E00C6B434 /* BoostCardViewController.swift in Sources */,
-				1A813D1A1F4B0F0D00F190A2 /* OnboardViewController.swift in Sources */,
+				1A9B42371F99F96600475620 /* OnboardViewController.swift in Sources */,
 				1A995F5D1F867B7D00EE72C5 /* InboxViewCell.swift in Sources */,
 				1A995F5B1F862AA400EE72C5 /* InboxViewController.swift in Sources */,
 				1AC439621F84E3E300CCBF22 /* NewBoostCardViewController.swift in Sources */,
 				1AA2BC401F4ACEFE00E0C2E5 /* AppDelegate.swift in Sources */,
 				1AD3A03B1F7BC10D002DD969 /* CoworkersViewController.swift in Sources */,
+				1A9B423B1F99FAA200475620 /* OnboardViewCell.swift in Sources */,
 				1AD8B95B1F4D7F7600F6777C /* EmailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,7 +699,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SingleSignUp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.SingleSignUp;
+				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.OffiMate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -682,7 +718,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SingleSignUp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.SingleSignUp;
+				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.OffiMate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;

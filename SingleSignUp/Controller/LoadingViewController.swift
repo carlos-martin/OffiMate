@@ -32,9 +32,12 @@ class LoadingViewController: UIViewController {
                     } else {
                         if CurrentUser.user!.isEmailVerified {
                             Tools.initChannelsList(completion: {
-                                self.spinner.stop()
-                                Tools.removeChannelObserver()
-                                self.goToMain(vc: self)
+                                Tools.fetchAllOffices(completion: { (allOffices: [Office]) in
+                                    CurrentUser.allOffices = allOffices
+                                    self.spinner.stop()
+                                    Tools.removeChannelObserver()
+                                    self.goToMain(vc: self)
+                                })
                             })
                         } else {
                             let title = "Email Not Verified"

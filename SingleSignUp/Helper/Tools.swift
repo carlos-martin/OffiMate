@@ -86,20 +86,61 @@ public class Tools {
 
 //MARK:- BackEnd 
 extension Tools {
+    //MARK: Office
+    static func createOffice(name: String) -> String {
+        let officeRef = Database.database().reference().child("office")
+        let newOfficeRef = officeRef.childByAutoId()
+        let newOfficeItem = [
+            "name": name
+        ]
+        newOfficeRef.setValue(newOfficeItem)
+        return newOfficeRef.key
+    }
+    
+    static func fetchOffice(id: String, completion: @escaping (_ office: Office?) -> Void ) {
+        let officeRef = Database.database().reference().child("office")
+        let officeHandle = officeRef.queryOrderedByKey().queryEqual(toValue: id)
+        officeHandle.observe(.value) { (snapshot: DataSnapshot) in
+            let raw = snapshot.value as! Dictionary<String, AnyObject>
+            if let id = raw.keys.first, let name = (raw.values.first as! Dictionary<String, AnyObject>)["name"] as? String {
+                let office = Office(id: id, name: name)
+                completion(office)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    static func fetchAllOffices(completion: @escaping (_ offices: [Office]) -> Void) {
+        let officeRef = Database.database().reference().child("office")
+        let officeHandle = officeRef.queryOrderedByKey()
+        officeHandle.observe(.value) { (snapshot: DataSnapshot) in
+            let raw = snapshot.value as! Dictionary<String, AnyObject>
+            var offices: [Office] = []
+            for item in raw {
+                let id = item.key
+                let name = item.value["name"] as! String
+                offices.append(Office(id: id, name: name))
+            }
+            completion(offices)
+        }
+    }
+    
     //MARK: Coworker
-    static func createCoworker(uid: String, email: String, name: String) -> String {
+    static func createCoworker(uid: String, email: String, name: String, officeId: String) -> String {
         let coworkerRef = Database.database().reference().child("coworkers")
         let newCoworkerRef = coworkerRef.childByAutoId()
         let newCoworkerItem = [
             "userId":   uid,
             "name":     name,
-            "email":    email
+            "email":    email,
+            "officeId": officeId
         ]
         newCoworkerRef.setValue(newCoworkerItem)
         return newCoworkerRef.key
     }
     
-    static func fetchCoworker (uid: String, completion: @escaping (_ email: String?, _ name: String?, _ id: String?) -> Void) {
+    static func fetchCoworker (uid: String, completion: @escaping (_ id: String?, _ email: String?, _ name: String?, _ office: Office?) -> Void) {
         let coworkerRef = Database.database().reference().child("coworkers")
         let coworkerHandle = coworkerRef.queryOrdered(byChild: "userId").queryEqual(toValue: uid)
         coworkerHandle.observe(.value) { (snapshot: DataSnapshot) in
@@ -109,13 +150,15 @@ extension Tools {
                 let id = coworkerID
                 let coworkerData = rawData[coworkerID] as! Dictionary<String, String>
                 
-                if let name = coworkerData["name"], let email = coworkerData["email"] {
-                    completion(email, name, id)
+                if let name = coworkerData["name"], let email = coworkerData["email"], let officeId = coworkerData["officeId"] {
+                    self.fetchOffice(id: officeId, completion: { (office: Office?) in
+                        completion(id, email, name, office)
+                    })
                 } else {
-                    completion(nil, nil, nil)
+                    completion(nil, nil, nil, nil)
                 }
             } else {
-                completion(nil, nil, nil)
+                completion(nil, nil, nil, nil)
             }
         }
     }
@@ -156,7 +199,7 @@ extension Tools {
     //MARK: Channels
     
     static func initChannelsList (completion: @escaping() -> Void) {
-        self.channelsHandle = self.channelRef.observe(.value) { (snapshot: DataSnapshot) in
+        self.channelsHandle = self.channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.value) { (snapshot: DataSnapshot) in
             if let rawChannels = snapshot.value as? Dictionary<String, AnyObject> {
                 if rawChannels.count == CurrentUser.channelsLastAccess.count {
                     var channels: [Channel] = [] {

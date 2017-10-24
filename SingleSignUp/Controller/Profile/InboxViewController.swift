@@ -135,7 +135,7 @@ class InboxViewController: UITableViewController {
                     let _type =     entry.value["type"]     as! String
                     let type = (_type == "passion" ? BoostCardType(rawValue: 0) : BoostCardType(rawValue: 1))!
                     
-                    Tools.fetchCoworker(uid: senderId, completion: { (_email: String?, _name: String?, _) in
+                    Tools.fetchCoworker(uid: senderId, completion: { (_, _email: String?, _name: String?, _) in
                         if let email = _email, let name = _name {
                             let newdate: NewDate
                             newdate = NewDate(id: date)

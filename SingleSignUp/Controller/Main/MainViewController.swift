@@ -147,7 +147,6 @@ class MainViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = profileButton
         self.navigationItem.title = "OffiMate"
         self.emptyChannelsLabel.isHidden = (CurrentUser.channels.isEmpty ? false : true)
-        print(CurrentUser.channels)
         self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
     }
     
@@ -164,7 +163,7 @@ class MainViewController: UITableViewController {
     
     private func observeChannels() {
         self.startLoading = true
-        self.channelRefHandle = channelRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
+        self.channelRefHandle = channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.stopLoading = true
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
@@ -189,16 +188,16 @@ class MainViewController: UITableViewController {
             }
         })
         
-        channelRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+        channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
                 self.stopLoading = true
-                self.emptyChannelsLabel.isHidden = (self.emptyChannelsLabel.isHidden ? false : true)
+                self.emptyChannelsLabel.isHidden = false
             }
         }
     }
     
     private func observeChannelsChanges() {
-        self.messageRefHandle = channelRef.observe(.childChanged, with: { (snapshot: DataSnapshot) in
+        self.messageRefHandle = channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childChanged, with: { (snapshot: DataSnapshot) in
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
@@ -213,7 +212,7 @@ class MainViewController: UITableViewController {
             }
         })
         
-        self.deletedRefHandle = channelRef.observe(.childRemoved, with: { (snapshot: DataSnapshot) in
+        self.deletedRefHandle = channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childRemoved, with: { (snapshot: DataSnapshot) in
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
                 if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
@@ -347,7 +346,7 @@ class MainViewController: UITableViewController {
             case .createNewChannel:
                 return 0.1
             case .currentChannel:
-                return (CurrentUser.channels.isEmpty ? 0.1 : 30.0)
+                return (CurrentUser.channels.isEmpty ? 0.1 : UITableViewAutomaticDimension)
             }
         } else {
             return 0.1
@@ -390,7 +389,6 @@ class MainViewController: UITableViewController {
                 cell?.label.text = channel.name
                 
                 let counter = channel.getUnread(from: lastAccess)
-                //print("[\(indexPath.row)]: \(counter)")
                 if counter == 0 {
                     cell?.counter.isHidden = true
                     cell?.labelRigthConstraint.constant = 0.0

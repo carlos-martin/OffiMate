@@ -11,6 +11,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+let OFFICE_ID = "-Kx7x0OQt_XbVzqVcbX2"
+
 class PasswordViewController: UIViewController {
     
     var username: String?
@@ -58,7 +60,7 @@ class PasswordViewController: UIViewController {
                         user!.sendEmailVerification(completion: { (emailError: Error?) in
                             if emailError == nil {
                                 CurrentUser.user = user!
-                                let coworkerId = Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!)
+                                let coworkerId = Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!, officeId: OFFICE_ID)
                                 do {
                                     try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!, coworkerId: coworkerId)
                                     try CurrentUser.localSave()

@@ -33,7 +33,12 @@ class CoworkersViewController: UITableViewController {
     }
     
     //Firebase
-    private      var coworkers:         [Coworker] = []
+    private var coworkers: [Coworker] = [] {
+        willSet {
+            if newValue.isEmpty { self.emptyCoworkerLabel.isHidden = false }
+            else { self.emptyCoworkerLabel.isHidden = true }
+        }
+    }
     private lazy var coworkerRef:       DatabaseReference = Database.database().reference().child("coworkers")
     private      var coworkerRefHandle: DatabaseHandle?
     
@@ -59,25 +64,25 @@ class CoworkersViewController: UITableViewController {
     
     private func initUI() {
         self.navigationItem.title = "Coworkers"
-        self.emptyCoworkerLabel.isHidden = true
+        self.tableView.reloadData()
     }
     
     private func observeCoworkers() {
         self.startLoading = true
-        self.coworkerRefHandle = self.coworkerRef.observe(.childAdded, with: { (snapshot: DataSnapshot) in
+        self.coworkerRefHandle = self.coworkerRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childAdded, with: { (snapshot: DataSnapshot) in
             self.stopLoading = true
             let coworkerData = snapshot.value as! Dictionary<String, AnyObject>
             let id = snapshot.key
             if let name = coworkerData["name"] as! String!, let email = coworkerData["email"] as! String!, let uid = coworkerData["userId"] as! String! {
                 if CurrentUser.user!.uid != uid {
-                    let _coworker = Coworker(id: id, uid: uid, email: email, name: name)
-                    //print(_coworker)
+                    let _coworker = Coworker(id: id, uid: uid, email: email, name: name, office: CurrentUser.office!)
+                    print(_coworker)
                     self.coworkers.append(_coworker)
                     self.tableView.reloadData()
                 }
             }
         })
-        coworkerRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+        coworkerRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.childrenCount == 0 {
                 self.stopLoading = true
                 self.emptyCoworkerLabel.isHidden = false
@@ -96,7 +101,7 @@ class CoworkersViewController: UITableViewController {
                     controller = segue.destination as! CoworkerProfileViewController
                 }
                 controller.coworker = self.coworkers[indexPath.row]
-                controller.index = indexPath.row % Tools.backgrounsColors.count
+                controller.unwindSegue = "unwindSegueToCoworkers"
             }
         }
     }
@@ -106,6 +111,18 @@ class CoworkersViewController: UITableViewController {
     //MARK: - Table View
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return (self.coworkers.isEmpty ? 18.0 : UITableViewAutomaticDimension)
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return (self.coworkers.isEmpty ? nil : "your office coworkers")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

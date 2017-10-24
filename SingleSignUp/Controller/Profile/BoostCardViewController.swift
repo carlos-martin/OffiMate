@@ -27,6 +27,29 @@ class BoostCardViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    // MARK: - Navigation
+    @objc private func toCoworkerProfile () {
+        let uid = boostCard!.senderId
+        Tools.fetchCoworker(uid: uid) { (_id: String?, _email: String?, _name: String?, _office: Office?) in
+            if let id = _id, let email = _email, let name = _name, let office = _office {
+                let coworker = Coworker(id: id, uid: uid, email: email, name: name, office: office)
+
+                if let navigationController = UIStoryboard(name: "Coworkers", bundle: nil).instantiateViewController(withIdentifier: "CoworkerProfile") as? UINavigationController {
+                    if let controller = navigationController.viewControllers.first as? CoworkerProfileViewController {
+                        controller.modalPresentationStyle = .fullScreen
+                        controller.modalTransitionStyle = .coverVertical
+                        controller.coworker = coworker
+                        controller.unwindSegue = "unwindSegueToBoostCard"
+                        self.present(navigationController, animated: true, completion: nil)
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    @IBAction func unwindToBoostCard(segue: UIStoryboardSegue) {}
 
     // MARK: - Table view data source
 
@@ -59,6 +82,7 @@ class BoostCardViewController: UITableViewController {
             let header = (boostCard?.type == .passion ? "Passion" : "Execution")
             cell.headerLabel.text = header
             cell.senderButton.setTitle(self.senderName, for: UIControlState.normal)
+            cell.senderButton.addTarget(self, action: #selector(toCoworkerProfile), for: UIControlEvents.touchDown)
             
             if self.boostCard?.type == BoostCardType.execution {
                 cell.iconView.backgroundColor = Tools.greenExecution

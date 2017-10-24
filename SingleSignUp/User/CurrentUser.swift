@@ -16,16 +16,22 @@ class CurrentUser {
     static private(set) var password:   String!
     static private(set) var coworkerId: String!
     
+    //Office
+    static var office: Office! {
+        didSet {
+            print(office)
+        }
+    }
+    
+    //FirebaseAuth user
+    static var user: User!
+    
     //Main view controller
     static private(set) var channelsLastAccess: [Int64] = []
     static private(set) var channels:           [Channel] = []
     
-    //Last connexion day
-    static var lastDate: Int64!
-    
-    //static var date: NewDate = NewDate(date: Date())
-    //FirebaseAuth user
-    static var user: User!
+    //Profile view controller
+    static var allOffices: [Office] = []
     
     //MARK:- Public funtion
     static func isInit() -> Bool {
@@ -146,9 +152,10 @@ class CurrentUser {
                 if error == nil {
                     self.user = user
                     self.tryLoadingChannelsLastAccess()
-                    Tools.fetchCoworker(uid: user!.uid, completion: { (_, name: String?, coworkerId: String?) in
+                    Tools.fetchCoworker(uid: user!.uid, completion: { (coworkerId: String?, _, name: String?, office: Office?) in
                         self.name = (name != nil ? name! : "#tryToLogin#")
                         self.coworkerId = coworkerId!
+                        self.office = office
                         completion(true, nil)
                     })
                 } else {
@@ -168,6 +175,11 @@ class CurrentUser {
     //MARK:- updates channels
     static func initChannel (channels: [Channel]) {
         self.channels = channels
+    }
+    
+    static func cleanChannels () {
+        self.channels = []
+        self.channelsLastAccess = []
     }
     
     static func addChannel (channel: Channel, lastAccess: NewDate?=nil) {
