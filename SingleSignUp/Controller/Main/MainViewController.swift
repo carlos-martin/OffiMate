@@ -346,7 +346,7 @@ class MainViewController: UITableViewController {
             case .createNewChannel:
                 return 0.1
             case .currentChannel:
-                return (CurrentUser.channels.isEmpty ? 0.1 : 30.0)
+                return (CurrentUser.channels.isEmpty ? 0.1 : UITableViewAutomaticDimension)
             }
         } else {
             return 0.1

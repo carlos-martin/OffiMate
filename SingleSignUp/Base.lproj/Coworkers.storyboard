@@ -18,28 +18,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="XGR-Nq-SSZ">
-                            <rect key="frame" x="0.0" y="117.5" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="118" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no coworker yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PD-HI-XYP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="9Gb-cb-fPC"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Gfe-5R-UpZ">
-                                    <rect key="frame" x="172" y="7" width="30" height="30"/>
+                                    <rect key="frame" x="172" y="25" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="KnF-mg-8lO"/>
                                         <constraint firstAttribute="height" constant="30" id="P6N-F3-Xrn"/>
                                     </constraints>
                                 </activityIndicatorView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no coworker yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PD-HI-XYP">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="Gfe-5R-UpZ" firstAttribute="centerY" secondItem="XGR-Nq-SSZ" secondAttribute="centerY" id="AK9-Vd-GBq"/>
+                                <constraint firstItem="Gfe-5R-UpZ" firstAttribute="top" secondItem="3PD-HI-XYP" secondAttribute="bottom" constant="4" id="CLf-jv-7yw"/>
                                 <constraint firstItem="Gfe-5R-UpZ" firstAttribute="centerX" secondItem="XGR-Nq-SSZ" secondAttribute="centerX" id="IKZ-Lm-jVv"/>
                                 <constraint firstAttribute="trailing" secondItem="3PD-HI-XYP" secondAttribute="trailing" id="JP7-t9-oiH"/>
-                                <constraint firstAttribute="bottom" secondItem="3PD-HI-XYP" secondAttribute="bottom" id="Oan-Pu-dMD"/>
                                 <constraint firstItem="3PD-HI-XYP" firstAttribute="leading" secondItem="XGR-Nq-SSZ" secondAttribute="leading" id="Wc2-L9-ehE"/>
                                 <constraint firstItem="3PD-HI-XYP" firstAttribute="top" secondItem="XGR-Nq-SSZ" secondAttribute="top" id="eP8-Y0-ihG"/>
                             </constraints>

@@ -33,7 +33,12 @@ class CoworkersViewController: UITableViewController {
     }
     
     //Firebase
-    private      var coworkers:         [Coworker] = []
+    private      var coworkers:         [Coworker] = [] {
+        willSet {
+            if newValue.isEmpty { self.emptyCoworkerLabel.isHidden = false }
+            else { self.emptyCoworkerLabel.isHidden = true }
+        }
+    }
     private lazy var coworkerRef:       DatabaseReference = Database.database().reference().child("coworkers")
     private      var coworkerRefHandle: DatabaseHandle?
     
@@ -59,7 +64,7 @@ class CoworkersViewController: UITableViewController {
     
     private func initUI() {
         self.navigationItem.title = "Coworkers"
-        self.emptyCoworkerLabel.isHidden = true
+        self.tableView.reloadData()
     }
     
     private func observeCoworkers() {
@@ -106,6 +111,18 @@ class CoworkersViewController: UITableViewController {
     //MARK: - Table View
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return (self.coworkers.isEmpty ? 18.0 : UITableViewAutomaticDimension)
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return (self.coworkers.isEmpty ? nil : "your office coworkers")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
