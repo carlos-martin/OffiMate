@@ -60,7 +60,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowIn" translatesAutoresizingMaskIntoConstraints="NO" id="AUD-pJ-lAs">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upCell" translatesAutoresizingMaskIntoConstraints="NO" id="AUD-pJ-lAs">
                                             <rect key="frame" x="334" y="9" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="NVy-Zo-qU9"/>
@@ -79,6 +79,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="arrowImage" destination="AUD-pJ-lAs" id="kb2-lm-hWA"/>
                                     <outlet property="coworkerLabel" destination="A3Y-su-CVz" id="H1e-fS-dtF"/>
                                 </connections>
                             </tableViewCell>
@@ -430,5 +431,6 @@
         <image name="arrowIn" width="25" height="25"/>
         <image name="passion-big" width="50" height="50"/>
         <image name="profile" width="75" height="75"/>
+        <image name="upCell" width="25" height="25"/>
     </resources>
 </document>

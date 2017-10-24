@@ -10,6 +10,7 @@ import UIKit
 
 class CoworkersViewCell : UITableViewCell {
     @IBOutlet weak var coworkerLabel: UILabel!
+    @IBOutlet weak var arrowImage:    UIImageView!
 }
 
 class CoworkerProfileViewCell : UITableViewCell {

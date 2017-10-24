@@ -38,10 +38,11 @@ class CoworkerProfileViewController: UITableViewController {
     
     func initUI () {
         let backButton = UIBarButtonItem(
-            title: "Go Back",
+            image: UIImage(named: "down"),
             style: .plain,
             target: self,
             action: #selector(goBackAction))
+        
         self.navigationItem.leftBarButtonItem = backButton
     }
     
