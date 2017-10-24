@@ -225,12 +225,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
-            case .profile, .logout, .inbox:
+            case .profile, .logout:
                 return nil
-            case .password:
-                return (self.isEditMode ? nil : "Password")
             case .office:
                 return "Office"
+            case .password:
+                return (self.isEditMode ? nil : "Password")
+            case .inbox:
+                return (self.isEditMode ? nil : "Boost Card")
             }
         } else {
             return nil
@@ -242,16 +244,14 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch currentSection {
             case .profile:
                 return 0.1
-            case .password, .office, .logout, .inbox:
+            case .password, .office, .inbox:
+                return 30.0
+            case .logout:
                 return UITableViewAutomaticDimension
             }
         } else {
             return 0.1
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 18.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
