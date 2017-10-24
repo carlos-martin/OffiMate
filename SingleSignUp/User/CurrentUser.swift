@@ -177,6 +177,11 @@ class CurrentUser {
         self.channels = channels
     }
     
+    static func cleanChannels () {
+        self.channels = []
+        self.channelsLastAccess = []
+    }
+    
     static func addChannel (channel: Channel, lastAccess: NewDate?=nil) {
         if let index = getChannelIndex(channel: channel) {
             self.channels[index] = channel

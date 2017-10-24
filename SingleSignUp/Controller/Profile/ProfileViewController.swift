@@ -28,19 +28,31 @@ enum ProfileInfoRow: Int {
 class ProfileViewController: UIViewController {
     
     var isHidden:   Bool = true
-    var isEditMode: Bool = false
+    var isEditMode: Bool = false {
+        didSet {
+            if isEditMode { self.saveButton?.animateUp(view: self.view) }
+            else { self.saveButton?.animateDown(view: self.view) }
+        }
+    }
     
     var hasUnread: Bool = false {
         didSet { self.tableView.reloadData() }
     }
     
+    //UI 
+    var saveButton: FloatingButton?
+    
+    //To be save
+    var name: String?
+    var office: Office?
+    
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var gobackBarButtonItem: UIBarButtonItem!
     
     //MARK: IBAction
-    @IBAction func cancelActionButton(_ sender: Any) {
+    @IBAction func gobackActionButton(_ sender: Any) {
         Tools.goToMain(vc: self)
     }
     
@@ -48,9 +60,10 @@ class ProfileViewController: UIViewController {
         self.editAction()
     }
     
+    //UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.initUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +78,20 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //MARK:- UI Actions
+    func initUI() {
+        self.saveButton = FloatingButton(
+            view:       self.view,
+            target:     nil,
+            action:     #selector(saveAction),
+            bgColor:    UIColor.white,
+            tintColor:  UIColor.jsq_messageBubbleBlue(),
+            image:      UIImage(named: "save")!)
+        
+        self.saveButton?.animateDown(view: self.view)
+    }
+    
     func logoutAction() {
         do {
             try Auth.auth().signOut()
@@ -76,25 +103,36 @@ class ProfileViewController: UIViewController {
         
     }
     
-    func editAction(name: String?=nil) {
+    func editAction() {
         if self.isEditMode {
             self.tableView.isScrollEnabled = true
             self.view.endEditing(true)
             self.editBarButtonItem.title = "Edit"
-            self.cancelBarButtonItem.isEnabled = true
-            if let newname = name {
-                self.updateName(name: newname)
-            }
-            
+            self.gobackBarButtonItem.isEnabled = true
         } else {
             self.tableView.isScrollEnabled = false
             self.view.endEditing(false)
             self.editBarButtonItem.title = "Cancel"
-            self.cancelBarButtonItem.isEnabled = false
+            self.gobackBarButtonItem.isEnabled = false
         }
         
         self.isEditMode = (self.isEditMode ? false : true)
         self.updateTableView()
+    }
+    
+    func saveAction() {
+        if let newName = self.name {
+            if newName != CurrentUser.name! && !newName.isEmpty {
+                self.updateName(name: newName)
+            }
+        }
+        if let newOffice = self.office {
+            if newOffice != CurrentUser.office {
+                self.updateOffice(office: newOffice)
+                CurrentUser.cleanChannels()
+            }
+        }
+        self.editAction()
     }
     
     func updateName(name: String) {
@@ -105,6 +143,11 @@ class ProfileViewController: UIViewController {
         } catch {
             Alert.showFailiureAlert(message: "Oops! Something goes wrong!")
         }
+    }
+    
+    func updateOffice(office: Office) {
+        CurrentUser.office = office
+        Database.database().reference().child("coworkers").child(CurrentUser.coworkerId!).child("officeId").setValue(office.id)
     }
     
     func updateTableView() {
@@ -118,7 +161,6 @@ class ProfileViewController: UIViewController {
             IndexPath(row: ProfileInfoRow.name.rawValue, section: ProfileSection.profile.rawValue),
             IndexPath(row: 0, section: ProfileSection.office.rawValue)]
         self.tableView.reloadRows(at: indexParhArray, with: .fade)
-        //self.tableView.reloadData()
     }
     
 }
@@ -148,10 +190,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
         switch section {
         case .profile:
-            let row = ProfileInfoRow(rawValue: indexPath.row)
-            if row == .image {
+            let row = ProfileInfoRow(rawValue: indexPath.row)!
+            switch row {
+            case .image, .name:
                 return UITableViewAutomaticDimension
-            } else {
+            default:
                 return 44.0
             }
         case .office:
@@ -165,10 +208,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
         switch section {
         case .profile:
-            let row = ProfileInfoRow(rawValue: indexPath.row)
-            if row == .image {
+            let row = ProfileInfoRow(rawValue: indexPath.row)!
+            switch row {
+            case .image, .name:
                 return UITableViewAutomaticDimension
-            } else {
+            default:
                 return 44.0
             }
         case .office:
@@ -247,7 +291,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                     if self.isEditMode {
                         cell.textField.font = UIFont(name: ".SFUIText-Italic", size: 22)
                         cell.textField.borderStyle = UITextBorderStyle.roundedRect
-                        cell.textField.backgroundColor = Tools.grayTextField
+                        cell.textField.backgroundColor = UIColor.white//Tools.grayTextField
                         cell.textField.isEnabled = true
                     } else {
                         cell.textField.font = UIFont(name: ".SFUIText", size: 22)
@@ -358,26 +402,19 @@ extension ProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return CurrentUser.allOffices[row].name
     }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.office = CurrentUser.allOffices[row]
+    }
 }
 
 //MARK: - UITextField
 extension ProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        var result: Bool = false
         if let name = textField.text {
-            if name.isEmpty {
-                let message = "Oops! Your name cannot be empty!"
-                Alert.showFailiureAlert(message: message, handler: { (_) in
-                    Tools.textFieldErrorAnimation(textField: textField)
-                })
-            } else if name == CurrentUser.name! {
-                self.editAction()
-                result = true
-            } else {
-                self.editAction(name: name)
-                result = true
-            }
+            self.name = name
         }
-        return result
+        textField.endEditing(true)
+        return true
     }
 }

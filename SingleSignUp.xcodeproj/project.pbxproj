@@ -27,6 +27,7 @@
 		1A900FA61F4C4A15005B3DA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */; };
 		1A900FA91F4C4C26005B3DA4 /* LoginViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */; };
 		1A900FAB1F4C4C73005B3DA4 /* SignUpViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */; };
+		1A95130A1F9F1280004A404B /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9513091F9F1280004A404B /* FloatingButton.swift */; };
 		1A9800E11F94C912002EED53 /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A9800DF1F94C912002EED53 /* Loading.storyboard */; };
 		1A9800E31F94C97A002EED53 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9800E21F94C97A002EED53 /* LoadingViewController.swift */; };
 		1A995F5B1F862AA400EE72C5 /* InboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */; };
@@ -76,6 +77,7 @@
 		1A900FA51F4C4A15005B3DA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1A900FA81F4C4C26005B3DA4 /* LoginViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewCell.swift; sourceTree = "<group>"; };
 		1A900FAA1F4C4C73005B3DA4 /* SignUpViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewCell.swift; sourceTree = "<group>"; };
+		1A9513091F9F1280004A404B /* FloatingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		1A9800E01F94C912002EED53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Loading.storyboard; sourceTree = "<group>"; };
 		1A9800E21F94C97A002EED53 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				1A9CC3881F4DC17E000C6479 /* Alert.swift */,
 				1A9CC38A1F4DC579000C6479 /* Tools.swift */,
 				1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */,
+				1A9513091F9F1280004A404B /* FloatingButton.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */,
 				1AA2BC421F4ACEFE00E0C2E5 /* MainViewController.swift in Sources */,
 				1AC439641F84F27F00CCBF22 /* NewBoostViewCell.swift in Sources */,
+				1A95130A1F9F1280004A404B /* FloatingButton.swift in Sources */,
 				1AAA5CB01F838FC400C59597 /* CoworkerProfileViewController.swift in Sources */,
 				1A9CC3891F4DC17E000C6479 /* Alert.swift in Sources */,
 				1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */,

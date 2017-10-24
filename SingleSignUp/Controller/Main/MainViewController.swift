@@ -390,7 +390,6 @@ class MainViewController: UITableViewController {
                 cell?.label.text = channel.name
                 
                 let counter = channel.getUnread(from: lastAccess)
-                //print("[\(indexPath.row)]: \(counter)")
                 if counter == 0 {
                     cell?.counter.isHidden = true
                     cell?.labelRigthConstraint.constant = 0.0

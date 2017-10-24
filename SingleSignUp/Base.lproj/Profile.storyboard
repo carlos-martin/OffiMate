@@ -251,7 +251,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="3w6-gf-4qD">
                         <barButtonItem key="leftBarButtonItem" title="Go back" id="XxB-6p-ztN">
                             <connections>
-                                <action selector="cancelActionButton:" destination="PNI-gG-MUl" id="B2e-Ml-mme"/>
+                                <action selector="gobackActionButton:" destination="PNI-gG-MUl" id="E8a-bz-MoZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="f79-r7-k6b">
@@ -261,8 +261,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cancelBarButtonItem" destination="XxB-6p-ztN" id="evD-V5-5FE"/>
                         <outlet property="editBarButtonItem" destination="f79-r7-k6b" id="E6Q-3T-S5w"/>
+                        <outlet property="gobackBarButtonItem" destination="XxB-6p-ztN" id="nNC-ZT-ber"/>
                         <outlet property="tableView" destination="W66-Wc-jbp" id="zmB-2s-f9b"/>
                         <segue destination="C4m-RW-pcW" kind="show" identifier="showInbox" id="xdy-VZ-u8t"/>
                     </connections>
@@ -313,7 +313,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duw-OT-SIq">
-                                            <rect key="frame" x="26" y="50" width="341" height="42"/>
+                                            <rect key="frame" x="26" y="50" width="341" height="41"/>
                                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id elit nec lectus commodo blandit. Nulla tristique placerat mollis. Duis mattis sit amet mauris vel volutpat. Morbi ullamcorper nulla augue, vitae tristique massa ullamcorper eget. Nullam aliquam erat et metus auctor viverra. Aenean feugiat tristique maximus. Aenean dapibus diam et faucibus tristique. Nulla ut ligula sed velit interdum vulputate. Donec ut augue ipsum. Phasellus neque ipsum, elementum a faucibus eget, blandit et quam.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -472,13 +472,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manages ambiguity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BN-WK-snA">
-                                            <rect key="frame" x="16" y="8" width="351" height="22.5"/>
+                                            <rect key="frame" x="16" y="8" width="351" height="23"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="october 9, 2017 - 11:41" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-wZ-Awa">
-                                            <rect key="frame" x="16" y="32.5" width="351" height="15"/>
+                                            <rect key="frame" x="16" y="33" width="351" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="EDF-48-dK1"/>
                                             </constraints>
