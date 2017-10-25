@@ -14,8 +14,8 @@ import FirebaseAuth
 enum ProfileSection: Int {
     case profile = 0
     case office
-    case password
     case inbox
+    case password
     case logout
 }
 
@@ -107,12 +107,14 @@ class ProfileViewController: UIViewController {
         if self.isEditMode {
             self.tableView.isScrollEnabled = true
             self.view.endEditing(true)
-            self.editBarButtonItem.title = "Edit"
+            //self.editBarButtonItem.title = "Edit"
+            self.editBarButtonItem.image = UIImage(named: "edit")
             self.gobackBarButtonItem.isEnabled = true
         } else {
             self.tableView.isScrollEnabled = false
             self.view.endEditing(false)
-            self.editBarButtonItem.title = "Cancel"
+            //self.editBarButtonItem.title = "Cancel"
+            self.editBarButtonItem.image = UIImage(named: "close")
             self.gobackBarButtonItem.isEnabled = false
         }
         

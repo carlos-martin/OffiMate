@@ -38,7 +38,7 @@ class CoworkerProfileViewController: UITableViewController {
     
     func initUI () {
         let backButton = UIBarButtonItem(
-            image: UIImage(named: "down"),
+            image: UIImage(named: "close"),
             style: .plain,
             target: self,
             action: #selector(goBackAction))
@@ -92,6 +92,16 @@ class CoworkerProfileViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let currentSection = CoworkerSection(rawValue: section)!
+        switch currentSection {
+        case .profile:
+            return 0.1
+        case .options:
+            return UITableViewAutomaticDimension
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

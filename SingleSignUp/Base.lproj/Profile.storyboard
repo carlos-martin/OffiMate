@@ -249,12 +249,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="3w6-gf-4qD">
-                        <barButtonItem key="leftBarButtonItem" title="Go back" id="XxB-6p-ztN">
+                        <barButtonItem key="leftBarButtonItem" image="backforward" id="XxB-6p-ztN">
                             <connections>
                                 <action selector="gobackActionButton:" destination="PNI-gG-MUl" id="E8a-bz-MoZ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="f79-r7-k6b">
+                        <barButtonItem key="rightBarButtonItem" image="edit" style="plain" id="f79-r7-k6b">
                             <connections>
                                 <action selector="editActionButton:" destination="PNI-gG-MUl" id="NQh-vW-S2V"/>
                             </connections>
@@ -280,7 +280,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any Boost Card yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rgi-y7-Td5">
-                            <rect key="frame" x="0.0" y="171.5" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="172" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -472,13 +472,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manages ambiguity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BN-WK-snA">
-                                            <rect key="frame" x="16" y="8" width="351" height="23"/>
+                                            <rect key="frame" x="16" y="8" width="351" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="october 9, 2017 - 11:41" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwX-wZ-Awa">
-                                            <rect key="frame" x="16" y="33" width="351" height="15"/>
+                                            <rect key="frame" x="16" y="32" width="351" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="EDF-48-dK1"/>
                                             </constraints>
@@ -541,6 +541,8 @@
     </scenes>
     <resources>
         <image name="arrowIn" width="25" height="25"/>
+        <image name="backforward" width="25" height="25"/>
+        <image name="edit" width="25" height="25"/>
         <image name="passion-big" width="50" height="50"/>
         <image name="profile" width="75" height="75"/>
         <image name="round" width="25" height="25"/>
