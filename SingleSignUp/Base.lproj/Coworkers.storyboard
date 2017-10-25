@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="XGR-Nq-SSZ">
-                            <rect key="frame" x="0.0" y="118" width="375" height="60"/>
+                            <rect key="frame" x="0.0" y="117.5" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no coworker yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PD-HI-XYP">
@@ -55,25 +55,24 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3Y-su-CVz">
-                                            <rect key="frame" x="16" y="11" width="310" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="315" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upCell" translatesAutoresizingMaskIntoConstraints="NO" id="AUD-pJ-lAs">
-                                            <rect key="frame" x="334" y="9" width="25" height="25"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forward" translatesAutoresizingMaskIntoConstraints="NO" id="AUD-pJ-lAs">
+                                            <rect key="frame" x="339" y="12" width="20" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="NVy-Zo-qU9"/>
-                                                <constraint firstAttribute="height" constant="25" id="i0t-4r-1h4"/>
+                                                <constraint firstAttribute="width" constant="20" id="NVy-Zo-qU9"/>
+                                                <constraint firstAttribute="height" constant="20" id="i0t-4r-1h4"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="AUD-pJ-lAs" secondAttribute="bottom" constant="1" id="Akn-S3-9Yf"/>
-                                        <constraint firstItem="AUD-pJ-lAs" firstAttribute="top" secondItem="UIz-4K-aV5" secondAttribute="topMargin" constant="1" id="E2O-GG-MLh"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="AUD-pJ-lAs" secondAttribute="trailing" constant="8" id="EAz-4m-ZLm"/>
                                         <constraint firstItem="A3Y-su-CVz" firstAttribute="leading" secondItem="UIz-4K-aV5" secondAttribute="leadingMargin" constant="8" id="GQq-yY-UoM"/>
                                         <constraint firstItem="AUD-pJ-lAs" firstAttribute="leading" secondItem="A3Y-su-CVz" secondAttribute="trailing" constant="8" id="fPU-uQ-36A"/>
+                                        <constraint firstItem="AUD-pJ-lAs" firstAttribute="centerY" secondItem="UIz-4K-aV5" secondAttribute="centerY" id="tvZ-pE-tvp"/>
                                         <constraint firstItem="A3Y-su-CVz" firstAttribute="top" secondItem="UIz-4K-aV5" secondAttribute="topMargin" constant="3" id="wgX-Yv-Qrn"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="A3Y-su-CVz" secondAttribute="bottom" constant="3" id="zQY-sr-FbW"/>
                                     </constraints>
@@ -429,8 +428,8 @@
     </scenes>
     <resources>
         <image name="arrowIn" width="25" height="25"/>
+        <image name="forward" width="25" height="25"/>
         <image name="passion-big" width="50" height="50"/>
         <image name="profile" width="75" height="75"/>
-        <image name="upCell" width="25" height="25"/>
     </resources>
 </document>
