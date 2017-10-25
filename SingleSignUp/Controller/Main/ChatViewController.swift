@@ -78,6 +78,13 @@ class ChatViewController: JSQMessagesViewController {
         })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !Tools.isInternetAvailable() {
+            Tools.goToWaitingRoom(vc: self)
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.observeTyping()

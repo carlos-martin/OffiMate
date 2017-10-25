@@ -23,7 +23,7 @@ class LoadingViewController: UIViewController {
     private func start () {
         self.spinner = SpinnerLoader(view: self.view)
         self.spinner.start()
-        
+        if Tools.isInternetAvailable() {
             if CurrentUser.isInit() {
                 CurrentUser.tryToLogin(completion: { (isLogin: Bool, error: Error?) in
                     if !isLogin {
@@ -66,6 +66,16 @@ class LoadingViewController: UIViewController {
                 self.spinner.stop()
                 self.goToOnboard(vc: self)
             }
+        } else {
+            let title = "Internet Connection Problem"
+            let message = "You do not have internet connection. Check your device and try to access again later."
+            Alert.showFailiureAlert(title: title, message: message, handler: { (_) in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5 , execute: {
+                    self.spinner.stop()
+                    self.start()
+                })
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {

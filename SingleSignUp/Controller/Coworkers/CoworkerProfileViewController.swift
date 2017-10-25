@@ -31,6 +31,13 @@ class CoworkerProfileViewController: UITableViewController {
         super.viewDidLoad()
         self.initUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !Tools.isInternetAvailable() {
+            Tools.goToWaitingRoom(vc: self)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -39,6 +39,13 @@ class BoostCardMessageViewController: UIViewController {
             object:   nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !Tools.isInternetAvailable() {
+            Tools.goToWaitingRoom(vc: self)
+        }
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

@@ -49,6 +49,9 @@ class CoworkersViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if !Tools.isInternetAvailable() {
+            Tools.goToWaitingRoom(vc: self)
+        }
         if coworkerRefHandle == nil { self.observeCoworkers() }
     }
     

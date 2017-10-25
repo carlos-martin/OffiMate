@@ -68,6 +68,9 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if !Tools.isInternetAvailable() {
+            Tools.goToWaitingRoom(vc: self)
+        }
         Tools.unreadBoostCard(uid: CurrentUser.user!.uid) { (unread: Bool) in
             self.hasUnread = unread
         }

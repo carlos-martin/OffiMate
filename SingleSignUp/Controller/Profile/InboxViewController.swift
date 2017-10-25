@@ -40,6 +40,13 @@ class InboxViewController: UITableViewController {
         self.spinner = SpinnerLoader(view: self.tableView)
         self.emptyInboxLabel.isHidden = true
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !Tools.isInternetAvailable() {
+            Tools.goToWaitingRoom(vc: self)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
