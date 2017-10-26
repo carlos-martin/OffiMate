@@ -279,7 +279,8 @@ class MainViewController: UITableViewController {
             let newChannelRef = channelRef.childByAutoId()
             let channelItem = [
                 "name":     name,
-                "creator":  CurrentUser.user!.uid
+                "creator":  CurrentUser.user!.uid,
+                "officeId": CurrentUser.office!.id
             ]
             newChannelRef.setValue(channelItem)
             sender.text! = ""
