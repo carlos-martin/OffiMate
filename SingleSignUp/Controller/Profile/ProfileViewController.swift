@@ -12,10 +12,14 @@ import Firebase
 import FirebaseAuth
 
 enum ProfileSection: Int {
-    case office = 0
+    case userdata = 0
     case boostcard
-    case password
     case logout
+}
+
+enum UserdataRow: Int {
+    case office = 0
+    case password
 }
 
 enum BoostcardRow: Int {
@@ -191,14 +195,10 @@ class ProfileViewController: UIViewController {
     
     func updateTableView() {
         var indexSet = IndexSet()
-        indexSet.insert(ProfileSection.password.rawValue)
         indexSet.insert(ProfileSection.boostcard.rawValue)
         indexSet.insert(ProfileSection.logout.rawValue)
+        indexSet.insert(ProfileSection.userdata.rawValue)
         self.tableView.reloadSections(indexSet, with: .fade)
-        
-        let indexParhArray = [
-            IndexPath(row: 0, section: ProfileSection.office.rawValue)]
-        self.tableView.reloadRows(at: indexParhArray, with: .fade)
     }
     
 }
@@ -207,17 +207,17 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
-            case .office:
-                return 1
+            case .userdata:
+                return (self.isEditMode ? 1 : 2)
             case .boostcard:
                 return (self.isEditMode ? 0 : 2)
-            case .logout, .password:
+            case .logout:
                 return (self.isEditMode ? 0 : 1)
             }
         }
@@ -227,10 +227,27 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
         switch section {
-        case .office:
-            return (self.isEditMode ? 70.0 : 44.0)
+        case .userdata:
+            let row: UserdataRow = UserdataRow(rawValue: indexPath.row)!
+            switch row {
+            case .office:
+                return (self.isEditMode ? 70.0 : 44.0)
+            case .password:
+                return 44.0
+            }
+            
         default:
             return 44.0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let currentSection: ProfileSection = ProfileSection(rawValue: section)!
+        switch currentSection {
+        case .boostcard:
+            return (self.isEditMode ? nil : "Boostcard")
+        default:
+            return nil
         }
     }
     
@@ -250,31 +267,34 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let currentSection: ProfileSection = ProfileSection(rawValue: indexPath.section) {
             switch currentSection {
-            case .office:
-                if self.isEditMode {
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "officePickerCell", for: indexPath) as! OfficePickerViewCell
-                    cell.officePickerView.delegate = self
-                    cell.officePickerView.dataSource = self
-                    let index = CurrentUser.allOffices.index(of: CurrentUser.office) ?? 0
-                    cell.officePickerView.selectRow(index, inComponent: 0, animated: true)
-                    return cell
-                } else {
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
+            case .userdata:
+                let row: UserdataRow = UserdataRow(rawValue: indexPath.row)!
+                switch row {
+                case .office:
+                    if self.isEditMode {
+                        let cell = self.tableView.dequeueReusableCell(withIdentifier: "officePickerCell", for: indexPath) as! OfficePickerViewCell
+                        cell.officePickerView.delegate = self
+                        cell.officePickerView.dataSource = self
+                        let index = CurrentUser.allOffices.index(of: CurrentUser.office) ?? 0
+                        cell.officePickerView.selectRow(index, inComponent: 0, animated: true)
+                        return cell
+                    } else {
+                        let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
+                        cell.selectionStyle = .none
+                        cell.arrowImage.isHidden = true
+                        cell.unreadImage.isHidden = true
+                        cell.optionImage.image = UIImage(named: "office")
+                        cell.optionImage.backgroundColor = UIColor.white
+                        cell.optionLabel.text = CurrentUser.office.name
+                        return cell
+                    }
+                case .password:
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "passwordCell", for: indexPath) as! PasswordViewCell
                     cell.selectionStyle = .none
-                    cell.arrowImage.isHidden = true
-                    cell.unreadImage.isHidden = true
-                    cell.optionImage.image = UIImage(named: "office")
-                    cell.optionImage.backgroundColor = UIColor.white
-                    cell.optionLabel.text = CurrentUser.office.name
+                    cell.passwordTextField.text = CurrentUser.password
+                    cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
                     return cell
                 }
-            case .password:
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "passwordCell", for: indexPath) as! PasswordViewCell
-                cell.selectionStyle = .none
-                cell.passwordTextField.text = CurrentUser.password
-                cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
-                return cell
-                
             case .boostcard:
                 let row = BoostcardRow(rawValue: indexPath.row)
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
@@ -310,7 +330,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func showHidePassword (_ sender: Any) {
-        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: ProfileSection.password.rawValue)) as! PasswordViewCell
+        let section = ProfileSection.userdata.rawValue
+        let row = UserdataRow.password.rawValue
+        let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: section)) as! PasswordViewCell
         if self.isHidden {
             self.isHidden = false
             cell.showHideButton.setImage(UIImage(named: "hide"), for: .normal)
