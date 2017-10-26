@@ -16,9 +16,11 @@ enum BoostCardRow: Int {
 
 class BoostCardViewController: UITableViewController {
     
+    var received: Bool?
     var boostCard: BoostCard?
-    var senderName: String?
-    var senderMail: String?
+    var name: String?
+    var mail: String?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +39,7 @@ class BoostCardViewController: UITableViewController {
     
     // MARK: - Navigation
     @objc private func toCoworkerProfile () {
-        let uid = boostCard!.senderId
+        let uid = (self.received! ? boostCard!.senderId : boostCard!.receiverId)
         Tools.fetchCoworker(uid: uid) { (_id: String?, _email: String?, _name: String?, _office: Office?) in
             if let id = _id, let email = _email, let name = _name, let office = _office {
                 let coworker = Coworker(id: id, uid: uid, email: email, name: name, office: office)
@@ -88,7 +90,8 @@ class BoostCardViewController: UITableViewController {
             
             let header = (boostCard?.type == .passion ? "Passion" : "Execution")
             cell.headerLabel.text = header
-            cell.senderButton.setTitle(self.senderName, for: UIControlState.normal)
+            cell.fromLabel.text = (self.received! ? "from:" : "to:")
+            cell.senderButton.setTitle(self.name, for: UIControlState.normal)
             cell.senderButton.addTarget(self, action: #selector(toCoworkerProfile), for: UIControlEvents.touchDown)
             
             if self.boostCard?.type == BoostCardType.execution {

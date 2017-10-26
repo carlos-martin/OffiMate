@@ -403,7 +403,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="from:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7t-AO-Ox4">
                                             <rect key="frame" x="80" y="32" width="41" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="41" id="w6l-1a-ClF"/>
+                                                <constraint firstAttribute="height" constant="21" id="jnv-jf-JGY"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -416,8 +416,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWv-Qg-gen">
-                                            <rect key="frame" x="129" y="26" width="238" height="33"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="129" y="32" width="238" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="ba8-ho-FEZ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <state key="normal" title="Carlos Johansson"/>
                                         </button>
                                     </subviews>
@@ -425,10 +428,10 @@
                                         <constraint firstItem="VW5-09-4F5" firstAttribute="trailing" secondItem="gkY-x7-q6b" secondAttribute="trailingMargin" id="7K8-WI-hXI"/>
                                         <constraint firstItem="Z7t-AO-Ox4" firstAttribute="centerY" secondItem="JK4-O8-jrC" secondAttribute="centerY" constant="10" id="9tz-eo-xdv"/>
                                         <constraint firstItem="JK4-O8-jrC" firstAttribute="leading" secondItem="gkY-x7-q6b" secondAttribute="leading" constant="16" id="BRH-sR-eZQ"/>
+                                        <constraint firstItem="HWv-Qg-gen" firstAttribute="centerY" secondItem="Z7t-AO-Ox4" secondAttribute="centerY" id="CQS-z4-T0S"/>
                                         <constraint firstItem="JK4-O8-jrC" firstAttribute="top" secondItem="gkY-x7-q6b" secondAttribute="top" constant="4" id="Cwm-MM-c27"/>
                                         <constraint firstItem="VW5-09-4F5" firstAttribute="centerY" secondItem="JK4-O8-jrC" secondAttribute="centerY" constant="-10" id="Ddf-Sf-cQg"/>
                                         <constraint firstItem="HWv-Qg-gen" firstAttribute="leading" secondItem="Z7t-AO-Ox4" secondAttribute="trailing" constant="8" id="XMd-mF-ZO5"/>
-                                        <constraint firstItem="HWv-Qg-gen" firstAttribute="centerY" secondItem="Z7t-AO-Ox4" secondAttribute="centerY" id="def-ot-PhS"/>
                                         <constraint firstAttribute="trailing" secondItem="HWv-Qg-gen" secondAttribute="trailing" constant="8" id="dmi-5b-kTY"/>
                                         <constraint firstAttribute="bottom" secondItem="JK4-O8-jrC" secondAttribute="bottom" constant="4" id="gHM-y4-kMb"/>
                                         <constraint firstItem="VW5-09-4F5" firstAttribute="leading" secondItem="JK4-O8-jrC" secondAttribute="trailing" constant="8" id="kMN-U0-kK9"/>

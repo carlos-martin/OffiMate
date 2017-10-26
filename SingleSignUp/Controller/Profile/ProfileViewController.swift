@@ -13,9 +13,14 @@ import FirebaseAuth
 
 enum ProfileSection: Int {
     case office = 0
-    case inbox
+    case boostcard
     case password
     case logout
+}
+
+enum BoostcardRow: Int {
+    case inbox = 0
+    case sent
 }
 
 class ProfileViewController: UIViewController {
@@ -187,7 +192,7 @@ class ProfileViewController: UIViewController {
     func updateTableView() {
         var indexSet = IndexSet()
         indexSet.insert(ProfileSection.password.rawValue)
-        indexSet.insert(ProfileSection.inbox.rawValue)
+        indexSet.insert(ProfileSection.boostcard.rawValue)
         indexSet.insert(ProfileSection.logout.rawValue)
         self.tableView.reloadSections(indexSet, with: .fade)
         
@@ -210,7 +215,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch currentSection {
             case .office:
                 return 1
-            case .logout, .inbox, .password:
+            case .boostcard:
+                return (self.isEditMode ? 0 : 2)
+            case .logout, .password:
                 return (self.isEditMode ? 0 : 1)
             }
         }
@@ -230,7 +237,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
         switch section {
-        case .inbox:
+        case .boostcard:
             self.tableView.deselectRow(at: indexPath, animated: true)
             performSegue(withIdentifier: "showInbox", sender: indexPath)
         case .logout:
@@ -268,14 +275,22 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.showHideButton.addTarget(self, action: #selector(showHidePassword(_:)), for: UIControlEvents.touchUpInside)
                 return cell
                 
-            case .inbox:
+            case .boostcard:
+                let row = BoostcardRow(rawValue: indexPath.row)
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
                 cell.selectionStyle = .gray
                 cell.arrowImage.isHidden = false
-                cell.unreadImage.isHidden = (self.hasUnread ? false : true)
-                cell.optionImage.image = UIImage(named: "inbox")
+                if row == .inbox {
+                    cell.unreadImage.isHidden = (self.hasUnread ? false : true)
+                    cell.optionImage.image = UIImage(named: "inbox")
+                    cell.optionLabel.text = "Inbox"
+                } else {
+                    cell.unreadImage.isHidden = true
+                    cell.optionImage.image = UIImage(named: "sent")
+                    cell.optionLabel.text = "Sent"
+                }
                 cell.optionImage.backgroundColor = UIColor.white
-                cell.optionLabel.text = "Inbox"
+                
                 return cell
                 
             case .logout:
@@ -311,7 +326,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //showInbox
         if segue.identifier == "showInbox" {
             if let indexPath = sender as? IndexPath {
-                if indexPath.section == ProfileSection.inbox.rawValue {
+                let section = ProfileSection(rawValue: indexPath.section)
+                let row = BoostcardRow(rawValue: indexPath.row)
+                
+                if section == .boostcard && row == .inbox {
                     var controller: InboxViewController
                     if let navigationController = segue.destination as? UINavigationController {
                         controller = navigationController.topViewController as! InboxViewController
@@ -319,6 +337,18 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                         controller = segue.destination as! InboxViewController
                     }
                     controller.navigationItem.title = "Inbox"
+                    controller.received = true
+                }
+                
+                if section == .boostcard && row == .sent {
+                    var controller: InboxViewController
+                    if let navigationController = segue.destination as? UINavigationController {
+                        controller = navigationController.topViewController as! InboxViewController
+                    } else {
+                        controller = segue.destination as! InboxViewController
+                    }
+                    controller.navigationItem.title = "Sent"
+                    controller.received = false
                 }
             }
         }
