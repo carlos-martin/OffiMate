@@ -14,9 +14,9 @@ import SystemConfiguration
 public class Tools {
     //place to create internal variables
     static let separator: UIColor = UIColor(
-        colorLiteralRed: 211.0/255.0,
-        green:           211.0/255.0,
-        blue:            211.0/255.0,
+        colorLiteralRed: 202.0/255.0,
+        green:           202.0/255.0,
+        blue:            207.0/255.0,
         alpha:           1.0)
     static let blueSystem: UIColor = UIColor(
         colorLiteralRed: 0.0,
