@@ -112,6 +112,8 @@ class ProfileViewController: UIViewController {
             image:      UIImage(named: "save")!)
         
         self.saveButton?.animateDown(view: self.view)
+        
+        self.tableView.isScrollEnabled = false
     }
     
     func logoutAction() {
@@ -127,7 +129,7 @@ class ProfileViewController: UIViewController {
     
     func editAction() {
         if self.isEditMode {
-            self.tableView.isScrollEnabled = true
+            //self.tableView.isScrollEnabled = true
             self.view.endEditing(true)
             self.editBarButtonItem.image = UIImage(named: "edit")
             self.gobackBarButtonItem.isEnabled = true
@@ -137,7 +139,7 @@ class ProfileViewController: UIViewController {
             self.nameTextField.layer.borderColor = Tools.separator.cgColor
             self.nameTextField.isEnabled = false
         } else {
-            self.tableView.isScrollEnabled = false
+            //self.tableView.isScrollEnabled = false
             self.view.endEditing(false)
             self.editBarButtonItem.image = UIImage(named: "close")
             self.gobackBarButtonItem.isEnabled = false

@@ -14,6 +14,7 @@ class CoworkersViewCell : UITableViewCell {
 }
 
 class CoworkerProfileViewCell : UITableViewCell {
+    @IBOutlet weak var coworkerBackground:      UIView!
     @IBOutlet weak var coworkerPictureProfile:  UIImageView!
     @IBOutlet weak var coworkerNameLabel:       UILabel!
     @IBOutlet weak var coworkerEmailLabel:      UILabel!
