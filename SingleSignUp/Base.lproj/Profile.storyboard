@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80H-E4-bvI">
-                                        <rect key="frame" x="-5" y="44" width="385" height="101"/>
+                                        <rect key="frame" x="-5" y="46" width="385" height="99"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="carlos.martin@sigmatechnology.se" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmN-B5-dNi">
@@ -78,7 +78,7 @@
                                     <constraint firstItem="7PJ-dn-ilO" firstAttribute="centerX" secondItem="I9Y-cj-rVf" secondAttribute="centerX" id="SnY-XS-fKD"/>
                                     <constraint firstItem="PmN-B5-dNi" firstAttribute="top" secondItem="fOI-y0-IMz" secondAttribute="bottom" constant="4" id="VYk-eY-Hwt"/>
                                     <constraint firstAttribute="bottom" secondItem="80H-E4-bvI" secondAttribute="bottom" id="fg7-bE-HZD"/>
-                                    <constraint firstItem="80H-E4-bvI" firstAttribute="top" secondItem="I9Y-cj-rVf" secondAttribute="top" constant="44" id="gSZ-yj-WP7"/>
+                                    <constraint firstItem="80H-E4-bvI" firstAttribute="top" secondItem="I9Y-cj-rVf" secondAttribute="top" constant="46" id="gSZ-yj-WP7"/>
                                     <constraint firstAttribute="height" constant="145" id="kkP-hL-eIJ"/>
                                     <constraint firstItem="fOI-y0-IMz" firstAttribute="top" secondItem="7PJ-dn-ilO" secondAttribute="bottom" constant="6" id="s6k-8M-MiJ"/>
                                     <constraint firstItem="PmN-B5-dNi" firstAttribute="leading" secondItem="I9Y-cj-rVf" secondAttribute="leading" constant="8" id="tv4-F8-5Mx"/>
