@@ -14,12 +14,12 @@ enum CoworkerSection: Int {
 }
 
 enum CoworkerOptions: Int {
-    case boost = 0
+    case office = 0
+    case boost
 }
 
 enum CoworkerProfile: Int {
     case data = 0
-    case office
 }
 
 class CoworkerProfileViewController: UITableViewController {
@@ -87,9 +87,9 @@ class CoworkerProfileViewController: UITableViewController {
         let currentSection = CoworkerSection(rawValue: section)!
         switch currentSection {
         case .profile:
-            return 2
-        case .options:
             return 1
+        case .options:
+            return 2
         }
     }
     
@@ -118,9 +118,12 @@ class CoworkerProfileViewController: UITableViewController {
             break
         case .options:
             let row: CoworkerOptions = CoworkerOptions(rawValue: indexPath.row)!
-            if row == .boost {
+            switch row {
+            case .boost:
                 tableView.deselectRow(at: indexPath, animated: true)
                 performSegue(withIdentifier: "showBoostCard", sender: indexPath)
+            default:
+                break
             }
         }
     }
@@ -129,20 +132,22 @@ class CoworkerProfileViewController: UITableViewController {
         let section: CoworkerSection = CoworkerSection(rawValue: indexPath.section)!
         switch section {
         case .profile:
-            
-            let row: CoworkerProfile = CoworkerProfile(rawValue: indexPath.row)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "coworkerProfileCell", for: indexPath) as! CoworkerProfileViewCell
+            cell.selectionStyle = .none
+            cell.coworkerNameLabel.text  = self.coworker?.name
+            cell.coworkerEmailLabel.text = self.coworker?.email
+            cell.coworkerBackground.layer.borderWidth = 0.5
+            cell.coworkerBackground.layer.borderColor = Tools.separator.cgColor
+            cell.coworkerPictureProfile.layer.cornerRadius = cell.coworkerPictureProfile.frame.size.width / 2
+            cell.coworkerPictureProfile.layer.borderWidth = 0.5
+            cell.coworkerPictureProfile.layer.borderColor = Tools.separator.cgColor
+            cell.coworkerPictureProfile.backgroundColor = Tools.getColor(id: self.coworker!.uid)
+            cell.coworkerPictureProfile.clipsToBounds = true
+            return cell
+
+        case .options:
+            let row: CoworkerOptions = CoworkerOptions(rawValue: indexPath.row)!
             switch row {
-            case .data:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "coworkerProfileCell", for: indexPath) as! CoworkerProfileViewCell
-                cell.selectionStyle = .none
-                cell.coworkerNameLabel.text  = self.coworker?.name
-                cell.coworkerEmailLabel.text = self.coworker?.email
-                cell.coworkerPictureProfile.layer.cornerRadius = cell.coworkerPictureProfile.frame.size.width / 2
-                cell.coworkerPictureProfile.layer.borderWidth = 1.0
-                cell.coworkerPictureProfile.layer.borderColor = Tools.separator.cgColor
-                cell.coworkerPictureProfile.backgroundColor = Tools.getColor(id: self.coworker!.uid)
-                cell.coworkerPictureProfile.clipsToBounds = true
-                return cell
             case .office:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "coworkerOptionCell", for: indexPath) as! CoworkerOptionViewCell
                 cell.selectionStyle = .none
@@ -150,16 +155,14 @@ class CoworkerProfileViewController: UITableViewController {
                 cell.actionLaben.text = self.coworker?.office.name
                 cell.arrowImage.isHidden = true
                 return cell
+            case .boost :
+                let cell = tableView.dequeueReusableCell(withIdentifier: "coworkerOptionCell", for: indexPath) as! CoworkerOptionViewCell
+                cell.selectionStyle = .gray
+                cell.iconImage.image = UIImage(named: "boost")
+                cell.actionLaben.text = "Send a Boost Card"
+                cell.arrowImage.isHidden = false
+                return cell
             }
-            
-            
-        case .options:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "coworkerOptionCell", for: indexPath) as! CoworkerOptionViewCell
-            cell.selectionStyle = .gray
-            cell.iconImage.image = UIImage(named: "boost")
-            cell.actionLaben.text = "Send a Boost Card"
-            cell.arrowImage.isHidden = false
-            return cell
         }
     }
 

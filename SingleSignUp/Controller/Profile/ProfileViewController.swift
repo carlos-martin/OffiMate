@@ -12,17 +12,10 @@ import Firebase
 import FirebaseAuth
 
 enum ProfileSection: Int {
-    case profile = 0
-    case office
+    case office = 0
     case inbox
     case password
     case logout
-}
-
-enum ProfileInfoRow: Int {
-    case image = 0
-    case name
-    case email
 }
 
 class ProfileViewController: UIViewController {
@@ -39,7 +32,7 @@ class ProfileViewController: UIViewController {
         didSet { self.tableView.reloadData() }
     }
     
-    //UI 
+    //UI
     var saveButton: FloatingButton?
     
     //To be save
@@ -47,9 +40,14 @@ class ProfileViewController: UIViewController {
     var office: Office?
     
     //MARK: IBOutlet
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var gobackBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var profileImage:            UIImageView!
+    @IBOutlet weak var nameTextField:           UITextField!
+    @IBOutlet weak var emailLabel:              UILabel!
+    @IBOutlet weak var tableView:               UITableView!
+    @IBOutlet weak var editBarButtonItem:       UIBarButtonItem!
+    @IBOutlet weak var gobackBarButtonItem:     UIBarButtonItem!
+    @IBOutlet weak var topConstraint:           NSLayoutConstraint!
+    @IBOutlet weak var profileBackgroundView:   UIView!
     
     //MARK: IBAction
     @IBAction func gobackActionButton(_ sender: Any) {
@@ -81,9 +79,30 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     //MARK:- UI Actions
     func initUI() {
+        // @IBOutlet weak var profileBackgroundView: UIView!
+        self.profileBackgroundView.layer.borderWidth = 0.5
+        self.profileBackgroundView.layer.borderColor = Tools.separator.cgColor
+        
+        // @IBOutlet weak var topConstraint: NSLayoutConstraint!
+        self.topConstraint.constant = self.navigationController!.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+        
+        // @IBOutlet weak var profileImage: UIImageView!
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+        self.profileImage.layer.borderWidth = 0.5
+        self.profileImage.layer.borderColor = Tools.separator.cgColor
+        self.profileImage.backgroundColor = Tools.getColor(id: CurrentUser.user!.uid)
+        self.profileImage.clipsToBounds = true
+        
+        // @IBOutlet weak var nameTextField: UITextField!
+        self.nameTextField.delegate = self
+        self.nameTextField.text = CurrentUser.name
+        self.nameTextField.borderStyle = .none
+        
+        // @IBOutlet weak var emailLabel: UILabel!
+        self.emailLabel.text = CurrentUser.email
+        
         self.saveButton = FloatingButton(
             view:       self.view,
             target:     nil,
@@ -93,6 +112,8 @@ class ProfileViewController: UIViewController {
             image:      UIImage(named: "save")!)
         
         self.saveButton?.animateDown(view: self.view)
+        
+        self.tableView.isScrollEnabled = false
     }
     
     func logoutAction() {
@@ -108,17 +129,25 @@ class ProfileViewController: UIViewController {
     
     func editAction() {
         if self.isEditMode {
-            self.tableView.isScrollEnabled = true
+            //self.tableView.isScrollEnabled = true
             self.view.endEditing(true)
-            //self.editBarButtonItem.title = "Edit"
             self.editBarButtonItem.image = UIImage(named: "edit")
             self.gobackBarButtonItem.isEnabled = true
+            self.nameTextField.font = UIFont(name: ".SFUIText", size: 22)
+            self.nameTextField.backgroundColor = UIColor.white
+            self.nameTextField.layer.borderWidth = 0.1
+            self.nameTextField.layer.borderColor = Tools.separator.cgColor
+            self.nameTextField.isEnabled = false
         } else {
-            self.tableView.isScrollEnabled = false
+            //self.tableView.isScrollEnabled = false
             self.view.endEditing(false)
-            //self.editBarButtonItem.title = "Cancel"
             self.editBarButtonItem.image = UIImage(named: "close")
             self.gobackBarButtonItem.isEnabled = false
+            self.nameTextField.font = UIFont(name: ".SFUIText-Italic", size: 22)
+            self.nameTextField.backgroundColor = UIColor.groupTableViewBackground.withAlphaComponent(0.5)
+            self.nameTextField.layer.borderWidth = 0.5
+            self.nameTextField.layer.borderColor = Tools.separator.cgColor
+            self.nameTextField.isEnabled = true
         }
         
         self.isEditMode = (self.isEditMode ? false : true)
@@ -163,7 +192,6 @@ class ProfileViewController: UIViewController {
         self.tableView.reloadSections(indexSet, with: .fade)
         
         let indexParhArray = [
-            IndexPath(row: ProfileInfoRow.name.rawValue, section: ProfileSection.profile.rawValue),
             IndexPath(row: 0, section: ProfileSection.office.rawValue)]
         self.tableView.reloadRows(at: indexParhArray, with: .fade)
     }
@@ -174,14 +202,12 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
-            case .profile:
-                return 3
             case .office:
                 return 1
             case .logout, .inbox, .password:
@@ -191,71 +217,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return 0
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
-        switch section {
-        case .profile:
-            let row = ProfileInfoRow(rawValue: indexPath.row)!
-            switch row {
-            case .image, .name:
-                return UITableViewAutomaticDimension
-            default:
-                return 44.0
-            }
-        case .office:
-            return (self.isEditMode ? 70.0 : 44.0)
-        default:
-            return 44.0
-        }
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
         switch section {
-        case .profile:
-            let row = ProfileInfoRow(rawValue: indexPath.row)!
-            switch row {
-            case .image, .name:
-                return UITableViewAutomaticDimension
-            default:
-                return 44.0
-            }
         case .office:
             return (self.isEditMode ? 70.0 : 44.0)
         default:
             return 44.0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
-            switch currentSection {
-            case .profile, .logout:
-                return nil
-            case .office:
-                return "Office"
-            case .password:
-                return (self.isEditMode ? nil : "Password")
-            case .inbox:
-                return (self.isEditMode ? nil : "Boost Card")
-            }
-        } else {
-            return nil
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
-            switch currentSection {
-            case .profile:
-                return 0.1
-            case .password, .office, .inbox:
-                return 30.0
-            case .logout:
-                return UITableViewAutomaticDimension
-            }
-        } else {
-            return 0.1
         }
     }
     
@@ -275,43 +243,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let currentSection: ProfileSection = ProfileSection(rawValue: indexPath.section) {
             switch currentSection {
-            case .profile:
-                let currentRow: ProfileInfoRow = ProfileInfoRow(rawValue: indexPath.row)!
-                switch currentRow {
-                case .image:
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! PictureViewCell
-                    cell.selectionStyle = .none
-                    cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width / 2
-                    cell.profileImage.layer.borderWidth = 0.5
-                    cell.profileImage.layer.borderColor = Tools.separator.cgColor
-                    cell.profileImage.backgroundColor = Tools.getColor(id: CurrentUser.user!.uid)
-                    cell.profileImage.clipsToBounds = true
-                    return cell
-                case .name:
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
-                    cell.selectionStyle = .none
-                    cell.textField.text = CurrentUser.name
-                    cell.textField.delegate = self
-                    
-                    if self.isEditMode {
-                        cell.textField.font = UIFont(name: ".SFUIText-Italic", size: 22)
-                        cell.textField.borderStyle = UITextBorderStyle.roundedRect
-                        cell.textField.backgroundColor = UIColor.white//Tools.grayTextField
-                        cell.textField.isEnabled = true
-                    } else {
-                        cell.textField.font = UIFont(name: ".SFUIText", size: 22)
-                        cell.textField.borderStyle = UITextBorderStyle.none
-                        cell.textField.backgroundColor = UIColor.white
-                        cell.textField.isEnabled = false
-                    }
-                    
-                    return cell
-                case .email:
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "informationCell", for: indexPath) as! InformationViewCell
-                    cell.selectionStyle = .none
-                    cell.textField.text = CurrentUser.email
-                    return cell
-                }
             case .office:
                 if self.isEditMode {
                     let cell = self.tableView.dequeueReusableCell(withIdentifier: "officePickerCell", for: indexPath) as! OfficePickerViewCell
