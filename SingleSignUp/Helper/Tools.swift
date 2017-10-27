@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import SystemConfiguration
+import SystemConfiguration.CaptiveNetwork
 
 public class Tools {
     //place to create internal variables
@@ -401,6 +402,35 @@ extension Tools {
         let isReachable = flags.contains(.reachable)
         let needsConnection = flags.contains(.connectionRequired)
         return (isReachable && !needsConnection)
+    }
+    
+    static func getWiFiSSID() -> String? {
+        var ssid: String? = nil
+        guard let unwrappedCFArrayInterfaces = CNCopySupportedInterfaces() else {
+            print("Error: No Interface Found!")
+            ssid = nil
+            return ssid
+        }
+        guard let swiftInterface = (unwrappedCFArrayInterfaces as NSArray) as? [String] else {
+            print("System error: did not come back as array of Strings")
+            ssid = nil
+            return ssid
+        }
+        for interface in swiftInterface {
+            print("Looking up SSID info for \(interface)")
+            guard let unwrappedCFDictionaryForInterface = CNCopyCurrentNetworkInfo(interface as CFString) else {
+                print("System error: \(interface) has no information")
+                ssid = nil
+                return ssid
+            }
+            guard let SSIDDict = (unwrappedCFDictionaryForInterface as NSDictionary) as? [String: AnyObject] else {
+                print("System error: interface information is not a string-keyed dictionary")
+                ssid = nil
+                return ssid
+            }
+            ssid = (SSIDDict["SSID"] as? String ?? nil)
+        }
+        return ssid
     }
     
     static func randomString(length: Int?=12) -> String {
