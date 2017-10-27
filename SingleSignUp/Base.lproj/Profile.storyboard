@@ -241,6 +241,7 @@
                         <outlet property="nameTextField" destination="fOI-y0-IMz" id="PcL-O1-Rcy"/>
                         <outlet property="profileBackgroundView" destination="80H-E4-bvI" id="yWR-Wg-qwb"/>
                         <outlet property="profileImage" destination="7PJ-dn-ilO" id="gzD-NZ-Qoq"/>
+                        <outlet property="profileView" destination="I9Y-cj-rVf" id="YZU-tU-5oX"/>
                         <outlet property="tableView" destination="dNM-2o-U3M" id="Cbf-IB-AhO"/>
                         <outlet property="topConstraint" destination="uYL-a5-M8g" id="41g-NJ-Q3Z"/>
                         <segue destination="C4m-RW-pcW" kind="show" identifier="showInbox" id="dPt-R8-P6j"/>
@@ -259,7 +260,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <label key="tableFooterView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any Boost Card yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rgi-y7-Td5">
-                            <rect key="frame" x="0.0" y="172" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="171.5" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>

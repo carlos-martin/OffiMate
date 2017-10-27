@@ -56,6 +56,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var editBarButtonItem:       UIBarButtonItem!
     @IBOutlet weak var gobackBarButtonItem:     UIBarButtonItem!
     @IBOutlet weak var topConstraint:           NSLayoutConstraint!
+    @IBOutlet weak var profileView:             UIView!
     @IBOutlet weak var profileBackgroundView:   UIView!
     
     //MARK: IBAction
@@ -89,7 +90,7 @@ class ProfileViewController: UIViewController {
     }
     
     //MARK:- UI Actions
-    func initUI() {
+    func initUI() {        
         // @IBOutlet weak var profileBackgroundView: UIView!
         self.profileBackgroundView.layer.borderWidth = 0.5
         self.profileBackgroundView.layer.borderColor = Tools.separator.cgColor
@@ -122,7 +123,7 @@ class ProfileViewController: UIViewController {
         
         self.saveButton?.animateDown(view: self.view)
         
-        self.tableView.isScrollEnabled = false
+        self.tableView.isScrollEnabled = true
     }
     
     func logoutAction() {
