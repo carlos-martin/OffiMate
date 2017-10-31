@@ -57,6 +57,12 @@ class OfficeViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.officeId = self.offices[indexPath.row].id
         self.tableView.deselectRow(at: indexPath, animated: true)
+        do {
+            try Auth.auth().signOut()
+            print("[OfficeViewController] Signed Out!")
+        } catch {
+            print("[OfficeViewController] Error Signing Out!")
+        }
         performSegue(withIdentifier: "toPassword", sender: nil)
     }
 
@@ -73,12 +79,20 @@ class OfficeViewController: UITableViewController {
     // MARK: - Firebase
     func observeOffice() {
         self.spinner.start()
-        Tools.fetchAllOffices { (offices: [Office]) in
-            self.offices = offices
-            self.tableView.reloadData()
-            Tools.removeChannelObserver()
-            self.spinner.stop()
-        }
+        Auth.auth().signIn(withEmail: ADMIN_NAME, password: ADMIN_PASS, completion: { (user: User?, error: Error?) in
+            if let _ = error {
+                let title = "Error"
+                let message = "Oops! Something goes wrong. Try again later."
+                Alert.showFailiureAlert(title: title, message: message, handler: nil)
+                self.spinner.stop()
+            } else {
+                Tools.fetchAllOffices { (offices: [Office]) in
+                    self.offices = offices
+                    self.tableView.reloadData()
+                    Tools.removeChannelObserver()
+                    self.spinner.stop()
+                }
+            }
+        })
     }
-
 }

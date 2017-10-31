@@ -69,7 +69,7 @@ class PasswordViewController: UIViewController {
                         user!.sendEmailVerification(completion: { (emailError: Error?) in
                             if emailError == nil {
                                 CurrentUser.user = user!
-                                let coworkerId = Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!, officeId: OFFICE_ID)
+                                let coworkerId = Tools.createCoworker(uid: user!.uid, email: self.email!, name: self.username!, officeId: self.officeId!)
                                 do {
                                     try CurrentUser.setData(name: self.username!, email: self.email!, password: self.password!, coworkerId: coworkerId)
                                     try CurrentUser.localSave()
