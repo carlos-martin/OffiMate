@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
+let ADMIN_NAME = "offimate@sigmatechnology.se"
+let ADMIN_PASS = "wPFur5n2GFc!"
+let SIGMA_CODE = "bNXtQckyZFyR"
+
 class CurrentUser {
     static private(set) var name:       String!
     static private(set) var email:      String!

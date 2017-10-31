@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A216AA41FA85BEC000CD100 /* OfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A216AA31FA85BEC000CD100 /* OfficeViewController.swift */; };
 		1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2338091F6AB54B009D3243 /* MainViewCell.swift */; };
 		1A26F48F1F875D3E00C6B434 /* BoostCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */; };
 		1A3326E91F67F8B3009247BC /* SpinnerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A216AA31FA85BEC000CD100 /* OfficeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficeViewController.swift; sourceTree = "<group>"; };
 		1A2338091F6AB54B009D3243 /* MainViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
 		1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCardViewController.swift; sourceTree = "<group>"; };
 		1A3326E81F67F8B3009247BC /* SpinnerLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerLoader.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			children = (
 				1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */,
 				1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */,
+				1A216AA31FA85BEC000CD100 /* OfficeViewController.swift */,
 				1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */,
 			);
 			path = SignUp;
@@ -519,6 +522,7 @@
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */,
 				1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */,
+				1A216AA41FA85BEC000CD100 /* OfficeViewController.swift in Sources */,
 				1AAA5CAE1F82798600C59597 /* CoworkersViewCell.swift in Sources */,
 				1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */,
 				1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */,

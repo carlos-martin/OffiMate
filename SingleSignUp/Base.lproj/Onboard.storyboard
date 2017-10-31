@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I0k-17-ekd">
-                            <rect key="frame" x="0.0" y="162" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="161.5" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="Add new office"/>
@@ -121,7 +122,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="22M-Q3-qUj">
-                            <rect key="frame" x="0.0" y="118" width="375" height="52"/>
+                            <rect key="frame" x="0.0" y="117.5" width="375" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don't have a validation code, contact to:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v9o-FB-ACP">
@@ -211,7 +212,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Tfl-Ww-k3C">
-                                    <rect key="frame" x="0.0" y="162" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="161.5" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Forgot your password?"/>
                                     <connections>
@@ -495,12 +496,78 @@
                     <connections>
                         <outlet property="nextBarButtonItem" destination="ZEp-aj-JM7" id="1G0-92-ajQ"/>
                         <outlet property="tableView" destination="zeW-Z3-rni" id="ZVU-fq-DYz"/>
-                        <segue destination="Xh8-rv-BpQ" kind="show" identifier="toPassword" id="ZFC-u7-gCo"/>
+                        <segue destination="u2d-BS-ZMK" kind="show" identifier="toOffice" id="NA4-2S-bbm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ara-ch-waE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2184.8000000000002" y="-178.56071964017991"/>
+        </scene>
+        <!--Office-->
+        <scene sceneID="tCG-eo-R5G">
+            <objects>
+                <tableViewController id="u2d-BS-ZMK" customClass="OfficeViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Qpg-BF-gpB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="selectOfficeCell" id="H2p-bW-gd6" customClass="OfficeViewCell" customModule="SingleSignUp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H2p-bW-gd6" id="ugl-b5-90N">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jönköping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ywg-Xb-KUm">
+                                            <rect key="frame" x="69" y="11" width="257" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="office" translatesAutoresizingMaskIntoConstraints="NO" id="Sbg-bf-em2">
+                                            <rect key="frame" x="26" y="9" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="IDu-K0-5kp"/>
+                                                <constraint firstAttribute="width" constant="25" id="ZLH-Zr-1XD"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowIn" translatesAutoresizingMaskIntoConstraints="NO" id="ZrI-TS-tgv">
+                                            <rect key="frame" x="334" y="9.5" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="72L-Li-ZOT"/>
+                                                <constraint firstAttribute="width" constant="25" id="QVs-LP-qH6"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Sbg-bf-em2" firstAttribute="leading" secondItem="ugl-b5-90N" secondAttribute="leadingMargin" constant="18" id="029-5e-AhJ"/>
+                                        <constraint firstItem="Sbg-bf-em2" firstAttribute="centerY" secondItem="ugl-b5-90N" secondAttribute="centerY" id="1BS-ld-n0t"/>
+                                        <constraint firstItem="Ywg-Xb-KUm" firstAttribute="leading" secondItem="Sbg-bf-em2" secondAttribute="trailing" constant="18" id="GmM-Xs-iEi"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ZrI-TS-tgv" secondAttribute="trailing" constant="8" id="HJL-sQ-1IP"/>
+                                        <constraint firstItem="ZrI-TS-tgv" firstAttribute="centerY" secondItem="ugl-b5-90N" secondAttribute="centerY" id="XJb-pM-GqG"/>
+                                        <constraint firstItem="ZrI-TS-tgv" firstAttribute="leading" secondItem="Ywg-Xb-KUm" secondAttribute="trailing" constant="8" id="fcH-h4-grj"/>
+                                        <constraint firstItem="Ywg-Xb-KUm" firstAttribute="centerY" secondItem="ugl-b5-90N" secondAttribute="centerY" id="iGL-Rc-sd4"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="officeNameLabel" destination="Ywg-Xb-KUm" id="VoF-dI-57O"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="u2d-BS-ZMK" id="BiL-yU-152"/>
+                            <outlet property="delegate" destination="u2d-BS-ZMK" id="249-m9-K8q"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Office" id="7E7-Eg-4Lf"/>
+                    <connections>
+                        <segue destination="Xh8-rv-BpQ" kind="show" identifier="toPassword" id="5dN-8w-Fbj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sAN-S3-6sh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2996" y="-179.46026986506749"/>
         </scene>
         <!--Password-->
         <scene sceneID="f2H-sS-xRy">
@@ -517,6 +584,36 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Bco-Mo-OfE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="mOp-JH-Cdp">
+                                    <rect key="frame" x="0.0" y="117.5" width="375" height="100"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xj8-E6-EB1">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="100"/>
+                                            <attributedString key="attributedText">
+                                                <fragment>
+                                                    <string key="content">The password must comply with the following restrictions:
+  - at least one uppercase
+  - at least one lowercase
+  - at least one number
+  - at least one of those special character (!%*?&amp;)</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="13" name=".AppleSystemUIFont"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Xj8-E6-EB1" secondAttribute="bottom" id="8Wg-st-za6"/>
+                                        <constraint firstItem="Xj8-E6-EB1" firstAttribute="top" secondItem="mOp-JH-Cdp" secondAttribute="top" id="EJB-9c-5GZ"/>
+                                        <constraint firstItem="Xj8-E6-EB1" firstAttribute="leading" secondItem="mOp-JH-Cdp" secondAttribute="leading" constant="16" id="KoR-cQ-9ea"/>
+                                        <constraint firstAttribute="trailing" secondItem="Xj8-E6-EB1" secondAttribute="trailing" constant="16" id="M96-ug-xag"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="passSignUpCell" id="Jt1-uo-tbB" customClass="PasswordSignUpViewCell" customModule="SingleSignUp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="56" width="375" height="44"/>
@@ -577,18 +674,21 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="helpLabel" destination="Xj8-E6-EB1" id="zSR-Y2-d6W"/>
                         <outlet property="tableView" destination="Bco-Mo-OfE" id="uR1-ri-Aoo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIb-H3-fC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3020" y="-178.56071964017991"/>
+            <point key="canvasLocation" x="3805.5999999999999" y="-179.46026986506749"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrowIn" width="25" height="25"/>
         <image name="done" width="25" height="25"/>
         <image name="login" width="25" height="25"/>
         <image name="next" width="25" height="25"/>
+        <image name="office" width="25" height="25"/>
         <image name="show" width="25" height="25"/>
     </resources>
 </document>

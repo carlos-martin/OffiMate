@@ -10,10 +10,6 @@ import UIKit
 import MessageUI
 import FirebaseAuth
 
-let ADMIN_NAME = "offimate@sigmatechnology.se"
-let ADMIN_PASS = "wPFur5n2GFc!"
-let SIGMA_CODE = "bNXtQckyZFyR"
-
 enum NewOfficeSection: Int {
     case name = 0
     case code
@@ -121,6 +117,12 @@ class NewOfficeViewController: UITableViewController, MFMailComposeViewControlle
     }
     
     func goBack() {
+        do {
+            try Auth.auth().signOut()
+            print("[NewOfficeViewController] Signed Out!")
+        } catch {
+            print("[NewOfficeViewController] Error Signing Out!")
+        }
         self.navigationController?.popToRootViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }
