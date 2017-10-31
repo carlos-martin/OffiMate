@@ -18,11 +18,13 @@ class PasswordViewController: UIViewController {
     var username: String?
     var email:    String?
     var password: String?
+    var officeId: String?
     var spinner:  SpinnerLoader?
     var isHidden: Bool = true
     
     //MARK: IBOutlet
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var helpLabel: UILabel!
     
     //MARK: IBAction
     @IBAction func saveActionButton(_ sender: Any) {
@@ -31,17 +33,24 @@ class PasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.initUI()
         self.tableView.reloadData()
-        
         self.startTextField()
-        
-        self.spinner = SpinnerLoader(view: self.view, alpha: 0.1)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func initUI () {
+        //Help text
+        let helpText: String = "The password must comply with the following restrictions:\n  - at least one uppercase\n  - at least one lowercase\n  - at least one number\n  - at least one of those character: !%*?&"
+        self.helpLabel.text = helpText
+        self.helpLabel.sizeToFit()
+        
+        //Init spinner
+        self.spinner = SpinnerLoader(view: self.view, alpha: 0.1)
     }
     
     private func startTextField(){

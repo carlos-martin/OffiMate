@@ -16,6 +16,10 @@ class EmailSignUpViewCell : UITableViewCell {
     @IBOutlet var emailTextField: UITextField!
 }
 
+class OfficeViewCell : UITableViewCell {
+    @IBOutlet var officeNameLabel: UILabel!
+}
+
 class PasswordSignUpViewCell : UITableViewCell {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var showHideButton: UIButton!

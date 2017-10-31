@@ -44,7 +44,7 @@ class EmailViewController: UIViewController {
     
     //MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toPassword", let nextScene = segue.destination as? PasswordViewController {
+        if segue.identifier == "toOffice", let nextScene = segue.destination as? OfficeViewController {
             nextScene.username = self.username
             nextScene.email = self.email
         }
@@ -54,7 +54,7 @@ class EmailViewController: UIViewController {
         if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
             if self.readyToMove(cell: cell) {
                 self.email = (cell as! EmailSignUpViewCell).emailTextField.text!
-                self.moveToPassword()
+                self.moveToOffice()
             } else {
                 let title = "Validation Email Error"
                 let message = "Your email must have one of this two domains: sigma.se or sigmatechnology.se"
@@ -74,9 +74,9 @@ class EmailViewController: UIViewController {
         return isReady
     }
     
-    func moveToPassword() {
+    func moveToOffice() {
         self.view.endEditing(true)
-        performSegue(withIdentifier: "toPassword", sender: nil)
+        performSegue(withIdentifier: "toOffice", sender: nil)
     }
 }
 
