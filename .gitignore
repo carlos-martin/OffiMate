@@ -6,6 +6,13 @@
 build/
 DerivedData/
 
+## Firebase
+SingleSignUp/GoogleService-Info.plist
+
+## Final, Release Candidate & Development
+SingleSignUp/Info.plist
+SingleSignUp.xcodeproj/project.pbxproj
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
