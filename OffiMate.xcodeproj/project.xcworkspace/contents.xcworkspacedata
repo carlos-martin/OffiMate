@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SingleSingUp.xcodeproj">
+      location = "self:/Users/carlos.martin/Develop/iOS/OffiMate/OffiMate.xcodeproj">
    </FileRef>
 </Workspace>

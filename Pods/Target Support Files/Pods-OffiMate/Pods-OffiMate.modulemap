@@ -1,0 +1,6 @@
+framework module Pods_OffiMate {
+  umbrella header "Pods-OffiMate-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,6 +1,0 @@
-framework module Pods_SingleSignUp {
-  umbrella header "Pods-SingleSignUp-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -54,7 +54,7 @@
 		1AD3A03B1F7BC10D002DD969 /* CoworkersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */; };
 		1AD8B95B1F4D7F7600F6777C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */; };
 		1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */; };
-		506600F5CD1EA8E9EF649A05 /* Pods_SingleSignUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B9BBE3CEE32350C20B3636 /* Pods_SingleSignUp.framework */; };
+		5B4EF1EF2569011FC159A8A6 /* Pods_OffiMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8BFF097716DF70FC9C8A5A /* Pods_OffiMate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +66,7 @@
 		1A3DB57E1F9728D600F05EF6 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewCell.swift; path = SingleSignUp/View/Profile/ProfileViewCell.swift; sourceTree = SOURCE_ROOT; };
+		1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewCell.swift; path = OffiMate/View/Profile/ProfileViewCell.swift; sourceTree = SOURCE_ROOT; };
 		1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOfficeViewController.swift; sourceTree = "<group>"; };
 		1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOfficeViewCell.swift; sourceTree = "<group>"; };
 		1A5B165A1F9DD8F30065596B /* Office.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Office.swift; sourceTree = "<group>"; };
@@ -88,9 +88,9 @@
 		1A9B423A1F99FAA200475620 /* OnboardViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardViewCell.swift; sourceTree = "<group>"; };
 		1A9CC3881F4DC17E000C6479 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		1A9CC38A1F4DC579000C6479 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
-		1AA2BC3C1F4ACEFE00E0C2E5 /* SingleSignUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleSignUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AA2BC3C1F4ACEFE00E0C2E5 /* OffiMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OffiMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA2BC3F1F4ACEFE00E0C2E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1AA2BC411F4ACEFE00E0C2E5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = SingleSignUp/Controller/Main/MainViewController.swift; sourceTree = SOURCE_ROOT; };
+		1AA2BC411F4ACEFE00E0C2E5 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = OffiMate/Controller/Main/MainViewController.swift; sourceTree = SOURCE_ROOT; };
 		1AA2BC441F4ACEFE00E0C2E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1AA2BC471F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SingleSignUp.xcdatamodel; sourceTree = "<group>"; };
 		1AA2BC491F4ACEFE00E0C2E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,9 +107,10 @@
 		1AD3A03A1F7BC10D002DD969 /* CoworkersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoworkersViewController.swift; sourceTree = "<group>"; };
 		1AD8B95A1F4D7F7600F6777C /* EmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		1AD8B95C1F4D802700F6777C /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
-		2169E46DE8EA580A38269BA8 /* Pods-SingleSignUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.debug.xcconfig"; sourceTree = "<group>"; };
 		47B9BBE3CEE32350C20B3636 /* Pods_SingleSignUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleSignUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EFC1F95125A4E9273D4CFDA /* Pods-SingleSignUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleSignUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp.release.xcconfig"; sourceTree = "<group>"; };
+		67159726FF51518329AA9820 /* Pods-OffiMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OffiMate.release.xcconfig"; path = "Pods/Target Support Files/Pods-OffiMate/Pods-OffiMate.release.xcconfig"; sourceTree = "<group>"; };
+		6F8BFF097716DF70FC9C8A5A /* Pods_OffiMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OffiMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5C0DC6DF448EC4C0F635B12 /* Pods-OffiMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OffiMate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OffiMate/Pods-OffiMate.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				506600F5CD1EA8E9EF649A05 /* Pods_SingleSignUp.framework in Frameworks */,
+				5B4EF1EF2569011FC159A8A6 /* Pods_OffiMate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				47B9BBE3CEE32350C20B3636 /* Pods_SingleSignUp.framework */,
+				6F8BFF097716DF70FC9C8A5A /* Pods_OffiMate.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,8 +137,8 @@
 		11E537622FBF0F3E0C3CFB75 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2169E46DE8EA580A38269BA8 /* Pods-SingleSignUp.debug.xcconfig */,
-				7EFC1F95125A4E9273D4CFDA /* Pods-SingleSignUp.release.xcconfig */,
+				B5C0DC6DF448EC4C0F635B12 /* Pods-OffiMate.debug.xcconfig */,
+				67159726FF51518329AA9820 /* Pods-OffiMate.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -293,7 +295,7 @@
 		1AA2BC331F4ACEFE00E0C2E5 = {
 			isa = PBXGroup;
 			children = (
-				1AA2BC3E1F4ACEFE00E0C2E5 /* SingleSignUp */,
+				1AA2BC3E1F4ACEFE00E0C2E5 /* OffiMate */,
 				1AA2BC3D1F4ACEFE00E0C2E5 /* Products */,
 				11E537622FBF0F3E0C3CFB75 /* Pods */,
 				0DA560F193791C8B7B271AC5 /* Frameworks */,
@@ -303,12 +305,12 @@
 		1AA2BC3D1F4ACEFE00E0C2E5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1AA2BC3C1F4ACEFE00E0C2E5 /* SingleSignUp.app */,
+				1AA2BC3C1F4ACEFE00E0C2E5 /* OffiMate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1AA2BC3E1F4ACEFE00E0C2E5 /* SingleSignUp */ = {
+		1AA2BC3E1F4ACEFE00E0C2E5 /* OffiMate */ = {
 			isa = PBXGroup;
 			children = (
 				1AA2BC3F1F4ACEFE00E0C2E5 /* AppDelegate.swift */,
@@ -323,7 +325,7 @@
 				1AA2BC461F4ACEFE00E0C2E5 /* SingleSignUp.xcdatamodeld */,
 				1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */,
 			);
-			path = SingleSignUp;
+			path = OffiMate;
 			sourceTree = "<group>";
 		};
 		1AAA5CA91F82534400C59597 /* Models */ = {
@@ -361,9 +363,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1AA2BC3B1F4ACEFE00E0C2E5 /* SingleSignUp */ = {
+		1AA2BC3B1F4ACEFE00E0C2E5 /* OffiMate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1AA2BC511F4ACEFE00E0C2E5 /* Build configuration list for PBXNativeTarget "SingleSignUp" */;
+			buildConfigurationList = 1AA2BC511F4ACEFE00E0C2E5 /* Build configuration list for PBXNativeTarget "OffiMate" */;
 			buildPhases = (
 				63779D1713DC408413116FAA /* [CP] Check Pods Manifest.lock */,
 				1AA2BC381F4ACEFE00E0C2E5 /* Sources */,
@@ -376,9 +378,9 @@
 			);
 			dependencies = (
 			);
-			name = SingleSignUp;
+			name = OffiMate;
 			productName = SingleSingUp;
-			productReference = 1AA2BC3C1F4ACEFE00E0C2E5 /* SingleSignUp.app */;
+			productReference = 1AA2BC3C1F4ACEFE00E0C2E5 /* OffiMate.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -399,7 +401,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1AA2BC371F4ACEFE00E0C2E5 /* Build configuration list for PBXProject "SingleSignUp" */;
+			buildConfigurationList = 1AA2BC371F4ACEFE00E0C2E5 /* Build configuration list for PBXProject "OffiMate" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -412,7 +414,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1AA2BC3B1F4ACEFE00E0C2E5 /* SingleSignUp */,
+				1AA2BC3B1F4ACEFE00E0C2E5 /* OffiMate */,
 			);
 		};
 /* End PBXProject section */
@@ -442,7 +444,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-OffiMate/Pods-OffiMate-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
@@ -461,7 +463,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OffiMate/Pods-OffiMate-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		63779D1713DC408413116FAA /* [CP] Check Pods Manifest.lock */ = {
@@ -475,7 +477,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SingleSignUp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-OffiMate-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -494,7 +496,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SingleSignUp/Pods-SingleSignUp-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OffiMate/Pods-OffiMate-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -579,7 +581,7 @@
 				1AA2BC441F4ACEFE00E0C2E5 /* Base */,
 			);
 			name = Main.storyboard;
-			path = /Users/carlos.martin/Develop/iOS/OffiMate/SingleSignUp;
+			path = /Users/carlos.martin/Develop/iOS/OffiMate/OffiMate;
 			sourceTree = "<absolute>";
 		};
 		1AA2BC4B1F4ACEFE00E0C2E5 /* LaunchScreen.storyboard */ = {
@@ -694,14 +696,14 @@
 		};
 		1AA2BC521F4ACEFE00E0C2E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2169E46DE8EA580A38269BA8 /* Pods-SingleSignUp.debug.xcconfig */;
+			baseConfigurationReference = B5C0DC6DF448EC4C0F635B12 /* Pods-OffiMate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YRTWAFKJ72;
-				INFOPLIST_FILE = "$(SRCROOT)/SingleSignUp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/OffiMate/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.OffiMate;
@@ -715,14 +717,14 @@
 		};
 		1AA2BC531F4ACEFE00E0C2E5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EFC1F95125A4E9273D4CFDA /* Pods-SingleSignUp.release.xcconfig */;
+			baseConfigurationReference = 67159726FF51518329AA9820 /* Pods-OffiMate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YRTWAFKJ72;
-				INFOPLIST_FILE = "$(SRCROOT)/SingleSignUp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/OffiMate/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.OffiMate;
@@ -737,7 +739,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1AA2BC371F4ACEFE00E0C2E5 /* Build configuration list for PBXProject "SingleSignUp" */ = {
+		1AA2BC371F4ACEFE00E0C2E5 /* Build configuration list for PBXProject "OffiMate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1AA2BC4F1F4ACEFE00E0C2E5 /* Debug */,
@@ -746,7 +748,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1AA2BC511F4ACEFE00E0C2E5 /* Build configuration list for PBXNativeTarget "SingleSignUp" */ = {
+		1AA2BC511F4ACEFE00E0C2E5 /* Build configuration list for PBXNativeTarget "OffiMate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1AA2BC521F4ACEFE00E0C2E5 /* Debug */,
