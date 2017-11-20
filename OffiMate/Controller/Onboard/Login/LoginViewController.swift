@@ -159,7 +159,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func showHidePassword (_ sender: Any) {
+    @objc func showHidePassword (_ sender: Any) {
         let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: LoginSection.pass.rawValue)) as! PasswordLoginViewCell
         if self.isHidden {
             self.isHidden = false

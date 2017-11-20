@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lGH-Dy-TnT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lGH-Dy-TnT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,13 +13,13 @@
         <!--Coworkers-->
         <scene sceneID="8Yj-SS-DLy">
             <objects>
-                <tableViewController storyboardIdentifier="Coworkers" id="A8z-zU-J7O" customClass="CoworkersViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Coworkers" id="A8z-zU-J7O" customClass="CoworkersViewController" customModule="OffiMate" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="8lM-Dq-kE5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="XGR-Nq-SSZ">
-                            <rect key="frame" x="0.0" y="118" width="375" height="60"/>
+                            <rect key="frame" x="0.0" y="117.5" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no coworker yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PD-HI-XYP">
@@ -47,21 +48,21 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkersCell" id="2ls-Jd-Ja2" customClass="CoworkersViewCell" customModule="SingleSignUp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkersCell" id="2ls-Jd-Ja2" customClass="CoworkersViewCell" customModule="OffiMate" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2ls-Jd-Ja2" id="UIz-4K-aV5">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3Y-su-CVz">
-                                            <rect key="frame" x="16" y="11" width="315" height="21"/>
+                                            <rect key="frame" x="24" y="14" width="299" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forward" translatesAutoresizingMaskIntoConstraints="NO" id="AUD-pJ-lAs">
-                                            <rect key="frame" x="339" y="12" width="20" height="20"/>
+                                            <rect key="frame" x="331" y="12" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="NVy-Zo-qU9"/>
                                                 <constraint firstAttribute="height" constant="20" id="i0t-4r-1h4"/>
@@ -104,7 +105,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CoworkerProfile" id="c13-dS-DuH" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d5c-hy-2bX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -118,17 +119,17 @@
         <!--Profile-->
         <scene sceneID="Dag-17-NjI">
             <objects>
-                <tableViewController id="cAE-2z-8kO" customClass="CoworkerProfileViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cAE-2z-8kO" customClass="CoworkerProfileViewController" customModule="OffiMate" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="18" sectionFooterHeight="18" id="xHs-Cl-rZG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="coworkerProfileCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkerProfileCell" rowHeight="145" id="erH-FW-HDH" customClass="CoworkerProfileViewCell" customModule="SingleSignUp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="145"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="coworkerProfileCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkerProfileCell" rowHeight="145" id="erH-FW-HDH" customClass="CoworkerProfileViewCell" customModule="OffiMate" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="145"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="erH-FW-HDH" id="jXj-Ha-KO4">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="144.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9s-hX-Ex7">
@@ -139,7 +140,7 @@
                                             </constraints>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="9qP-wI-TrY">
-                                            <rect key="frame" x="150" y="8" width="75" height="75"/>
+                                            <rect key="frame" x="150" y="11" width="75" height="75"/>
                                             <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="75" id="3gj-PX-zfs"/>
@@ -147,7 +148,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carlos Martín" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRc-J8-oKH">
-                                            <rect key="frame" x="8" y="89" width="359" height="27"/>
+                                            <rect key="frame" x="16" y="92" width="343" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="27" id="ZdH-bh-3ug"/>
                                             </constraints>
@@ -156,7 +157,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carlos.Martin@sigmatechnology.se" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZT-JL-cYO">
-                                            <rect key="frame" x="0.0" y="121" width="375" height="18"/>
+                                            <rect key="frame" x="0.0" y="124" width="375" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -185,41 +186,40 @@
                                     <outlet property="coworkerPictureProfile" destination="9qP-wI-TrY" id="ppY-om-FfE"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkerOptionCell" rowHeight="44" id="clh-eA-TJt" customClass="CoworkerOptionViewCell" customModule="SingleSignUp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="201" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkerOptionCell" rowHeight="44" id="clh-eA-TJt" customClass="CoworkerOptionViewCell" customModule="OffiMate" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="200.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="clh-eA-TJt" id="gF6-Gh-h4X">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OC4-cq-9td">
-                                            <rect key="frame" x="18" y="9" width="25" height="25"/>
+                                            <rect key="frame" x="18" y="9.5" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="BYP-O3-9Q3"/>
                                                 <constraint firstAttribute="height" constant="25" id="cpn-jr-hom"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rya-Oz-aLG">
-                                            <rect key="frame" x="61" y="11" width="265" height="21"/>
+                                            <rect key="frame" x="61" y="12" width="257" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowIn" translatesAutoresizingMaskIntoConstraints="NO" id="IIm-TU-Cn3">
-                                            <rect key="frame" x="334" y="9" width="25" height="25"/>
+                                            <rect key="frame" x="326" y="9" width="25" height="25"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="25" id="6lg-4I-4go"/>
-                                                <constraint firstAttribute="width" constant="25" id="BEA-eL-72M"/>
+                                                <constraint firstAttribute="width" constant="25" id="ZvF-3u-soW"/>
+                                                <constraint firstAttribute="height" constant="25" id="rzt-iA-zxY"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="IIm-TU-Cn3" secondAttribute="bottom" constant="1" id="48X-YB-RD1"/>
+                                        <constraint firstItem="IIm-TU-Cn3" firstAttribute="leading" secondItem="rya-Oz-aLG" secondAttribute="trailing" constant="8" id="4Dp-eM-gRn"/>
                                         <constraint firstItem="rya-Oz-aLG" firstAttribute="centerY" secondItem="gF6-Gh-h4X" secondAttribute="centerY" id="DVb-59-1ai"/>
+                                        <constraint firstItem="IIm-TU-Cn3" firstAttribute="centerY" secondItem="gF6-Gh-h4X" secondAttribute="centerY" id="Nld-EJ-40G"/>
+                                        <constraint firstAttribute="trailing" secondItem="IIm-TU-Cn3" secondAttribute="trailing" constant="24" id="Ycm-62-CJ0"/>
                                         <constraint firstItem="rya-Oz-aLG" firstAttribute="leading" secondItem="OC4-cq-9td" secondAttribute="trailing" constant="18" id="q3W-Ki-ILI"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="IIm-TU-Cn3" secondAttribute="trailing" constant="8" id="qKB-62-fgO"/>
-                                        <constraint firstItem="IIm-TU-Cn3" firstAttribute="leading" secondItem="rya-Oz-aLG" secondAttribute="trailing" constant="8" id="suF-qw-0SJ"/>
-                                        <constraint firstItem="IIm-TU-Cn3" firstAttribute="top" secondItem="gF6-Gh-h4X" secondAttribute="topMargin" constant="1" id="tO8-Tf-x5l"/>
                                         <constraint firstItem="OC4-cq-9td" firstAttribute="leading" secondItem="gF6-Gh-h4X" secondAttribute="leading" constant="18" id="vvh-se-fID"/>
                                         <constraint firstItem="OC4-cq-9td" firstAttribute="centerY" secondItem="gF6-Gh-h4X" secondAttribute="centerY" id="z22-WL-5X6"/>
                                     </constraints>
@@ -251,18 +251,18 @@
         <!--Boost Card-->
         <scene sceneID="dm0-F2-dwm">
             <objects>
-                <tableViewController id="WPR-bz-aGZ" customClass="NewBoostCardViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WPR-bz-aGZ" customClass="NewBoostCardViewController" customModule="OffiMate" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="76a-Ez-LVV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostCardHeaderCell" rowHeight="66" id="uaD-Xk-z9I" customClass="NewBoostHeaderViewCell" customModule="SingleSignUp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="66"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostCardHeaderCell" rowHeight="66" id="uaD-Xk-z9I" customClass="NewBoostHeaderViewCell" customModule="OffiMate" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uaD-Xk-z9I" id="rpy-TC-LFq">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s7S-Nf-FJb">
@@ -273,7 +273,7 @@
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hUW-Mm-ICH">
-                                            <rect key="frame" x="333" y="22" width="22" height="22"/>
+                                            <rect key="frame" x="325" y="22" width="22" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="22" id="14z-uV-kjH"/>
                                                 <constraint firstAttribute="height" constant="22" id="SHG-1x-6YX"/>
@@ -293,15 +293,15 @@
                                     <outlet property="icon" destination="s7S-Nf-FJb" id="AjE-73-0R3"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostCardTypeCell" id="YTz-1D-uoM" customClass="NewBoostTypeViewCell" customModule="SingleSignUp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="122" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostCardTypeCell" id="YTz-1D-uoM" customClass="NewBoostTypeViewCell" customModule="OffiMate" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="121.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YTz-1D-uoM" id="geN-uv-QDe">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z61-XE-c7M">
-                                            <rect key="frame" x="16" y="11" width="343" height="21"/>
+                                            <rect key="frame" x="24" y="14" width="327" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -336,7 +336,7 @@
         <!--Why?-->
         <scene sceneID="5SF-PQ-GKy">
             <objects>
-                <viewController id="NYg-5o-afE" customClass="BoostCardMessageViewController" customModule="SingleSignUp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NYg-5o-afE" customClass="BoostCardMessageViewController" customModule="OffiMate" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nFp-CH-aCV"/>
                         <viewControllerLayoutGuide type="bottom" id="wbM-kL-Pd5"/>
@@ -429,7 +429,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lGH-Dy-TnT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bxm-9l-4Pb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

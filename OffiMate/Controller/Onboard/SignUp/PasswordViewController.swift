@@ -135,7 +135,7 @@ extension PasswordViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func showHidePassword (_ sender: Any) {
+    @objc func showHidePassword (_ sender: Any) {
         let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! PasswordSignUpViewCell
         if self.isHidden {
             self.isHidden = false

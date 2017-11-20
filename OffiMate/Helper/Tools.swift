@@ -15,71 +15,71 @@ import SystemConfiguration.CaptiveNetwork
 public class Tools {
     //place to create internal variables
     static let separator: UIColor = UIColor(
-        colorLiteralRed: 202.0/255.0,
-        green:           202.0/255.0,
-        blue:            207.0/255.0,
-        alpha:           1.0)
+        red:    202.0/255.0,
+        green:  202.0/255.0,
+        blue:   207.0/255.0,
+        alpha:  1.0)
     static let blueSystem: UIColor = UIColor(
-        colorLiteralRed: 0.0,
-        green:           122.0/255.0,
-        blue:            255.0/255.0,
-        alpha:           1.0)
+        red:    0.0,
+        green:  122.0/255.0,
+        blue:   255.0/255.0,
+        alpha:  1.0)
     static let redPassion: UIColor = UIColor(
-        colorLiteralRed: 245.0/255.0,
-        green:            64.0/255.0,
-        blue:             73.0/255.0,
-        alpha:           1.0)
+        red:    245.0/255.0,
+        green:  64.0/255.0,
+        blue:   73.0/255.0,
+        alpha:  1.0)
     static let greenExecution: UIColor = UIColor(
-        colorLiteralRed: 114.0/255.0,
-        green:           214.0/255.0,
-        blue:            227.0/255.0,
-        alpha:           1.0)
+        red:    114.0/255.0,
+        green:  214.0/255.0,
+        blue:   227.0/255.0,
+        alpha:  1.0)
     static let blueInbox: UIColor = UIColor(
-        colorLiteralRed:  74.0/255.0,
-        green:           144.0/255.0,
-        blue:            226.0/255.0,
-        alpha:           1.0)
+        red:    74.0/255.0,
+        green:  144.0/255.0,
+        blue:   226.0/255.0,
+        alpha:  1.0)
     static let redLogout: UIColor = UIColor(
-        colorLiteralRed: 208.0/255.0,
-        green:             2.0/255.0,
-        blue:             27.0/255.0,
-        alpha:           1.0)
+        red:    208.0/255.0,
+        green:  2.0/255.0,
+        blue:   27.0/255.0,
+        alpha:  1.0)
     static let grayTextField: UIColor = UIColor(
-        colorLiteralRed: 238.0/255.0,
-        green:           238.0/255.0,
-        blue:            238.0/255.0,
-        alpha:           1.0)
+        red:    238.0/255.0,
+        green:  238.0/255.0,
+        blue:   238.0/255.0,
+        alpha:  1.0)
     static let backgrounsColors: [UIColor] = [
-        UIColor(colorLiteralRed:  74.0/255.0, green: 143.0/255.0, blue: 138.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 115.0/255.0, green: 175.0/255.0, blue: 173.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 217.0/255.0, green: 133.0/255.0, blue:  59.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 236.0/255.0, green: 236.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+        UIColor(red:  74.0/255.0, green: 143.0/255.0, blue: 138.0/255.0, alpha: 1.0),
+        UIColor(red: 115.0/255.0, green: 175.0/255.0, blue: 173.0/255.0, alpha: 1.0),
+        UIColor(red: 217.0/255.0, green: 133.0/255.0, blue:  59.0/255.0, alpha: 1.0),
+        UIColor(red: 236.0/255.0, green: 236.0/255.0, blue: 234.0/255.0, alpha: 1.0)
     ]
     
     static let bubbleColors: [UIColor] = [
-        UIColor(colorLiteralRed:   0.0/255.0, green: 165.0/255.0, blue: 133.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed:   0.0/255.0, green: 183.0/255.0, blue:  89.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed:  23.0/255.0, green: 124.0/255.0, blue: 188.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 152.0/255.0, green:  34.0/255.0, blue: 178.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed:  20.0/255.0, green:  83.0/255.0, blue:  87.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 240.0/255.0, green: 119.0/255.0, blue:   0.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 203.0/255.0, green:  27.0/255.0, blue:  37.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 101.0/255.0, green:  77.0/255.0, blue: 179.0/255.0, alpha: 1.0)
+        UIColor(red:   0.0/255.0, green: 165.0/255.0, blue: 133.0/255.0, alpha: 1.0),
+        UIColor(red:   0.0/255.0, green: 183.0/255.0, blue:  89.0/255.0, alpha: 1.0),
+        UIColor(red:  23.0/255.0, green: 124.0/255.0, blue: 188.0/255.0, alpha: 1.0),
+        UIColor(red: 152.0/255.0, green:  34.0/255.0, blue: 178.0/255.0, alpha: 1.0),
+        UIColor(red:  20.0/255.0, green:  83.0/255.0, blue:  87.0/255.0, alpha: 1.0),
+        UIColor(red: 240.0/255.0, green: 119.0/255.0, blue:   0.0/255.0, alpha: 1.0),
+        UIColor(red: 203.0/255.0, green:  27.0/255.0, blue:  37.0/255.0, alpha: 1.0),
+        UIColor(red: 101.0/255.0, green:  77.0/255.0, blue: 179.0/255.0, alpha: 1.0)
     ]
     
     static let bubbleColorsLight: [UIColor] = [
-        UIColor(colorLiteralRed: 218.0/255.0, green: 241.0/255.0, blue: 220.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 210.0/255.0, green: 237.0/255.0, blue: 199.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 184.0/255.0, green: 229.0/255.0, blue: 199.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 178.0/255.0, green: 227.0/255.0, blue: 187.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 102.0/255.0, green: 206.0/255.0, blue: 173.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 171.0/255.0, green: 208.0/255.0, blue: 205.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 160.0/255.0, green: 236.0/255.0, blue: 220.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 169.0/255.0, green: 243.0/255.0, blue: 203.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 179.0/255.0, green: 219.0/255.0, blue: 245.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 163.0/255.0, green: 225.0/255.0, blue: 213.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 176.0/255.0, green: 211.0/255.0, blue: 234.0/255.0, alpha: 1.0),
-        UIColor(colorLiteralRed: 169.0/255.0, green: 233.0/255.0, blue: 197.0/255.0, alpha: 1.0)
+        UIColor(red: 218.0/255.0, green: 241.0/255.0, blue: 220.0/255.0, alpha: 1.0),
+        UIColor(red: 210.0/255.0, green: 237.0/255.0, blue: 199.0/255.0, alpha: 1.0),
+        UIColor(red: 184.0/255.0, green: 229.0/255.0, blue: 199.0/255.0, alpha: 1.0),
+        UIColor(red: 178.0/255.0, green: 227.0/255.0, blue: 187.0/255.0, alpha: 1.0),
+        UIColor(red: 102.0/255.0, green: 206.0/255.0, blue: 173.0/255.0, alpha: 1.0),
+        UIColor(red: 171.0/255.0, green: 208.0/255.0, blue: 205.0/255.0, alpha: 1.0),
+        UIColor(red: 160.0/255.0, green: 236.0/255.0, blue: 220.0/255.0, alpha: 1.0),
+        UIColor(red: 169.0/255.0, green: 243.0/255.0, blue: 203.0/255.0, alpha: 1.0),
+        UIColor(red: 179.0/255.0, green: 219.0/255.0, blue: 245.0/255.0, alpha: 1.0),
+        UIColor(red: 163.0/255.0, green: 225.0/255.0, blue: 213.0/255.0, alpha: 1.0),
+        UIColor(red: 176.0/255.0, green: 211.0/255.0, blue: 234.0/255.0, alpha: 1.0),
+        UIColor(red: 169.0/255.0, green: 233.0/255.0, blue: 197.0/255.0, alpha: 1.0)
     ]
     
     static var channelRef = Database.database().reference().child("channels")
@@ -205,7 +205,7 @@ extension Tools {
             if let rawChannels = snapshot.value as? Dictionary<String, AnyObject> {
                 if rawChannels.count == CurrentUser.channelsLastAccess.count {
                     var channels: [Channel] = [] {
-                        didSet { channels.sort { $0.0.id < $0.1.id } }
+                        didSet { channels.sort { $0.id < $1.id } }
                     }
                     for rawChannel in rawChannels {
                         let id = rawChannel.key
@@ -453,14 +453,14 @@ extension Tools {
     static func getColor(id: String) -> UIColor {
         let index: Int
         if id.hashValue > 0 {
-            let value = Int(String(String(id.hashValue).characters.suffix(1)))!
+            let value = Int(String(String(id.hashValue).suffix(1)))!
             if value < bubbleColors.count/2 {
                 index = value
             } else {
                 index = value % bubbleColors.count/2
             }
         } else {
-            let value = Int(String(String(id.hashValue).characters.suffix(1)))!
+            let value = Int(String(String(id.hashValue).suffix(1)))!
             if value < bubbleColors.count/2 {
                 index = value + (bubbleColors.count/2)
             } else {

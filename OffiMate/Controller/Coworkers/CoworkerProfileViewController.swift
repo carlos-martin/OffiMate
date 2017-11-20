@@ -53,7 +53,7 @@ class CoworkerProfileViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = backButton
     }
     
-    func goBackAction() {
+    @objc func goBackAction() {
         print(unwindSegue!)
         self.performSegue(withIdentifier: unwindSegue!, sender: self)
     }

@@ -54,7 +54,7 @@ class NewDate: CustomStringConvertible, Hashable {
         } else if (self.year == current.year && self.month == current.month && (current.day - self.day < 7)) {
             toString = self.getDayName()
         } else {
-            toString = "\(day)/\(month)/\(String(String(year).characters.suffix(2)))"
+            toString = "\(day)/\(month)/\(String(String(year).suffix(2)))"
         }
         return toString
     }

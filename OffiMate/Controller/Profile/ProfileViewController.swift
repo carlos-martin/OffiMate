@@ -164,7 +164,7 @@ class ProfileViewController: UIViewController {
         self.updateTableView()
     }
     
-    func saveAction() {
+    @objc func saveAction() {
         if let newName = self.name {
             if newName != CurrentUser.name! && !newName.isEmpty {
                 self.updateName(name: newName)
@@ -330,7 +330,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func showHidePassword (_ sender: Any) {
+    @objc func showHidePassword (_ sender: Any) {
         let section = ProfileSection.userdata.rawValue
         let row = UserdataRow.password.rawValue
         let cell = self.tableView.cellForRow(at: IndexPath(row: row, section: section)) as! PasswordViewCell

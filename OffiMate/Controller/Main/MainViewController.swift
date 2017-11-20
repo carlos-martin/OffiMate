@@ -116,11 +116,11 @@ class MainViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func onboardActionButton(_ sender: Any) {
+    @objc func onboardActionButton(_ sender: Any) {
         Tools.goToProfile(vc: self)
     }
     
-    func menuActionButton(_ sender: Any) {
+    @objc func menuActionButton(_ sender: Any) {
         guard let vc = UIStoryboard(name: "Coworkers", bundle: nil).instantiateViewController(withIdentifier: "Coworkers") as? CoworkersViewController else {
             let message = "Could not instantiate view controller with identifier of type CoworkersViewController"
             Alert.showFailiureAlert(message: message)
@@ -350,12 +350,25 @@ class MainViewController: UITableViewController {
         if let currentSection: MainSection = MainSection(rawValue: section) {
             switch currentSection {
             case .createNewChannel:
-                return 0.1
+                return CGFloat.leastNonzeroMagnitude
             case .currentChannel:
                 return (CurrentUser.channels.isEmpty ? 0.1 : UITableViewAutomaticDimension)
             }
         } else {
-            return 0.1
+            return CGFloat.leastNonzeroMagnitude
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if let currentSection: MainSection = MainSection(rawValue: section) {
+            switch currentSection {
+            case .createNewChannel:
+                return CGFloat.leastNonzeroMagnitude
+            case .currentChannel:
+                return (CurrentUser.channels.isEmpty ? 0.1 : UITableViewAutomaticDimension)
+            }
+        } else {
+            return CGFloat.leastNonzeroMagnitude
         }
     }
     
