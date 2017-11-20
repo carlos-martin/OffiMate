@@ -153,6 +153,13 @@ class MainViewController: UITableViewController {
         self.navigationItem.title = "OffiMate"
         self.emptyChannelsLabel.isHidden = (CurrentUser.channels.isEmpty ? false : true)
         self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.viewRespectsSystemMinimumLayoutMargins = false
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     private func reloadView() {

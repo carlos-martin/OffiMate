@@ -1,8 +1,8 @@
 //
 //  ProfileViewController.swift
-//  SingleSignUp
+//  OffiMate
 //
-//  Created by Carlos Martin on 29/08/17.
+//  Created by Carlos Martin on 20/11/2017.
 //  Copyright © 2017 Carlos Martin. All rights reserved.
 //
 
@@ -12,7 +12,8 @@ import Firebase
 import FirebaseAuth
 
 enum ProfileSection: Int {
-    case userdata = 0
+    case userprofile = 0
+    case userdata
     case boostcard
     case logout
 }
@@ -27,39 +28,24 @@ enum BoostcardRow: Int {
     case sent
 }
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UITableViewController {
     
     var isHidden:   Bool = true
-    var isEditMode: Bool = false {
-        didSet {
-            if isEditMode { self.saveButton?.animateUp(view: self.view) }
-            else { self.saveButton?.animateDown(view: self.view) }
-        }
-    }
+    var isEditMode: Bool = false
     
     var hasUnread: Bool = false {
         didSet { self.tableView.reloadData() }
     }
     
-    //UI
-    var saveButton: FloatingButton?
-    
-    //To be save
+    // MARK: Data to be save
     var name: String?
     var office: Office?
     
-    //MARK: IBOutlet
-    @IBOutlet weak var profileImage:            UIImageView!
-    @IBOutlet weak var nameTextField:           UITextField!
-    @IBOutlet weak var emailLabel:              UILabel!
-    @IBOutlet weak var tableView:               UITableView!
+    // MARK: IBOutlet
     @IBOutlet weak var editBarButtonItem:       UIBarButtonItem!
     @IBOutlet weak var gobackBarButtonItem:     UIBarButtonItem!
-    @IBOutlet weak var topConstraint:           NSLayoutConstraint!
-    @IBOutlet weak var profileView:             UIView!
-    @IBOutlet weak var profileBackgroundView:   UIView!
     
-    //MARK: IBAction
+    // MARK: IBAction
     @IBAction func gobackActionButton(_ sender: Any) {
         Tools.goToMain(vc: self)
     }
@@ -67,7 +53,7 @@ class ProfileViewController: UIViewController {
     @IBAction func editActionButton(_ sender: Any) {
         self.editAction()
     }
-    
+
     //UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,41 +75,16 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK:- UI Actions
-    func initUI() {        
-        // @IBOutlet weak var profileBackgroundView: UIView!
-        self.profileBackgroundView.layer.borderWidth = 0.5
-        self.profileBackgroundView.layer.borderColor = Tools.separator.cgColor
-        
-        // @IBOutlet weak var topConstraint: NSLayoutConstraint!
-        self.topConstraint.constant = self.navigationController!.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
-        
-        // @IBOutlet weak var profileImage: UIImageView!
-        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
-        self.profileImage.layer.borderWidth = 0.5
-        self.profileImage.layer.borderColor = Tools.separator.cgColor
-        self.profileImage.backgroundColor = Tools.getColor(id: CurrentUser.user!.uid)
-        self.profileImage.clipsToBounds = true
-        
-        // @IBOutlet weak var nameTextField: UITextField!
-        self.nameTextField.delegate = self
-        self.nameTextField.text = CurrentUser.name
-        self.nameTextField.borderStyle = .none
-        
-        // @IBOutlet weak var emailLabel: UILabel!
-        self.emailLabel.text = CurrentUser.email
-        
-        self.saveButton = FloatingButton(
-            view:       self.view,
-            target:     nil,
-            action:     #selector(saveAction),
-            bgColor:    UIColor.white,
-            tintColor:  UIColor.jsq_messageBubbleBlue(),
-            image:      UIImage(named: "save")!)
-        
-        self.saveButton?.animateDown(view: self.view)
-        
+    // MARK: - UI Actions
+    func initUI() {
         self.tableView.isScrollEnabled = true
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.viewRespectsSystemMinimumLayoutMargins = false
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func logoutAction() {
@@ -139,32 +100,40 @@ class ProfileViewController: UIViewController {
     
     func editAction() {
         if self.isEditMode {
-            //self.tableView.isScrollEnabled = true
+            self.tableView.isScrollEnabled = true
             self.view.endEditing(true)
             self.editBarButtonItem.image = UIImage(named: "edit")
             self.gobackBarButtonItem.isEnabled = true
-            self.nameTextField.font = UIFont(name: ".SFUIText", size: 22)
-            self.nameTextField.backgroundColor = UIColor.white
-            self.nameTextField.layer.borderWidth = 0.1
-            self.nameTextField.layer.borderColor = Tools.separator.cgColor
-            self.nameTextField.isEnabled = false
+            
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: ProfileSection.userprofile.rawValue)) {
+                let profileCell = cell as! ProfileViewCell
+                profileCell.nameTextField.font = UIFont(name: ".SFUIText", size: 22)
+                profileCell.nameTextField.backgroundColor = UIColor.white
+                profileCell.nameTextField.layer.borderWidth = 0.1
+                profileCell.nameTextField.layer.borderColor = Tools.separator.cgColor
+                profileCell.nameTextField.isEnabled = false
+            }
+            self.saveAction()
         } else {
-            //self.tableView.isScrollEnabled = false
+            self.tableView.isScrollEnabled = false
             self.view.endEditing(false)
-            self.editBarButtonItem.image = UIImage(named: "close")
+            self.editBarButtonItem.image = UIImage(named: "save")
             self.gobackBarButtonItem.isEnabled = false
-            self.nameTextField.font = UIFont(name: ".SFUIText-Italic", size: 22)
-            self.nameTextField.backgroundColor = UIColor.groupTableViewBackground.withAlphaComponent(0.5)
-            self.nameTextField.layer.borderWidth = 0.5
-            self.nameTextField.layer.borderColor = Tools.separator.cgColor
-            self.nameTextField.isEnabled = true
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: ProfileSection.userprofile.rawValue)) {
+                let profileCell = cell as! ProfileViewCell
+                profileCell.nameTextField.font = UIFont(name: ".SFUIText-Italic", size: 22)
+                profileCell.nameTextField.backgroundColor = UIColor.groupTableViewBackground.withAlphaComponent(0.5)
+                profileCell.nameTextField.layer.borderWidth = 0.5
+                profileCell.nameTextField.layer.borderColor = Tools.separator.cgColor
+                profileCell.nameTextField.isEnabled = true
+            }
         }
         
         self.isEditMode = (self.isEditMode ? false : true)
         self.updateTableView()
     }
     
-    @objc func saveAction() {
+    func saveAction() {
         if let newName = self.name {
             if newName != CurrentUser.name! && !newName.isEmpty {
                 self.updateName(name: newName)
@@ -176,7 +145,6 @@ class ProfileViewController: UIViewController {
                 CurrentUser.cleanChannels()
             }
         }
-        self.editAction()
     }
     
     func updateName(name: String) {
@@ -201,19 +169,18 @@ class ProfileViewController: UIViewController {
         indexSet.insert(ProfileSection.userdata.rawValue)
         self.tableView.reloadSections(indexSet, with: .fade)
     }
-    
-}
 
-//MARK: - TableView
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let currentSection: ProfileSection = ProfileSection(rawValue: section) {
             switch currentSection {
+            case .userprofile:
+                return 1
             case .userdata:
                 return (self.isEditMode ? 1 : 2)
             case .boostcard:
@@ -225,9 +192,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         return 0
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
         switch section {
+        case .userprofile:
+            return 155.0
         case .userdata:
             let row: UserdataRow = UserdataRow(rawValue: indexPath.row)!
             switch row {
@@ -242,7 +211,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let currentSection: ProfileSection = ProfileSection(rawValue: section)!
         switch currentSection {
         case .boostcard:
@@ -252,7 +221,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
         switch section {
         case .boostcard:
@@ -265,9 +234,30 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let currentSection: ProfileSection = ProfileSection(rawValue: indexPath.section) {
             switch currentSection {
+            case .userprofile:
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath) as! ProfileViewCell
+                
+                cell.selectionStyle = .none
+                
+                //profileImage: UIImageView!
+                cell.profileImage.layer.cornerRadius = cell.profileImage.frame.size.width / 2
+                cell.profileImage.layer.borderWidth = 0.5
+                cell.profileImage.layer.borderColor = Tools.separator.cgColor
+                cell.profileImage.backgroundColor = Tools.getColor(id: CurrentUser.user!.uid)
+                cell.profileImage.clipsToBounds = true
+                
+                //nameTextField: UITextField!
+                cell.nameTextField.delegate = self
+                cell.nameTextField.text = CurrentUser.name
+                cell.nameTextField.borderStyle = .none
+                
+                //emailLabel: UILabel!
+                cell.emailLabel.text = CurrentUser.email
+                
+                return cell
             case .userdata:
                 let row: UserdataRow = UserdataRow(rawValue: indexPath.row)!
                 switch row {
@@ -329,6 +319,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     }
+
     
     @objc func showHidePassword (_ sender: Any) {
         let section = ProfileSection.userdata.rawValue
@@ -379,7 +370,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK: - UIPickerView
-extension ProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {    
+extension ProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

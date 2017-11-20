@@ -83,6 +83,10 @@ class ChatViewController: JSQMessagesViewController {
         if !Tools.isInternetAvailable() {
             Tools.goToWaitingRoom(vc: self)
         }
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +97,10 @@ class ChatViewController: JSQMessagesViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if let _ = CurrentUser.getChannelIndex(channel: self.channel!) {
             CurrentUser.updateChannel(channel: self.channel!, lastAccess: NewDate(date: Date()))
+        }
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
         }
     }
     

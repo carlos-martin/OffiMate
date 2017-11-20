@@ -46,7 +46,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no channel yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcS-LU-O1o">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="21"/>
+                                    <rect key="frame" x="0.0" y="8" width="375" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="fXk-xZ-IVl"/>
                                     </constraints>
@@ -55,7 +55,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VxW-6v-XPd">
-                                    <rect key="frame" x="172" y="25" width="30" height="30"/>
+                                    <rect key="frame" x="172" y="33" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="4s9-Nf-OLk"/>
                                         <constraint firstAttribute="width" constant="30" id="7Dx-uG-zpj"/>
@@ -63,7 +63,7 @@
                                 </activityIndicatorView>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="CcS-LU-O1o" firstAttribute="top" secondItem="1Nt-tL-k7k" secondAttribute="top" id="FgP-7w-R0L"/>
+                                <constraint firstItem="CcS-LU-O1o" firstAttribute="top" secondItem="1Nt-tL-k7k" secondAttribute="top" constant="8" id="FgP-7w-R0L"/>
                                 <constraint firstAttribute="trailing" secondItem="CcS-LU-O1o" secondAttribute="trailing" id="MYj-JI-i36"/>
                                 <constraint firstItem="CcS-LU-O1o" firstAttribute="leading" secondItem="1Nt-tL-k7k" secondAttribute="leading" id="V5h-F3-E3N"/>
                                 <constraint firstItem="VxW-6v-XPd" firstAttribute="top" secondItem="CcS-LU-O1o" secondAttribute="bottom" constant="4" id="VW8-wz-OoX"/>

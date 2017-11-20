@@ -31,6 +31,16 @@ class BoostCardViewController: UITableViewController {
         if !Tools.isInternetAvailable() {
             Tools.goToWaitingRoom(vc: self)
         }
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
