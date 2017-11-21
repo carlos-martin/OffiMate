@@ -51,9 +51,16 @@ class CoworkerProfileViewController: UITableViewController {
             action: #selector(goBackAction))
         
         self.navigationItem.leftBarButtonItem = backButton
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.viewRespectsSystemMinimumLayoutMargins = false
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
-    func goBackAction() {
+    @objc func goBackAction() {
         print(unwindSegue!)
         self.performSegue(withIdentifier: unwindSegue!, sender: self)
     }
@@ -136,8 +143,6 @@ class CoworkerProfileViewController: UITableViewController {
             cell.selectionStyle = .none
             cell.coworkerNameLabel.text  = self.coworker?.name
             cell.coworkerEmailLabel.text = self.coworker?.email
-            cell.coworkerBackground.layer.borderWidth = 0.5
-            cell.coworkerBackground.layer.borderColor = Tools.separator.cgColor
             cell.coworkerPictureProfile.layer.cornerRadius = cell.coworkerPictureProfile.frame.size.width / 2
             cell.coworkerPictureProfile.layer.borderWidth = 0.5
             cell.coworkerPictureProfile.layer.borderColor = Tools.separator.cgColor

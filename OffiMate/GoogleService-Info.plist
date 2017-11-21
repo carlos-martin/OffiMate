@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
+<!-- Master
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ <plist version="1.0">
+ <dict>
 	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
 	<string>ca-app-pub-3940256099942544/2934735716</string>
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
@@ -36,51 +37,51 @@
 	<string>1:76360474944:ios:a2118739ad2ab567</string>
 	<key>DATABASE_URL</key>
 	<string>https://offimate-master.firebaseio.com</string>
-</dict>
-</plist>
-
-<!-- RC
- <?xml version="1.0" encoding="UTF-8"?>
- <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
- <plist version="1.0">
- <dict>
-	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
-	<string>ca-app-pub-3940256099942544/2934735716</string>
-	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
-	<string>ca-app-pub-3940256099942544/4411468910</string>
-	<key>CLIENT_ID</key>
-	<string>849450920429-ha4guv8icjo09e82hkl84lf48c98onvd.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.849450920429-ha4guv8icjo09e82hkl84lf48c98onvd</string>
-	<key>API_KEY</key>
-	<string>AIzaSyDOg0-9DL1e4fj7mb6nmwpb7MQgI5edmzo</string>
-	<key>GCM_SENDER_ID</key>
-	<string>849450920429</string>
-	<key>PLIST_VERSION</key>
-	<string>1</string>
-	<key>BUNDLE_ID</key>
-	<string>carlos.martin.OffiMate</string>
-	<key>PROJECT_ID</key>
-	<string>offimate-release-candidate</string>
-	<key>STORAGE_BUCKET</key>
-	<string>offimate-release-candidate.appspot.com</string>
-	<key>IS_ADS_ENABLED</key>
-	<true></true>
-	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
-	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
-	<key>IS_GCM_ENABLED</key>
-	<true></true>
-	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
-	<key>GOOGLE_APP_ID</key>
-	<string>1:849450920429:ios:a2118739ad2ab567</string>
-	<key>DATABASE_URL</key>
-	<string>https://offimate-release-candidate.firebaseio.com</string>
  </dict>
  </plist>
--->
+ -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+        <string>ca-app-pub-3940256099942544/2934735716</string>
+        <key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+        <string>ca-app-pub-3940256099942544/4411468910</string>
+        <key>CLIENT_ID</key>
+        <string>849450920429-ha4guv8icjo09e82hkl84lf48c98onvd.apps.googleusercontent.com</string>
+        <key>REVERSED_CLIENT_ID</key>
+        <string>com.googleusercontent.apps.849450920429-ha4guv8icjo09e82hkl84lf48c98onvd</string>
+        <key>API_KEY</key>
+        <string>AIzaSyDOg0-9DL1e4fj7mb6nmwpb7MQgI5edmzo</string>
+        <key>GCM_SENDER_ID</key>
+        <string>849450920429</string>
+        <key>PLIST_VERSION</key>
+        <string>1</string>
+        <key>BUNDLE_ID</key>
+        <string>carlos.martin.OffiMate</string>
+        <key>PROJECT_ID</key>
+        <string>offimate-release-candidate</string>
+        <key>STORAGE_BUCKET</key>
+        <string>offimate-release-candidate.appspot.com</string>
+        <key>IS_ADS_ENABLED</key>
+        <true></true>
+        <key>IS_ANALYTICS_ENABLED</key>
+        <false></false>
+        <key>IS_APPINVITE_ENABLED</key>
+        <false></false>
+        <key>IS_GCM_ENABLED</key>
+        <true></true>
+        <key>IS_SIGNIN_ENABLED</key>
+        <true></true>
+        <key>GOOGLE_APP_ID</key>
+        <string>1:849450920429:ios:a2118739ad2ab567</string>
+        <key>DATABASE_URL</key>
+        <string>https://offimate-release-candidate.firebaseio.com</string>
+    </dict>
+</plist>
+
 
 <!-- DEV
  <?xml version="1.0" encoding="UTF-8"?>

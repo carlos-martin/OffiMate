@@ -33,7 +33,7 @@ class FloatingButton {
         self.button.layer.shadowRadius = 0.0
         
         self.button.setImage(image, for: .normal)
-        self.button.addTarget(target, action: action, for: UIControlEvents.touchUpInside)
+        self.button.addTarget(target, action: action, for: UIControlEvents.allTouchEvents)
         self.overlayView.addSubview(self.button)
         view.addSubview(overlayView)
     }
@@ -54,7 +54,7 @@ class FloatingButton {
             animations: {
                 self.overlayView.bounds = CGRect(
                     x: 0,
-                    y: -150,
+                    y: -350,
                     width: 50,
                     height: 50
                 )
@@ -74,7 +74,7 @@ class FloatingButton {
             animations: {
                 self.overlayView.bounds = CGRect(
                     x: 0,
-                    y: 0,
+                    y: 120,
                     width: 50,
                     height: 50
                 )

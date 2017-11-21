@@ -82,7 +82,7 @@ internal class Message: CustomStringConvertible {
     internal let text:      String
     internal let date:      Int64
     public var description: String {
-        let _txt = (self.text.characters.count <= 30 ? self.text : String(self.text.characters.prefix(25))+"[...]")
+        let _txt = (self.text.count <= 30 ? self.text : String(self.text.prefix(25))+"[...]")
         return "Message:\n" +
             "   ├── id:        \(self.id)\n" +
             "   ├── senderId:  \(self.senderId)\n" +

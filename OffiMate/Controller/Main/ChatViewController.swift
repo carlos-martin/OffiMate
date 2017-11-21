@@ -41,7 +41,7 @@ class ChatViewController: JSQMessagesViewController {
     
     //Data source
     var messages = [JSQMessage]() {
-        didSet { messages.sort { $0.0.date < $0.1.date } }
+        didSet { messages.sort { $0.date < $1.date } }
     }
     var totalMessages: Int? {
         didSet { self.counter = self.totalMessages }
@@ -83,6 +83,14 @@ class ChatViewController: JSQMessagesViewController {
         if !Tools.isInternetAvailable() {
             Tools.goToWaitingRoom(vc: self)
         }
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+        }
+        
+        if Tools.iPhoneX() {
+            self.inputToolbar.contentView.textView.becomeFirstResponder()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +101,10 @@ class ChatViewController: JSQMessagesViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if let _ = CurrentUser.getChannelIndex(channel: self.channel!) {
             CurrentUser.updateChannel(channel: self.channel!, lastAccess: NewDate(date: Date()))
+        }
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
         }
     }
     
@@ -105,7 +117,6 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.inputToolbar.contentView.textView.layer.cornerRadius = 12
         self.inputToolbar.contentView.textView.placeHolder = "Add new message..."
-        //self.scrollToBottom(animated: true)
     }
     
     //=======================================================================//
@@ -232,8 +243,8 @@ class ChatViewController: JSQMessagesViewController {
             cell.textView.textColor = UIColor.white
         } else {
             let color = Tools.getColor(id: message.senderId)
-            let attrs_name = [NSFontAttributeName : font, NSForegroundColorAttributeName : color]
-            let attrs_text = [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.black]
+            let attrs_name = [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : color]
+            let attrs_text = [NSAttributedStringKey.font : font, NSAttributedStringKey.foregroundColor : UIColor.black]
             let final_text = NSMutableAttributedString(string: message.senderDisplayName!+"\n", attributes: attrs_name)
             let array_text = message.text.components(separatedBy: "\n")
             let rawMessage = (array_text.count > 1 ? array_text.joined(separator: "\n") : array_text.first!)
@@ -258,7 +269,7 @@ class ChatViewController: JSQMessagesViewController {
         if row == 0 {
             timeStamp = NSAttributedString(
                 string:     currentDate.getChannelFormat(),
-                attributes: [NSParagraphStyleAttributeName: paragraphStyle, NSBaselineOffsetAttributeName: NSNumber(value: 0)]
+                attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle, NSAttributedStringKey.baselineOffset: NSNumber(value: 0)]
             )
         } else {
             let previousMessage = self.messages[row-1]
@@ -267,7 +278,7 @@ class ChatViewController: JSQMessagesViewController {
             if currentDate.compare(date: previousDate) > 0 {
                 timeStamp = NSAttributedString(
                     string:     NewDate(date: currentMessage.date!).getChannelFormat(),
-                    attributes: [NSParagraphStyleAttributeName: paragraphStyle, NSBaselineOffsetAttributeName: NSNumber(value: 0)]
+                    attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle, NSAttributedStringKey.baselineOffset: NSNumber(value: 0)]
                 )
             } else {
                 timeStamp = nil
@@ -296,6 +307,13 @@ class ChatViewController: JSQMessagesViewController {
         
         return height
     }
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if Tools.iPhoneX() {
+            if !self.inputToolbar.contentView.textView.isFirstResponder {
+                self.inputToolbar.contentView.textView.becomeFirstResponder()
+            }
+        }
+    }
     
     //=======================================================================//
     //MARK:- TextView
@@ -313,6 +331,12 @@ class ChatViewController: JSQMessagesViewController {
                     })
                 }
             }
+        }
+    }
+    
+    override func textViewDidEndEditing(_ textView: UITextView) {
+        if Tools.iPhoneX() {
+            textView.becomeFirstResponder()
         }
     }
     

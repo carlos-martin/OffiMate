@@ -44,7 +44,7 @@ class ForgotPasswordViewController: UITableViewController {
         (self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ForgetPasswordViewCell).emailTextField.becomeFirstResponder()
     }
     
-    func resetAction() {
+    @objc func resetAction() {
         self.spinner = SpinnerLoader(view: self.tableView, alpha: 0.1)
         if validTextField() {
             self.spinner?.start()

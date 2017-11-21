@@ -9,13 +9,12 @@
 import Foundation
 import UIKit
 
-class EmailViewController: UIViewController {
+class EmailViewController: UITableViewController {
     
     var username: String?
     var email:    String?
     
     //MARK: IBOutlet
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextBarButtonItem: UIBarButtonItem!
     
     //MARK: IBAction
@@ -78,23 +77,21 @@ class EmailViewController: UIViewController {
         self.view.endEditing(true)
         performSegue(withIdentifier: "toOffice", sender: nil)
     }
-}
-
-//MARK: - TableView
-extension EmailViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    
+    // MARK: - Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "What's your Sigma e-mail?"
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "emailSignUpCell", for: indexPath) as! EmailSignUpViewCell
         cell.emailTextField.delegate = self
         cell.emailTextField.placeholder = "Enter your email..."
@@ -103,10 +100,11 @@ extension EmailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     //Dismissing Keyboard
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
     }
 }
+
 
 //MARK: - TextField
 extension EmailViewController: UITextFieldDelegate {
