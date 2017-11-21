@@ -213,9 +213,9 @@
 		1A343FEC1F6AACDB000CB641 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				1A7760601FC30D6400B55413 /* ProfileViewController.swift */,
 				1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */,
 				1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */,
-				1A7760601FC30D6400B55413 /* ProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";

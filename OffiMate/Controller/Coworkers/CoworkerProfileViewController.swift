@@ -112,7 +112,7 @@ class CoworkerProfileViewController: UITableViewController {
         let currentSection = CoworkerSection(rawValue: section)!
         switch currentSection {
         case .profile:
-            return 0.1
+            return CGFloat.leastNonzeroMagnitude
         case .options:
             return UITableViewAutomaticDimension
         }
