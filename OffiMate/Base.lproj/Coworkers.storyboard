@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lGH-Dy-TnT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lGH-Dy-TnT">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -326,10 +327,6 @@
         <scene sceneID="5SF-PQ-GKy">
             <objects>
                 <viewController id="NYg-5o-afE" customClass="BoostCardMessageViewController" customModule="OffiMate" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nFp-CH-aCV"/>
-                        <viewControllerLayoutGuide type="bottom" id="wbM-kL-Pd5"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Oup-71-XVk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -379,15 +376,16 @@
                             <constraint firstItem="5An-qO-ZBC" firstAttribute="leading" secondItem="abZ-Sb-NPR" secondAttribute="trailing" constant="8" id="24a-vh-dsP"/>
                             <constraint firstItem="ht1-XB-Ef6" firstAttribute="centerY" secondItem="abZ-Sb-NPR" secondAttribute="centerY" constant="-10" id="39m-XP-7pf"/>
                             <constraint firstItem="5An-qO-ZBC" firstAttribute="centerY" secondItem="abZ-Sb-NPR" secondAttribute="centerY" constant="10" id="Dlj-Ti-Lyr"/>
-                            <constraint firstItem="wbM-kL-Pd5" firstAttribute="top" secondItem="dfh-Gs-fdx" secondAttribute="bottom" id="OrQ-oL-ehH"/>
-                            <constraint firstItem="abZ-Sb-NPR" firstAttribute="top" secondItem="nFp-CH-aCV" secondAttribute="bottom" constant="8" id="PZA-c2-6zG"/>
-                            <constraint firstAttribute="trailing" secondItem="ht1-XB-Ef6" secondAttribute="trailing" constant="8" id="Ugr-eO-yjq"/>
+                            <constraint firstItem="jRi-gC-3WD" firstAttribute="bottom" secondItem="dfh-Gs-fdx" secondAttribute="bottom" id="OrQ-oL-ehH"/>
+                            <constraint firstItem="abZ-Sb-NPR" firstAttribute="top" secondItem="jRi-gC-3WD" secondAttribute="top" constant="8" id="PZA-c2-6zG"/>
+                            <constraint firstItem="jRi-gC-3WD" firstAttribute="trailing" secondItem="ht1-XB-Ef6" secondAttribute="trailing" constant="8" id="Ugr-eO-yjq"/>
                             <constraint firstItem="dfh-Gs-fdx" firstAttribute="top" secondItem="abZ-Sb-NPR" secondAttribute="bottom" constant="8" id="f3n-d3-wrQ"/>
                             <constraint firstItem="dfh-Gs-fdx" firstAttribute="trailing" secondItem="Oup-71-XVk" secondAttribute="trailingMargin" id="hhg-pe-hb3"/>
-                            <constraint firstAttribute="trailing" secondItem="5An-qO-ZBC" secondAttribute="trailing" constant="8" id="imA-Lr-2gB"/>
+                            <constraint firstItem="jRi-gC-3WD" firstAttribute="trailing" secondItem="5An-qO-ZBC" secondAttribute="trailing" constant="8" id="imA-Lr-2gB"/>
                             <constraint firstItem="dfh-Gs-fdx" firstAttribute="leading" secondItem="Oup-71-XVk" secondAttribute="leadingMargin" id="pZM-nh-J3R"/>
                             <constraint firstItem="ht1-XB-Ef6" firstAttribute="leading" secondItem="abZ-Sb-NPR" secondAttribute="trailing" constant="8" id="xyU-Cs-nlJ"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="jRi-gC-3WD"/>
                     </view>
                     <navigationItem key="navigationItem" title="Why?" id="phM-K0-mPX">
                         <barButtonItem key="rightBarButtonItem" title="Send" id="JnX-HV-fQg">
