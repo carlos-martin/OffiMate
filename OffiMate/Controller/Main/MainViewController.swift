@@ -366,19 +366,6 @@ class MainViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if let currentSection: MainSection = MainSection(rawValue: section) {
-            switch currentSection {
-            case .createNewChannel:
-                return CGFloat.leastNonzeroMagnitude
-            case .currentChannel:
-                return (CurrentUser.channels.isEmpty ? 0.1 : UITableViewAutomaticDimension)
-            }
-        } else {
-            return CGFloat.leastNonzeroMagnitude
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let currentSection: MainSection = MainSection(rawValue: section) {
             switch currentSection {
