@@ -82,8 +82,13 @@ public class Tools {
         UIColor(red: 169.0/255.0, green: 233.0/255.0, blue: 197.0/255.0, alpha: 1.0)
     ]
     
+    //CHANNELS
     static var channelRef = Database.database().reference().child("channels")
-    static var channelsHandle:  DatabaseHandle?
+    static var channelsHandle: DatabaseHandle?
+    
+    //CODE
+    static var codeRef = Database.database().reference().child("group_code")
+    static var codeHandle: DatabaseHandle?
 }
 
 //MARK:- BackEnd 
@@ -245,6 +250,27 @@ extension Tools {
             "date": date.id
         ] as [String : Any]
         newMessageRef.setValue(newMessageItem)
+    }
+    
+    //MARK: Group Code
+    static func validateGroupCode(code: String, completion: @escaping(_ valid: Bool) -> Void) {
+        self.codeHandle = self.codeRef.queryOrdered(byChild: "code").queryEqual(toValue: code).observe(.value, with: { (snapshot: DataSnapshot) in
+            
+            if let rawCodes = snapshot.value as? Dictionary<String, AnyObject> {
+                var found: Bool = false
+                for rawCode in rawCodes {
+                    if let codeData = rawCode.value as? Dictionary<String, String> {
+                        if code == codeData["code"] {
+                            found = true
+                            break
+                        }
+                    }
+                }
+                completion(found)
+            } else {
+                completion(false)
+            }
+        })
     }
 }
 
