@@ -73,6 +73,7 @@
                                         <constraint firstItem="PmN-B5-dNi" firstAttribute="trailing" secondItem="IG2-8f-upr" secondAttribute="trailingMargin" id="CuX-bR-E1F"/>
                                         <constraint firstItem="fOI-y0-IMz" firstAttribute="trailing" secondItem="IG2-8f-upr" secondAttribute="trailingMargin" id="GPb-NW-fwX"/>
                                         <constraint firstItem="PmN-B5-dNi" firstAttribute="top" secondItem="fOI-y0-IMz" secondAttribute="bottom" constant="5" id="Lj6-eq-WJJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="PmN-B5-dNi" secondAttribute="bottom" constant="2" id="kgL-k7-gWz"/>
                                         <constraint firstItem="fOI-y0-IMz" firstAttribute="top" secondItem="7PJ-dn-ilO" secondAttribute="bottom" constant="6" id="x3i-w0-cc4"/>
                                     </constraints>
                                 </tableViewCellContentView>

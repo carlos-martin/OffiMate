@@ -125,20 +125,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="coworkerProfileCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkerProfileCell" rowHeight="145" id="erH-FW-HDH" customClass="CoworkerProfileViewCell" customModule="OffiMate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="145"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="coworkerProfileCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkerProfileCell" rowHeight="155" id="erH-FW-HDH" customClass="CoworkerProfileViewCell" customModule="OffiMate" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="155"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="erH-FW-HDH" id="jXj-Ha-KO4">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="144.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="154.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9s-hX-Ex7">
-                                            <rect key="frame" x="-25" y="46" width="425" height="108"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="108" id="Thr-1q-xgX"/>
-                                            </constraints>
-                                        </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="9qP-wI-TrY">
                                             <rect key="frame" x="150" y="11" width="75" height="75"/>
                                             <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -157,37 +150,33 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carlos.Martin@sigmatechnology.se" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZT-JL-cYO">
-                                            <rect key="frame" x="0.0" y="124" width="375" height="18"/>
+                                            <rect key="frame" x="16" y="124" width="343" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="lRc-J8-oKH" firstAttribute="top" secondItem="9qP-wI-TrY" secondAttribute="bottom" constant="6" id="Hfq-W6-xPj"/>
                                         <constraint firstItem="lRc-J8-oKH" firstAttribute="leading" secondItem="jXj-Ha-KO4" secondAttribute="leadingMargin" id="K3C-i0-A9H"/>
-                                        <constraint firstAttribute="bottom" secondItem="w9s-hX-Ex7" secondAttribute="bottom" constant="-10" id="OAh-kt-Gwm"/>
-                                        <constraint firstItem="PZT-JL-cYO" firstAttribute="leading" secondItem="jXj-Ha-KO4" secondAttribute="leading" id="SIc-Ad-N6y"/>
-                                        <constraint firstItem="w9s-hX-Ex7" firstAttribute="top" secondItem="jXj-Ha-KO4" secondAttribute="top" constant="46" id="Sbd-9t-f57"/>
-                                        <constraint firstItem="w9s-hX-Ex7" firstAttribute="leading" secondItem="jXj-Ha-KO4" secondAttribute="leading" constant="-25" id="Vdh-1w-t6v"/>
                                         <constraint firstItem="PZT-JL-cYO" firstAttribute="top" secondItem="lRc-J8-oKH" secondAttribute="bottom" constant="5" id="bEp-kW-ntg"/>
                                         <constraint firstItem="9qP-wI-TrY" firstAttribute="top" secondItem="jXj-Ha-KO4" secondAttribute="topMargin" id="c6a-yQ-PrC"/>
                                         <constraint firstItem="9qP-wI-TrY" firstAttribute="centerX" secondItem="jXj-Ha-KO4" secondAttribute="centerX" id="ctO-ts-ff8"/>
-                                        <constraint firstAttribute="trailing" secondItem="w9s-hX-Ex7" secondAttribute="trailing" constant="-25" id="pjz-Ze-0ea"/>
-                                        <constraint firstAttribute="trailing" secondItem="PZT-JL-cYO" secondAttribute="trailing" id="riR-Tb-tkc"/>
+                                        <constraint firstItem="PZT-JL-cYO" firstAttribute="trailing" secondItem="jXj-Ha-KO4" secondAttribute="trailingMargin" id="czN-fv-R50"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="PZT-JL-cYO" secondAttribute="bottom" constant="2" id="pT7-cE-e1Z"/>
+                                        <constraint firstItem="PZT-JL-cYO" firstAttribute="leading" secondItem="jXj-Ha-KO4" secondAttribute="leadingMargin" id="rHc-QL-wVj"/>
                                         <constraint firstItem="lRc-J8-oKH" firstAttribute="trailing" secondItem="jXj-Ha-KO4" secondAttribute="trailingMargin" id="vNs-gV-I4j"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="coworkerBackground" destination="w9s-hX-Ex7" id="sBo-xS-j2y"/>
                                     <outlet property="coworkerEmailLabel" destination="PZT-JL-cYO" id="nkm-F3-RNe"/>
                                     <outlet property="coworkerNameLabel" destination="lRc-J8-oKH" id="dbN-bJ-Irs"/>
                                     <outlet property="coworkerPictureProfile" destination="9qP-wI-TrY" id="ppY-om-FfE"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="coworkerOptionCell" rowHeight="44" id="clh-eA-TJt" customClass="CoworkerOptionViewCell" customModule="OffiMate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="200.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="210.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="clh-eA-TJt" id="gF6-Gh-h4X">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
