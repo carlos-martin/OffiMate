@@ -15,14 +15,12 @@ enum LoginSection: Int {
     case pass
 }
 
-class LoginViewController: UIViewController {
+class LoginViewController: UITableViewController {
     
     var username: String?
     var password: String?
     var spinner:  SpinnerLoader?
     var isHidden: Bool = true
-    
-    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     @IBAction func doneActionButton(_ sender: Any) {
@@ -111,19 +109,16 @@ class LoginViewController: UIViewController {
         return valid
     }
     
-}
-
-//MARK: - TableView
-extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    // MARK: - Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let currentSection: LoginSection = LoginSection(rawValue: section) {
             switch currentSection {
             case .mail:
@@ -136,7 +131,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let currentSection: LoginSection = LoginSection(rawValue: indexPath.section) {
             switch currentSection {
             case .mail:
@@ -174,7 +169,7 @@ extension LoginViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     //Dismissing Keyboard
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
     }
 }

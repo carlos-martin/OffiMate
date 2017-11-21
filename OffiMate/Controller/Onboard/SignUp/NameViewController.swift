@@ -9,12 +9,11 @@
 import Foundation
 import UIKit
 
-class NameViewController: UIViewController {
+class NameViewController: UITableViewController {
     
     var username: String?
     
     //MARK: IBOutlet
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextBarButtonItem: UIBarButtonItem!
     
     //MARK: IBAction
@@ -74,23 +73,21 @@ class NameViewController: UIViewController {
         self.view.endEditing(true)
         performSegue(withIdentifier: "toEmail", sender: nil)
     }
-}
-
-//MARK: - TableView
-extension NameViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    
+    // MARK: - Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "What's your name?"
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "nameSignUpCell", for: indexPath) as! NameSignUpViewCell
         cell.nameTextField.delegate = self
         cell.nameTextField.placeholder = "Enter your name..."
@@ -99,10 +96,11 @@ extension NameViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     //Dismissing Keyboard
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
     }
 }
+
 
 //MARK: - TextField
 extension NameViewController: UITextFieldDelegate {

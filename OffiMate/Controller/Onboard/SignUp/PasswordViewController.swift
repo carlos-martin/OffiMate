@@ -13,7 +13,7 @@ import FirebaseAuth
 
 let OFFICE_ID = "-Kx7x0OQt_XbVzqVcbX2"
 
-class PasswordViewController: UIViewController {
+class PasswordViewController: UITableViewController {
     
     var username: String?
     var email:    String?
@@ -23,7 +23,6 @@ class PasswordViewController: UIViewController {
     var isHidden: Bool = true
     
     //MARK: IBOutlet
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var helpLabel: UILabel!
     
     //MARK: IBAction
@@ -109,23 +108,20 @@ class PasswordViewController: UIViewController {
         return isReady
     }
     
-}
-
-//MARK: - TableView
-extension PasswordViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // MARK: - Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Add a password for your account"
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "passSignUpCell", for: indexPath) as! PasswordSignUpViewCell
         cell.passwordTextField.delegate = self
         cell.passwordTextField.placeholder = "Enter password..."
@@ -147,9 +143,9 @@ extension PasswordViewController: UITableViewDelegate, UITableViewDataSource {
             cell.passwordTextField.isSecureTextEntry = true
         }
     }
-
+    
     //Dismissing Keyboard
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
     }
 }
