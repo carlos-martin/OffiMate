@@ -384,6 +384,19 @@ extension Tools {
         return version
     }
     
+    static func iPhoneX() -> Bool {
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 2436:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
     static func isInternetAvailable() -> Bool {
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))

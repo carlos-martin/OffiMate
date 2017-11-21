@@ -87,6 +87,10 @@ class ChatViewController: JSQMessagesViewController {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = false
         }
+        
+        if Tools.iPhoneX() {
+            self.inputToolbar.contentView.textView.becomeFirstResponder()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,7 +117,6 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.inputToolbar.contentView.textView.layer.cornerRadius = 12
         self.inputToolbar.contentView.textView.placeHolder = "Add new message..."
-        //self.scrollToBottom(animated: true)
     }
     
     //=======================================================================//
@@ -304,6 +307,13 @@ class ChatViewController: JSQMessagesViewController {
         
         return height
     }
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if Tools.iPhoneX() {
+            if !self.inputToolbar.contentView.textView.isFirstResponder {
+                self.inputToolbar.contentView.textView.becomeFirstResponder()
+            }
+        }
+    }
     
     //=======================================================================//
     //MARK:- TextView
@@ -321,6 +331,12 @@ class ChatViewController: JSQMessagesViewController {
                     })
                 }
             }
+        }
+    }
+    
+    override func textViewDidEndEditing(_ textView: UITextView) {
+        if Tools.iPhoneX() {
+            textView.becomeFirstResponder()
         }
     }
     
