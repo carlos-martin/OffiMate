@@ -15,9 +15,10 @@ class SpinnerLoader {
     var loadingView: UIView = UIView()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    init(view: UIView, alpha: CGFloat?=nil) {
+    init(view: UIView, alpha: CGFloat?=0.1) {
         self.view = view
         
+        /*
         if !UIAccessibilityIsReduceTransparencyEnabled() && alpha == nil {
             let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
             self.container = UIVisualEffectView(effect: blurEffect)
@@ -29,6 +30,11 @@ class SpinnerLoader {
             self.container.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
             self.container.backgroundColor = UIColor(red: 255/256.0, green: 255/256.0, blue: 255/256.0, alpha: alpha!)
         }
+         */
+        
+        self.container.frame = UIScreen.main.bounds
+        self.container.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        self.container.backgroundColor = UIColor(red: 255/256.0, green: 255/256.0, blue: 255/256.0, alpha: alpha!)
         
         self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
         self.loadingView.center = self.container.center

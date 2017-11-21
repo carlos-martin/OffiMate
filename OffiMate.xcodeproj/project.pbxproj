@@ -14,7 +14,6 @@
 		1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A343FE71F6AAB22000CB641 /* ChatViewController.swift */; };
 		1A3DB57F1F9728D600F05EF6 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3DB57E1F9728D600F05EF6 /* ForgotPasswordViewController.swift */; };
 		1A417FC61F55886700ADC6B5 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A417FC41F55886700ADC6B5 /* Profile.storyboard */; };
-		1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */; };
 		1A417FCA1F55909700ADC6B5 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */; };
 		1A5B16531F9DBF160065596B /* NewOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */; };
 		1A5B16561F9DC07B0065596B /* NewOfficeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */; };
@@ -22,6 +21,7 @@
 		1A5BDFDE1F6FE719003C10E5 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDFDD1F6FE719003C10E5 /* Channel.swift */; };
 		1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */; };
 		1A6A5F131F692E1E0052F1FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */; };
+		1A7760611FC30D6400B55413 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7760601FC30D6400B55413 /* ProfileViewController.swift */; };
 		1A813D181F4B0DCD00F190A2 /* Onboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A813D161F4B0DCD00F190A2 /* Onboard.storyboard */; };
 		1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */; };
 		1A900FA41F4C49FE005B3DA4 /* NameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */; };
@@ -65,7 +65,6 @@
 		1A343FE71F6AAB22000CB641 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		1A3DB57E1F9728D600F05EF6 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		1A417FC51F55886700ADC6B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
-		1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1A417FC91F55909700ADC6B5 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewCell.swift; path = OffiMate/View/Profile/ProfileViewCell.swift; sourceTree = SOURCE_ROOT; };
 		1A5B16521F9DBF160065596B /* NewOfficeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOfficeViewController.swift; sourceTree = "<group>"; };
 		1A5B16551F9DC07B0065596B /* NewOfficeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOfficeViewCell.swift; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		1A5BDFDD1F6FE719003C10E5 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		1A5BDFDF1F6FF704003C10E5 /* NewDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDate.swift; sourceTree = "<group>"; };
 		1A6A5F121F692E1E0052F1FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1A7760601FC30D6400B55413 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1A813D171F4B0DCD00F190A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboard.storyboard; sourceTree = "<group>"; };
 		1A813D1C1F4B1C6200F190A2 /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		1A900FA31F4C49FE005B3DA4 /* NameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameViewController.swift; sourceTree = "<group>"; };
@@ -213,9 +213,9 @@
 		1A343FEC1F6AACDB000CB641 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				1A417FC71F55891900ADC6B5 /* ProfileViewController.swift */,
 				1A995F5A1F862AA400EE72C5 /* InboxViewController.swift */,
 				1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */,
+				1A7760601FC30D6400B55413 /* ProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -396,7 +396,7 @@
 					1AA2BC3B1F4ACEFE00E0C2E5 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = YRTWAFKJ72;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -520,7 +520,6 @@
 				1AC439661F8532C000CCBF22 /* BoostCardMessageViewController.swift in Sources */,
 				1A5B16561F9DC07B0065596B /* NewOfficeViewCell.swift in Sources */,
 				1A5B16531F9DBF160065596B /* NewOfficeViewController.swift in Sources */,
-				1A417FC81F55891900ADC6B5 /* ProfileViewController.swift in Sources */,
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */,
 				1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */,
@@ -528,6 +527,7 @@
 				1AAA5CAE1F82798600C59597 /* CoworkersViewCell.swift in Sources */,
 				1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */,
 				1A343FE81F6AAB22000CB641 /* ChatViewController.swift in Sources */,
+				1A7760611FC30D6400B55413 /* ProfileViewController.swift in Sources */,
 				1AA2BC421F4ACEFE00E0C2E5 /* MainViewController.swift in Sources */,
 				1AC439641F84F27F00CCBF22 /* NewBoostViewCell.swift in Sources */,
 				1A95130A1F9F1280004A404B /* FloatingButton.swift in Sources */,
@@ -643,7 +643,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -686,7 +686,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -699,18 +699,18 @@
 			baseConfigurationReference = B5C0DC6DF448EC4C0F635B12 /* Pods-OffiMate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YRTWAFKJ72;
 				INFOPLIST_FILE = "$(SRCROOT)/OffiMate/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.OffiMate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -720,18 +720,18 @@
 			baseConfigurationReference = 67159726FF51518329AA9820 /* Pods-OffiMate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YRTWAFKJ72;
 				INFOPLIST_FILE = "$(SRCROOT)/OffiMate/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = carlos.martin.OffiMate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

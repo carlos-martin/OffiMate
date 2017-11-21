@@ -8,24 +8,15 @@
 
 import UIKit
 
+class ProfileViewCell : UITableViewCell {
+    @IBOutlet weak var profileImage:    UIImageView!
+    @IBOutlet weak var nameTextField:   UITextField!
+    @IBOutlet weak var emailLabel:      UILabel!
+}
+
 class PasswordViewCell : UITableViewCell {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var showHideButton: UIButton!
-}
-
-class InformationViewCell : UITableViewCell {
-    @IBOutlet weak var textField: UITextField!
-}
-
-class EditViewCell : UITableViewCell {
-    @IBOutlet weak var actionButton: UIButton!
-}
-
-class PictureViewCell : UITableViewCell {
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var topView:       UIView!
-    @IBOutlet weak var bottomView:    UIView!
-    @IBOutlet weak var profileImage:  UIImageView!
 }
 
 class OptionsViewCell : UITableViewCell {

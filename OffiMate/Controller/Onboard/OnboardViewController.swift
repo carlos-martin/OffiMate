@@ -25,9 +25,15 @@ class OnboardViewController: UITableViewController {
     }
 
     private func initUI() {
-        var headerHeight = (self.tableView.frame.size.height - ((30+44)*2) + 15) / 2
+        var headerHeight: CGFloat = 165.0
         headerHeight -= self.navigationController!.navigationBar.frame.size.height
         self.tableView.contentInset = UIEdgeInsetsMake(headerHeight, 0, -headerHeight, 0)
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.viewRespectsSystemMinimumLayoutMargins = false
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     override func didReceiveMemoryWarning() {
