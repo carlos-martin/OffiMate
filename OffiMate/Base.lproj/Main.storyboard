@@ -160,6 +160,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="PbW-g0-Ak4"/>
                     <connections>
                         <outlet property="emptyChannelsLabel" destination="CcS-LU-O1o" id="9VF-Rn-HQn"/>
+                        <outlet property="emptyLabelConstraint" destination="FgP-7w-R0L" id="FCg-6g-aFT"/>
                         <outlet property="spinnerView" destination="VxW-6v-XPd" id="3DA-Ha-Qiv"/>
                     </connections>
                 </tableViewController>
