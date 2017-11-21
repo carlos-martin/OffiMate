@@ -52,7 +52,6 @@ class MainViewController: UITableViewController {
     }
     
     //MARK:- UI
-    @IBOutlet weak var emptyLabelConstraint: NSLayoutConstraint!
     var profileButton:  UIBarButtonItem!
     var menuButton:     UIBarButtonItem!
     
@@ -154,8 +153,6 @@ class MainViewController: UITableViewController {
         self.navigationItem.title = "OffiMate"
         self.emptyChannelsLabel.isHidden = (CurrentUser.channels.isEmpty ? false : true)
         self.spinner = SpinnerLoader(view: self.navigationController!.view, alpha: 0.1)
-        
-        self.emptyLabelConstraint.constant = 44.0
         
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -357,19 +354,6 @@ class MainViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let currentSection: MainSection = MainSection(rawValue: section) {
-            switch currentSection {
-            case .createNewChannel:
-                return CGFloat.leastNonzeroMagnitude
-            case .currentChannel:
-                return (CurrentUser.channels.isEmpty ? 0.1 : UITableViewAutomaticDimension)
-            }
-        } else {
-            return CGFloat.leastNonzeroMagnitude
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if let currentSection: MainSection = MainSection(rawValue: section) {
             switch currentSection {
             case .createNewChannel:

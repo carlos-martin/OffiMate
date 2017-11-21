@@ -221,6 +221,16 @@ class ProfileViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let currentSection: ProfileSection = ProfileSection(rawValue: section)!
+        switch currentSection {
+        case .userprofile:
+            return CGFloat.leastNonzeroMagnitude
+        default:
+            return UITableViewAutomaticDimension
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section: ProfileSection = ProfileSection(rawValue: indexPath.section)!
         switch section {
