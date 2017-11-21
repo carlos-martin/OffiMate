@@ -37,7 +37,12 @@ class InboxViewController: UITableViewController {
     }
     
     func initUI() {
-        self.spinner = SpinnerLoader(view: self.tableView)
+        if #available(iOS 11.0, *) {
+            let outset = self.navigationController?.navigationBar.bounds.height
+            self.spinner = SpinnerLoader(view: self.view, manualOutset: outset)
+        } else {
+            self.spinner = SpinnerLoader(view: self.view)
+        }
         self.emptyInboxLabel.isHidden = true
     }
     

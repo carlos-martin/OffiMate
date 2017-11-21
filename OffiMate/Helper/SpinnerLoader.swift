@@ -15,11 +15,11 @@ class SpinnerLoader {
     var loadingView: UIView = UIView()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    init(view: UIView, alpha: CGFloat?=0.1) {
+    init(view: UIView, alpha: CGFloat?=0.1, manualOutset: CGFloat?=nil) {
         self.view = view
         
         self.container.frame = view.bounds
-        let outset = view.bounds.minY
+        let outset = (manualOutset == nil ? view.bounds.minY : -manualOutset!)
         self.container.center = CGPoint(x: (view.bounds.width/2), y: (view.bounds.height/2)+(outset/2))
         self.container.backgroundColor = UIColor(red: 255/256.0, green: 255/256.0, blue: 255/256.0, alpha: alpha!)
         

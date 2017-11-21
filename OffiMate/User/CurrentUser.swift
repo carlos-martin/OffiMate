@@ -20,11 +20,7 @@ class CurrentUser {
     static private(set) var coworkerId: String!
     
     //Office
-    static var office: Office! {
-        didSet {
-            print(office)
-        }
-    }
+    static var office: Office! 
     
     //FirebaseAuth user
     static var user: User!
