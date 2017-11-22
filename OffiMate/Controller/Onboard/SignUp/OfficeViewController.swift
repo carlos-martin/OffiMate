@@ -62,11 +62,6 @@ class OfficeViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.officeId = self.offices[indexPath.row].id
         self.tableView.deselectRow(at: indexPath, animated: true)
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("[OfficeViewController] Error Signing Out!")
-        }
         performSegue(withIdentifier: "toPassword", sender: nil)
     }
 

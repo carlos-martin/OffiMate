@@ -116,20 +116,11 @@ class NewOfficeViewController: UITableViewController, MFMailComposeViewControlle
                     let title = "Completed Process"
                     let message = "You have created a new office with the name \(name) at the system successfully."
                     Alert.showFailiureAlert(title: title, message: message, handler: { (_) in
-                        self.goBack()
+                        self.closeAction()
                     })
                 }
             })
         }
-    }
-    
-    func goBack() {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("[NewOfficeViewController] Error Signing Out!")
-        }
-        self.closeAction()
     }
     // MARK: - Table view data source
 
