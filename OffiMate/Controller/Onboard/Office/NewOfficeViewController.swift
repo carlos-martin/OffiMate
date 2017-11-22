@@ -19,6 +19,8 @@ class NewOfficeViewController: UITableViewController, MFMailComposeViewControlle
     
     var spinner: SpinnerLoader!
     
+    var unwindSegue: String?
+    
     @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
 
     @IBAction func saveBarButtonAction(_ sender: Any) {
@@ -49,6 +51,24 @@ class NewOfficeViewController: UITableViewController, MFMailComposeViewControlle
     
     func initUI () {
         self.spinner = SpinnerLoader(view: self.view, alpha: 0.1)
+        
+        let backButton = UIBarButtonItem(
+            image: UIImage(named: "close"),
+            style: .plain,
+            target: self,
+            action: #selector(closeAction))
+        
+        self.navigationItem.leftBarButtonItem = backButton
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    @objc func closeAction() {
+        self.performSegue(withIdentifier: self.unwindSegue!, sender: self)
     }
     
     func saveAction() {
@@ -118,8 +138,7 @@ class NewOfficeViewController: UITableViewController, MFMailComposeViewControlle
         } catch {
             print("[NewOfficeViewController] Error Signing Out!")
         }
-        self.navigationController?.popToRootViewController(animated: true)
-        self.dismiss(animated: true, completion: nil)
+        self.closeAction()
     }
     // MARK: - Table view data source
 

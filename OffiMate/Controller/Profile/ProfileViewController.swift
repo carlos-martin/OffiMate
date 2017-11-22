@@ -15,7 +15,10 @@ enum ProfileSection: Int {
     case userprofile = 0
     case userdata
     case boostcard
+    case newoffice
     case logout
+    
+    static var count: Int { return ProfileSection.logout.rawValue + 1 }
 }
 
 enum UserdataRow: Int {
@@ -166,13 +169,14 @@ class ProfileViewController: UITableViewController {
         indexSet.insert(ProfileSection.boostcard.rawValue)
         indexSet.insert(ProfileSection.logout.rawValue)
         indexSet.insert(ProfileSection.userdata.rawValue)
+        indexSet.insert(ProfileSection.newoffice.rawValue)
         self.tableView.reloadSections(indexSet, with: .fade)
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return ProfileSection.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -184,6 +188,8 @@ class ProfileViewController: UITableViewController {
                 return (self.isEditMode ? 1 : 2)
             case .boostcard:
                 return (self.isEditMode ? 0 : 2)
+            case .newoffice:
+                return (self.isEditMode ? 0 : 1)
             case .logout:
                 return (self.isEditMode ? 0 : 1)
             }
@@ -238,6 +244,8 @@ class ProfileViewController: UITableViewController {
             performSegue(withIdentifier: "showInbox", sender: indexPath)
         case .logout:
             self.logoutAction()
+        case .newoffice:
+            self.toNewOffice()
         default:
             break
         }
@@ -310,9 +318,16 @@ class ProfileViewController: UITableViewController {
                     cell.optionLabel.text = "Sent"
                 }
                 cell.optionImage.backgroundColor = UIColor.white
-                
                 return cell
-                
+            case .newoffice:
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
+                cell.selectionStyle = .gray
+                cell.arrowImage.isHidden = true
+                cell.unreadImage.isHidden = true
+                cell.optionImage.image = UIImage(named: "new-office")
+                cell.optionImage.backgroundColor = UIColor.white
+                cell.optionLabel.text = "Create a new Office"
+                return cell
             case .logout:
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "optionsCell", for: indexPath) as! OptionsViewCell
                 cell.selectionStyle = .gray
@@ -373,6 +388,19 @@ class ProfileViewController: UITableViewController {
                     controller.navigationItem.title = "Sent"
                     controller.received = false
                 }
+            }
+        }
+    }
+    
+    @IBAction func unwindToProfile(segue: UIStoryboardSegue) {}
+    
+    func toNewOffice () {
+        if let navigationController = UIStoryboard(name: "Onboard", bundle: nil).instantiateViewController(withIdentifier: "NewOffice") as? UINavigationController {
+            if let controller = navigationController.viewControllers.first as? NewOfficeViewController {
+                controller.modalPresentationStyle = .fullScreen
+                controller.modalTransitionStyle = .coverVertical
+                controller.unwindSegue = "unwindSegueToProfile"
+                self.present(navigationController, animated: true, completion: nil)
             }
         }
     }

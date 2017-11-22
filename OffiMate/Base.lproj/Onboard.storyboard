@@ -24,7 +24,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SE2-qA-0bp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-532" y="164"/>
+            <point key="canvasLocation" x="-258" y="505"/>
         </scene>
         <!--Onboard-->
         <scene sceneID="s5q-Sx-49U">
@@ -40,7 +40,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="Add new office"/>
                             <connections>
-                                <segue destination="Olw-s7-Y3v" kind="show" id="ce5-Nr-Uy0"/>
+                                <action selector="toNewOffice:" destination="s4A-bG-Uir" eventType="touchUpInside" id="0ET-ok-Iet"/>
                             </connections>
                         </button>
                         <prototypes>
@@ -109,10 +109,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Onboard" id="KQJ-Cb-lvq"/>
+                    <connections>
+                        <segue destination="d10-9U-OqD" kind="show" identifier="showNewOffice" id="g7v-fU-xnP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O49-1j-vyf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="425" y="164"/>
+            <point key="canvasLocation" x="569" y="505"/>
         </scene>
         <!--New Office-->
         <scene sceneID="1Fa-MP-fHQ">
@@ -191,11 +194,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="saveBarButtonItem" destination="Jko-4a-FLP" id="DxH-Fi-4bL"/>
+                        <segue destination="CSV-62-Wgr" kind="unwind" identifier="unwindSegueToOnboard" unwindAction="unwindToOnboardWithSegue:" id="9Us-DC-sKi"/>
+                        <segue destination="CSV-62-Wgr" kind="unwind" identifier="unwindSegueToProfile" unwindAction="unwindToProfileWithSegue:" id="k4y-ct-T6n"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOV-ZU-8mU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="CSV-62-Wgr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="424.80000000000001" y="982.75862068965523"/>
+            <point key="canvasLocation" x="2185" y="1306"/>
         </scene>
         <!--Login-->
         <scene sceneID="Bs9-fm-3tb">
@@ -300,7 +306,23 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8yc-cj-mVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1358" y="513"/>
+            <point key="canvasLocation" x="1380" y="505"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RPp-yV-aAf">
+            <objects>
+                <navigationController storyboardIdentifier="NewOffice" id="d10-9U-OqD" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UjZ-lL-pBp">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Olw-s7-Y3v" kind="relationship" relationship="rootViewController" id="R6G-B0-Cs4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5iN-cj-xGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="1306"/>
         </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="9x3-xr-3st">
@@ -348,7 +370,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kfI-zx-dek" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2185" y="513"/>
+            <point key="canvasLocation" x="2185" y="505"/>
         </scene>
         <!--Sign up-->
         <scene sceneID="RNZ-16-DRu">
@@ -407,7 +429,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NeL-ts-Z2g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1358" y="-180"/>
+            <point key="canvasLocation" x="1380" y="-279"/>
         </scene>
         <!--E-mail-->
         <scene sceneID="K5u-X3-vyn">
@@ -466,7 +488,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Eu-3n-Zqm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2185" y="-180"/>
+            <point key="canvasLocation" x="2185" y="-279"/>
         </scene>
         <!--Password-->
         <scene sceneID="719-a9-Zd5">
@@ -565,7 +587,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhj-6e-hNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3801" y="-180"/>
+            <point key="canvasLocation" x="3801" y="-279"/>
         </scene>
         <!--Office-->
         <scene sceneID="tCG-eo-R5G">
@@ -631,7 +653,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sAN-S3-6sh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2996" y="-179.46026986506749"/>
+            <point key="canvasLocation" x="2996" y="-278"/>
         </scene>
     </scenes>
     <resources>
