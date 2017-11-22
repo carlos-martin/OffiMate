@@ -23,7 +23,12 @@ class OfficeViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.spinner = SpinnerLoader(view: self.view)
+        if #available(iOS 11.0, *) {
+            let outset = self.navigationController?.navigationBar.bounds.height
+            self.spinner = SpinnerLoader(view: self.view, manualOutset: outset)
+        } else {
+            self.spinner = SpinnerLoader(view: self.view)
+        }
         self.observeOffice()
     }
 
@@ -78,20 +83,11 @@ class OfficeViewController: UITableViewController {
     // MARK: - Firebase
     func observeOffice() {
         self.spinner.start()
-        Auth.auth().signIn(withEmail: ADMIN_NAME, password: ADMIN_PASS, completion: { (user: User?, error: Error?) in
-            if let _ = error {
-                let title = "Error"
-                let message = "Oops! Something goes wrong. Try again later."
-                Alert.showFailiureAlert(title: title, message: message, handler: nil)
-                self.spinner.stop()
-            } else {
-                Tools.fetchAllOffices { (offices: [Office]) in
-                    self.offices = offices
-                    self.tableView.reloadData()
-                    Tools.removeChannelObserver()
-                    self.spinner.stop()
-                }
-            }
-        })
+        Tools.fetchAllOffices { (offices: [Office]) in
+            self.offices = offices
+            self.tableView.reloadData()
+            Tools.removeChannelObserver()
+            self.spinner.stop()
+        }
     }
 }
