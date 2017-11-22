@@ -329,6 +329,7 @@
                             <outlet property="delegate" destination="C4m-RW-pcW" id="PNu-wc-psp"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="8Wj-5z-FdL"/>
                     <connections>
                         <outlet property="emptyInboxLabel" destination="Rgi-y7-Td5" id="q17-QT-Rov"/>
                         <segue destination="p6C-Jw-oCZ" kind="show" identifier="showBoostCard" id="6i4-xh-Udr"/>
@@ -488,6 +489,7 @@
                             <outlet property="delegate" destination="p6C-Jw-oCZ" id="iOB-oa-W1s"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="c7j-9o-cHG"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mw5-MH-3Zx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

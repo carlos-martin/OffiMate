@@ -21,7 +21,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="HNJ-Hk-KpC"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Kru-ak-il5"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Kru-ak-il5"/>
                     <connections>
                         <segue destination="FBB-0b-VRZ" kind="unwind" identifier="unwindSegueToMain" unwindAction="unwindToMainWithSegue:" id="MgB-lB-2Oh"/>
                     </connections>
