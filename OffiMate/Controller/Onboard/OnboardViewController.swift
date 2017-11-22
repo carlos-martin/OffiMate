@@ -14,7 +14,9 @@ enum OnboardSection: Int {
 }
 
 class OnboardViewController: UITableViewController {
-
+    
+    @IBOutlet weak var newOfficeButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initUI()
@@ -28,9 +30,11 @@ class OnboardViewController: UITableViewController {
         var headerHeight: CGFloat = 165.0
         headerHeight -= self.navigationController!.navigationBar.frame.size.height
         self.tableView.contentInset = UIEdgeInsetsMake(headerHeight, 0, -headerHeight, 0)
+        
+        self.newOfficeButton.isHidden = true
+        
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
-            self.viewRespectsSystemMinimumLayoutMargins = false
         } else {
             // Fallback on earlier versions
         }

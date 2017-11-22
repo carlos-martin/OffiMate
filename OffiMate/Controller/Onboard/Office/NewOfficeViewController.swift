@@ -101,31 +101,22 @@ class NewOfficeViewController: UITableViewController, MFMailComposeViewControlle
         } else {
             self.spinner.start()
             self.saveBarButtonItem.isEnabled = false
-            Auth.auth().signIn(withEmail: ADMIN_NAME, password: ADMIN_PASS, completion: { (user: User?, error: Error?) in
-                if let _ = error {
-                    self.spinner.stop()
-                    self.saveBarButtonItem.isEnabled = true
-                    let title = "Error"
-                    let message = "Oops! Something goes wrong. Try again later."
-                    Alert.showFailiureAlert(title: title, message: message, handler: nil)
+
+            Tools.validateGroupCode(code: code, completion: { (valid: Bool) in
+                self.spinner.stop()
+                self.saveBarButtonItem.isEnabled = true
+                if !valid {
+                    let title = "Validating Code Error"
+                    let message = "Oops! Something goes wrong with your validation code. Check it again or try to get new one."
+                    Alert.showFailiureAlert(title: title, message: message, handler: { (_) in
+                        Tools.cellViewErrorAnimation(cell: codeCell)
+                    })
                 } else {
-                    Tools.validateGroupCode(code: code, completion: { (valid: Bool) in
-                        self.spinner.stop()
-                        self.saveBarButtonItem.isEnabled = true
-                        if !valid {
-                            let title = "Validating Code Error"
-                            let message = "Oops! Something goes wrong with your validation code. Check it again or try to get new one."
-                            Alert.showFailiureAlert(title: title, message: message, handler: { (_) in
-                                Tools.cellViewErrorAnimation(cell: codeCell)
-                            })
-                        } else {
-                            let _ = Tools.createOffice(name: name)
-                            let title = "Completed Process"
-                            let message = "You have created a new office with the name \(name) at the system successfully."
-                            Alert.showFailiureAlert(title: title, message: message, handler: { (_) in
-                                self.goBack()
-                            })
-                        }
+                    let _ = Tools.createOffice(name: name)
+                    let title = "Completed Process"
+                    let message = "You have created a new office with the name \(name) at the system successfully."
+                    Alert.showFailiureAlert(title: title, message: message, handler: { (_) in
+                        self.goBack()
                     })
                 }
             })

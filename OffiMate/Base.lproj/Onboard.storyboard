@@ -110,6 +110,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Onboard" id="KQJ-Cb-lvq"/>
                     <connections>
+                        <outlet property="newOfficeButton" destination="I0k-17-ekd" id="p4D-Nw-7oW"/>
                         <segue destination="d10-9U-OqD" kind="show" identifier="showNewOffice" id="g7v-fU-xnP"/>
                     </connections>
                 </tableViewController>
