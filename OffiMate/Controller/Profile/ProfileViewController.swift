@@ -81,7 +81,6 @@ class ProfileViewController: UITableViewController {
         
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
-            self.viewRespectsSystemMinimumLayoutMargins = false
         } else {
             // Fallback on earlier versions
         }

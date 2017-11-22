@@ -59,7 +59,6 @@ class OfficeViewController: UITableViewController {
         self.tableView.deselectRow(at: indexPath, animated: true)
         do {
             try Auth.auth().signOut()
-            print("[OfficeViewController] Signed Out!")
         } catch {
             print("[OfficeViewController] Error Signing Out!")
         }

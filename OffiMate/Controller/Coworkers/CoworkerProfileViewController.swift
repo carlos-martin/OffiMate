@@ -61,7 +61,6 @@ class CoworkerProfileViewController: UITableViewController {
     }
     
     @objc func goBackAction() {
-        print(unwindSegue!)
         self.performSegue(withIdentifier: unwindSegue!, sender: self)
     }
 

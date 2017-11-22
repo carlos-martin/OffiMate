@@ -83,14 +83,6 @@ class ChatViewController: JSQMessagesViewController {
         if !Tools.isInternetAvailable() {
             Tools.goToWaitingRoom(vc: self)
         }
-        
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = false
-        }
-        
-        if Tools.iPhoneX() {
-            self.inputToolbar.contentView.textView.becomeFirstResponder()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,10 +93,6 @@ class ChatViewController: JSQMessagesViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if let _ = CurrentUser.getChannelIndex(channel: self.channel!) {
             CurrentUser.updateChannel(channel: self.channel!, lastAccess: NewDate(date: Date()))
-        }
-        
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
         }
     }
     
@@ -199,6 +187,7 @@ class ChatViewController: JSQMessagesViewController {
     
     //=======================================================================//
     //MARK:- JSQMessagesCollectionView
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
@@ -307,13 +296,6 @@ class ChatViewController: JSQMessagesViewController {
         
         return height
     }
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if Tools.iPhoneX() {
-            if !self.inputToolbar.contentView.textView.isFirstResponder {
-                self.inputToolbar.contentView.textView.becomeFirstResponder()
-            }
-        }
-    }
     
     //=======================================================================//
     //MARK:- TextView
@@ -331,12 +313,6 @@ class ChatViewController: JSQMessagesViewController {
                     })
                 }
             }
-        }
-    }
-    
-    override func textViewDidEndEditing(_ textView: UITextView) {
-        if Tools.iPhoneX() {
-            textView.becomeFirstResponder()
         }
     }
     
