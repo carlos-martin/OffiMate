@@ -115,7 +115,6 @@ class NewOfficeViewController: UITableViewController, MFMailComposeViewControlle
     func goBack() {
         do {
             try Auth.auth().signOut()
-            print("[NewOfficeViewController] Signed Out!")
         } catch {
             print("[NewOfficeViewController] Error Signing Out!")
         }

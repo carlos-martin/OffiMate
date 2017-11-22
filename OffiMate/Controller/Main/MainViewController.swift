@@ -305,7 +305,6 @@ class MainViewController: UITableViewController {
     
     func deleteChannelUI(indexPath: IndexPath) {
         if indexPath.row < CurrentUser.channels.count {
-            print("~\(indexPath.row)~")
             CurrentUser.removeChannel(index: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.left)
             self.tableView.endUpdates()

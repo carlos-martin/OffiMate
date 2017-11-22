@@ -186,7 +186,6 @@ class CurrentUser {
             self.channels[index] = channel
             self.channelsLastAccess[index] = (lastAccess != nil ? lastAccess!.id : NewDate(id: 20000101080059).id)
         } else {
-            //print("Adding new channel: \(channel)")
             self.channels.append(channel)
             let id = (lastAccess != nil ? lastAccess!.id : NewDate(id: 20000101080059).id)
             self.channelsLastAccess.append(id)
@@ -195,10 +194,8 @@ class CurrentUser {
     
     static func updateChannel (channel: Channel, lastAccess: NewDate?=nil) {
         if let index = getChannelIndex(channel: channel) {
-            //print(" ~ Channel will be update! \(self.channels[index].messages.count) ~> \(channel.messages.count)")
             self.channels[index] = channel
             if let date = lastAccess {
-                //print(" ~ Also the access date: \(date)")
                 self.channelsLastAccess[index] = date.id
             }
         }         
@@ -214,7 +211,6 @@ class CurrentUser {
     }
     
     static func removeChannel (index: Int) {
-        print("Channel to be deleted: \(self.channels[index]) {\(self.channelsLastAccess[index])}")
         self.channels.remove(at: index)
         self.channelsLastAccess.remove(at: index)
     }
