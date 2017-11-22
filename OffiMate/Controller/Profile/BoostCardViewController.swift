@@ -24,22 +24,16 @@ class BoostCardViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationItem.largeTitleDisplayMode = .never
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if !Tools.isInternetAvailable() {
             Tools.goToWaitingRoom(vc: self)
-        }
-        
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = false
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
         }
     }
 
