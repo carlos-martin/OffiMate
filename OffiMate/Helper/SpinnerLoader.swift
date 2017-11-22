@@ -19,12 +19,15 @@ class SpinnerLoader {
         self.view = view
         
         self.container.frame = view.bounds
-        let outset = (manualOutset == nil ? view.bounds.minY : -manualOutset!)
-        self.container.center = CGPoint(x: (view.bounds.width/2), y: (view.bounds.height/2)+(outset/2))
+        self.container.center = CGPoint(
+            x: UIScreen.main.bounds.width/2,
+            y: UIScreen.main.bounds.height/2)
         self.container.backgroundColor = UIColor(red: 255/256.0, green: 255/256.0, blue: 255/256.0, alpha: alpha!)
         
+        let outset = (manualOutset == nil ? view.bounds.minY : -manualOutset!)
+        
         self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
-        self.loadingView.center = self.container.center
+        self.loadingView.center = CGPoint(x: (view.bounds.width/2), y: (view.bounds.height/2)+(outset))
         self.loadingView.backgroundColor = UIColor(red: 68/256.0, green: 68/256.0, blue: 68/256.0, alpha: 0.7)
         self.loadingView.clipsToBounds = true
         self.loadingView.layer.cornerRadius = 12
