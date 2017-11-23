@@ -282,7 +282,7 @@
                                             <rect key="frame" x="273" y="11" width="70" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="MZd-wC-eNT"/>
-                                                <constraint firstAttribute="width" constant="70" id="VcX-Nf-cLY"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="VcX-Nf-cLY"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -420,11 +420,11 @@
                                     <outlet property="senderButton" destination="HWv-Qg-gen" id="kG4-0k-VbC"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostcardTitleCell" rowHeight="60" id="pyY-v2-tkj" customClass="BoostCardTitleViewCell" customModule="OffiMate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="120.33333333333334" width="375" height="60"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostcardTitleCell" rowHeight="56" id="pyY-v2-tkj" customClass="BoostCardTitleViewCell" customModule="OffiMate" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="120.33333333333334" width="375" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pyY-v2-tkj" id="Abl-57-8gq">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="55.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manages ambiguity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BN-WK-snA">
@@ -445,7 +445,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="VwX-wZ-Awa" firstAttribute="leading" secondItem="Abl-57-8gq" secondAttribute="leadingMargin" constant="8" id="1AN-p8-At5"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="VwX-wZ-Awa" secondAttribute="bottom" constant="4" id="DXh-Ft-z4e"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="VwX-wZ-Awa" secondAttribute="bottom" id="DXh-Ft-z4e"/>
                                         <constraint firstItem="7BN-WK-snA" firstAttribute="trailing" secondItem="Abl-57-8gq" secondAttribute="trailingMargin" id="IEA-a2-EPL"/>
                                         <constraint firstItem="VwX-wZ-Awa" firstAttribute="trailing" secondItem="Abl-57-8gq" secondAttribute="trailingMargin" id="Q5m-bE-Neg"/>
                                         <constraint firstItem="7BN-WK-snA" firstAttribute="leading" secondItem="Abl-57-8gq" secondAttribute="leadingMargin" constant="8" id="Qcb-SK-2ai"/>
@@ -459,7 +459,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="boostcardBodyCell" id="tcE-7U-kyh" customClass="BoostCardBodyViewCell" customModule="OffiMate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="180.33333333333334" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="176.33333333333334" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tcE-7U-kyh" id="f2G-i7-1kS">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
