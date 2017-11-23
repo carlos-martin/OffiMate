@@ -99,7 +99,12 @@ class ChatViewController: JSQMessagesViewController {
     //=======================================================================//
     //MARK:- UI Initializing
     private func initUI () {
-        self.spinner = SpinnerLoader(view: self.view)
+        if #available(iOS 11.0, *) {
+            let outset: CGFloat = self.navigationController!.navigationBar.bounds.height
+            self.spinner = SpinnerLoader(view: self.view, manualOutset: outset/2)
+        } else {
+            self.spinner = SpinnerLoader(view: self.view)
+        }
         self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         self.inputToolbar.contentView.leftBarButtonItem = nil
