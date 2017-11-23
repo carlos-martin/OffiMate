@@ -59,6 +59,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     //=======================================================================//
+    //MARK:- View Controller funtions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +73,7 @@ class ChatViewController: JSQMessagesViewController {
                 self.observeMessage()
             } else {
                 Alert.showFailiureAlert(message: self.notExistsError, handler: { (_) in
-                    self.toMainViewController()
+                    _ = self.navigationController?.popViewController(animated: true)
                 })
             }
         })
@@ -97,7 +98,7 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     //=======================================================================//
-    //MARK:- UI Initializing
+    //MARK:- UI Functions
     private func initUI () {
         if #available(iOS 11.0, *) {
             let outset: CGFloat = self.navigationController!.navigationBar.bounds.height
@@ -110,6 +111,18 @@ class ChatViewController: JSQMessagesViewController {
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.inputToolbar.contentView.textView.layer.cornerRadius = 12
         self.inputToolbar.contentView.textView.placeHolder = "Add new message..."
+        
+        let infoButton = UIBarButtonItem(
+            image: UIImage(named: "info"),
+            style: .plain,
+            target: self,
+            action: #selector(channelInfoAction))
+        
+        self.navigationItem.rightBarButtonItem = infoButton
+    }
+    
+    @objc private func channelInfoAction() {
+        performSegue(withIdentifier: "showInfo", sender: nil)
     }
     
     //=======================================================================//
@@ -142,7 +155,7 @@ class ChatViewController: JSQMessagesViewController {
                 self.isTyping = false
             } else {
                 Alert.showFailiureAlert(message: self.notExistsError, handler: { (_) in
-                    self.toMainViewController()
+                    _ = self.navigationController?.popViewController(animated: true)
                 })
             }
         }
@@ -189,6 +202,24 @@ class ChatViewController: JSQMessagesViewController {
             self.scrollToBottom(animated: true)
         }
     }
+    
+    //=======================================================================//
+    //MARK:- Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showInfo" {
+            var controller: ChatInfoViewController
+            if let navigationController = segue.destination as? UINavigationController {
+                controller = navigationController.topViewController as! ChatInfoViewController
+            } else {
+                controller = segue.destination as! ChatInfoViewController
+            }
+            controller.channel = self.channel
+            controller.unwindSegue = "unwindSegueToChat"
+        }
+    }
+    
+    @IBAction func unwindToChat(segue: UIStoryboardSegue) {}
     
     //=======================================================================//
     //MARK:- JSQMessagesCollectionView
@@ -314,7 +345,7 @@ class ChatViewController: JSQMessagesViewController {
                     self.isTyping = textView.text != ""
                 } else {
                     Alert.showFailiureAlert(message: self.notExistsError, handler: { (_) in
-                        self.toMainViewController()
+                        _ = self.navigationController?.popViewController(animated: true)
                     })
                 }
             }
@@ -322,20 +353,6 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     //=======================================================================//
-}
-
-
-//MARK:- Navigation
-extension ChatViewController {
-    func toMainViewController () {
-        if let splitController = self.splitViewController {
-            if splitController.isCollapsed {
-                let detailNC = self.parent as! UINavigationController
-                let masterNC = detailNC.parent as! UINavigationController
-                masterNC.popToRootViewController(animated: false)
-            }
-        }
-    }
 }
 
 //MARK:- JSQMessagesBubbleImage

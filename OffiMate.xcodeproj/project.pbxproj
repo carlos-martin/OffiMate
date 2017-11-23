@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A06AC4A1FC6CBDF00B21877 /* ChatInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A06AC491FC6CBDF00B21877 /* ChatInfoViewCell.swift */; };
+		1A06AC4C1FC6CC2500B21877 /* ChatInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A06AC4B1FC6CC2500B21877 /* ChatInfoViewController.swift */; };
 		1A216AA41FA85BEC000CD100 /* OfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A216AA31FA85BEC000CD100 /* OfficeViewController.swift */; };
 		1A23380A1F6AB54B009D3243 /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2338091F6AB54B009D3243 /* MainViewCell.swift */; };
 		1A26F48F1F875D3E00C6B434 /* BoostCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */; };
@@ -58,6 +60,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A06AC491FC6CBDF00B21877 /* ChatInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInfoViewCell.swift; sourceTree = "<group>"; };
+		1A06AC4B1FC6CC2500B21877 /* ChatInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInfoViewController.swift; sourceTree = "<group>"; };
 		1A216AA31FA85BEC000CD100 /* OfficeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficeViewController.swift; sourceTree = "<group>"; };
 		1A2338091F6AB54B009D3243 /* MainViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
 		1A26F48E1F875D3E00C6B434 /* BoostCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoostCardViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			children = (
 				1AA2BC411F4ACEFE00E0C2E5 /* MainViewController.swift */,
 				1A343FE71F6AAB22000CB641 /* ChatViewController.swift */,
+				1A06AC4B1FC6CC2500B21877 /* ChatInfoViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				1A2338091F6AB54B009D3243 /* MainViewCell.swift */,
+				1A06AC491FC6CBDF00B21877 /* ChatInfoViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -520,8 +526,10 @@
 				1AC439661F8532C000CCBF22 /* BoostCardMessageViewController.swift in Sources */,
 				1A5B16561F9DC07B0065596B /* NewOfficeViewCell.swift in Sources */,
 				1A5B16531F9DBF160065596B /* NewOfficeViewController.swift in Sources */,
+				1A06AC4C1FC6CC2500B21877 /* ChatInfoViewController.swift in Sources */,
 				1AD8B95D1F4D802700F6777C /* PasswordViewController.swift in Sources */,
 				1A5BDFE01F6FF704003C10E5 /* NewDate.swift in Sources */,
+				1A06AC4A1FC6CBDF00B21877 /* ChatInfoViewCell.swift in Sources */,
 				1A813D1D1F4B1C6200F190A2 /* CurrentUser.swift in Sources */,
 				1A216AA41FA85BEC000CD100 /* OfficeViewController.swift in Sources */,
 				1AAA5CAE1F82798600C59597 /* CoworkersViewCell.swift in Sources */,
