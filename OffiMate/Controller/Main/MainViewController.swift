@@ -71,13 +71,14 @@ class MainViewController: UITableViewController {
     //MARK:- View Func
     override func viewDidLoad() {
         self.initUI()
-        self.observeChannels()
-        self.observeChannelsChanges()
-        self.observeBoostCard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.observeChannels()
+        self.observeChannelsChanges()
+        self.observeBoostCard()
         
         if !Tools.isInternetAvailable() {
            Tools.goToWaitingRoom(vc: self)
