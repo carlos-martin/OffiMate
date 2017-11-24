@@ -187,7 +187,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Office" id="Yns-QY-2qN">
-                        <barButtonItem key="rightBarButtonItem" title="Save" image="save" style="done" id="Jko-4a-FLP">
+                        <barButtonItem key="rightBarButtonItem" image="save" style="done" id="Jko-4a-FLP">
                             <connections>
                                 <action selector="saveBarButtonAction:" destination="Olw-s7-Y3v" id="Cee-tb-VcJ"/>
                             </connections>

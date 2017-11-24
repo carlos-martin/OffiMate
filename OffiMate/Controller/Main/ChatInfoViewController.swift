@@ -19,6 +19,7 @@ class ChatInfoViewController: UITableViewController {
     var isEditMode: Bool = false
     var isAdmin: Bool!
     var newName: String?
+    var admin: Coworker?
     
     // From segue
     var channel: Channel?
@@ -27,6 +28,7 @@ class ChatInfoViewController: UITableViewController {
     // UI
     var closeButton: UIBarButtonItem!
     var editButton: UIBarButtonItem!
+    var spinner: SpinnerLoader!
     
     // Firebase
     private var members: [Coworker] = []
@@ -52,6 +54,13 @@ class ChatInfoViewController: UITableViewController {
     
     private func initUI() {
         self.navigationItem.title = "Channel Information"
+        
+        if #available(iOS 11.0, *) {
+            let outset: CGFloat = self.navigationController!.navigationBar.bounds.height
+            self.spinner = SpinnerLoader(view: self.view, manualOutset: outset/2)
+        } else {
+            self.spinner = SpinnerLoader(view: self.view)
+        }
         
         self.closeButton = UIBarButtonItem(
             image: UIImage(named: "close"),
@@ -83,20 +92,29 @@ class ChatInfoViewController: UITableViewController {
     // MARK: - Firebase
     
     private func observeCoworkers() {
-        self.coworkerRefHandle = self.coworkerRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childAdded, with: { (snapshot: DataSnapshot) in
-            let coworkerData = snapshot.value as! Dictionary<String, AnyObject>
-            let id = snapshot.key
-            if let name = coworkerData["name"] as! String!, let email = coworkerData["email"] as! String!, let uid = coworkerData["userId"] as! String! {
-                if CurrentUser.user!.uid != uid {
-                    let _coworker = Coworker(id: id, uid: uid, email: email, name: name, office: CurrentUser.office!)
-                    self.members.append(_coworker)
+        self.spinner.start()
+        Tools.fetchCoworker(uid: self.channel!.creator) { (_id: String?, _email: String?, _name: String?, _office: Office?) in
+            if let id = _id, let email = _email, let name = _name, let office = _office {
+                self.admin = Coworker(id: id, uid: self.channel!.creator, email: email, name: name, office: office)
+            }
+            
+            self.coworkerRefHandle = self.coworkerRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childAdded, with: { (snapshot: DataSnapshot) in
+                self.spinner.stop()
+                let coworkerData = snapshot.value as! Dictionary<String, AnyObject>
+                let id = snapshot.key
+                if let name = coworkerData["name"] as! String!, let email = coworkerData["email"] as! String!, let uid = coworkerData["userId"] as! String! {
+                    let coworker = Coworker(id: id, uid: uid, email: email, name: name, office: CurrentUser.office!)
+                    if self.channel!.creator != uid {
+                        self.members.append(coworker)
+                    }
                     self.tableView.reloadData()
                 }
-            }
-        })
-        coworkerRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            if snapshot.childrenCount == 0 {
-                self.tableView.reloadData()
+            })
+            self.coworkerRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+                self.spinner.stop()
+                if snapshot.childrenCount == 0 {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -187,7 +205,7 @@ class ChatInfoViewController: UITableViewController {
         case .info:
             return 1
         case .members:
-            return (self.isEditMode ? 0 : self.members.count)
+            return (self.isEditMode ? 0 : self.members.count + (self.admin != nil ? 1 : 0))
         }
     }
     
@@ -200,7 +218,7 @@ class ChatInfoViewController: UITableViewController {
         switch currentSection {
         case .info:
             return CGFloat.leastNonzeroMagnitude
-        case .members:
+        default:
             return UITableViewAutomaticDimension
         }
     }
@@ -211,7 +229,7 @@ class ChatInfoViewController: UITableViewController {
         case .info:
             return nil
         case .members:
-            return (self.isEditMode ? nil : (self.members.isEmpty ? nil : "members"))
+            return (self.isEditMode ? nil : (self.members.isEmpty ? (self.admin != nil ? "members" : nil) : "members"))
         }
     }
     
@@ -219,8 +237,20 @@ class ChatInfoViewController: UITableViewController {
         let currentSection = ChatInfoSection(rawValue: indexPath.section)!
         switch currentSection {
         case .members:
-            let member: Coworker = self.members[indexPath.row]
-            self.toCoworkerProfile(coworker: member)
+            let index = indexPath.row
+            switch index {
+            case 0:
+                if self.admin!.uid != CurrentUser.user.uid {
+                    self.toCoworkerProfile(coworker: self.admin!)
+                }
+                break
+            default:
+                let member: Coworker = self.members[indexPath.row-1]
+                if member.uid != CurrentUser.user.uid {
+                    self.toCoworkerProfile(coworker: member)
+                }
+                break
+            }
         default:
             break
         }
@@ -238,13 +268,22 @@ class ChatInfoViewController: UITableViewController {
             return cell
         case .members:
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "chatMemberCell", for: indexPath) as! ChatMembersViewCell
-            let member: Coworker = self.members[indexPath.row]
-            cell.memberLabel.text = member.name
-            if member.uid == self.channel!.creator {
+            let index = indexPath.row
+            let member: Coworker
+            switch index {
+            case 0:
+                member = self.admin!
                 cell.adminLabel.isHidden = false
-            } else {
+                cell.adminLabel.text = "admin"
+            default:
+                member = self.members[index-1]
                 cell.adminLabel.isHidden = true
             }
+            if member.uid == CurrentUser.user.uid {
+                cell.selectionStyle = .none
+                cell.memberLabel.font = UIFont.italicSystemFont(ofSize: 17.0)
+            }
+            cell.memberLabel.text = member.name
             return cell
         }
         
