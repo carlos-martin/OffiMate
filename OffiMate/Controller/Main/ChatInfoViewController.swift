@@ -17,6 +17,7 @@ enum ChatInfoSection: Int {
 class ChatInfoViewController: UITableViewController {
     
     var isEditMode: Bool = false
+    var isAdmin: Bool!
     var newName: String?
     
     // From segue
@@ -58,14 +59,19 @@ class ChatInfoViewController: UITableViewController {
             target: self,
             action: #selector(closeAction))
         
-        self.editButton = UIBarButtonItem(
-            image: UIImage(named: "edit"),
-            style: .plain,
-            target: self,
-            action: #selector(editAction))
-        
         self.navigationItem.leftBarButtonItem = closeButton
-        self.navigationItem.rightBarButtonItem = editButton
+        
+        self.isAdmin = (CurrentUser.user.uid == self.channel!.creator)
+        
+        if self.isAdmin {
+            self.editButton = UIBarButtonItem(
+                image: UIImage(named: "edit"),
+                style: .plain,
+                target: self,
+                action: #selector(editAction))
+            
+            self.navigationItem.rightBarButtonItem = editButton
+        }
         
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true

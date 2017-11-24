@@ -64,7 +64,7 @@ class MainViewController: UITableViewController {
     private lazy var boostcardRef:  DatabaseReference = Database.database().reference().child("boostcard")
     
     private var channelRefHandle:   DatabaseHandle?
-    private var messageRefHandle:   DatabaseHandle?
+    private var changedRefHandle:   DatabaseHandle?
     private var deletedRefHandle:   DatabaseHandle?
     private var boostcardRefHandle: DatabaseHandle?
     
@@ -100,8 +100,8 @@ class MainViewController: UITableViewController {
         if let refChannelHandle = channelRefHandle {
             channelRef.removeObserver(withHandle: refChannelHandle)
         }
-        if let refMessageHandle = messageRefHandle {
-            channelRef.removeObserver(withHandle: refMessageHandle)
+        if let refChangedHandle = changedRefHandle {
+            channelRef.removeObserver(withHandle: refChangedHandle)
         }
         if let refDeletedHandle = deletedRefHandle {
             channelRef.removeObserver(withHandle: refDeletedHandle)
@@ -210,16 +210,19 @@ class MainViewController: UITableViewController {
     }
     
     private func observeChannelsChanges() {
-        self.messageRefHandle = channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childChanged, with: { (snapshot: DataSnapshot) in
+        self.changedRefHandle = channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childChanged, with: { (snapshot: DataSnapshot) in
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
-                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String!, let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
-                    let channel = Channel(id: id, name: name, creator: creator, messages: messages)
-                    if let index = self.getChannelIndex(channel: channel) {
-                        if CurrentUser.channels[index].messages.count != messages.count {
-                            CurrentUser.updateChannel(channel: channel)
-                            self.reloadView()
-                        }
+                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
+                    let channel: Channel
+                    if let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                        channel = Channel(id: id, name: name, creator: creator, messages: messages)
+                    } else {
+                        channel = Channel(id: id, name: name, creator: creator)
+                    }
+                    if let _ = self.getChannelIndex(channel: channel) {
+                        CurrentUser.updateChannel(channel: channel)
+                        self.reloadView()
                     }
                 }
             }
