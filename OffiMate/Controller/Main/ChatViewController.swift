@@ -14,9 +14,7 @@ class ChatViewController: JSQMessagesViewController {
     
     //Chat settings
     var channelRef: DatabaseReference?
-    var channel:    Channel? {
-        didSet { self.title = channel?.name }
-    }
+    var channel:    Channel? 
     
     //Chat Firebase
     private lazy var messagesRef:         DatabaseReference = self.channelRef!.child("messages")
@@ -83,7 +81,10 @@ class ChatViewController: JSQMessagesViewController {
         super.viewWillAppear(animated)
         if !Tools.isInternetAvailable() {
             Tools.goToWaitingRoom(vc: self)
+        } else {
+            self.title = self.channel?.name
         }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

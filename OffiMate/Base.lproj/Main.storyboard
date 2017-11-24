@@ -30,7 +30,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxe-EF-ier" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FBB-0b-VRZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="330" y="-3"/>
+            <point key="canvasLocation" x="372" y="-4"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="klV-ZW-gmP">
@@ -57,17 +57,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatInfoCell" rowHeight="55" id="k4F-qA-enO" customClass="ChatInfoViewCell" customModule="OffiMate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333333333333336" width="375" height="55"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatInfoCell" rowHeight="59" id="k4F-qA-enO" customClass="ChatInfoViewCell" customModule="OffiMate" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.333333333333336" width="375" height="59"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k4F-qA-enO" id="b72-wN-Q8o">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="54.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="58.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Good Morning Malmö!" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="R0h-mR-7ij">
-                                            <rect key="frame" x="20" y="0.0" width="355" height="54.666666666666664"/>
+                                            <rect key="frame" x="20" y="8" width="335" height="42.666666666666664"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="55" id="4hB-cb-V0w"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="kyD-58-gVE"/>
                                             </constraints>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="22"/>
@@ -75,10 +75,10 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="R0h-mR-7ij" firstAttribute="top" secondItem="b72-wN-Q8o" secondAttribute="top" id="3WP-G4-INe"/>
-                                        <constraint firstAttribute="trailing" secondItem="R0h-mR-7ij" secondAttribute="trailing" id="HPZ-Ii-IB9"/>
+                                        <constraint firstItem="R0h-mR-7ij" firstAttribute="top" secondItem="b72-wN-Q8o" secondAttribute="top" constant="8" id="LJl-fS-cBy"/>
                                         <constraint firstItem="R0h-mR-7ij" firstAttribute="leading" secondItem="b72-wN-Q8o" secondAttribute="leading" constant="20" id="XQl-35-VMq"/>
-                                        <constraint firstAttribute="bottom" secondItem="R0h-mR-7ij" secondAttribute="bottom" id="iT9-RD-zKh"/>
+                                        <constraint firstAttribute="trailing" secondItem="R0h-mR-7ij" secondAttribute="trailing" constant="20" id="YsG-TD-zgL"/>
+                                        <constraint firstAttribute="bottom" secondItem="R0h-mR-7ij" secondAttribute="bottom" constant="8" id="tx4-Jb-ncq"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -86,7 +86,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatMemberCell" id="zuE-DS-Vyr" customClass="ChatMembersViewCell" customModule="OffiMate" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="110.33333333333334" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="114.33333333333334" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zuE-DS-Vyr" id="AaK-7q-sfI">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
@@ -136,7 +136,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1aK-5r-Fxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JOn-Yo-55e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2082" y="-4"/>
+            <point key="canvasLocation" x="2080.8000000000002" y="-4.4334975369458132"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="kVX-PL-tfF">
