@@ -114,6 +114,14 @@ class ProfileViewController: UITableViewController {
                 profileCell.nameTextField.layer.borderWidth = .leastNonzeroMagnitude
                 profileCell.nameTextField.layer.borderColor = UIColor.white.cgColor
                 profileCell.nameTextField.isEnabled = false
+                
+                let textFieldName = profileCell.nameTextField.text
+                
+                if self.name == nil {
+                    self.name = textFieldName
+                } else if self.name != textFieldName {
+                    self.name = textFieldName
+                }
             }
             self.saveAction()
         } else {
