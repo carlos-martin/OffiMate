@@ -407,14 +407,12 @@ class MainViewController: UITableViewController {
                 let counter = channel.getUnread(from: lastAccess)
                 if counter == 0 {
                     cell?.counter.isHidden = true
-                    cell?.labelRigthConstraint.constant = 0.0
                 } else {
                     cell?.counter.isHidden = false
-                    cell?.labelRigthConstraint.constant = 23.0
                     cell?.counter.text = String(counter)
                     cell?.counter.textColor = UIColor.white
                     cell?.counter.layer.backgroundColor = UIColor.red.cgColor
-                    cell?.counter.layer.cornerRadius = 9
+                    cell?.counter.layer.cornerRadius = 12
                     cell?.counter.layer.borderWidth = 0.5
                     cell?.counter.layer.borderColor = UIColor.red.cgColor
                 }

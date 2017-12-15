@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23P-Mv-bnK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23P-Mv-bnK">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -207,8 +207,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-IW-4pE">
-                                            <rect key="frame" x="69" y="11" width="257" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programa emitido el 12 de diciembre de 2017." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-IW-4pE">
+                                            <rect key="frame" x="69" y="11" width="224" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -228,10 +228,10 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6o5-zQ-3cP">
-                                            <rect key="frame" x="300" y="11" width="26" height="21"/>
+                                            <rect key="frame" x="301" y="10" width="25" height="25"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="PP6-Jh-40p"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="26" id="ciu-dk-Juc"/>
+                                                <constraint firstAttribute="height" constant="25" id="5uw-6u-QVF"/>
+                                                <constraint firstAttribute="width" constant="25" id="YwT-EB-hpb"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -239,14 +239,13 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="WYO-Xq-YSV" firstAttribute="leading" secondItem="TLK-IW-4pE" secondAttribute="trailing" id="A7c-Fj-LmC"/>
+                                        <constraint firstItem="TLK-IW-4pE" firstAttribute="leading" secondItem="nnq-y6-pM5" secondAttribute="trailing" constant="18" id="5Yk-Ay-FZh"/>
+                                        <constraint firstItem="TLK-IW-4pE" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="ARS-rQ-XHT"/>
                                         <constraint firstItem="nnq-y6-pM5" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="EBk-gn-MJu"/>
-                                        <constraint firstItem="WYO-Xq-YSV" firstAttribute="leading" secondItem="6o5-zQ-3cP" secondAttribute="trailing" id="G2I-L7-fCw"/>
-                                        <constraint firstItem="6o5-zQ-3cP" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="IyM-S7-TQc"/>
-                                        <constraint firstItem="6o5-zQ-3cP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="l7b-DJ-6mY" secondAttribute="leading" constant="20" symbolic="YES" id="LxE-Bh-Gpz"/>
+                                        <constraint firstItem="6o5-zQ-3cP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TLK-IW-4pE" secondAttribute="trailing" constant="8" id="FSu-NI-Yos"/>
+                                        <constraint firstItem="WYO-Xq-YSV" firstAttribute="leading" secondItem="6o5-zQ-3cP" secondAttribute="trailing" id="Jv3-An-fRu"/>
                                         <constraint firstItem="nnq-y6-pM5" firstAttribute="leading" secondItem="l7b-DJ-6mY" secondAttribute="leadingMargin" constant="10" id="aiM-Ar-99U"/>
-                                        <constraint firstItem="TLK-IW-4pE" firstAttribute="leading" secondItem="nnq-y6-pM5" secondAttribute="trailing" constant="18" id="eoU-2o-18d"/>
-                                        <constraint firstItem="TLK-IW-4pE" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="exh-Il-jfs"/>
+                                        <constraint firstItem="6o5-zQ-3cP" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="cGE-Aj-Xge"/>
                                         <constraint firstItem="WYO-Xq-YSV" firstAttribute="centerY" secondItem="l7b-DJ-6mY" secondAttribute="centerY" id="zJf-6k-HI2"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="WYO-Xq-YSV" secondAttribute="trailing" constant="8" id="zQ0-oQ-nMX"/>
                                     </constraints>
@@ -254,7 +253,6 @@
                                 <connections>
                                     <outlet property="counter" destination="6o5-zQ-3cP" id="9nD-pR-5hd"/>
                                     <outlet property="label" destination="TLK-IW-4pE" id="lGx-96-TZL"/>
-                                    <outlet property="labelRigthConstraint" destination="A7c-Fj-LmC" id="Xbw-4J-ZVR"/>
                                     <segue destination="Bji-Jy-H59" kind="show" identifier="showDetail" id="gy9-Jk-ebs"/>
                                 </connections>
                             </tableViewCell>
@@ -272,7 +270,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ha9-Aw-ff0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-490.39999999999998" y="-3.1484257871064472"/>
+            <point key="canvasLocation" x="-490.39999999999998" y="-3.6945812807881775"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="shr-Nr-Zt3">

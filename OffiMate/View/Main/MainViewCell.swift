@@ -9,7 +9,6 @@
 import UIKit
 
 class MainViewCell : UITableViewCell {
-    @IBOutlet weak var labelRigthConstraint: NSLayoutConstraint!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var counter: UILabel!
 }
