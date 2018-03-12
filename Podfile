@@ -5,11 +5,11 @@ target 'OffiMate' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   
-  pod 'Firebase/Core'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Database'
-  pod 'JSQMessagesViewController'
+  pod 'Firebase/Core', :inhibit_warnings => true
+  pod 'Firebase/Auth', :inhibit_warnings => true
+  pod 'Firebase/Storage', :inhibit_warnings => true
+  pod 'Firebase/Database', :inhibit_warnings => true
+  pod 'JSQMessagesViewController', :inhibit_warnings => true
  
   # Pods for SingleSignUp
 end
