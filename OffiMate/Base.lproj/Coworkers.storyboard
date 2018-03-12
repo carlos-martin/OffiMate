@@ -121,7 +121,7 @@
         <scene sceneID="Dag-17-NjI">
             <objects>
                 <tableViewController id="cAE-2z-8kO" customClass="CoworkerProfileViewController" customModule="OffiMate" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="18" sectionFooterHeight="18" id="xHs-Cl-rZG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="100" sectionHeaderHeight="18" sectionFooterHeight="18" id="xHs-Cl-rZG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -231,6 +231,7 @@
                         <segue destination="WPR-bz-aGZ" kind="show" identifier="showBoostCard" id="c98-jD-Tsz"/>
                         <segue destination="iVy-AT-frm" kind="unwind" identifier="unwindSegueToBoostCard" unwindAction="unwindToBoostCardWithSegue:" id="RtT-72-Kg2"/>
                         <segue destination="iVy-AT-frm" kind="unwind" identifier="unwindSegueToCoworkers" unwindAction="unwindToCoworkersWithSegue:" id="O0j-BW-i5l"/>
+                        <segue destination="iVy-AT-frm" kind="unwind" identifier="unwindSegueToChatInfo" unwindAction="unwindToChatInfoWithSegue:" id="JMs-qS-VG6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwH-fq-86g" userLabel="First Responder" sceneMemberID="firstResponder"/>
