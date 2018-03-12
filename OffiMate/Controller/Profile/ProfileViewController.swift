@@ -111,9 +111,17 @@ class ProfileViewController: UITableViewController {
                 let profileCell = cell as! ProfileViewCell
                 profileCell.nameTextField.font = UIFont(name: ".SFUIText", size: 22)
                 profileCell.nameTextField.backgroundColor = UIColor.white
-                profileCell.nameTextField.layer.borderWidth = 0.1
-                profileCell.nameTextField.layer.borderColor = Tools.separator.cgColor
+                profileCell.nameTextField.layer.borderWidth = .leastNonzeroMagnitude
+                profileCell.nameTextField.layer.borderColor = UIColor.white.cgColor
                 profileCell.nameTextField.isEnabled = false
+                
+                let textFieldName = profileCell.nameTextField.text
+                
+                if self.name == nil {
+                    self.name = textFieldName
+                } else if self.name != textFieldName {
+                    self.name = textFieldName
+                }
             }
             self.saveAction()
         } else {
@@ -128,6 +136,7 @@ class ProfileViewController: UITableViewController {
                 profileCell.nameTextField.layer.borderWidth = 0.5
                 profileCell.nameTextField.layer.borderColor = Tools.separator.cgColor
                 profileCell.nameTextField.isEnabled = true
+                profileCell.nameTextField.layer.cornerRadius = 12
             }
         }
         
@@ -163,6 +172,8 @@ class ProfileViewController: UITableViewController {
         CurrentUser.office = office
         Database.database().reference().child("coworkers").child(CurrentUser.coworkerId!).child("officeId").setValue(office.id)
     }
+
+    // MARK: - Table view data source
     
     func updateTableView() {
         var indexSet = IndexSet()
@@ -172,8 +183,6 @@ class ProfileViewController: UITableViewController {
         indexSet.insert(ProfileSection.newoffice.rawValue)
         self.tableView.reloadSections(indexSet, with: .fade)
     }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return ProfileSection.count

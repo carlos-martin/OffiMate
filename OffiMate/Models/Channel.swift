@@ -28,7 +28,7 @@ internal func <= (left: Channel, rigth: Channel) -> Bool {
 
 internal class Channel: CustomStringConvertible, Hashable {
     internal let id:        String
-    internal let name:      String
+    internal var name:      String
     internal let creator:   String
     public   var messages:  [Message]
     public   var hashValue:  Int

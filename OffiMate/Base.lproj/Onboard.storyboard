@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mwI-4A-5aw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mwI-4A-5aw">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -155,7 +155,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newOfficeNameCell" id="wA6-pR-aWb" customClass="NewOfficeNameViewCell" customModule="OffiMate" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="newOfficeNameCell" id="wA6-pR-aWb" customClass="NewOfficeNameViewCell" customModule="OffiMate" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.333333333333336" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wA6-pR-aWb" id="ZcT-pZ-8DX">
@@ -187,7 +187,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Office" id="Yns-QY-2qN">
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Jko-4a-FLP">
+                        <barButtonItem key="rightBarButtonItem" image="save" style="done" id="Jko-4a-FLP">
                             <connections>
                                 <action selector="saveBarButtonAction:" destination="Olw-s7-Y3v" id="Cee-tb-VcJ"/>
                             </connections>
@@ -221,7 +221,7 @@
                             </connections>
                         </button>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="emailLoginCell" id="3UN-iI-uOk" customClass="EmailLoginViewCell" customModule="OffiMate" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="emailLoginCell" id="3UN-iI-uOk" customClass="EmailLoginViewCell" customModule="OffiMate" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.333333333333336" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3UN-iI-uOk" id="C07-yB-psf">
@@ -249,7 +249,7 @@
                                     <outlet property="emailTextField" destination="RAf-Nb-lDa" id="zVC-pP-yfl"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="passLoginCell" id="bTm-3k-ln5" customClass="PasswordLoginViewCell" customModule="OffiMate" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="passLoginCell" id="bTm-3k-ln5" customClass="PasswordLoginViewCell" customModule="OffiMate" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="99.333333333333343" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTm-3k-ln5" id="HSX-fj-Oct">
@@ -334,7 +334,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="forgotEmailCell" id="8cO-bM-DVc" customClass="ForgetPasswordViewCell" customModule="OffiMate" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="forgotEmailCell" id="8cO-bM-DVc" customClass="ForgetPasswordViewCell" customModule="OffiMate" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.333333333333336" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8cO-bM-DVc" id="I3n-IA-c3l">
@@ -663,6 +663,7 @@
         <image name="login" width="25" height="25"/>
         <image name="next" width="25" height="25"/>
         <image name="office" width="25" height="25"/>
+        <image name="save" width="25" height="25"/>
         <image name="show" width="25" height="25"/>
     </resources>
 </document>
