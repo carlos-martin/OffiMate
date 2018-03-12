@@ -10,6 +10,8 @@ target 'OffiMate' do
   pod 'Firebase/Storage', :inhibit_warnings => true
   pod 'Firebase/Database', :inhibit_warnings => true
   pod 'JSQMessagesViewController', :inhibit_warnings => true
+  pod 'Fabric'
+  pod 'Crashlytics'
  
   # Pods for SingleSignUp
 end
