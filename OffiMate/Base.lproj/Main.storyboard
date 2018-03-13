@@ -75,6 +75,7 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="R0h-mR-7ij" secondAttribute="trailing" constant="20" id="HpM-Uy-jjo"/>
                                         <constraint firstItem="R0h-mR-7ij" firstAttribute="top" secondItem="b72-wN-Q8o" secondAttribute="top" constant="8" id="LJl-fS-cBy"/>
                                         <constraint firstItem="R0h-mR-7ij" firstAttribute="leading" secondItem="b72-wN-Q8o" secondAttribute="leading" constant="20" id="XQl-35-VMq"/>
                                         <constraint firstAttribute="trailing" secondItem="R0h-mR-7ij" secondAttribute="trailing" constant="20" id="YsG-TD-zgL"/>
@@ -101,7 +102,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="admin" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ag-Yl-BLH">
                                             <rect key="frame" x="317" y="12.666666666666664" width="42" height="18"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="42" id="rrP-ih-Azt"/>
+                                                <constraint firstAttribute="width" constant="42" placeholder="YES" id="rrP-ih-Azt"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
@@ -136,7 +137,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1aK-5r-Fxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="JOn-Yo-55e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2080.8000000000002" y="-4.4334975369458132"/>
+            <point key="canvasLocation" x="2080.5" y="-5"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="kVX-PL-tfF">
@@ -207,7 +208,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programa emitido el 12 de diciembre de 2017." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-IW-4pE">
+                                        <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Programa emitido el 12 de diciembre de 2017." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-IW-4pE">
                                             <rect key="frame" x="69" y="11" width="224" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -231,7 +232,7 @@
                                             <rect key="frame" x="301" y="10" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="5uw-6u-QVF"/>
-                                                <constraint firstAttribute="width" constant="25" id="YwT-EB-hpb"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="YwT-EB-hpb"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -270,7 +271,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ha9-Aw-ff0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-490.39999999999998" y="-3.6945812807881775"/>
+            <point key="canvasLocation" x="-492" y="-4.4334975369458132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="shr-Nr-Zt3">

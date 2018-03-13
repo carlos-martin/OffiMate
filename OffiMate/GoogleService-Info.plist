@@ -1,16 +1,15 @@
-<!-- Master
- <?xml version="1.0" encoding="UTF-8"?>
- <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
- <plist version="1.0">
- <dict>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
 	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
 	<string>ca-app-pub-3940256099942544/2934735716</string>
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>76360474944-eahdgcj4p32bnpgolf3vh8j9h3bailal.apps.googleusercontent.com</string>
+	<string>76360474944-rnd6hiokld8t0a217dqnvaihqk3i0kqv.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.76360474944-eahdgcj4p32bnpgolf3vh8j9h3bailal</string>
+	<string>com.googleusercontent.apps.76360474944-rnd6hiokld8t0a217dqnvaihqk3i0kqv</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCSs8BnOOt4pkzKZylv8h59Ru_Ifq-Y-Q0</string>
 	<key>GCM_SENDER_ID</key>
@@ -18,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>carlos.martin.OffiMate</string>
+	<string>sigma.technology.OffiMate</string>
 	<key>PROJECT_ID</key>
 	<string>offimate-master</string>
 	<key>STORAGE_BUCKET</key>
@@ -34,14 +33,13 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:76360474944:ios:a2118739ad2ab567</string>
+	<string>1:76360474944:ios:085b5bac573370f3</string>
 	<key>DATABASE_URL</key>
 	<string>https://offimate-master.firebaseio.com</string>
- </dict>
- </plist>
- -->
+</dict>
+</plist>
 
-
+<!-- RC
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -82,8 +80,7 @@
         <string>https://offimate-release-candidate.firebaseio.com</string>
     </dict>
 </plist>
-
-
+ -->
 <!-- DEV
  <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -125,4 +122,4 @@
 	<string>https://singlesignup-c74ac.firebaseio.com</string>
  </dict>
  </plist>
-  -->
+-->
