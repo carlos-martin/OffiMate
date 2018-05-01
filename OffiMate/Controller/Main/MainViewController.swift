@@ -180,10 +180,10 @@ class MainViewController: UITableViewController {
             self.stopLoading = true
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
-                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
+                if let name = channelData["name"] as! String?, let creator = channelData["creator"] as! String? {
                     let channel: Channel
                     
-                    if let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                    if let messages = channelData["messages"] as! Dictionary<String, AnyObject>? {
                         channel = Channel(id: id, name: name, creator: creator, messages: messages)
                     } else {
                         channel = Channel(id: id, name: name, creator: creator)
@@ -213,9 +213,9 @@ class MainViewController: UITableViewController {
         self.changedRefHandle = channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childChanged, with: { (snapshot: DataSnapshot) in
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
-                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
+                if let name = channelData["name"] as! String?, let creator = channelData["creator"] as! String? {
                     let channel: Channel
-                    if let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                    if let messages = channelData["messages"] as! Dictionary<String, AnyObject>? {
                         channel = Channel(id: id, name: name, creator: creator, messages: messages)
                     } else {
                         channel = Channel(id: id, name: name, creator: creator)
@@ -231,7 +231,7 @@ class MainViewController: UITableViewController {
         self.deletedRefHandle = channelRef.queryOrdered(byChild: "officeId").queryEqual(toValue: CurrentUser.office!.id).observe(.childRemoved, with: { (snapshot: DataSnapshot) in
             if let channelData = snapshot.value as? Dictionary<String, AnyObject> {
                 let id = snapshot.key
-                if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
+                if let name = channelData["name"] as! String?, let creator = channelData["creator"] as! String? {
                     let channel = Channel(id: id, name: name, creator: creator)
                     if let index = self.getChannelIndex(channel: channel) {
                         let indexPath = IndexPath(row: index, section: MainSection.currentChannel.rawValue)

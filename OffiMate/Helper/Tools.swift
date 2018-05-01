@@ -215,8 +215,8 @@ extension Tools {
                     for rawChannel in rawChannels {
                         let id = rawChannel.key
                         if let channelData = rawChannel.value as? Dictionary<String, AnyObject> {
-                            if let name = channelData["name"] as! String!, let creator = channelData["creator"] as! String! {
-                                if let messages = channelData["messages"] as! Dictionary<String, AnyObject>! {
+                            if let name = channelData["name"] as! String?, let creator = channelData["creator"] as! String? {
+                                if let messages = channelData["messages"] as! Dictionary<String, AnyObject>? {
                                     channels.append(Channel(id: id, name: name, creator: creator, messages: messages))
                                 } else {
                                     channels.append(Channel(id: id, name: name, creator: creator))

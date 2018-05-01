@@ -102,7 +102,7 @@ class ChatInfoViewController: UITableViewController {
                 self.spinner.stop()
                 let coworkerData = snapshot.value as! Dictionary<String, AnyObject>
                 let id = snapshot.key
-                if let name = coworkerData["name"] as! String!, let email = coworkerData["email"] as! String!, let uid = coworkerData["userId"] as! String! {
+                if let name = coworkerData["name"] as! String?, let email = coworkerData["email"] as! String?, let uid = coworkerData["userId"] as! String? {
                     let coworker = Coworker(id: id, uid: uid, email: email, name: name, office: CurrentUser.office!)
                     if self.channel!.creator != uid {
                         self.members.append(coworker)

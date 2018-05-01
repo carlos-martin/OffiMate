@@ -9,6 +9,7 @@ target 'OffiMate' do
   pod 'Firebase/Auth', :inhibit_warnings => true
   pod 'Firebase/Storage', :inhibit_warnings => true
   pod 'Firebase/Database', :inhibit_warnings => true
+  pod 'Firebase/Messaging', :inhibit_warnings => true
   pod 'JSQMessagesViewController', :inhibit_warnings => true
   pod 'Fabric'
   pod 'Crashlytics'
